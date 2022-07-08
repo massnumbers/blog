@@ -6,14 +6,14 @@
       "description": "Some additional details about the Mass. Numbers blog",
       "author": [],
       "contents": "\nAbout this blog\nThe Mass. Numbers blog uses data like election results, poll results, candidate campaign finance reports, and census data to evaluate Massachusetts politics and policy.\nSome of our most popular posts are about the partisan lean of Massachusetts cities and towns, and ratings of state legislative races based on historical outcomes.\n\n\n\n",
-      "last_modified": "2022-07-08T11:25:52-04:00"
+      "last_modified": "2022-07-08T18:20:54-04:00"
     },
     {
       "path": "index.html",
       "title": "Mass. Numbers",
       "author": [],
       "contents": "\n\n\n\n",
-      "last_modified": "2022-07-08T11:25:53-04:00"
+      "last_modified": "2022-07-08T18:20:55-04:00"
     }
   ],
   "collections": ["posts/posts.json"]
