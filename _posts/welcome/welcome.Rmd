@@ -1,0 +1,55 @@
+---
+title: "Welcome to Mass. Numbers"
+description: |
+  Welcome to the Mass. Numbers blog. Mass. Numbers takes
+  a quantiative look as Massachusetts politics and policy.
+author:
+  - name: Brent Benson
+    url: https://massnumbers.us/brentbenson
+date: 07-05-2022
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+## City/Town Map
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE)
+
+library(tidyverse)
+library(sf)
+library(tmap)
+```
+
+```{r city-town-map-setup}
+ma_towns_dems <- read_csv("../../_data/2020/ma_city_town_demographics_pvi_2020.csv") %>%
+    mutate(city_town = str_replace(city_town, "Manchester-by-the-Sea", "Manchester")) %>%
+    rename(white_pct = race_white_pct,
+           black_pct = race_black_pct,
+           hispanic_pct = race_hispanic_pct,
+           asian_pct = race_asian_pct) %>%
+    select(city_town_fips, city_town, PVI, PVI_N, total_population,
+           white_pct, black_pct, hispanic_pct, asian_pct)
+
+ma_city_town <- read_sf("../../_gis/townssurvey_shp/TOWNSSURVEY_POLYM.shp", as_tibble=TRUE) %>%
+    st_make_valid() %>%
+    mutate(city_town = str_to_title(TOWN)) %>%
+    left_join(ma_towns_dems, by="city_town")
+```
+
+```{r city-town-map}
+tmap_mode(mode="plot")
+
+city_town_map <- (
+    tm_shape(ma_city_town) +
+    tm_borders(lwd=1) + 
+    tm_fill(col="PVI_N",
+            palette=c("#FF4949", "white", "#0F4392"),
+            midpoint=0)
+    )
+city_town_map    
+```
+
+
+

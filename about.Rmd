@@ -1,0 +1,21 @@
+---
+title: "About this blog"
+description: |
+  Some additional details about the Mass. Numbers blog
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## About this blog
+
+The Mass. Numbers blog uses data like election results,
+poll results, candidate campaign finance reports, and
+census data to evaluate Massachusetts politics and
+policy.
+
+Some of our most popular posts are about the partisan
+lean of Massachusetts cities and towns, and ratings of
+state legislative races based on historical outcomes.
+

@@ -1,0 +1,16 @@
+name: "blog"
+title: "Mass. Numbers"
+description: |
+  A qualitative look at Massachusetts politics and policy
+output_dir: "docs"
+theme: massnumbers.css
+navbar:
+  logo:
+      image: images/ma_shape.png
+  right:
+    - text: "Home"
+      href: index.html
+    - text: "About"
+      href: about.html
+output: distill::distill_article
+exclude: ["README.md"]

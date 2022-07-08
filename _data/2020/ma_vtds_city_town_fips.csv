@@ -1,0 +1,2153 @@
+state_code,county_code,vtd_code,vtd_fips,vtd_name,city_town,Ward,Pct,city_town_fips,city_town_code,type
+25,001,000107,25001000107,Barnstable Town Precinct 1,Barnstable,-,1,2500103690,03690,Town_City
+25,001,000108,25001000108,Barnstable Town Precinct 10,Barnstable,-,10,2500103690,03690,Town_City
+25,001,000109,25001000109,Barnstable Town Precinct 11,Barnstable,-,11,2500103690,03690,Town_City
+25,001,000110,25001000110,Barnstable Town Precinct 12,Barnstable,-,12,2500103690,03690,Town_City
+25,001,000111,25001000111,Barnstable Town Precinct 13,Barnstable,-,13,2500103690,03690,Town_City
+25,001,000112,25001000112,Barnstable Town Precinct 2,Barnstable,-,2,2500103690,03690,Town_City
+25,001,000113,25001000113,Barnstable Town Precinct 3,Barnstable,-,3,2500103690,03690,Town_City
+25,001,000114,25001000114,Barnstable Town Precinct 4,Barnstable,-,4,2500103690,03690,Town_City
+25,001,000115,25001000115,Barnstable Town Precinct 5,Barnstable,-,5,2500103690,03690,Town_City
+25,001,000116,25001000116,Barnstable Town Precinct 6,Barnstable,-,6,2500103690,03690,Town_City
+25,001,000117,25001000117,Barnstable Town Precinct 7,Barnstable,-,7,2500103690,03690,Town_City
+25,001,000118,25001000118,Barnstable Town Precinct 8,Barnstable,-,8,2500103690,03690,Town_City
+25,001,000119,25001000119,Barnstable Town Precinct 9,Barnstable,-,9,2500103690,03690,Town_City
+25,001,000430,25001000430,Bourne Town Precinct 1,Bourne,-,1,2500107175,07175,Town
+25,001,000431,25001000431,Bourne Town Precinct 2,Bourne,-,2,2500107175,07175,Town
+25,001,000432,25001000432,Bourne Town Precinct 3,Bourne,-,3,2500107175,07175,Town
+25,001,000433,25001000433,Bourne Town Precinct 4,Bourne,-,4,2500107175,07175,Town
+25,001,000434,25001000434,Bourne Town Precinct 5,Bourne,-,5,2500107175,07175,Town
+25,001,000435,25001000435,Bourne Town Precinct 6,Bourne,-,6,2500107175,07175,Town
+25,001,000436,25001000436,Bourne Town Precinct 7,Bourne,-,7,2500107175,07175,Town
+25,001,000454,25001000454,Brewster Town Precinct 1,Brewster,-,1,2500107980,07980,Town
+25,001,000455,25001000455,Brewster Town Precinct 2,Brewster,-,2,2500107980,07980,Town
+25,001,000456,25001000456,Brewster Town Precinct 3,Brewster,-,3,2500107980,07980,Town
+25,001,000566,25001000566,Chatham Town Precinct 1,Chatham,-,1,2500112995,12995,Town
+25,001,000656,25001000656,Dennis Town Precinct 1,Dennis,-,1,2500116775,16775,Town
+25,001,000657,25001000657,Dennis Town Precinct 2,Dennis,-,2,2500116775,16775,Town
+25,001,000658,25001000658,Dennis Town Precinct 3,Dennis,-,3,2500116775,16775,Town
+25,001,000659,25001000659,Dennis Town Precinct 4,Dennis,-,4,2500116775,16775,Town
+25,001,000660,25001000660,Dennis Town Precinct 5,Dennis,-,5,2500116775,16775,Town
+25,001,000695,25001000695,Eastham Town Precinct 1,Eastham,-,1,2500119295,19295,Town
+25,001,000756,25001000756,Falmouth Town Precinct 1,Falmouth,-,1,2500123105,23105,Town
+25,001,000757,25001000757,Falmouth Town Precinct 2,Falmouth,-,2,2500123105,23105,Town
+25,001,000758,25001000758,Falmouth Town Precinct 3,Falmouth,-,3,2500123105,23105,Town
+25,001,000759,25001000759,Falmouth Town Precinct 4,Falmouth,-,4,2500123105,23105,Town
+25,001,000760,25001000760,Falmouth Town Precinct 5,Falmouth,-,5,2500123105,23105,Town
+25,001,000761,25001000761,Falmouth Town Precinct 6,Falmouth,-,6,2500123105,23105,Town
+25,001,000762,25001000762,Falmouth Town Precinct 7,Falmouth,-,7,2500123105,23105,Town
+25,001,000763,25001000763,Falmouth Town Precinct 8,Falmouth,-,8,2500123105,23105,Town
+25,001,000764,25001000764,Falmouth Town Precinct 9,Falmouth,-,9,2500123105,23105,Town
+25,001,000881,25001000881,Harwich Town Precinct 1,Harwich,-,1,2500129020,29020,Town
+25,001,000882,25001000882,Harwich Town Precinct 2,Harwich,-,2,2500129020,29020,Town
+25,001,000883,25001000883,Harwich Town Precinct 3,Harwich,-,3,2500129020,29020,Town
+25,001,000884,25001000884,Harwich Town Precinct 4,Harwich,-,4,2500129020,29020,Town
+25,001,001167,25001001167,Mashpee Town Precinct 1,Mashpee,-,1,2500139100,39100,Town
+25,001,001168,25001001168,Mashpee Town Precinct 2,Mashpee,-,2,2500139100,39100,Town
+25,001,001169,25001001169,Mashpee Town Precinct 3,Mashpee,-,3,2500139100,39100,Town
+25,001,001170,25001001170,Mashpee Town Precinct 4,Mashpee,-,4,2500139100,39100,Town
+25,001,001171,25001001171,Mashpee Town Precinct 5,Mashpee,-,5,2500139100,39100,Town
+25,001,001454,25001001454,Orleans Town Precinct 1,Orleans,-,1,2500151440,51440,Town
+25,001,001530,25001001530,Provincetown Town Precinct 1,Provincetown,-,1,2500155500,55500,Town
+25,001,001643,25001001643,Sandwich Town Precinct 1,Sandwich,-,1,2500159735,59735,Town
+25,001,001644,25001001644,Sandwich Town Precinct 2,Sandwich,-,2,2500159735,59735,Town
+25,001,001645,25001001645,Sandwich Town Precinct 3,Sandwich,-,3,2500159735,59735,Town
+25,001,001646,25001001646,Sandwich Town Precinct 4,Sandwich,-,4,2500159735,59735,Town
+25,001,001647,25001001647,Sandwich Town Precinct 5,Sandwich,-,5,2500159735,59735,Town
+25,001,001648,25001001648,Sandwich Town Precinct 6,Sandwich,-,6,2500159735,59735,Town
+25,001,001877,25001001877,Truro Town Precinct 1,Truro,-,1,2500170605,70605,Town
+25,001,001964,25001001964,Wellfleet Town Precinct 1,Wellfleet,-,1,2500174385,74385,Town
+25,001,002145,25001002145,Yarmouth Town Precinct 1,Yarmouth,-,1,2500182525,82525,Town
+25,001,002146,25001002146,Yarmouth Town Precinct 2,Yarmouth,-,2,2500182525,82525,Town
+25,001,002147,25001002147,Yarmouth Town Precinct 3,Yarmouth,-,3,2500182525,82525,Town
+25,001,002148,25001002148,Yarmouth Town Precinct 4,Yarmouth,-,4,2500182525,82525,Town
+25,001,002149,25001002149,Yarmouth Town Precinct 5,Yarmouth,-,5,2500182525,82525,Town
+25,001,002150,25001002150,Yarmouth Town Precinct 6,Yarmouth,-,6,2500182525,82525,Town
+25,001,002151,25001002151,Yarmouth Town Precinct 7,Yarmouth,-,7,2500182525,82525,Town
+25,003,000015,25003000015,Adams Town Precinct 1,Adams,-,1,2500300555,00555,Town
+25,003,000016,25003000016,Adams Town Precinct 2,Adams,-,2,2500300555,00555,Town
+25,003,000017,25003000017,Adams Town Precinct 3,Adams,-,3,2500300555,00555,Town
+25,003,000018,25003000018,Adams Town Precinct 4,Adams,-,4,2500300555,00555,Town
+25,003,000019,25003000019,Adams Town Precinct 5,Adams,-,5,2500300555,00555,Town
+25,003,000028,25003000028,Alford Town Precinct 1,Alford,-,1,2500300975,00975,Town
+25,003,000122,25003000122,Becket Town Precinct 1,Becket,-,1,2500304545,04545,Town
+25,003,000592,25003000592,Cheshire Town Precinct 1,Cheshire,-,1,2500313345,13345,Town
+25,003,000614,25003000614,Clarksburg Town Precinct 1,Clarksburg,-,1,2500314010,14010,Town
+25,003,000629,25003000629,Dalton Town Precinct 1,Dalton,-,1,2500316180,16180,Town
+25,003,000630,25003000630,Dalton Town Precinct 2,Dalton,-,2,2500316180,16180,Town
+25,003,000708,25003000708,Egremont Town Precinct 1,Egremont,-,1,2500321360,21360,Town
+25,003,000777,25003000777,Florida Town Precinct 1,Florida,-,1,2500324120,24120,Town
+25,003,000846,25003000846,Great Barrington Town Precinct A,Great Barrington,-,A,2500326815,26815,Town
+25,003,000847,25003000847,Great Barrington Town Precinct B,Great Barrington,-,B,2500326815,26815,Town
+25,003,000848,25003000848,Great Barrington Town Precinct C,Great Barrington,-,C,2500326815,26815,Town
+25,003,000849,25003000849,Great Barrington Town Precinct D,Great Barrington,-,D,2500326815,26815,Town
+25,003,000871,25003000871,Hancock Town Precinct 1,Hancock,-,1,2500328180,28180,Town
+25,003,000915,25003000915,Hinsdale Town Precinct 1,Hinsdale,-,1,2500330315,30315,Town
+25,003,000974,25003000974,Lanesborough Town Precinct 1,Lanesborough,-,1,2500334340,34340,Town
+25,003,000999,25003000999,Lee Town Precinct 1,Lee,-,1,2500334655,34655,Town
+25,003,001004,25003001004,Lenox Town Precinct 1,Lenox,-,1,2500334970,34970,Town
+25,003,001275,25003001275,Monterey Town Precinct 1,Monterey,-,1,2500342460,42460,Town
+25,003,001277,25003001277,Mount Washington Town Precinct 1,Mount Washington,-,1,2500343300,43300,Town
+25,003,001300,25003001300,New Ashford Town Precinct 1,New Ashford,-,1,2500344385,44385,Town
+25,003,001338,25003001338,New Marlborough Town Precinct 1,New Marlborough,-,1,2500345420,45420,Town
+25,003,001383,25003001383,North Adams City Ward 1 Precinct 1,North Adams,1,1,2500346225,46225,City
+25,003,001384,25003001384,North Adams City Ward 2 Precinct 2,North Adams,2,2,2500346225,46225,City
+25,003,001385,25003001385,North Adams City Ward 3 Precinct 3,North Adams,3,3,2500346225,46225,City
+25,003,001386,25003001386,North Adams City Ward 4 Precinct 4,North Adams,4,4,2500346225,46225,City
+25,003,001387,25003001387,North Adams City Ward 5 Precinct 5,North Adams,5,5,2500346225,46225,City
+25,003,001455,25003001455,Otis Town Precinct 1,Otis,-,1,2500351580,51580,Town
+25,003,001492,25003001492,Peru Town Precinct 1,Peru,-,1,2500353050,53050,Town
+25,003,001495,25003001495,Pittsfield City Ward 1 Precinct A,Pittsfield,1,A,2500353960,53960,City
+25,003,001496,25003001496,Pittsfield City Ward 1 Precinct B,Pittsfield,1,B,2500353960,53960,City
+25,003,001497,25003001497,Pittsfield City Ward 2 Precinct A,Pittsfield,2,A,2500353960,53960,City
+25,003,001498,25003001498,Pittsfield City Ward 2 Precinct B,Pittsfield,2,B,2500353960,53960,City
+25,003,001499,25003001499,Pittsfield City Ward 3 Precinct A,Pittsfield,3,A,2500353960,53960,City
+25,003,001500,25003001500,Pittsfield City Ward 3 Precinct B,Pittsfield,3,B,2500353960,53960,City
+25,003,001501,25003001501,Pittsfield City Ward 4 Precinct A,Pittsfield,4,A,2500353960,53960,City
+25,003,001502,25003001502,Pittsfield City Ward 4 Precinct B,Pittsfield,4,B,2500353960,53960,City
+25,003,001503,25003001503,Pittsfield City Ward 5 Precinct A,Pittsfield,5,A,2500353960,53960,City
+25,003,001504,25003001504,Pittsfield City Ward 5 Precinct B,Pittsfield,5,B,2500353960,53960,City
+25,003,001505,25003001505,Pittsfield City Ward 6 Precinct A,Pittsfield,6,A,2500353960,53960,City
+25,003,001506,25003001506,Pittsfield City Ward 6 Precinct B,Pittsfield,6,B,2500353960,53960,City
+25,003,001507,25003001507,Pittsfield City Ward 7 Precinct A,Pittsfield,7,A,2500353960,53960,City
+25,003,001508,25003001508,Pittsfield City Ward 7 Precinct B,Pittsfield,7,B,2500353960,53960,City
+25,003,001606,25003001606,Richmond Town Precinct 1,Richmond,-,1,2500356795,56795,Town
+25,003,001642,25003001642,Sandisfield Town Precinct 1,Sandisfield,-,1,2500359665,59665,Town
+25,003,001659,25003001659,Savoy Town Precinct 1,Savoy,-,1,2500360225,60225,Town
+25,003,001675,25003001675,Sheffield Town Precinct 1,Sheffield,-,1,2500361065,61065,Town
+25,003,001803,25003001803,Stockbridge Town Precinct 1,Stockbridge,-,1,2500367595,67595,Town
+25,003,001882,25003001882,Tyringham Town Precinct 1,Tyringham,-,1,2500371095,71095,Town
+25,003,001934,25003001934,Washington Town Precinct 1,Washington,-,1,2500373335,73335,Town
+25,003,001981,25003001981,West Stockbridge Town Precinct 1,West Stockbridge,-,1,2500377990,77990,Town
+25,003,002050,25003002050,Williamstown Town Precinct 1,Williamstown,-,1,2500379985,79985,Town
+25,003,002051,25003002051,Williamstown Town Precinct 2,Williamstown,-,2,2500379985,79985,Town
+25,003,002052,25003002052,Williamstown Town Precinct 3,Williamstown,-,3,2500379985,79985,Town
+25,003,002070,25003002070,Windsor Town Precinct 1,Windsor,-,1,2500380685,80685,Town
+25,005,000012,25005000012,Acushnet Town Precinct 1,Acushnet,-,1,2500500520,00520,Town
+25,005,000013,25005000013,Acushnet Town Precinct 2,Acushnet,-,2,2500500520,00520,Town
+25,005,000014,25005000014,Acushnet Town Precinct 3,Acushnet,-,3,2500500520,00520,Town
+25,005,000087,25005000087,Attleboro City Ward 1 Precinct A,Attleboro,1,A,2500502690,02690,City
+25,005,000088,25005000088,Attleboro City Ward 1 Precinct B,Attleboro,1,B,2500502690,02690,City
+25,005,000089,25005000089,Attleboro City Ward 2 Precinct A,Attleboro,2,A,2500502690,02690,City
+25,005,000090,25005000090,Attleboro City Ward 2 Precinct B,Attleboro,2,B,2500502690,02690,City
+25,005,000091,25005000091,Attleboro City Ward 3 Precinct A,Attleboro,3,A,2500502690,02690,City
+25,005,000092,25005000092,Attleboro City Ward 3 Precinct B,Attleboro,3,B,2500502690,02690,City
+25,005,000093,25005000093,Attleboro City Ward 4 Precinct A,Attleboro,4,A,2500502690,02690,City
+25,005,000094,25005000094,Attleboro City Ward 4 Precinct B,Attleboro,4,B,2500502690,02690,City
+25,005,000095,25005000095,Attleboro City Ward 5 Precinct A,Attleboro,5,A,2500502690,02690,City
+25,005,000096,25005000096,Attleboro City Ward 5 Precinct B,Attleboro,5,B,2500502690,02690,City
+25,005,000097,25005000097,Attleboro City Ward 6 Precinct A,Attleboro,6,A,2500502690,02690,City
+25,005,000098,25005000098,Attleboro City Ward 6 Precinct B,Attleboro,6,B,2500502690,02690,City
+25,005,000144,25005000144,Berkley Town Precinct 1,Berkley,-,1,2500505280,05280,Town
+25,005,000145,25005000145,Berkley Town Precinct 2,Berkley,-,2,2500505280,05280,Town
+25,005,000639,25005000639,Dartmouth Town Precinct 1,Dartmouth,-,1,2500516425,16425,Town
+25,005,000640,25005000640,Dartmouth Town Precinct 2,Dartmouth,-,2,2500516425,16425,Town
+25,005,000641,25005000641,Dartmouth Town Precinct 3,Dartmouth,-,3,2500516425,16425,Town
+25,005,000642,25005000642,Dartmouth Town Precinct 4,Dartmouth,-,4,2500516425,16425,Town
+25,005,000643,25005000643,Dartmouth Town Precinct 5,Dartmouth,-,5,2500516425,16425,Town
+25,005,000644,25005000644,Dartmouth Town Precinct 6,Dartmouth,-,6,2500516425,16425,Town
+25,005,000645,25005000645,Dartmouth Town Precinct 7,Dartmouth,-,7,2500516425,16425,Town
+25,005,000646,25005000646,Dartmouth Town Precinct 8,Dartmouth,-,8,2500516425,16425,Town
+25,005,000647,25005000647,Dartmouth Town Precinct 9,Dartmouth,-,9,2500516425,16425,Town
+25,005,000661,25005000661,Dighton Town Precinct 1,Dighton,-,1,2500516950,16950,Town
+25,005,000662,25005000662,Dighton Town Precinct 2,Dighton,-,2,2500516950,16950,Town
+25,005,000701,25005000701,Easton Town Precinct 1,Easton,-,1,2500520100,20100,Town
+25,005,000702,25005000702,Easton Town Precinct 2,Easton,-,2,2500520100,20100,Town
+25,005,000703,25005000703,Easton Town Precinct 3,Easton,-,3,2500520100,20100,Town
+25,005,000704,25005000704,Easton Town Precinct 4,Easton,-,4,2500520100,20100,Town
+25,005,000705,25005000705,Easton Town Precinct 5,Easton,-,5,2500520100,20100,Town
+25,005,000706,25005000706,Easton Town Precinct 6,Easton,-,6,2500520100,20100,Town
+25,005,000723,25005000723,Fairhaven Town Precinct 1,Fairhaven,-,1,2500522130,22130,Town
+25,005,000724,25005000724,Fairhaven Town Precinct 2,Fairhaven,-,2,2500522130,22130,Town
+25,005,000725,25005000725,Fairhaven Town Precinct 3,Fairhaven,-,3,2500522130,22130,Town
+25,005,000726,25005000726,Fairhaven Town Precinct 4,Fairhaven,-,4,2500522130,22130,Town
+25,005,000727,25005000727,Fairhaven Town Precinct 5,Fairhaven,-,5,2500522130,22130,Town
+25,005,000728,25005000728,Fairhaven Town Precinct 6,Fairhaven,-,6,2500522130,22130,Town
+25,005,000729,25005000729,Fall River City Ward 1 Precinct A,Fall River,1,A,2500523000,23000,City
+25,005,000730,25005000730,Fall River City Ward 1 Precinct B,Fall River,1,B,2500523000,23000,City
+25,005,000731,25005000731,Fall River City Ward 1 Precinct C,Fall River,1,C,2500523000,23000,City
+25,005,000732,25005000732,Fall River City Ward 2 Precinct A,Fall River,2,A,2500523000,23000,City
+25,005,000733,25005000733,Fall River City Ward 2 Precinct B,Fall River,2,B,2500523000,23000,City
+25,005,000734,25005000734,Fall River City Ward 2 Precinct C,Fall River,2,C,2500523000,23000,City
+25,005,000735,25005000735,Fall River City Ward 3 Precinct A,Fall River,3,A,2500523000,23000,City
+25,005,000736,25005000736,Fall River City Ward 3 Precinct B,Fall River,3,B,2500523000,23000,City
+25,005,000737,25005000737,Fall River City Ward 3 Precinct C,Fall River,3,C,2500523000,23000,City
+25,005,000738,25005000738,Fall River City Ward 4 Precinct A,Fall River,4,A,2500523000,23000,City
+25,005,000739,25005000739,Fall River City Ward 4 Precinct B,Fall River,4,B,2500523000,23000,City
+25,005,000740,25005000740,Fall River City Ward 4 Precinct C,Fall River,4,C,2500523000,23000,City
+25,005,000741,25005000741,Fall River City Ward 5 Precinct A,Fall River,5,A,2500523000,23000,City
+25,005,000742,25005000742,Fall River City Ward 5 Precinct B,Fall River,5,B,2500523000,23000,City
+25,005,000743,25005000743,Fall River City Ward 5 Precinct C,Fall River,5,C,2500523000,23000,City
+25,005,000744,25005000744,Fall River City Ward 6 Precinct A,Fall River,6,A,2500523000,23000,City
+25,005,000745,25005000745,Fall River City Ward 6 Precinct B,Fall River,6,B,2500523000,23000,City
+25,005,000746,25005000746,Fall River City Ward 6 Precinct C,Fall River,6,C,2500523000,23000,City
+25,005,000747,25005000747,Fall River City Ward 7 Precinct A,Fall River,7,A,2500523000,23000,City
+25,005,000748,25005000748,Fall River City Ward 7 Precinct B,Fall River,7,B,2500523000,23000,City
+25,005,000749,25005000749,Fall River City Ward 7 Precinct C,Fall River,7,C,2500523000,23000,City
+25,005,000750,25005000750,Fall River City Ward 8 Precinct A,Fall River,8,A,2500523000,23000,City
+25,005,000751,25005000751,Fall River City Ward 8 Precinct B,Fall River,8,B,2500523000,23000,City
+25,005,000752,25005000752,Fall River City Ward 8 Precinct C,Fall River,8,C,2500523000,23000,City
+25,005,000753,25005000753,Fall River City Ward 9 Precinct A,Fall River,9,A,2500523000,23000,City
+25,005,000754,25005000754,Fall River City Ward 9 Precinct B,Fall River,9,B,2500523000,23000,City
+25,005,000755,25005000755,Fall River City Ward 9 Precinct C,Fall River,9,C,2500523000,23000,City
+25,005,000809,25005000809,Freetown Town Precinct 1,Freetown,-,1,2500525240,25240,Town
+25,005,000810,25005000810,Freetown Town Precinct 2,Freetown,-,2,2500525240,25240,Town
+25,005,000811,25005000811,Freetown Town Precinct 3,Freetown,-,3,2500525240,25240,Town
+25,005,001133,25005001133,Mansfield Town Precinct 1,Mansfield,-,1,2500538225,38225,Town
+25,005,001134,25005001134,Mansfield Town Precinct 2,Mansfield,-,2,2500538225,38225,Town
+25,005,001135,25005001135,Mansfield Town Precinct 3,Mansfield,-,3,2500538225,38225,Town
+25,005,001136,25005001136,Mansfield Town Precinct 4,Mansfield,-,4,2500538225,38225,Town
+25,005,001137,25005001137,Mansfield Town Precinct 5,Mansfield,-,5,2500538225,38225,Town
+25,005,001138,25005001138,Mansfield Town Precinct 6,Mansfield,-,6,2500538225,38225,Town
+25,005,001301,25005001301,New Bedford City Ward 1 Precinct A,New Bedford,1,A,2500545000,45000,City
+25,005,001302,25005001302,New Bedford City Ward 1 Precinct B,New Bedford,1,B,2500545000,45000,City
+25,005,001303,25005001303,New Bedford City Ward 1 Precinct C,New Bedford,1,C,2500545000,45000,City
+25,005,001304,25005001304,New Bedford City Ward 1 Precinct D,New Bedford,1,D,2500545000,45000,City
+25,005,001305,25005001305,New Bedford City Ward 1 Precinct E,New Bedford,1,E,2500545000,45000,City
+25,005,001306,25005001306,New Bedford City Ward 1 Precinct F,New Bedford,1,F,2500545000,45000,City
+25,005,001307,25005001307,New Bedford City Ward 2 Precinct A,New Bedford,2,A,2500545000,45000,City
+25,005,001308,25005001308,New Bedford City Ward 2 Precinct B,New Bedford,2,B,2500545000,45000,City
+25,005,001309,25005001309,New Bedford City Ward 2 Precinct C,New Bedford,2,C,2500545000,45000,City
+25,005,001310,25005001310,New Bedford City Ward 2 Precinct D,New Bedford,2,D,2500545000,45000,City
+25,005,001311,25005001311,New Bedford City Ward 2 Precinct E,New Bedford,2,E,2500545000,45000,City
+25,005,001312,25005001312,New Bedford City Ward 2 Precinct F,New Bedford,2,F,2500545000,45000,City
+25,005,001313,25005001313,New Bedford City Ward 3 Precinct A,New Bedford,3,A,2500545000,45000,City
+25,005,001314,25005001314,New Bedford City Ward 3 Precinct B,New Bedford,3,B,2500545000,45000,City
+25,005,001315,25005001315,New Bedford City Ward 3 Precinct C,New Bedford,3,C,2500545000,45000,City
+25,005,001316,25005001316,New Bedford City Ward 3 Precinct D,New Bedford,3,D,2500545000,45000,City
+25,005,001317,25005001317,New Bedford City Ward 3 Precinct E,New Bedford,3,E,2500545000,45000,City
+25,005,001318,25005001318,New Bedford City Ward 3 Precinct F,New Bedford,3,F,2500545000,45000,City
+25,005,001319,25005001319,New Bedford City Ward 4 Precinct A,New Bedford,4,A,2500545000,45000,City
+25,005,001320,25005001320,New Bedford City Ward 4 Precinct B,New Bedford,4,B,2500545000,45000,City
+25,005,001321,25005001321,New Bedford City Ward 4 Precinct C,New Bedford,4,C,2500545000,45000,City
+25,005,001322,25005001322,New Bedford City Ward 4 Precinct D,New Bedford,4,D,2500545000,45000,City
+25,005,001323,25005001323,New Bedford City Ward 4 Precinct E,New Bedford,4,E,2500545000,45000,City
+25,005,001324,25005001324,New Bedford City Ward 4 Precinct F,New Bedford,4,F,2500545000,45000,City
+25,005,001325,25005001325,New Bedford City Ward 5 Precinct A,New Bedford,5,A,2500545000,45000,City
+25,005,001326,25005001326,New Bedford City Ward 5 Precinct B,New Bedford,5,B,2500545000,45000,City
+25,005,001327,25005001327,New Bedford City Ward 5 Precinct C,New Bedford,5,C,2500545000,45000,City
+25,005,001328,25005001328,New Bedford City Ward 5 Precinct D,New Bedford,5,D,2500545000,45000,City
+25,005,001329,25005001329,New Bedford City Ward 5 Precinct E,New Bedford,5,E,2500545000,45000,City
+25,005,001330,25005001330,New Bedford City Ward 5 Precinct F,New Bedford,5,F,2500545000,45000,City
+25,005,001331,25005001331,New Bedford City Ward 6 Precinct A,New Bedford,6,A,2500545000,45000,City
+25,005,001332,25005001332,New Bedford City Ward 6 Precinct B,New Bedford,6,B,2500545000,45000,City
+25,005,001333,25005001333,New Bedford City Ward 6 Precinct C,New Bedford,6,C,2500545000,45000,City
+25,005,001334,25005001334,New Bedford City Ward 6 Precinct D,New Bedford,6,D,2500545000,45000,City
+25,005,001335,25005001335,New Bedford City Ward 6 Precinct E,New Bedford,6,E,2500545000,45000,City
+25,005,001336,25005001336,New Bedford City Ward 6 Precinct F,New Bedford,6,F,2500545000,45000,City
+25,005,001396,25005001396,North Attleborough Town Precinct 1,North Attleborough,-,1,2500546598,46598,Town_City
+25,005,001397,25005001397,North Attleborough Town Precinct 2,North Attleborough,-,2,2500546598,46598,Town_City
+25,005,001398,25005001398,North Attleborough Town Precinct 3,North Attleborough,-,3,2500546598,46598,Town_City
+25,005,001399,25005001399,North Attleborough Town Precinct 4,North Attleborough,-,4,2500546598,46598,Town_City
+25,005,001400,25005001400,North Attleborough Town Precinct 5,North Attleborough,-,5,2500546598,46598,Town_City
+25,005,001401,25005001401,North Attleborough Town Precinct 6,North Attleborough,-,6,2500546598,46598,Town_City
+25,005,001402,25005001402,North Attleborough Town Precinct 7,North Attleborough,-,7,2500546598,46598,Town_City
+25,005,001403,25005001403,North Attleborough Town Precinct 8,North Attleborough,-,8,2500546598,46598,Town_City
+25,005,001404,25005001404,North Attleborough Town Precinct 9,North Attleborough,-,9,2500546598,46598,Town_City
+25,005,001433,25005001433,Norton Town Precinct 1,Norton,-,1,2500549970,49970,Town
+25,005,001434,25005001434,Norton Town Precinct 2,Norton,-,2,2500549970,49970,Town
+25,005,001435,25005001435,Norton Town Precinct 3,Norton,-,3,2500549970,49970,Town
+25,005,001436,25005001436,Norton Town Precinct 4,Norton,-,4,2500549970,49970,Town
+25,005,001437,25005001437,Norton Town Precinct 5,Norton,-,5,2500549970,49970,Town
+25,005,001573,25005001573,Raynham Town Precinct 1,Raynham,-,1,2500556060,56060,Town
+25,005,001574,25005001574,Raynham Town Precinct 2,Raynham,-,2,2500556060,56060,Town
+25,005,001575,25005001575,Raynham Town Precinct 3,Raynham,-,3,2500556060,56060,Town
+25,005,001576,25005001576,Raynham Town Precinct 4,Raynham,-,4,2500556060,56060,Town
+25,005,001585,25005001585,Rehoboth Town Precinct 1,Rehoboth,-,1,2500556375,56375,Town
+25,005,001586,25005001586,Rehoboth Town Precinct 2,Rehoboth,-,2,2500556375,56375,Town
+25,005,001587,25005001587,Rehoboth Town Precinct 3,Rehoboth,-,3,2500556375,56375,Town
+25,005,001666,25005001666,Seekonk Town Precinct 1,Seekonk,-,1,2500560645,60645,Town
+25,005,001667,25005001667,Seekonk Town Precinct 2,Seekonk,-,2,2500560645,60645,Town
+25,005,001668,25005001668,Seekonk Town Precinct 3,Seekonk,-,3,2500560645,60645,Town
+25,005,001669,25005001669,Seekonk Town Precinct 4,Seekonk,-,4,2500560645,60645,Town
+25,005,001690,25005001690,Somerset Town Precinct 1,Somerset,-,1,2500562430,62430,Town
+25,005,001691,25005001691,Somerset Town Precinct 2,Somerset,-,2,2500562430,62430,Town
+25,005,001692,25005001692,Somerset Town Precinct 3,Somerset,-,3,2500562430,62430,Town
+25,005,001693,25005001693,Somerset Town Precinct 4,Somerset,-,4,2500562430,62430,Town
+25,005,001694,25005001694,Somerset Town Precinct 5,Somerset,-,5,2500562430,62430,Town
+25,005,001839,25005001839,Swansea Town Precinct 1,Swansea,-,1,2500568750,68750,Town
+25,005,001840,25005001840,Swansea Town Precinct 2,Swansea,-,2,2500568750,68750,Town
+25,005,001841,25005001841,Swansea Town Precinct 3,Swansea,-,3,2500568750,68750,Town
+25,005,001842,25005001842,Swansea Town Precinct 4,Swansea,-,4,2500568750,68750,Town
+25,005,001843,25005001843,Swansea Town Precinct 5,Swansea,-,5,2500568750,68750,Town
+25,005,001844,25005001844,Taunton City Ward 1 Precinct A,Taunton,1,A,2500569170,69170,City
+25,005,001845,25005001845,Taunton City Ward 1 Precinct B,Taunton,1,B,2500569170,69170,City
+25,005,001846,25005001846,Taunton City Ward 2 Precinct A,Taunton,2,A,2500569170,69170,City
+25,005,001847,25005001847,Taunton City Ward 2 Precinct B,Taunton,2,B,2500569170,69170,City
+25,005,001848,25005001848,Taunton City Ward 3 Precinct A,Taunton,3,A,2500569170,69170,City
+25,005,001849,25005001849,Taunton City Ward 3 Precinct B,Taunton,3,B,2500569170,69170,City
+25,005,001850,25005001850,Taunton City Ward 4 Precinct A,Taunton,4,A,2500569170,69170,City
+25,005,001851,25005001851,Taunton City Ward 4 Precinct B,Taunton,4,B,2500569170,69170,City
+25,005,001852,25005001852,Taunton City Ward 5 Precinct A,Taunton,5,A,2500569170,69170,City
+25,005,001853,25005001853,Taunton City Ward 5 Precinct B,Taunton,5,B,2500569170,69170,City
+25,005,001854,25005001854,Taunton City Ward 6 Precinct A,Taunton,6,A,2500569170,69170,City
+25,005,001855,25005001855,Taunton City Ward 6 Precinct B,Taunton,6,B,2500569170,69170,City
+25,005,001856,25005001856,Taunton City Ward 7 Precinct A,Taunton,7,A,2500569170,69170,City
+25,005,001857,25005001857,Taunton City Ward 7 Precinct B,Taunton,7,B,2500569170,69170,City
+25,005,001858,25005001858,Taunton City Ward 8 Precinct A,Taunton,8,A,2500569170,69170,City
+25,005,001859,25005001859,Taunton City Ward 8 Precinct B,Taunton,8,B,2500569170,69170,City
+25,005,002013,25005002013,Westport Town Precinct A,Westport,-,A,2500577570,77570,Town
+25,005,002014,25005002014,Westport Town Precinct B,Westport,-,B,2500577570,77570,Town
+25,005,002015,25005002015,Westport Town Precinct C,Westport,-,C,2500577570,77570,Town
+25,005,002016,25005002016,Westport Town Precinct D,Westport,-,D,2500577570,77570,Town
+25,005,002017,25005002017,Westport Town Precinct E,Westport,-,E,2500577570,77570,Town
+25,007,000054,25007000054,Aquinnah Town Precinct 1,Aquinnah,-,1,2500701585,01585,Town
+25,007,000613,25007000613,Chilmark Town Precinct 1,Chilmark,-,1,2500713800,13800,Town
+25,007,000707,25007000707,Edgartown Town Precinct 1,Edgartown,-,1,2500721150,21150,Town
+25,007,000837,25007000837,Gosnold Town Precinct 1,Gosnold,-,1,2500726325,26325,Town
+25,007,001450,25007001450,Oak Bluffs Town Precinct 1,Oak Bluffs,-,1,2500750390,50390,Town
+25,007,001871,25007001871,Tisbury Town Precinct 1,Tisbury,-,1,2500769940,69940,Town
+25,007,001982,25007001982,West Tisbury Town Precinct 1,West Tisbury,-,1,2500778235,78235,Town
+25,009,000029,25009000029,Amesbury Town Precinct 1,Amesbury,-,1,2500901260,01260,Town_City
+25,009,000030,25009000030,Amesbury Town Precinct 2,Amesbury,-,2,2500901260,01260,Town_City
+25,009,000031,25009000031,Amesbury Town Precinct 3,Amesbury,-,3,2500901260,01260,Town_City
+25,009,000032,25009000032,Amesbury Town Precinct 4,Amesbury,-,4,2500901260,01260,Town_City
+25,009,000033,25009000033,Amesbury Town Precinct 5,Amesbury,-,5,2500901260,01260,Town_City
+25,009,000034,25009000034,Amesbury Town Precinct 6,Amesbury,-,6,2500901260,01260,Town_City
+25,009,000045,25009000045,Andover Town Precinct 1,Andover,-,1,2500901465,01465,Town
+25,009,000046,25009000046,Andover Town Precinct 2,Andover,-,2,2500901465,01465,Town
+25,009,000047,25009000047,Andover Town Precinct 3,Andover,-,3,2500901465,01465,Town
+25,009,000048,25009000048,Andover Town Precinct 4,Andover,-,4,2500901465,01465,Town
+25,009,000049,25009000049,Andover Town Precinct 5,Andover,-,5,2500901465,01465,Town
+25,009,000050,25009000050,Andover Town Precinct 6,Andover,-,6,2500901465,01465,Town
+25,009,000051,25009000051,Andover Town Precinct 7,Andover,-,7,2500901465,01465,Town
+25,009,000052,25009000052,Andover Town Precinct 8,Andover,-,8,2500901465,01465,Town
+25,009,000053,25009000053,Andover Town Precinct 9,Andover,-,9,2500901465,01465,Town
+25,009,000148,25009000148,Beverly City Ward 1 Precinct 1,Beverly,1,1,2500905595,05595,City
+25,009,000149,25009000149,Beverly City Ward 1 Precinct 2,Beverly,1,2,2500905595,05595,City
+25,009,000150,25009000150,Beverly City Ward 2 Precinct 1,Beverly,2,1,2500905595,05595,City
+25,009,000151,25009000151,Beverly City Ward 2 Precinct 2,Beverly,2,2,2500905595,05595,City
+25,009,000152,25009000152,Beverly City Ward 3 Precinct 1,Beverly,3,1,2500905595,05595,City
+25,009,000153,25009000153,Beverly City Ward 3 Precinct 2,Beverly,3,2,2500905595,05595,City
+25,009,000154,25009000154,Beverly City Ward 4 Precinct 1,Beverly,4,1,2500905595,05595,City
+25,009,000155,25009000155,Beverly City Ward 4 Precinct 2,Beverly,4,2,2500905595,05595,City
+25,009,000156,25009000156,Beverly City Ward 5 Precinct 1,Beverly,5,1,2500905595,05595,City
+25,009,000157,25009000157,Beverly City Ward 5 Precinct 2,Beverly,5,2,2500905595,05595,City
+25,009,000158,25009000158,Beverly City Ward 6 Precinct 1,Beverly,6,1,2500905595,05595,City
+25,009,000159,25009000159,Beverly City Ward 6 Precinct 2,Beverly,6,2,2500905595,05595,City
+25,009,000438,25009000438,Boxford Town Precinct 1,Boxford,-,1,2500907420,07420,Town
+25,009,000439,25009000439,Boxford Town Precinct 2,Boxford,-,2,2500907420,07420,Town
+25,009,000440,25009000440,Boxford Town Precinct 3,Boxford,-,3,2500907420,07420,Town
+25,009,000631,25009000631,Danvers Town Precinct 1,Danvers,-,1,2500916250,16250,Town
+25,009,000632,25009000632,Danvers Town Precinct 2,Danvers,-,2,2500916250,16250,Town
+25,009,000633,25009000633,Danvers Town Precinct 3,Danvers,-,3,2500916250,16250,Town
+25,009,000634,25009000634,Danvers Town Precinct 4,Danvers,-,4,2500916250,16250,Town
+25,009,000635,25009000635,Danvers Town Precinct 5,Danvers,-,5,2500916250,16250,Town
+25,009,000636,25009000636,Danvers Town Precinct 6,Danvers,-,6,2500916250,16250,Town
+25,009,000637,25009000637,Danvers Town Precinct 7,Danvers,-,7,2500916250,16250,Town
+25,009,000638,25009000638,Danvers Town Precinct 8,Danvers,-,8,2500916250,16250,Town
+25,009,000710,25009000710,Essex Town Precinct 1,Essex,-,1,2500921850,21850,Town
+25,009,000822,25009000822,Georgetown Town Precinct 1,Georgetown,-,1,2500925625,25625,Town
+25,009,000823,25009000823,Georgetown Town Precinct 2,Georgetown,-,2,2500925625,25625,Town
+25,009,000824,25009000824,Georgetown Town Precinct 3,Georgetown,-,3,2500925625,25625,Town
+25,009,000826,25009000826,Gloucester City Ward 1 Precinct 1,Gloucester,1,1,2500926150,26150,City
+25,009,000827,25009000827,Gloucester City Ward 1 Precinct 2,Gloucester,1,2,2500926150,26150,City
+25,009,000828,25009000828,Gloucester City Ward 2 Precinct 1,Gloucester,2,1,2500926150,26150,City
+25,009,000829,25009000829,Gloucester City Ward 2 Precinct 2,Gloucester,2,2,2500926150,26150,City
+25,009,000830,25009000830,Gloucester City Ward 3 Precinct 1,Gloucester,3,1,2500926150,26150,City
+25,009,000831,25009000831,Gloucester City Ward 3 Precinct 2,Gloucester,3,2,2500926150,26150,City
+25,009,000832,25009000832,Gloucester City Ward 4 Precinct 1,Gloucester,4,1,2500926150,26150,City
+25,009,000833,25009000833,Gloucester City Ward 4 Precinct 2,Gloucester,4,2,2500926150,26150,City
+25,009,000834,25009000834,Gloucester City Ward 5 Precinct 1,Gloucester,5,1,2500926150,26150,City
+25,009,000835,25009000835,Gloucester City Ward 5 Precinct 2,Gloucester,5,2,2500926150,26150,City
+25,009,000862,25009000862,Groveland Town Precinct 1,Groveland,-,1,2500927620,27620,Town
+25,009,000863,25009000863,Groveland Town Precinct 2,Groveland,-,2,2500927620,27620,Town
+25,009,000867,25009000867,Hamilton Town Precinct 1,Hamilton,-,1,2500927900,27900,Town
+25,009,000868,25009000868,Hamilton Town Precinct 2,Hamilton,-,2,2500927900,27900,Town
+25,009,000869,25009000869,Hamilton Town Precinct 3,Hamilton,-,3,2500927900,27900,Town
+25,009,000886,25009000886,Haverhill City Ward 1 Precinct 1,Haverhill,1,1,2500929405,29405,City
+25,009,000887,25009000887,Haverhill City Ward 1 Precinct 2,Haverhill,1,2,2500929405,29405,City
+25,009,000888,25009000888,Haverhill City Ward 1 Precinct 3,Haverhill,1,3,2500929405,29405,City
+25,009,000889,25009000889,Haverhill City Ward 2 Precinct 1,Haverhill,2,1,2500929405,29405,City
+25,009,000890,25009000890,Haverhill City Ward 2 Precinct 2,Haverhill,2,2,2500929405,29405,City
+25,009,000891,25009000891,Haverhill City Ward 2 Precinct 3,Haverhill,2,3,2500929405,29405,City
+25,009,000892,25009000892,Haverhill City Ward 3 Precinct 1,Haverhill,3,1,2500929405,29405,City
+25,009,000893,25009000893,Haverhill City Ward 3 Precinct 2,Haverhill,3,2,2500929405,29405,City
+25,009,000894,25009000894,Haverhill City Ward 3 Precinct 3,Haverhill,3,3,2500929405,29405,City
+25,009,000895,25009000895,Haverhill City Ward 4 Precinct 1,Haverhill,4,1,2500929405,29405,City
+25,009,000896,25009000896,Haverhill City Ward 4 Precinct 2,Haverhill,4,2,2500929405,29405,City
+25,009,000897,25009000897,Haverhill City Ward 4 Precinct 3,Haverhill,4,3,2500929405,29405,City
+25,009,000898,25009000898,Haverhill City Ward 5 Precinct 1,Haverhill,5,1,2500929405,29405,City
+25,009,000899,25009000899,Haverhill City Ward 5 Precinct 2,Haverhill,5,2,2500929405,29405,City
+25,009,000900,25009000900,Haverhill City Ward 5 Precinct 3,Haverhill,5,3,2500929405,29405,City
+25,009,000901,25009000901,Haverhill City Ward 6 Precinct 1,Haverhill,6,1,2500929405,29405,City
+25,009,000902,25009000902,Haverhill City Ward 6 Precinct 2,Haverhill,6,2,2500929405,29405,City
+25,009,000903,25009000903,Haverhill City Ward 6 Precinct 3,Haverhill,6,3,2500929405,29405,City
+25,009,000904,25009000904,Haverhill City Ward 7 Precinct 1,Haverhill,7,1,2500929405,29405,City
+25,009,000905,25009000905,Haverhill City Ward 7 Precinct 2,Haverhill,7,2,2500929405,29405,City
+25,009,000906,25009000906,Haverhill City Ward 7 Precinct 3,Haverhill,7,3,2500929405,29405,City
+25,009,000961,25009000961,Ipswich Town Precinct 1,Ipswich,-,1,2500932310,32310,Town
+25,009,000962,25009000962,Ipswich Town Precinct 2,Ipswich,-,2,2500932310,32310,Town
+25,009,000963,25009000963,Ipswich Town Precinct 3,Ipswich,-,3,2500932310,32310,Town
+25,009,000964,25009000964,Ipswich Town Precinct 4,Ipswich,-,4,2500932310,32310,Town
+25,009,000975,25009000975,Lawrence City Ward A Precinct 1,Lawrence,A,1,2500934550,34550,City
+25,009,000976,25009000976,Lawrence City Ward A Precinct 2,Lawrence,A,2,2500934550,34550,City
+25,009,000977,25009000977,Lawrence City Ward A Precinct 3,Lawrence,A,3,2500934550,34550,City
+25,009,000978,25009000978,Lawrence City Ward A Precinct 4,Lawrence,A,4,2500934550,34550,City
+25,009,000979,25009000979,Lawrence City Ward B Precinct 1,Lawrence,B,1,2500934550,34550,City
+25,009,000980,25009000980,Lawrence City Ward B Precinct 2,Lawrence,B,2,2500934550,34550,City
+25,009,000981,25009000981,Lawrence City Ward B Precinct 3,Lawrence,B,3,2500934550,34550,City
+25,009,000982,25009000982,Lawrence City Ward B Precinct 4,Lawrence,B,4,2500934550,34550,City
+25,009,000983,25009000983,Lawrence City Ward C Precinct 1,Lawrence,C,1,2500934550,34550,City
+25,009,000984,25009000984,Lawrence City Ward C Precinct 2,Lawrence,C,2,2500934550,34550,City
+25,009,000985,25009000985,Lawrence City Ward C Precinct 3,Lawrence,C,3,2500934550,34550,City
+25,009,000986,25009000986,Lawrence City Ward C Precinct 4,Lawrence,C,4,2500934550,34550,City
+25,009,000987,25009000987,Lawrence City Ward D Precinct 1,Lawrence,D,1,2500934550,34550,City
+25,009,000988,25009000988,Lawrence City Ward D Precinct 2,Lawrence,D,2,2500934550,34550,City
+25,009,000989,25009000989,Lawrence City Ward D Precinct 3,Lawrence,D,3,2500934550,34550,City
+25,009,000990,25009000990,Lawrence City Ward D Precinct 4,Lawrence,D,4,2500934550,34550,City
+25,009,000991,25009000991,Lawrence City Ward E Precinct 1,Lawrence,E,1,2500934550,34550,City
+25,009,000992,25009000992,Lawrence City Ward E Precinct 2,Lawrence,E,2,2500934550,34550,City
+25,009,000993,25009000993,Lawrence City Ward E Precinct 3,Lawrence,E,3,2500934550,34550,City
+25,009,000994,25009000994,Lawrence City Ward E Precinct 4,Lawrence,E,4,2500934550,34550,City
+25,009,000995,25009000995,Lawrence City Ward F Precinct 1,Lawrence,F,1,2500934550,34550,City
+25,009,000996,25009000996,Lawrence City Ward F Precinct 2,Lawrence,F,2,2500934550,34550,City
+25,009,000997,25009000997,Lawrence City Ward F Precinct 3,Lawrence,F,3,2500934550,34550,City
+25,009,000998,25009000998,Lawrence City Ward F Precinct 4,Lawrence,F,4,2500934550,34550,City
+25,009,001084,25009001084,Lynn City Ward 1 Precinct 1,Lynn,1,1,2500937490,37490,City
+25,009,001085,25009001085,Lynn City Ward 1 Precinct 2,Lynn,1,2,2500937490,37490,City
+25,009,001086,25009001086,Lynn City Ward 1 Precinct 3,Lynn,1,3,2500937490,37490,City
+25,009,001087,25009001087,Lynn City Ward 1 Precinct 4,Lynn,1,4,2500937490,37490,City
+25,009,001088,25009001088,Lynn City Ward 2 Precinct 1,Lynn,2,1,2500937490,37490,City
+25,009,001089,25009001089,Lynn City Ward 2 Precinct 2,Lynn,2,2,2500937490,37490,City
+25,009,001090,25009001090,Lynn City Ward 2 Precinct 3,Lynn,2,3,2500937490,37490,City
+25,009,001091,25009001091,Lynn City Ward 2 Precinct 4,Lynn,2,4,2500937490,37490,City
+25,009,001092,25009001092,Lynn City Ward 3 Precinct 1,Lynn,3,1,2500937490,37490,City
+25,009,001093,25009001093,Lynn City Ward 3 Precinct 2,Lynn,3,2,2500937490,37490,City
+25,009,001094,25009001094,Lynn City Ward 3 Precinct 3,Lynn,3,3,2500937490,37490,City
+25,009,001095,25009001095,Lynn City Ward 3 Precinct 4,Lynn,3,4,2500937490,37490,City
+25,009,001096,25009001096,Lynn City Ward 4 Precinct 1,Lynn,4,1,2500937490,37490,City
+25,009,001097,25009001097,Lynn City Ward 4 Precinct 2,Lynn,4,2,2500937490,37490,City
+25,009,001098,25009001098,Lynn City Ward 4 Precinct 3,Lynn,4,3,2500937490,37490,City
+25,009,001099,25009001099,Lynn City Ward 4 Precinct 4,Lynn,4,4,2500937490,37490,City
+25,009,001100,25009001100,Lynn City Ward 5 Precinct 1,Lynn,5,1,2500937490,37490,City
+25,009,001101,25009001101,Lynn City Ward 5 Precinct 2,Lynn,5,2,2500937490,37490,City
+25,009,001102,25009001102,Lynn City Ward 5 Precinct 3,Lynn,5,3,2500937490,37490,City
+25,009,001103,25009001103,Lynn City Ward 5 Precinct 4,Lynn,5,4,2500937490,37490,City
+25,009,001104,25009001104,Lynn City Ward 6 Precinct 1,Lynn,6,1,2500937490,37490,City
+25,009,001105,25009001105,Lynn City Ward 6 Precinct 2,Lynn,6,2,2500937490,37490,City
+25,009,001106,25009001106,Lynn City Ward 6 Precinct 3,Lynn,6,3,2500937490,37490,City
+25,009,001107,25009001107,Lynn City Ward 6 Precinct 4,Lynn,6,4,2500937490,37490,City
+25,009,001108,25009001108,Lynn City Ward 7 Precinct 1,Lynn,7,1,2500937490,37490,City
+25,009,001109,25009001109,Lynn City Ward 7 Precinct 2,Lynn,7,2,2500937490,37490,City
+25,009,001110,25009001110,Lynn City Ward 7 Precinct 3,Lynn,7,3,2500937490,37490,City
+25,009,001111,25009001111,Lynn City Ward 7 Precinct 4,Lynn,7,4,2500937490,37490,City
+25,009,001112,25009001112,Lynnfield Town Precinct 1,Lynnfield,-,1,2500937560,37560,Town
+25,009,001113,25009001113,Lynnfield Town Precinct 2,Lynnfield,-,2,2500937560,37560,Town
+25,009,001114,25009001114,Lynnfield Town Precinct 3,Lynnfield,-,3,2500937560,37560,Town
+25,009,001115,25009001115,Lynnfield Town Precinct 4,Lynnfield,-,4,2500937560,37560,Town
+25,009,001132,25009001132,Manchester-by-the-Sea Town Precinct 1,Manchester-by-the-Sea,-,1,2500937995,37995,Town
+25,009,001139,25009001139,Marblehead Town Precinct 1,Marblehead,-,1,2500938400,38400,Town
+25,009,001140,25009001140,Marblehead Town Precinct 2,Marblehead,-,2,2500938400,38400,Town
+25,009,001141,25009001141,Marblehead Town Precinct 3,Marblehead,-,3,2500938400,38400,Town
+25,009,001142,25009001142,Marblehead Town Precinct 4,Marblehead,-,4,2500938400,38400,Town
+25,009,001143,25009001143,Marblehead Town Precinct 5,Marblehead,-,5,2500938400,38400,Town
+25,009,001144,25009001144,Marblehead Town Precinct 6,Marblehead,-,6,2500938400,38400,Town
+25,009,001216,25009001216,Merrimac Town Precinct 1,Merrimac,-,1,2500940430,40430,Town
+25,009,001217,25009001217,Merrimac Town Precinct 2,Merrimac,-,2,2500940430,40430,Town
+25,009,001218,25009001218,Methuen Town Precinct 1,Methuen,-,1,2500940710,40710,Town_City
+25,009,001219,25009001219,Methuen Town Precinct 10,Methuen,-,10,2500940710,40710,Town_City
+25,009,001220,25009001220,Methuen Town Precinct 11,Methuen,-,11,2500940710,40710,Town_City
+25,009,001221,25009001221,Methuen Town Precinct 12,Methuen,-,12,2500940710,40710,Town_City
+25,009,001222,25009001222,Methuen Town Precinct 2,Methuen,-,2,2500940710,40710,Town_City
+25,009,001223,25009001223,Methuen Town Precinct 3,Methuen,-,3,2500940710,40710,Town_City
+25,009,001224,25009001224,Methuen Town Precinct 4,Methuen,-,4,2500940710,40710,Town_City
+25,009,001225,25009001225,Methuen Town Precinct 5,Methuen,-,5,2500940710,40710,Town_City
+25,009,001226,25009001226,Methuen Town Precinct 6,Methuen,-,6,2500940710,40710,Town_City
+25,009,001227,25009001227,Methuen Town Precinct 7,Methuen,-,7,2500940710,40710,Town_City
+25,009,001228,25009001228,Methuen Town Precinct 8,Methuen,-,8,2500940710,40710,Town_City
+25,009,001229,25009001229,Methuen Town Precinct 9,Methuen,-,9,2500940710,40710,Town_City
+25,009,001237,25009001237,Middleton Town Precinct 1,Middleton,-,1,2500941095,41095,Town
+25,009,001238,25009001238,Middleton Town Precinct 2,Middleton,-,2,2500941095,41095,Town
+25,009,001278,25009001278,Nahant Town Precinct 1,Nahant,-,1,2500943580,43580,Town
+25,009,001340,25009001340,Newbury Town Precinct 1,Newbury,-,1,2500945175,45175,Town
+25,009,001341,25009001341,Newbury Town Precinct 2,Newbury,-,2,2500945175,45175,Town
+25,009,001342,25009001342,Newburyport City Ward 1 Precinct 1,Newburyport,1,1,2500945245,45245,City
+25,009,001343,25009001343,Newburyport City Ward 2 Precinct 1,Newburyport,2,1,2500945245,45245,City
+25,009,001344,25009001344,Newburyport City Ward 3 Precinct 1,Newburyport,3,1,2500945245,45245,City
+25,009,001345,25009001345,Newburyport City Ward 4 Precinct 1,Newburyport,4,1,2500945245,45245,City
+25,009,001346,25009001346,Newburyport City Ward 5 Precinct 1,Newburyport,5,1,2500945245,45245,City
+25,009,001347,25009001347,Newburyport City Ward 6 Precinct 1,Newburyport,6,1,2500945245,45245,City
+25,009,001388,25009001388,North Andover Town Precinct 1,North Andover,-,1,2500946365,46365,Town
+25,009,001389,25009001389,North Andover Town Precinct 2,North Andover,-,2,2500946365,46365,Town
+25,009,001390,25009001390,North Andover Town Precinct 3,North Andover,-,3,2500946365,46365,Town
+25,009,001391,25009001391,North Andover Town Precinct 4,North Andover,-,4,2500946365,46365,Town
+25,009,001392,25009001392,North Andover Town Precinct 5,North Andover,-,5,2500946365,46365,Town
+25,009,001393,25009001393,North Andover Town Precinct 6,North Andover,-,6,2500946365,46365,Town
+25,009,001394,25009001394,North Andover Town Precinct 7,North Andover,-,7,2500946365,46365,Town
+25,009,001395,25009001395,North Andover Town Precinct 8,North Andover,-,8,2500946365,46365,Town
+25,009,001465,25009001465,Peabody City Ward 1 Precinct 1,Peabody,1,1,2500952490,52490,City
+25,009,001466,25009001466,Peabody City Ward 1 Precinct 2,Peabody,1,2,2500952490,52490,City
+25,009,001467,25009001467,Peabody City Ward 1 Precinct 3,Peabody,1,3,2500952490,52490,City
+25,009,001468,25009001468,Peabody City Ward 2 Precinct 1,Peabody,2,1,2500952490,52490,City
+25,009,001469,25009001469,Peabody City Ward 2 Precinct 2,Peabody,2,2,2500952490,52490,City
+25,009,001470,25009001470,Peabody City Ward 2 Precinct 3,Peabody,2,3,2500952490,52490,City
+25,009,001471,25009001471,Peabody City Ward 3 Precinct 1,Peabody,3,1,2500952490,52490,City
+25,009,001472,25009001472,Peabody City Ward 3 Precinct 2,Peabody,3,2,2500952490,52490,City
+25,009,001473,25009001473,Peabody City Ward 3 Precinct 3,Peabody,3,3,2500952490,52490,City
+25,009,001474,25009001474,Peabody City Ward 4 Precinct 1,Peabody,4,1,2500952490,52490,City
+25,009,001475,25009001475,Peabody City Ward 4 Precinct 2,Peabody,4,2,2500952490,52490,City
+25,009,001476,25009001476,Peabody City Ward 4 Precinct 3,Peabody,4,3,2500952490,52490,City
+25,009,001477,25009001477,Peabody City Ward 5 Precinct 1,Peabody,5,1,2500952490,52490,City
+25,009,001478,25009001478,Peabody City Ward 5 Precinct 2,Peabody,5,2,2500952490,52490,City
+25,009,001479,25009001479,Peabody City Ward 5 Precinct 3,Peabody,5,3,2500952490,52490,City
+25,009,001480,25009001480,Peabody City Ward 6 Precinct 1,Peabody,6,1,2500952490,52490,City
+25,009,001481,25009001481,Peabody City Ward 6 Precinct 2,Peabody,6,2,2500952490,52490,City
+25,009,001482,25009001482,Peabody City Ward 6 Precinct 3,Peabody,6,3,2500952490,52490,City
+25,009,001614,25009001614,Rockport Precinct 1,Rockport,-,1,2500957880,57880,Town
+25,009,001615,25009001615,Rockport Precinct 2,Rockport,-,2,2500957880,57880,Town
+25,009,001616,25009001616,Rockport Precinct 3,Rockport,-,3,2500957880,57880,Town
+25,009,001618,25009001618,Rowley Town Precinct 1,Rowley,-,1,2500958405,58405,Town
+25,009,001625,25009001625,Salem City Ward 1 Precinct 1,Salem,1,1,2500959105,59105,City
+25,009,001626,25009001626,Salem City Ward 1 Precinct 2,Salem,1,2,2500959105,59105,City
+25,009,001627,25009001627,Salem City Ward 2 Precinct 1,Salem,2,1,2500959105,59105,City
+25,009,001628,25009001628,Salem City Ward 2 Precinct 2,Salem,2,2,2500959105,59105,City
+25,009,001629,25009001629,Salem City Ward 3 Precinct 1,Salem,3,1,2500959105,59105,City
+25,009,001630,25009001630,Salem City Ward 3 Precinct 2,Salem,3,2,2500959105,59105,City
+25,009,001631,25009001631,Salem City Ward 4 Precinct 1,Salem,4,1,2500959105,59105,City
+25,009,001632,25009001632,Salem City Ward 4 Precinct 2,Salem,4,2,2500959105,59105,City
+25,009,001633,25009001633,Salem City Ward 5 Precinct 1,Salem,5,1,2500959105,59105,City
+25,009,001634,25009001634,Salem City Ward 5 Precinct 2,Salem,5,2,2500959105,59105,City
+25,009,001635,25009001635,Salem City Ward 6 Precinct 1,Salem,6,1,2500959105,59105,City
+25,009,001636,25009001636,Salem City Ward 6 Precinct 2,Salem,6,2,2500959105,59105,City
+25,009,001637,25009001637,Salem City Ward 7 Precinct 1,Salem,7,1,2500959105,59105,City
+25,009,001638,25009001638,Salem City Ward 7 Precinct 2,Salem,7,2,2500959105,59105,City
+25,009,001639,25009001639,Salisbury Town Precinct 1,Salisbury,-,1,2500959245,59245,Town
+25,009,001640,25009001640,Salisbury Town Precinct 2,Salisbury,-,2,2500959245,59245,Town
+25,009,001641,25009001641,Salisbury Town Precinct 3,Salisbury,-,3,2500959245,59245,Town
+25,009,001649,25009001649,Saugus Town Precinct 1,Saugus,-,1,2500960015,60015,Town
+25,009,001650,25009001650,Saugus Town Precinct 10,Saugus,-,10,2500960015,60015,Town
+25,009,001651,25009001651,Saugus Town Precinct 2,Saugus,-,2,2500960015,60015,Town
+25,009,001652,25009001652,Saugus Town Precinct 3,Saugus,-,3,2500960015,60015,Town
+25,009,001653,25009001653,Saugus Town Precinct 4,Saugus,-,4,2500960015,60015,Town
+25,009,001654,25009001654,Saugus Town Precinct 5,Saugus,-,5,2500960015,60015,Town
+25,009,001655,25009001655,Saugus Town Precinct 6,Saugus,-,6,2500960015,60015,Town
+25,009,001656,25009001656,Saugus Town Precinct 7,Saugus,-,7,2500960015,60015,Town
+25,009,001657,25009001657,Saugus Town Precinct 8,Saugus,-,8,2500960015,60015,Town
+25,009,001658,25009001658,Saugus Town Precinct 9,Saugus,-,9,2500960015,60015,Town
+25,009,001833,25009001833,Swampscott Town Precinct 1,Swampscott,-,1,2500968645,68645,Town
+25,009,001834,25009001834,Swampscott Town Precinct 2,Swampscott,-,2,2500968645,68645,Town
+25,009,001835,25009001835,Swampscott Town Precinct 3,Swampscott,-,3,2500968645,68645,Town
+25,009,001836,25009001836,Swampscott Town Precinct 4,Swampscott,-,4,2500968645,68645,Town
+25,009,001837,25009001837,Swampscott Town Precinct 5,Swampscott,-,5,2500968645,68645,Town
+25,009,001838,25009001838,Swampscott Town Precinct 6,Swampscott,-,6,2500968645,68645,Town
+25,009,001873,25009001873,Topsfield Town Precinct 1,Topsfield,-,1,2500970150,70150,Town
+25,009,001966,25009001966,Wenham Town Precinct 1,Wenham,-,1,2500974595,74595,Town
+25,009,001972,25009001972,West Newbury Town Precinct 1,West Newbury,-,1,2500977150,77150,Town
+25,011,000078,25011000078,Ashfield Town Precinct 1,Ashfield,-,1,2501102095,02095,Town
+25,011,000147,25011000147,Bernardston Town Precinct 1,Bernardston,-,1,2501105560,05560,Town
+25,011,000510,25011000510,Buckland Town Precinct 1,Buckland,-,1,2501109595,09595,Town
+25,011,000561,25011000561,Charlemont Town Precinct 1,Charlemont,-,1,2501112505,12505,Town
+25,011,000621,25011000621,Colrain Town Precinct 1,Colrain,-,1,2501114885,14885,Town
+25,011,000627,25011000627,Conway Town Precinct 1,Conway,-,1,2501115200,15200,Town
+25,011,000655,25011000655,Deerfield Town Precinct 1,Deerfield,-,1,2501116670,16670,Town
+25,011,000709,25011000709,Erving Town Precinct 1,Erving,-,1,2501121780,21780,Town
+25,011,000825,25011000825,Gill Town Precinct 1,Gill,-,1,2501125730,25730,Town
+25,011,000850,25011000850,Greenfield Town Precinct 1,Greenfield,-,1,2501127060,27060,City
+25,011,000851,25011000851,Greenfield Town Precinct 2,Greenfield,-,2,2501127060,27060,City
+25,011,000852,25011000852,Greenfield Town Precinct 3,Greenfield,-,3,2501127060,27060,City
+25,011,000853,25011000853,Greenfield Town Precinct 4,Greenfield,-,4,2501127060,27060,City
+25,011,000854,25011000854,Greenfield Town Precinct 5,Greenfield,-,5,2501127060,27060,City
+25,011,000855,25011000855,Greenfield Town Precinct 6,Greenfield,-,6,2501127060,27060,City
+25,011,000856,25011000856,Greenfield Town Precinct 7,Greenfield,-,7,2501127060,27060,City
+25,011,000857,25011000857,Greenfield Town Precinct 8,Greenfield,-,8,2501127060,27060,City
+25,011,000858,25011000858,Greenfield Town Precinct 9,Greenfield,-,9,2501127060,27060,City
+25,011,000907,25011000907,Hawley Town Precinct 1,Hawley,-,1,2501129475,29475,Town
+25,011,000908,25011000908,Heath Town Precinct 1,Heath,-,1,2501129650,29650,Town
+25,011,001020,25011001020,Leverett Town Precinct 1,Leverett,-,1,2501135180,35180,Town
+25,011,001030,25011001030,Leyden Town Precinct 1,Leyden,-,1,2501135285,35285,Town
+25,011,001265,25011001265,Monroe Town Precinct 1,Monroe,-,1,2501142040,42040,Town
+25,011,001269,25011001269,Montague Town Precinct 1,Montague,-,1,2501142285,42285,Town
+25,011,001270,25011001270,Montague Town Precinct 2,Montague,-,2,2501142285,42285,Town
+25,011,001271,25011001271,Montague Town Precinct 3,Montague,-,3,2501142285,42285,Town
+25,011,001272,25011001272,Montague Town Precinct 4,Montague,-,4,2501142285,42285,Town
+25,011,001273,25011001273,Montague Town Precinct 5,Montague,-,5,2501142285,42285,Town
+25,011,001274,25011001274,Montague Town Precinct 6,Montague,-,6,2501142285,42285,Town
+25,011,001339,25011001339,New Salem Town Precinct 1,New Salem,-,1,2501145490,45490,Town
+25,011,001432,25011001432,Northfield Town Precinct 1,Northfield,-,1,2501147835,47835,Town
+25,011,001452,25011001452,Orange Town Precinct 1,Orange,-,1,2501151265,51265,Town
+25,011,001453,25011001453,Orange Town Precinct 2,Orange,-,2,2501151265,51265,Town
+25,011,001617,25011001617,Rowe Town Precinct 1,Rowe,-,1,2501158335,58335,Town
+25,011,001676,25011001676,Shelburne Town Precinct 1,Shelburne,-,1,2501161135,61135,Town
+25,011,001689,25011001689,Shutesbury Town Precinct 1,Shutesbury,-,1,2501161905,61905,Town
+25,011,001829,25011001829,Sunderland Town Precinct 1,Sunderland,-,1,2501168400,68400,Town
+25,011,001933,25011001933,Warwick Town Precinct 1,Warwick,-,1,2501173265,73265,Town
+25,011,001965,25011001965,Wendell Town Precinct 1,Wendell,-,1,2501174525,74525,Town
+25,011,002040,25011002040,Whately Town Precinct 1,Whately,-,1,2501179110,79110,Town
+25,013,000020,25013000020,Agawam Town Precinct 1,Agawam,-,1,2501300840,00840,Town_City
+25,013,000021,25013000021,Agawam Town Precinct 2,Agawam,-,2,2501300840,00840,Town_City
+25,013,000022,25013000022,Agawam Town Precinct 3,Agawam,-,3,2501300840,00840,Town_City
+25,013,000023,25013000023,Agawam Town Precinct 4,Agawam,-,4,2501300840,00840,Town_City
+25,013,000024,25013000024,Agawam Town Precinct 5,Agawam,-,5,2501300840,00840,Town_City
+25,013,000025,25013000025,Agawam Town Precinct 6,Agawam,-,6,2501300840,00840,Town_City
+25,013,000026,25013000026,Agawam Town Precinct 7,Agawam,-,7,2501300840,00840,Town_City
+25,013,000027,25013000027,Agawam Town Precinct 8,Agawam,-,8,2501300840,00840,Town_City
+25,013,000174,25013000174,Blandford Town Precinct 1,Blandford,-,1,2501306085,06085,Town
+25,013,000464,25013000464,Brimfield Town Precinct 1,Brimfield,-,1,2501308470,08470,Town
+25,013,000593,25013000593,Chester Town Precinct 1,Chester,-,1,2501313485,13485,Town
+25,013,000595,25013000595,Chicopee City Ward 1 Precinct A,Chicopee,1,A,2501313660,13660,City
+25,013,000596,25013000596,Chicopee City Ward 1 Precinct B,Chicopee,1,B,2501313660,13660,City
+25,013,000597,25013000597,Chicopee City Ward 2 Precinct A,Chicopee,2,A,2501313660,13660,City
+25,013,000598,25013000598,Chicopee City Ward 2 Precinct B,Chicopee,2,B,2501313660,13660,City
+25,013,000599,25013000599,Chicopee City Ward 3 Precinct A,Chicopee,3,A,2501313660,13660,City
+25,013,000600,25013000600,Chicopee City Ward 3 Precinct B,Chicopee,3,B,2501313660,13660,City
+25,013,000601,25013000601,Chicopee City Ward 4 Precinct A,Chicopee,4,A,2501313660,13660,City
+25,013,000602,25013000602,Chicopee City Ward 4 Precinct B,Chicopee,4,B,2501313660,13660,City
+25,013,000603,25013000603,Chicopee City Ward 5 Precinct A,Chicopee,5,A,2501313660,13660,City
+25,013,000604,25013000604,Chicopee City Ward 5 Precinct B,Chicopee,5,B,2501313660,13660,City
+25,013,000605,25013000605,Chicopee City Ward 6 Precinct A,Chicopee,6,A,2501313660,13660,City
+25,013,000606,25013000606,Chicopee City Ward 6 Precinct B,Chicopee,6,B,2501313660,13660,City
+25,013,000607,25013000607,Chicopee City Ward 7 Precinct A,Chicopee,7,A,2501313660,13660,City
+25,013,000608,25013000608,Chicopee City Ward 7 Precinct B,Chicopee,7,B,2501313660,13660,City
+25,013,000609,25013000609,Chicopee City Ward 8 Precinct A,Chicopee,8,A,2501313660,13660,City
+25,013,000610,25013000610,Chicopee City Ward 8 Precinct B,Chicopee,8,B,2501313660,13660,City
+25,013,000611,25013000611,Chicopee City Ward 9 Precinct A,Chicopee,9,A,2501313660,13660,City
+25,013,000612,25013000612,Chicopee City Ward 9 Precinct B,Chicopee,9,B,2501313660,13660,City
+25,013,000691,25013000691,East Longmeadow Town Precinct 1,East Longmeadow,-,1,2501319645,19645,Town
+25,013,000692,25013000692,East Longmeadow Town Precinct 2,East Longmeadow,-,2,2501319645,19645,Town
+25,013,000693,25013000693,East Longmeadow Town Precinct 3,East Longmeadow,-,3,2501319645,19645,Town
+25,013,000694,25013000694,East Longmeadow Town Precinct 4,East Longmeadow,-,4,2501319645,19645,Town
+25,013,000845,25013000845,Granville Town Precinct 1,Granville,-,1,2501326675,26675,Town
+25,013,000870,25013000870,Hampden Town Precinct 1,Hampden,-,1,2501328075,28075,Town
+25,013,000925,25013000925,Holland Town Precinct 1,Holland,-,1,2501330665,30665,Town
+25,013,000930,25013000930,Holyoke City Ward 1 Precinct A,Holyoke,1,A,2501330840,30840,City
+25,013,000931,25013000931,Holyoke City Ward 1 Precinct B,Holyoke,1,B,2501330840,30840,City
+25,013,000932,25013000932,Holyoke City Ward 2 Precinct A,Holyoke,2,A,2501330840,30840,City
+25,013,000933,25013000933,Holyoke City Ward 2 Precinct B,Holyoke,2,B,2501330840,30840,City
+25,013,000934,25013000934,Holyoke City Ward 3 Precinct A,Holyoke,3,A,2501330840,30840,City
+25,013,000935,25013000935,Holyoke City Ward 3 Precinct B,Holyoke,3,B,2501330840,30840,City
+25,013,000936,25013000936,Holyoke City Ward 4 Precinct A,Holyoke,4,A,2501330840,30840,City
+25,013,000937,25013000937,Holyoke City Ward 4 Precinct B,Holyoke,4,B,2501330840,30840,City
+25,013,000938,25013000938,Holyoke City Ward 5 Precinct A,Holyoke,5,A,2501330840,30840,City
+25,013,000939,25013000939,Holyoke City Ward 5 Precinct B,Holyoke,5,B,2501330840,30840,City
+25,013,000940,25013000940,Holyoke City Ward 6 Precinct A,Holyoke,6,A,2501330840,30840,City
+25,013,000941,25013000941,Holyoke City Ward 6 Precinct B,Holyoke,6,B,2501330840,30840,City
+25,013,000942,25013000942,Holyoke City Ward 7 Precinct A,Holyoke,7,A,2501330840,30840,City
+25,013,000943,25013000943,Holyoke City Ward 7 Precinct B,Holyoke,7,B,2501330840,30840,City
+25,013,001036,25013001036,Longmeadow Town Precinct A,Longmeadow,-,A,2501336300,36300,Town
+25,013,001037,25013001037,Longmeadow Town Precinct B,Longmeadow,-,B,2501336300,36300,Town
+25,013,001038,25013001038,Longmeadow Town Precinct C,Longmeadow,-,C,2501336300,36300,Town
+25,013,001039,25013001039,Longmeadow Town Precinct D,Longmeadow,-,D,2501336300,36300,Town
+25,013,001040,25013001040,Longmeadow Town Precinct E,Longmeadow,-,E,2501336300,36300,Town
+25,013,001074,25013001074,Ludlow Town Precinct 1,Ludlow,-,1,2501337175,37175,Town
+25,013,001075,25013001075,Ludlow Town Precinct 2,Ludlow,-,2,2501337175,37175,Town
+25,013,001076,25013001076,Ludlow Town Precinct 3,Ludlow,-,3,2501337175,37175,Town
+25,013,001077,25013001077,Ludlow Town Precinct 4,Ludlow,-,4,2501337175,37175,Town
+25,013,001078,25013001078,Ludlow Town Precinct 5,Ludlow,-,5,2501337175,37175,Town
+25,013,001079,25013001079,Ludlow Town Precinct 6,Ludlow,-,6,2501337175,37175,Town
+25,013,001266,25013001266,Monson Town Precinct A,Monson,-,A,2501342145,42145,Town
+25,013,001267,25013001267,Monson Town Precinct B,Monson,-,B,2501342145,42145,Town
+25,013,001268,25013001268,Monson Town Precinct C,Monson,-,C,2501342145,42145,Town
+25,013,001276,25013001276,Montgomery Town Precinct 1,Montgomery,-,1,2501342530,42530,Town
+25,013,001460,25013001460,Palmer Town Precinct 1,Palmer,-,1,2501352144,52144,Town_City
+25,013,001461,25013001461,Palmer Town Precinct 2,Palmer,-,2,2501352144,52144,Town_City
+25,013,001462,25013001462,Palmer Town Precinct 3,Palmer,-,3,2501352144,52144,Town_City
+25,013,001463,25013001463,Palmer Town Precinct 4,Palmer,-,4,2501352144,52144,Town_City
+25,013,001621,25013001621,Russell Town Precinct 1,Russell,-,1,2501358650,58650,Town
+25,013,001730,25013001730,Southwick Town Precinct 1,Southwick,-,1,2501365825,65825,Town
+25,013,001731,25013001731,Southwick Town Precinct 2,Southwick,-,2,2501365825,65825,Town
+25,013,001732,25013001732,Southwick Town Precinct 3,Southwick,-,3,2501365825,65825,Town
+25,013,001737,25013001737,Springfield City Ward 1 Precinct A,Springfield,1,A,2501367000,67000,City
+25,013,001738,25013001738,Springfield City Ward 1 Precinct B,Springfield,1,B,2501367000,67000,City
+25,013,001739,25013001739,Springfield City Ward 1 Precinct C,Springfield,1,C,2501367000,67000,City
+25,013,001740,25013001740,Springfield City Ward 1 Precinct D,Springfield,1,D,2501367000,67000,City
+25,013,001741,25013001741,Springfield City Ward 1 Precinct E,Springfield,1,E,2501367000,67000,City
+25,013,001742,25013001742,Springfield City Ward 1 Precinct F,Springfield,1,F,2501367000,67000,City
+25,013,001743,25013001743,Springfield City Ward 1 Precinct G,Springfield,1,G,2501367000,67000,City
+25,013,001744,25013001744,Springfield City Ward 1 Precinct H,Springfield,1,H,2501367000,67000,City
+25,013,001745,25013001745,Springfield City Ward 2 Precinct A,Springfield,2,A,2501367000,67000,City
+25,013,001746,25013001746,Springfield City Ward 2 Precinct B,Springfield,2,B,2501367000,67000,City
+25,013,001747,25013001747,Springfield City Ward 2 Precinct C,Springfield,2,C,2501367000,67000,City
+25,013,001748,25013001748,Springfield City Ward 2 Precinct D,Springfield,2,D,2501367000,67000,City
+25,013,001749,25013001749,Springfield City Ward 2 Precinct E,Springfield,2,E,2501367000,67000,City
+25,013,001750,25013001750,Springfield City Ward 2 Precinct F,Springfield,2,F,2501367000,67000,City
+25,013,001751,25013001751,Springfield City Ward 2 Precinct G,Springfield,2,G,2501367000,67000,City
+25,013,001752,25013001752,Springfield City Ward 2 Precinct H,Springfield,2,H,2501367000,67000,City
+25,013,001753,25013001753,Springfield City Ward 3 Precinct A,Springfield,3,A,2501367000,67000,City
+25,013,001754,25013001754,Springfield City Ward 3 Precinct B,Springfield,3,B,2501367000,67000,City
+25,013,001755,25013001755,Springfield City Ward 3 Precinct C,Springfield,3,C,2501367000,67000,City
+25,013,001756,25013001756,Springfield City Ward 3 Precinct D,Springfield,3,D,2501367000,67000,City
+25,013,001757,25013001757,Springfield City Ward 3 Precinct E,Springfield,3,E,2501367000,67000,City
+25,013,001758,25013001758,Springfield City Ward 3 Precinct F,Springfield,3,F,2501367000,67000,City
+25,013,001759,25013001759,Springfield City Ward 3 Precinct G,Springfield,3,G,2501367000,67000,City
+25,013,001760,25013001760,Springfield City Ward 3 Precinct H,Springfield,3,H,2501367000,67000,City
+25,013,001761,25013001761,Springfield City Ward 4 Precinct A,Springfield,4,A,2501367000,67000,City
+25,013,001762,25013001762,Springfield City Ward 4 Precinct B,Springfield,4,B,2501367000,67000,City
+25,013,001763,25013001763,Springfield City Ward 4 Precinct C,Springfield,4,C,2501367000,67000,City
+25,013,001764,25013001764,Springfield City Ward 4 Precinct D,Springfield,4,D,2501367000,67000,City
+25,013,001765,25013001765,Springfield City Ward 4 Precinct E,Springfield,4,E,2501367000,67000,City
+25,013,001766,25013001766,Springfield City Ward 4 Precinct F,Springfield,4,F,2501367000,67000,City
+25,013,001767,25013001767,Springfield City Ward 4 Precinct G,Springfield,4,G,2501367000,67000,City
+25,013,001768,25013001768,Springfield City Ward 4 Precinct H,Springfield,4,H,2501367000,67000,City
+25,013,001769,25013001769,Springfield City Ward 5 Precinct A,Springfield,5,A,2501367000,67000,City
+25,013,001770,25013001770,Springfield City Ward 5 Precinct B,Springfield,5,B,2501367000,67000,City
+25,013,001771,25013001771,Springfield City Ward 5 Precinct C,Springfield,5,C,2501367000,67000,City
+25,013,001772,25013001772,Springfield City Ward 5 Precinct D,Springfield,5,D,2501367000,67000,City
+25,013,001773,25013001773,Springfield City Ward 5 Precinct E,Springfield,5,E,2501367000,67000,City
+25,013,001774,25013001774,Springfield City Ward 5 Precinct F,Springfield,5,F,2501367000,67000,City
+25,013,001775,25013001775,Springfield City Ward 5 Precinct G,Springfield,5,G,2501367000,67000,City
+25,013,001776,25013001776,Springfield City Ward 5 Precinct H,Springfield,5,H,2501367000,67000,City
+25,013,001777,25013001777,Springfield City Ward 6 Precinct A,Springfield,6,A,2501367000,67000,City
+25,013,001778,25013001778,Springfield City Ward 6 Precinct B,Springfield,6,B,2501367000,67000,City
+25,013,001779,25013001779,Springfield City Ward 6 Precinct C,Springfield,6,C,2501367000,67000,City
+25,013,001780,25013001780,Springfield City Ward 6 Precinct D,Springfield,6,D,2501367000,67000,City
+25,013,001781,25013001781,Springfield City Ward 6 Precinct E,Springfield,6,E,2501367000,67000,City
+25,013,001782,25013001782,Springfield City Ward 6 Precinct F,Springfield,6,F,2501367000,67000,City
+25,013,001783,25013001783,Springfield City Ward 6 Precinct G,Springfield,6,G,2501367000,67000,City
+25,013,001784,25013001784,Springfield City Ward 6 Precinct H,Springfield,6,H,2501367000,67000,City
+25,013,001785,25013001785,Springfield City Ward 7 Precinct A,Springfield,7,A,2501367000,67000,City
+25,013,001786,25013001786,Springfield City Ward 7 Precinct B,Springfield,7,B,2501367000,67000,City
+25,013,001787,25013001787,Springfield City Ward 7 Precinct C,Springfield,7,C,2501367000,67000,City
+25,013,001788,25013001788,Springfield City Ward 7 Precinct D,Springfield,7,D,2501367000,67000,City
+25,013,001789,25013001789,Springfield City Ward 7 Precinct E,Springfield,7,E,2501367000,67000,City
+25,013,001790,25013001790,Springfield City Ward 7 Precinct F,Springfield,7,F,2501367000,67000,City
+25,013,001791,25013001791,Springfield City Ward 7 Precinct G,Springfield,7,G,2501367000,67000,City
+25,013,001792,25013001792,Springfield City Ward 7 Precinct H,Springfield,7,H,2501367000,67000,City
+25,013,001793,25013001793,Springfield City Ward 8 Precinct A,Springfield,8,A,2501367000,67000,City
+25,013,001794,25013001794,Springfield City Ward 8 Precinct B,Springfield,8,B,2501367000,67000,City
+25,013,001795,25013001795,Springfield City Ward 8 Precinct C,Springfield,8,C,2501367000,67000,City
+25,013,001796,25013001796,Springfield City Ward 8 Precinct D,Springfield,8,D,2501367000,67000,City
+25,013,001797,25013001797,Springfield City Ward 8 Precinct E,Springfield,8,E,2501367000,67000,City
+25,013,001798,25013001798,Springfield City Ward 8 Precinct F,Springfield,8,F,2501367000,67000,City
+25,013,001799,25013001799,Springfield City Ward 8 Precinct G,Springfield,8,G,2501367000,67000,City
+25,013,001800,25013001800,Springfield City Ward 8 Precinct H,Springfield,8,H,2501367000,67000,City
+25,013,001872,25013001872,Tolland Town Precinct 1,Tolland,-,1,2501370045,70045,Town
+25,013,001896,25013001896,Wales Town Precinct 1,Wales,-,1,2501372390,72390,Town
+25,013,001973,25013001973,West Springfield Town Precinct 1,West Springfield,-,1,2501377890,77890,Town_City
+25,013,001974,25013001974,West Springfield Town Precinct 2,West Springfield,-,2,2501377890,77890,Town_City
+25,013,001975,25013001975,West Springfield Town Precinct 3,West Springfield,-,3,2501377890,77890,Town_City
+25,013,001976,25013001976,West Springfield Town Precinct 4,West Springfield,-,4,2501377890,77890,Town_City
+25,013,001977,25013001977,West Springfield Town Precinct 5,West Springfield,-,5,2501377890,77890,Town_City
+25,013,001978,25013001978,West Springfield Town Precinct 6,West Springfield,-,6,2501377890,77890,Town_City
+25,013,001979,25013001979,West Springfield Town Precinct 7,West Springfield,-,7,2501377890,77890,Town_City
+25,013,001980,25013001980,West Springfield Town Precinct 8,West Springfield,-,8,2501377890,77890,Town_City
+25,013,001988,25013001988,Westfield City Ward 1 Precinct A,Westfield,1,A,2501376030,76030,City
+25,013,001989,25013001989,Westfield City Ward 1 Precinct B,Westfield,1,B,2501376030,76030,City
+25,013,001990,25013001990,Westfield City Ward 2 Precinct A,Westfield,2,A,2501376030,76030,City
+25,013,001991,25013001991,Westfield City Ward 2 Precinct B,Westfield,2,B,2501376030,76030,City
+25,013,001992,25013001992,Westfield City Ward 3 Precinct A,Westfield,3,A,2501376030,76030,City
+25,013,001993,25013001993,Westfield City Ward 3 Precinct B,Westfield,3,B,2501376030,76030,City
+25,013,001994,25013001994,Westfield City Ward 4 Precinct A,Westfield,4,A,2501376030,76030,City
+25,013,001995,25013001995,Westfield City Ward 4 Precinct B,Westfield,4,B,2501376030,76030,City
+25,013,001996,25013001996,Westfield City Ward 5 Precinct A,Westfield,5,A,2501376030,76030,City
+25,013,001997,25013001997,Westfield City Ward 5 Precinct B,Westfield,5,B,2501376030,76030,City
+25,013,001998,25013001998,Westfield City Ward 6 Precinct A,Westfield,6,A,2501376030,76030,City
+25,013,001999,25013001999,Westfield City Ward 6 Precinct B,Westfield,6,B,2501376030,76030,City
+25,013,002045,25013002045,Wilbraham Town Precinct A,Wilbraham,-,A,2501379740,79740,Town
+25,013,002046,25013002046,Wilbraham Town Precinct B,Wilbraham,-,B,2501379740,79740,Town
+25,013,002047,25013002047,Wilbraham Town Precinct C,Wilbraham,-,C,2501379740,79740,Town
+25,013,002048,25013002048,Wilbraham Town Precinct D,Wilbraham,-,D,2501379740,79740,Town
+25,015,000035,25015000035,Amherst Town Precinct 1,Amherst,-,1,2501501370,01370,Town_City
+25,015,000036,25015000036,Amherst Town Precinct 10,Amherst,-,10,2501501370,01370,Town_City
+25,015,000037,25015000037,Amherst Town Precinct 2,Amherst,-,2,2501501370,01370,Town_City
+25,015,000038,25015000038,Amherst Town Precinct 3,Amherst,-,3,2501501370,01370,Town_City
+25,015,000039,25015000039,Amherst Town Precinct 4,Amherst,-,4,2501501370,01370,Town_City
+25,015,000040,25015000040,Amherst Town Precinct 5,Amherst,-,5,2501501370,01370,Town_City
+25,015,000041,25015000041,Amherst Town Precinct 6,Amherst,-,6,2501501370,01370,Town_City
+25,015,000042,25015000042,Amherst Town Precinct 7,Amherst,-,7,2501501370,01370,Town_City
+25,015,000043,25015000043,Amherst Town Precinct 8,Amherst,-,8,2501501370,01370,Town_City
+25,015,000044,25015000044,Amherst Town Precinct 9,Amherst,-,9,2501501370,01370,Town_City
+25,015,000127,25015000127,Belchertown Town Precinct A,Belchertown,-,A,2501504825,04825,Town
+25,015,000128,25015000128,Belchertown Town Precinct B,Belchertown,-,B,2501504825,04825,Town
+25,015,000129,25015000129,Belchertown Town Precinct C,Belchertown,-,C,2501504825,04825,Town
+25,015,000130,25015000130,Belchertown Town Precinct D,Belchertown,-,D,2501504825,04825,Town
+25,015,000594,25015000594,Chesterfield Town Precinct 1,Chesterfield,-,1,2501513590,13590,Town
+25,015,000628,25015000628,Cummington Town Precinct 1,Cummington,-,1,2501516040,16040,Town
+25,015,000696,25015000696,Easthampton City Precinct 1,Easthampton,-,1,2501519370,19370,Town_City
+25,015,000697,25015000697,Easthampton City Precinct 2,Easthampton,-,2,2501519370,19370,Town_City
+25,015,000698,25015000698,Easthampton City Precinct 3,Easthampton,-,3,2501519370,19370,Town_City
+25,015,000699,25015000699,Easthampton City Precinct 4,Easthampton,-,4,2501519370,19370,Town_City
+25,015,000700,25015000700,Easthampton City Precinct 5,Easthampton,-,5,2501519370,19370,Town_City
+25,015,000836,25015000836,Goshen Town Precinct 1,Goshen,-,1,2501526290,26290,Town
+25,015,000843,25015000843,Granby Town Precinct 1,Granby,-,1,2501526535,26535,Town
+25,015,000844,25015000844,Granby Town Precinct 2,Granby,-,2,2501526535,26535,Town
+25,015,000864,25015000864,Hadley Town Precinct 1,Hadley,-,1,2501527690,27690,Town
+25,015,000885,25015000885,Hatfield Town Precinct 1,Hatfield,-,1,2501529265,29265,Town
+25,015,000960,25015000960,Huntington Town Precinct 1,Huntington,-,1,2501531785,31785,Town
+25,015,001236,25015001236,Middlefield Town Precinct 1,Middlefield,-,1,2501540990,40990,Town
+25,015,001410,25015001410,Northampton City Ward 1 Precinct A,Northampton,1,A,2501546330,46330,City
+25,015,001411,25015001411,Northampton City Ward 1 Precinct B,Northampton,1,B,2501546330,46330,City
+25,015,001412,25015001412,Northampton City Ward 2 Precinct A,Northampton,2,A,2501546330,46330,City
+25,015,001413,25015001413,Northampton City Ward 2 Precinct B,Northampton,2,B,2501546330,46330,City
+25,015,001414,25015001414,Northampton City Ward 3 Precinct A,Northampton,3,A,2501546330,46330,City
+25,015,001415,25015001415,Northampton City Ward 3 Precinct B,Northampton,3,B,2501546330,46330,City
+25,015,001416,25015001416,Northampton City Ward 4 Precinct A,Northampton,4,A,2501546330,46330,City
+25,015,001417,25015001417,Northampton City Ward 4 Precinct B,Northampton,4,B,2501546330,46330,City
+25,015,001418,25015001418,Northampton City Ward 5 Precinct A,Northampton,5,A,2501546330,46330,City
+25,015,001419,25015001419,Northampton City Ward 5 Precinct B,Northampton,5,B,2501546330,46330,City
+25,015,001420,25015001420,Northampton City Ward 6 Precinct A,Northampton,6,A,2501546330,46330,City
+25,015,001421,25015001421,Northampton City Ward 6 Precinct B,Northampton,6,B,2501546330,46330,City
+25,015,001422,25015001422,Northampton City Ward 7 Precinct A,Northampton,7,A,2501546330,46330,City
+25,015,001423,25015001423,Northampton City Ward 7 Precinct B,Northampton,7,B,2501546330,46330,City
+25,015,001483,25015001483,Pelham Town Precinct 1,Pelham,-,1,2501552560,52560,Town
+25,015,001509,25015001509,Plainfield Town Precinct 1,Plainfield,-,1,2501554030,54030,Town
+25,015,001716,25015001716,South Hadley Town Precinct A,South Hadley,-,A,2501564145,64145,Town
+25,015,001717,25015001717,South Hadley Town Precinct B,South Hadley,-,B,2501564145,64145,Town
+25,015,001718,25015001718,South Hadley Town Precinct C,South Hadley,-,C,2501564145,64145,Town
+25,015,001719,25015001719,South Hadley Town Precinct D,South Hadley,-,D,2501564145,64145,Town
+25,015,001720,25015001720,South Hadley Town Precinct E,South Hadley,-,E,2501564145,64145,Town
+25,015,001721,25015001721,Southampton Town Precinct 1,Southampton,-,1,2501562745,62745,Town
+25,015,001923,25015001923,Ware Town Precinct A,Ware,-,A,2501572880,72880,Town
+25,015,001924,25015001924,Ware Town Precinct B,Ware,-,B,2501572880,72880,Town
+25,015,001925,25015001925,Ware Town Precinct C,Ware,-,C,2501572880,72880,Town
+25,015,002006,25015002006,Westhampton Town Precinct 1,Westhampton,-,1,2501576380,76380,Town
+25,015,002049,25015002049,Williamsburg Town Precinct 1,Williamsburg,-,1,2501579915,79915,Town
+25,015,002141,25015002141,Worthington Town Precinct 1,Worthington,-,1,2501582175,82175,Town
+25,017,000006,25017000006,Acton Town Precinct 1,Acton,-,1,2501700380,00380,Town
+25,017,000007,25017000007,Acton Town Precinct 2,Acton,-,2,2501700380,00380,Town
+25,017,000008,25017000008,Acton Town Precinct 3,Acton,-,3,2501700380,00380,Town
+25,017,000009,25017000009,Acton Town Precinct 4,Acton,-,4,2501700380,00380,Town
+25,017,000010,25017000010,Acton Town Precinct 5,Acton,-,5,2501700380,00380,Town
+25,017,000011,25017000011,Acton Town Precinct 6,Acton,-,6,2501700380,00380,Town
+25,017,000055,25017000055,Arlington Town Precinct 1,Arlington,-,1,2501701605,01605,Town
+25,017,000056,25017000056,Arlington Town Precinct 10,Arlington,-,10,2501701605,01605,Town
+25,017,000057,25017000057,Arlington Town Precinct 11,Arlington,-,11,2501701605,01605,Town
+25,017,000058,25017000058,Arlington Town Precinct 12,Arlington,-,12,2501701605,01605,Town
+25,017,000059,25017000059,Arlington Town Precinct 13,Arlington,-,13,2501701605,01605,Town
+25,017,000060,25017000060,Arlington Town Precinct 14,Arlington,-,14,2501701605,01605,Town
+25,017,000061,25017000061,Arlington Town Precinct 15,Arlington,-,15,2501701605,01605,Town
+25,017,000062,25017000062,Arlington Town Precinct 16,Arlington,-,16,2501701605,01605,Town
+25,017,000063,25017000063,Arlington Town Precinct 17,Arlington,-,17,2501701605,01605,Town
+25,017,000064,25017000064,Arlington Town Precinct 18,Arlington,-,18,2501701605,01605,Town
+25,017,000065,25017000065,Arlington Town Precinct 19,Arlington,-,19,2501701605,01605,Town
+25,017,000066,25017000066,Arlington Town Precinct 2,Arlington,-,2,2501701605,01605,Town
+25,017,000067,25017000067,Arlington Town Precinct 20,Arlington,-,20,2501701605,01605,Town
+25,017,000068,25017000068,Arlington Town Precinct 21,Arlington,-,21,2501701605,01605,Town
+25,017,000069,25017000069,Arlington Town Precinct 3,Arlington,-,3,2501701605,01605,Town
+25,017,000070,25017000070,Arlington Town Precinct 4,Arlington,-,4,2501701605,01605,Town
+25,017,000071,25017000071,Arlington Town Precinct 5,Arlington,-,5,2501701605,01605,Town
+25,017,000072,25017000072,Arlington Town Precinct 6,Arlington,-,6,2501701605,01605,Town
+25,017,000073,25017000073,Arlington Town Precinct 7,Arlington,-,7,2501701605,01605,Town
+25,017,000074,25017000074,Arlington Town Precinct 8,Arlington,-,8,2501701605,01605,Town
+25,017,000075,25017000075,Arlington Town Precinct 9,Arlington,-,9,2501701605,01605,Town
+25,017,000077,25017000077,Ashby Town Precinct 1,Ashby,-,1,2501701955,01955,Town
+25,017,000079,25017000079,Ashland Town Precinct 1,Ashland,-,1,2501702130,02130,Town
+25,017,000080,25017000080,Ashland Town Precinct 2,Ashland,-,2,2501702130,02130,Town
+25,017,000081,25017000081,Ashland Town Precinct 3,Ashland,-,3,2501702130,02130,Town
+25,017,000082,25017000082,Ashland Town Precinct 4,Ashland,-,4,2501702130,02130,Town
+25,017,000083,25017000083,Ashland Town Precinct 5,Ashland,-,5,2501702130,02130,Town
+25,017,000105,25017000105,Ayer Town Precinct 1,Ayer,-,1,2501703005,03005,Town
+25,017,000106,25017000106,Ayer Town Precinct 2,Ayer,-,2,2501703005,03005,Town
+25,017,000123,25017000123,Bedford Town Precinct 1,Bedford,-,1,2501704615,04615,Town
+25,017,000124,25017000124,Bedford Town Precinct 2,Bedford,-,2,2501704615,04615,Town
+25,017,000125,25017000125,Bedford Town Precinct 3,Bedford,-,3,2501704615,04615,Town
+25,017,000126,25017000126,Bedford Town Precinct 4,Bedford,-,4,2501704615,04615,Town
+25,017,000136,25017000136,Belmont Town Precinct 1,Belmont,-,1,2501705070,05070,Town
+25,017,000137,25017000137,Belmont Town Precinct 2,Belmont,-,2,2501705070,05070,Town
+25,017,000138,25017000138,Belmont Town Precinct 3,Belmont,-,3,2501705070,05070,Town
+25,017,000139,25017000139,Belmont Town Precinct 4,Belmont,-,4,2501705070,05070,Town
+25,017,000140,25017000140,Belmont Town Precinct 5,Belmont,-,5,2501705070,05070,Town
+25,017,000141,25017000141,Belmont Town Precinct 6,Belmont,-,6,2501705070,05070,Town
+25,017,000142,25017000142,Belmont Town Precinct 7,Belmont,-,7,2501705070,05070,Town
+25,017,000143,25017000143,Belmont Town Precinct 8,Belmont,-,8,2501705070,05070,Town
+25,017,000160,25017000160,Billerica Town Precinct 1,Billerica,-,1,2501705805,05805,Town
+25,017,000161,25017000161,Billerica Town Precinct 10,Billerica,-,10,2501705805,05805,Town
+25,017,000162,25017000162,Billerica Town Precinct 11,Billerica,-,11,2501705805,05805,Town
+25,017,000163,25017000163,Billerica Town Precinct 2,Billerica,-,2,2501705805,05805,Town
+25,017,000164,25017000164,Billerica Town Precinct 3,Billerica,-,3,2501705805,05805,Town
+25,017,000165,25017000165,Billerica Town Precinct 4,Billerica,-,4,2501705805,05805,Town
+25,017,000166,25017000166,Billerica Town Precinct 5,Billerica,-,5,2501705805,05805,Town
+25,017,000167,25017000167,Billerica Town Precinct 6,Billerica,-,6,2501705805,05805,Town
+25,017,000168,25017000168,Billerica Town Precinct 7,Billerica,-,7,2501705805,05805,Town
+25,017,000169,25017000169,Billerica Town Precinct 8,Billerica,-,8,2501705805,05805,Town
+25,017,000170,25017000170,Billerica Town Precinct 9,Billerica,-,9,2501705805,05805,Town
+25,017,000437,25017000437,Boxborough Town Precinct 1,Boxborough,-,1,2501707350,07350,Town
+25,017,000511,25017000511,Burlington Town Precinct 1,Burlington,-,1,2501709840,09840,Town
+25,017,000512,25017000512,Burlington Town Precinct 2,Burlington,-,2,2501709840,09840,Town
+25,017,000513,25017000513,Burlington Town Precinct 3,Burlington,-,3,2501709840,09840,Town
+25,017,000514,25017000514,Burlington Town Precinct 4,Burlington,-,4,2501709840,09840,Town
+25,017,000515,25017000515,Burlington Town Precinct 5,Burlington,-,5,2501709840,09840,Town
+25,017,000516,25017000516,Burlington Town Precinct 6,Burlington,-,6,2501709840,09840,Town
+25,017,000517,25017000517,Burlington Town Precinct 7,Burlington,-,7,2501709840,09840,Town
+25,017,000518,25017000518,Cambridge City Ward 1 Precinct 1,Cambridge,1,1,2501711000,11000,City
+25,017,000519,25017000519,Cambridge City Ward 1 Precinct 2,Cambridge,1,2,2501711000,11000,City
+25,017,000520,25017000520,Cambridge City Ward 1 Precinct 3,Cambridge,1,3,2501711000,11000,City
+25,017,000521,25017000521,Cambridge City Ward 10 Precinct 1,Cambridge,10,1,2501711000,11000,City
+25,017,000522,25017000522,Cambridge City Ward 10 Precinct 2,Cambridge,10,2,2501711000,11000,City
+25,017,000523,25017000523,Cambridge City Ward 10 Precinct 3,Cambridge,10,3,2501711000,11000,City
+25,017,000524,25017000524,Cambridge City Ward 11 Precinct 1,Cambridge,11,1,2501711000,11000,City
+25,017,000525,25017000525,Cambridge City Ward 11 Precinct 2,Cambridge,11,2,2501711000,11000,City
+25,017,000526,25017000526,Cambridge City Ward 11 Precinct 3,Cambridge,11,3,2501711000,11000,City
+25,017,000527,25017000527,Cambridge City Ward 2 Precinct 1,Cambridge,2,1,2501711000,11000,City
+25,017,000528,25017000528,Cambridge City Ward 2 Precinct 2,Cambridge,2,2,2501711000,11000,City
+25,017,000529,25017000529,Cambridge City Ward 2 Precinct 3,Cambridge,2,3,2501711000,11000,City
+25,017,000530,25017000530,Cambridge City Ward 3 Precinct 1,Cambridge,3,1,2501711000,11000,City
+25,017,000531,25017000531,Cambridge City Ward 3 Precinct 2,Cambridge,3,2,2501711000,11000,City
+25,017,000532,25017000532,Cambridge City Ward 3 Precinct 3,Cambridge,3,3,2501711000,11000,City
+25,017,000533,25017000533,Cambridge City Ward 4 Precinct 1,Cambridge,4,1,2501711000,11000,City
+25,017,000534,25017000534,Cambridge City Ward 4 Precinct 2,Cambridge,4,2,2501711000,11000,City
+25,017,000535,25017000535,Cambridge City Ward 4 Precinct 3,Cambridge,4,3,2501711000,11000,City
+25,017,000536,25017000536,Cambridge City Ward 5 Precinct 1,Cambridge,5,1,2501711000,11000,City
+25,017,000537,25017000537,Cambridge City Ward 5 Precinct 2,Cambridge,5,2,2501711000,11000,City
+25,017,000538,25017000538,Cambridge City Ward 5 Precinct 3,Cambridge,5,3,2501711000,11000,City
+25,017,000539,25017000539,Cambridge City Ward 6 Precinct 1,Cambridge,6,1,2501711000,11000,City
+25,017,000540,25017000540,Cambridge City Ward 6 Precinct 2,Cambridge,6,2,2501711000,11000,City
+25,017,000541,25017000541,Cambridge City Ward 6 Precinct 3,Cambridge,6,3,2501711000,11000,City
+25,017,000542,25017000542,Cambridge City Ward 7 Precinct 1,Cambridge,7,1,2501711000,11000,City
+25,017,000543,25017000543,Cambridge City Ward 7 Precinct 2,Cambridge,7,2,2501711000,11000,City
+25,017,000544,25017000544,Cambridge City Ward 7 Precinct 3,Cambridge,7,3,2501711000,11000,City
+25,017,000545,25017000545,Cambridge City Ward 8 Precinct 1,Cambridge,8,1,2501711000,11000,City
+25,017,000546,25017000546,Cambridge City Ward 8 Precinct 2,Cambridge,8,2,2501711000,11000,City
+25,017,000547,25017000547,Cambridge City Ward 8 Precinct 3,Cambridge,8,3,2501711000,11000,City
+25,017,000548,25017000548,Cambridge City Ward 9 Precinct 1,Cambridge,9,1,2501711000,11000,City
+25,017,000549,25017000549,Cambridge City Ward 9 Precinct 2,Cambridge,9,2,2501711000,11000,City
+25,017,000550,25017000550,Cambridge City Ward 9 Precinct 3,Cambridge,9,3,2501711000,11000,City
+25,017,000557,25017000557,Carlisle Town Precinct 1,Carlisle,-,1,2501711525,11525,Town
+25,017,000567,25017000567,Chelmsford Town Precinct 1,Chelmsford,-,1,2501713135,13135,Town
+25,017,000568,25017000568,Chelmsford Town Precinct 2,Chelmsford,-,2,2501713135,13135,Town
+25,017,000569,25017000569,Chelmsford Town Precinct 3,Chelmsford,-,3,2501713135,13135,Town
+25,017,000570,25017000570,Chelmsford Town Precinct 4,Chelmsford,-,4,2501713135,13135,Town
+25,017,000571,25017000571,Chelmsford Town Precinct 5,Chelmsford,-,5,2501713135,13135,Town
+25,017,000572,25017000572,Chelmsford Town Precinct 6,Chelmsford,-,6,2501713135,13135,Town
+25,017,000573,25017000573,Chelmsford Town Precinct 7,Chelmsford,-,7,2501713135,13135,Town
+25,017,000574,25017000574,Chelmsford Town Precinct 8,Chelmsford,-,8,2501713135,13135,Town
+25,017,000575,25017000575,Chelmsford Town Precinct 9,Chelmsford,-,9,2501713135,13135,Town
+25,017,000622,25017000622,Concord Town Precinct 1,Concord,-,1,2501715060,15060,Town
+25,017,000623,25017000623,Concord Town Precinct 2,Concord,-,2,2501715060,15060,Town
+25,017,000624,25017000624,Concord Town Precinct 3,Concord,-,3,2501715060,15060,Town
+25,017,000625,25017000625,Concord Town Precinct 4,Concord,-,4,2501715060,15060,Town
+25,017,000626,25017000626,Concord Town Precinct 5,Concord,-,5,2501715060,15060,Town
+25,017,000667,25017000667,Dracut Town Precinct 1,Dracut,-,1,2501717475,17475,Town
+25,017,000668,25017000668,Dracut Town Precinct 2,Dracut,-,2,2501717475,17475,Town
+25,017,000669,25017000669,Dracut Town Precinct 3,Dracut,-,3,2501717475,17475,Town
+25,017,000670,25017000670,Dracut Town Precinct 4,Dracut,-,4,2501717475,17475,Town
+25,017,000671,25017000671,Dracut Town Precinct 5,Dracut,-,5,2501717475,17475,Town
+25,017,000672,25017000672,Dracut Town Precinct 6,Dracut,-,6,2501717475,17475,Town
+25,017,000673,25017000673,Dracut Town Precinct 7,Dracut,-,7,2501717475,17475,Town
+25,017,000674,25017000674,Dracut Town Precinct 8,Dracut,-,8,2501717475,17475,Town
+25,017,000675,25017000675,Dracut Town Precinct 9,Dracut,-,9,2501717475,17475,Town
+25,017,000679,25017000679,Dunstable Town Precinct 1,Dunstable,-,1,2501717825,17825,Town
+25,017,000711,25017000711,Everett City Ward 1 Precinct 1,Everett,1,1,2501721990,21990,City
+25,017,000712,25017000712,Everett City Ward 1 Precinct 2,Everett,1,2,2501721990,21990,City
+25,017,000713,25017000713,Everett City Ward 2 Precinct 1,Everett,2,1,2501721990,21990,City
+25,017,000714,25017000714,Everett City Ward 2 Precinct 2,Everett,2,2,2501721990,21990,City
+25,017,000715,25017000715,Everett City Ward 3 Precinct 1,Everett,3,1,2501721990,21990,City
+25,017,000716,25017000716,Everett City Ward 3 Precinct 2,Everett,3,2,2501721990,21990,City
+25,017,000717,25017000717,Everett City Ward 4 Precinct 1,Everett,4,1,2501721990,21990,City
+25,017,000718,25017000718,Everett City Ward 4 Precinct 2,Everett,4,2,2501721990,21990,City
+25,017,000719,25017000719,Everett City Ward 5 Precinct 1,Everett,5,1,2501721990,21990,City
+25,017,000720,25017000720,Everett City Ward 5 Precinct 2,Everett,5,2,2501721990,21990,City
+25,017,000721,25017000721,Everett City Ward 6 Precinct 1,Everett,6,1,2501721990,21990,City
+25,017,000722,25017000722,Everett City Ward 6 Precinct 2,Everett,6,2,2501721990,21990,City
+25,017,000783,25017000783,Framingham Town Precinct 1,Framingham,-,1,2501724960,24960,City
+25,017,000784,25017000784,Framingham Town Precinct 10,Framingham,-,10,2501724960,24960,City
+25,017,000785,25017000785,Framingham Town Precinct 11,Framingham,-,11,2501724960,24960,City
+25,017,000786,25017000786,Framingham Town Precinct 12,Framingham,-,12,2501724960,24960,City
+25,017,000787,25017000787,Framingham Town Precinct 13,Framingham,-,13,2501724960,24960,City
+25,017,000788,25017000788,Framingham Town Precinct 14,Framingham,-,14,2501724960,24960,City
+25,017,000789,25017000789,Framingham Town Precinct 15,Framingham,-,15,2501724960,24960,City
+25,017,000790,25017000790,Framingham Town Precinct 16,Framingham,-,16,2501724960,24960,City
+25,017,000791,25017000791,Framingham Town Precinct 17,Framingham,-,17,2501724960,24960,City
+25,017,000792,25017000792,Framingham Town Precinct 18,Framingham,-,18,2501724960,24960,City
+25,017,000793,25017000793,Framingham Town Precinct 2,Framingham,-,2,2501724960,24960,City
+25,017,000794,25017000794,Framingham Town Precinct 3,Framingham,-,3,2501724960,24960,City
+25,017,000795,25017000795,Framingham Town Precinct 4,Framingham,-,4,2501724960,24960,City
+25,017,000796,25017000796,Framingham Town Precinct 5,Framingham,-,5,2501724960,24960,City
+25,017,000797,25017000797,Framingham Town Precinct 6,Framingham,-,6,2501724960,24960,City
+25,017,000798,25017000798,Framingham Town Precinct 7,Framingham,-,7,2501724960,24960,City
+25,017,000799,25017000799,Framingham Town Precinct 8,Framingham,-,8,2501724960,24960,City
+25,017,000800,25017000800,Framingham Town Precinct 9,Framingham,-,9,2501724960,24960,City
+25,017,000859,25017000859,Groton Town Precinct 1,Groton,-,1,2501727480,27480,Town
+25,017,000860,25017000860,Groton Town Precinct 2,Groton,-,2,2501727480,27480,Town
+25,017,000861,25017000861,Groton Town Precinct 3,Groton,-,3,2501727480,27480,Town
+25,017,000926,25017000926,Holliston Town Precinct 1,Holliston,-,1,2501730700,30700,Town
+25,017,000927,25017000927,Holliston Town Precinct 2,Holliston,-,2,2501730700,30700,Town
+25,017,000928,25017000928,Holliston Town Precinct 3,Holliston,-,3,2501730700,30700,Town
+25,017,000929,25017000929,Holliston Town Precinct 4,Holliston,-,4,2501730700,30700,Town
+25,017,000945,25017000945,Hopkinton Town Precinct 1,Hopkinton,-,1,2501731085,31085,Town
+25,017,000946,25017000946,Hopkinton Town Precinct 2,Hopkinton,-,2,2501731085,31085,Town
+25,017,000947,25017000947,Hopkinton Town Precinct 3,Hopkinton,-,3,2501731085,31085,Town
+25,017,000948,25017000948,Hopkinton Town Precinct 4,Hopkinton,-,4,2501731085,31085,Town
+25,017,000950,25017000950,Hudson Town Precinct 1,Hudson,-,1,2501731540,31540,Town
+25,017,000951,25017000951,Hudson Town Precinct 2,Hudson,-,2,2501731540,31540,Town
+25,017,000952,25017000952,Hudson Town Precinct 3,Hudson,-,3,2501731540,31540,Town
+25,017,000953,25017000953,Hudson Town Precinct 4,Hudson,-,4,2501731540,31540,Town
+25,017,000954,25017000954,Hudson Town Precinct 5,Hudson,-,5,2501731540,31540,Town
+25,017,000955,25017000955,Hudson Town Precinct 6,Hudson,-,6,2501731540,31540,Town
+25,017,000956,25017000956,Hudson Town Precinct 7,Hudson,-,7,2501731540,31540,Town
+25,017,001021,25017001021,Lexington Town Precinct 1,Lexington,-,1,2501735215,35215,Town
+25,017,001022,25017001022,Lexington Town Precinct 2,Lexington,-,2,2501735215,35215,Town
+25,017,001023,25017001023,Lexington Town Precinct 3,Lexington,-,3,2501735215,35215,Town
+25,017,001024,25017001024,Lexington Town Precinct 4,Lexington,-,4,2501735215,35215,Town
+25,017,001025,25017001025,Lexington Town Precinct 5,Lexington,-,5,2501735215,35215,Town
+25,017,001026,25017001026,Lexington Town Precinct 6,Lexington,-,6,2501735215,35215,Town
+25,017,001027,25017001027,Lexington Town Precinct 7,Lexington,-,7,2501735215,35215,Town
+25,017,001028,25017001028,Lexington Town Precinct 8,Lexington,-,8,2501735215,35215,Town
+25,017,001029,25017001029,Lexington Town Precinct 9,Lexington,-,9,2501735215,35215,Town
+25,017,001031,25017001031,Lincoln Town Precinct 1,Lincoln,-,1,2501735425,35425,Town
+25,017,001032,25017001032,Lincoln Town Precinct 2,Lincoln,-,2,2501735425,35425,Town
+25,017,001033,25017001033,Littleton Town Precinct 1,Littleton,-,1,2501735950,35950,Town
+25,017,001034,25017001034,Littleton Town Precinct 2,Littleton,-,2,2501735950,35950,Town
+25,017,001035,25017001035,Littleton Town Precinct 3,Littleton,-,3,2501735950,35950,Town
+25,017,001041,25017001041,Lowell City Ward 1 Precinct 1,Lowell,1,1,2501737000,37000,City
+25,017,001042,25017001042,Lowell City Ward 1 Precinct 2,Lowell,1,2,2501737000,37000,City
+25,017,001043,25017001043,Lowell City Ward 1 Precinct 3,Lowell,1,3,2501737000,37000,City
+25,017,001044,25017001044,Lowell City Ward 10 Precinct 1,Lowell,10,1,2501737000,37000,City
+25,017,001045,25017001045,Lowell City Ward 10 Precinct 2,Lowell,10,2,2501737000,37000,City
+25,017,001046,25017001046,Lowell City Ward 10 Precinct 3,Lowell,10,3,2501737000,37000,City
+25,017,001047,25017001047,Lowell City Ward 11 Precinct 1,Lowell,11,1,2501737000,37000,City
+25,017,001048,25017001048,Lowell City Ward 11 Precinct 2,Lowell,11,2,2501737000,37000,City
+25,017,001049,25017001049,Lowell City Ward 11 Precinct 3,Lowell,11,3,2501737000,37000,City
+25,017,001050,25017001050,Lowell City Ward 2 Precinct 1,Lowell,2,1,2501737000,37000,City
+25,017,001051,25017001051,Lowell City Ward 2 Precinct 2,Lowell,2,2,2501737000,37000,City
+25,017,001052,25017001052,Lowell City Ward 2 Precinct 3,Lowell,2,3,2501737000,37000,City
+25,017,001053,25017001053,Lowell City Ward 3 Precinct 1,Lowell,3,1,2501737000,37000,City
+25,017,001054,25017001054,Lowell City Ward 3 Precinct 2,Lowell,3,2,2501737000,37000,City
+25,017,001055,25017001055,Lowell City Ward 3 Precinct 3,Lowell,3,3,2501737000,37000,City
+25,017,001056,25017001056,Lowell City Ward 4 Precinct 1,Lowell,4,1,2501737000,37000,City
+25,017,001057,25017001057,Lowell City Ward 4 Precinct 2,Lowell,4,2,2501737000,37000,City
+25,017,001058,25017001058,Lowell City Ward 4 Precinct 3,Lowell,4,3,2501737000,37000,City
+25,017,001059,25017001059,Lowell City Ward 5 Precinct 1,Lowell,5,1,2501737000,37000,City
+25,017,001060,25017001060,Lowell City Ward 5 Precinct 2,Lowell,5,2,2501737000,37000,City
+25,017,001061,25017001061,Lowell City Ward 5 Precinct 3,Lowell,5,3,2501737000,37000,City
+25,017,001062,25017001062,Lowell City Ward 6 Precinct 1,Lowell,6,1,2501737000,37000,City
+25,017,001063,25017001063,Lowell City Ward 6 Precinct 2,Lowell,6,2,2501737000,37000,City
+25,017,001064,25017001064,Lowell City Ward 6 Precinct 3,Lowell,6,3,2501737000,37000,City
+25,017,001065,25017001065,Lowell City Ward 7 Precinct 1,Lowell,7,1,2501737000,37000,City
+25,017,001066,25017001066,Lowell City Ward 7 Precinct 2,Lowell,7,2,2501737000,37000,City
+25,017,001067,25017001067,Lowell City Ward 7 Precinct 3,Lowell,7,3,2501737000,37000,City
+25,017,001068,25017001068,Lowell City Ward 8 Precinct 1,Lowell,8,1,2501737000,37000,City
+25,017,001069,25017001069,Lowell City Ward 8 Precinct 2,Lowell,8,2,2501737000,37000,City
+25,017,001070,25017001070,Lowell City Ward 8 Precinct 3,Lowell,8,3,2501737000,37000,City
+25,017,001071,25017001071,Lowell City Ward 9 Precinct 1,Lowell,9,1,2501737000,37000,City
+25,017,001072,25017001072,Lowell City Ward 9 Precinct 2,Lowell,9,2,2501737000,37000,City
+25,017,001073,25017001073,Lowell City Ward 9 Precinct 3,Lowell,9,3,2501737000,37000,City
+25,017,001116,25017001116,Malden City Ward 1 Precinct 1,Malden,1,1,2501737875,37875,City
+25,017,001117,25017001117,Malden City Ward 1 Precinct 2,Malden,1,2,2501737875,37875,City
+25,017,001118,25017001118,Malden City Ward 2 Precinct 1,Malden,2,1,2501737875,37875,City
+25,017,001119,25017001119,Malden City Ward 2 Precinct 2,Malden,2,2,2501737875,37875,City
+25,017,001120,25017001120,Malden City Ward 3 Precinct 1,Malden,3,1,2501737875,37875,City
+25,017,001121,25017001121,Malden City Ward 3 Precinct 2,Malden,3,2,2501737875,37875,City
+25,017,001122,25017001122,Malden City Ward 4 Precinct 1,Malden,4,1,2501737875,37875,City
+25,017,001123,25017001123,Malden City Ward 4 Precinct 2,Malden,4,2,2501737875,37875,City
+25,017,001124,25017001124,Malden City Ward 5 Precinct 1,Malden,5,1,2501737875,37875,City
+25,017,001125,25017001125,Malden City Ward 5 Precinct 2,Malden,5,2,2501737875,37875,City
+25,017,001126,25017001126,Malden City Ward 6 Precinct 1,Malden,6,1,2501737875,37875,City
+25,017,001127,25017001127,Malden City Ward 6 Precinct 2,Malden,6,2,2501737875,37875,City
+25,017,001128,25017001128,Malden City Ward 7 Precinct 1,Malden,7,1,2501737875,37875,City
+25,017,001129,25017001129,Malden City Ward 7 Precinct 2,Malden,7,2,2501737875,37875,City
+25,017,001130,25017001130,Malden City Ward 8 Precinct 1,Malden,8,1,2501737875,37875,City
+25,017,001131,25017001131,Malden City Ward 8 Precinct 2,Malden,8,2,2501737875,37875,City
+25,017,001146,25017001146,Marlborough City Ward 1 Precinct 1,Marlborough,1,1,2501738715,38715,City
+25,017,001147,25017001147,Marlborough City Ward 1 Precinct 2,Marlborough,1,2,2501738715,38715,City
+25,017,001148,25017001148,Marlborough City Ward 2 Precinct 1,Marlborough,2,1,2501738715,38715,City
+25,017,001149,25017001149,Marlborough City Ward 2 Precinct 2,Marlborough,2,2,2501738715,38715,City
+25,017,001150,25017001150,Marlborough City Ward 3 Precinct 1,Marlborough,3,1,2501738715,38715,City
+25,017,001151,25017001151,Marlborough City Ward 3 Precinct 2,Marlborough,3,2,2501738715,38715,City
+25,017,001152,25017001152,Marlborough City Ward 4 Precinct 1,Marlborough,4,1,2501738715,38715,City
+25,017,001153,25017001153,Marlborough City Ward 4 Precinct 2,Marlborough,4,2,2501738715,38715,City
+25,017,001154,25017001154,Marlborough City Ward 5 Precinct 1,Marlborough,5,1,2501738715,38715,City
+25,017,001155,25017001155,Marlborough City Ward 5 Precinct 2,Marlborough,5,2,2501738715,38715,City
+25,017,001156,25017001156,Marlborough City Ward 6 Precinct 1,Marlborough,6,1,2501738715,38715,City
+25,017,001157,25017001157,Marlborough City Ward 6 Precinct 2,Marlborough,6,2,2501738715,38715,City
+25,017,001158,25017001158,Marlborough City Ward 7 Precinct 1,Marlborough,7,1,2501738715,38715,City
+25,017,001159,25017001159,Marlborough City Ward 7 Precinct 2,Marlborough,7,2,2501738715,38715,City
+25,017,001173,25017001173,Maynard Town Precinct 1,Maynard,-,1,2501739625,39625,Town
+25,017,001174,25017001174,Maynard Town Precinct 2,Maynard,-,2,2501739625,39625,Town
+25,017,001175,25017001175,Maynard Town Precinct 3,Maynard,-,3,2501739625,39625,Town
+25,017,001176,25017001176,Maynard Town Precinct 4,Maynard,-,4,2501739625,39625,Town
+25,017,001181,25017001181,Medford City Ward 1 Precinct 1,Medford,1,1,2501739835,39835,City
+25,017,001182,25017001182,Medford City Ward 1 Precinct 2,Medford,1,2,2501739835,39835,City
+25,017,001183,25017001183,Medford City Ward 2 Precinct 1,Medford,2,1,2501739835,39835,City
+25,017,001184,25017001184,Medford City Ward 2 Precinct 2,Medford,2,2,2501739835,39835,City
+25,017,001185,25017001185,Medford City Ward 3 Precinct 1,Medford,3,1,2501739835,39835,City
+25,017,001186,25017001186,Medford City Ward 3 Precinct 2,Medford,3,2,2501739835,39835,City
+25,017,001187,25017001187,Medford City Ward 4 Precinct 1,Medford,4,1,2501739835,39835,City
+25,017,001188,25017001188,Medford City Ward 4 Precinct 2,Medford,4,2,2501739835,39835,City
+25,017,001189,25017001189,Medford City Ward 5 Precinct 1,Medford,5,1,2501739835,39835,City
+25,017,001190,25017001190,Medford City Ward 5 Precinct 2,Medford,5,2,2501739835,39835,City
+25,017,001191,25017001191,Medford City Ward 6 Precinct 1,Medford,6,1,2501739835,39835,City
+25,017,001192,25017001192,Medford City Ward 6 Precinct 2,Medford,6,2,2501739835,39835,City
+25,017,001193,25017001193,Medford City Ward 7 Precinct 1,Medford,7,1,2501739835,39835,City
+25,017,001194,25017001194,Medford City Ward 7 Precinct 2,Medford,7,2,2501739835,39835,City
+25,017,001195,25017001195,Medford City Ward 8 Precinct 1,Medford,8,1,2501739835,39835,City
+25,017,001196,25017001196,Medford City Ward 8 Precinct 2,Medford,8,2,2501739835,39835,City
+25,017,001201,25017001201,Melrose City Ward 1 Precinct 1,Melrose,1,1,2501740115,40115,City
+25,017,001202,25017001202,Melrose City Ward 1 Precinct 2,Melrose,1,2,2501740115,40115,City
+25,017,001203,25017001203,Melrose City Ward 2 Precinct 1,Melrose,2,1,2501740115,40115,City
+25,017,001204,25017001204,Melrose City Ward 2 Precinct 2,Melrose,2,2,2501740115,40115,City
+25,017,001205,25017001205,Melrose City Ward 3 Precinct 1,Melrose,3,1,2501740115,40115,City
+25,017,001206,25017001206,Melrose City Ward 3 Precinct 2,Melrose,3,2,2501740115,40115,City
+25,017,001207,25017001207,Melrose City Ward 4 Precinct 1,Melrose,4,1,2501740115,40115,City
+25,017,001208,25017001208,Melrose City Ward 4 Precinct 2,Melrose,4,2,2501740115,40115,City
+25,017,001209,25017001209,Melrose City Ward 5 Precinct 1,Melrose,5,1,2501740115,40115,City
+25,017,001210,25017001210,Melrose City Ward 5 Precinct 2,Melrose,5,2,2501740115,40115,City
+25,017,001211,25017001211,Melrose City Ward 6 Precinct 1,Melrose,6,1,2501740115,40115,City
+25,017,001212,25017001212,Melrose City Ward 6 Precinct 2,Melrose,6,2,2501740115,40115,City
+25,017,001213,25017001213,Melrose City Ward 7 Precinct 1,Melrose,7,1,2501740115,40115,City
+25,017,001214,25017001214,Melrose City Ward 7 Precinct 2,Melrose,7,2,2501740115,40115,City
+25,017,001280,25017001280,Natick Town Precinct 1,Natick,-,1,2501743895,43895,Town
+25,017,001281,25017001281,Natick Town Precinct 10,Natick,-,10,2501743895,43895,Town
+25,017,001282,25017001282,Natick Town Precinct 2,Natick,-,2,2501743895,43895,Town
+25,017,001283,25017001283,Natick Town Precinct 3,Natick,-,3,2501743895,43895,Town
+25,017,001284,25017001284,Natick Town Precinct 4,Natick,-,4,2501743895,43895,Town
+25,017,001285,25017001285,Natick Town Precinct 5,Natick,-,5,2501743895,43895,Town
+25,017,001286,25017001286,Natick Town Precinct 6,Natick,-,6,2501743895,43895,Town
+25,017,001287,25017001287,Natick Town Precinct 7,Natick,-,7,2501743895,43895,Town
+25,017,001288,25017001288,Natick Town Precinct 8,Natick,-,8,2501743895,43895,Town
+25,017,001289,25017001289,Natick Town Precinct 9,Natick,-,9,2501743895,43895,Town
+25,017,001348,25017001348,Newton City Ward 1 Precinct 1,Newton,1,1,2501745560,45560,City
+25,017,001349,25017001349,Newton City Ward 1 Precinct 2,Newton,1,2,2501745560,45560,City
+25,017,001350,25017001350,Newton City Ward 1 Precinct 3,Newton,1,3,2501745560,45560,City
+25,017,001351,25017001351,Newton City Ward 1 Precinct 4,Newton,1,4,2501745560,45560,City
+25,017,001352,25017001352,Newton City Ward 2 Precinct 1,Newton,2,1,2501745560,45560,City
+25,017,001353,25017001353,Newton City Ward 2 Precinct 2,Newton,2,2,2501745560,45560,City
+25,017,001354,25017001354,Newton City Ward 2 Precinct 3,Newton,2,3,2501745560,45560,City
+25,017,001355,25017001355,Newton City Ward 2 Precinct 4,Newton,2,4,2501745560,45560,City
+25,017,001356,25017001356,Newton City Ward 3 Precinct 1,Newton,3,1,2501745560,45560,City
+25,017,001357,25017001357,Newton City Ward 3 Precinct 2,Newton,3,2,2501745560,45560,City
+25,017,001358,25017001358,Newton City Ward 3 Precinct 3,Newton,3,3,2501745560,45560,City
+25,017,001359,25017001359,Newton City Ward 3 Precinct 4,Newton,3,4,2501745560,45560,City
+25,017,001360,25017001360,Newton City Ward 4 Precinct 1,Newton,4,1,2501745560,45560,City
+25,017,001361,25017001361,Newton City Ward 4 Precinct 2,Newton,4,2,2501745560,45560,City
+25,017,001362,25017001362,Newton City Ward 4 Precinct 3,Newton,4,3,2501745560,45560,City
+25,017,001363,25017001363,Newton City Ward 4 Precinct 4,Newton,4,4,2501745560,45560,City
+25,017,001364,25017001364,Newton City Ward 5 Precinct 1,Newton,5,1,2501745560,45560,City
+25,017,001365,25017001365,Newton City Ward 5 Precinct 2,Newton,5,2,2501745560,45560,City
+25,017,001366,25017001366,Newton City Ward 5 Precinct 3,Newton,5,3,2501745560,45560,City
+25,017,001367,25017001367,Newton City Ward 5 Precinct 4,Newton,5,4,2501745560,45560,City
+25,017,001368,25017001368,Newton City Ward 6 Precinct 1,Newton,6,1,2501745560,45560,City
+25,017,001369,25017001369,Newton City Ward 6 Precinct 2,Newton,6,2,2501745560,45560,City
+25,017,001370,25017001370,Newton City Ward 6 Precinct 3,Newton,6,3,2501745560,45560,City
+25,017,001371,25017001371,Newton City Ward 6 Precinct 4,Newton,6,4,2501745560,45560,City
+25,017,001372,25017001372,Newton City Ward 7 Precinct 1,Newton,7,1,2501745560,45560,City
+25,017,001373,25017001373,Newton City Ward 7 Precinct 2,Newton,7,2,2501745560,45560,City
+25,017,001374,25017001374,Newton City Ward 7 Precinct 3,Newton,7,3,2501745560,45560,City
+25,017,001375,25017001375,Newton City Ward 7 Precinct 4,Newton,7,4,2501745560,45560,City
+25,017,001376,25017001376,Newton City Ward 8 Precinct 1,Newton,8,1,2501745560,45560,City
+25,017,001377,25017001377,Newton City Ward 8 Precinct 2,Newton,8,2,2501745560,45560,City
+25,017,001378,25017001378,Newton City Ward 8 Precinct 3,Newton,8,3,2501745560,45560,City
+25,017,001379,25017001379,Newton City Ward 8 Precinct 4,Newton,8,4,2501745560,45560,City
+25,017,001406,25017001406,North Reading Town Precinct 1,North Reading,-,1,2501748955,48955,Town
+25,017,001407,25017001407,North Reading Town Precinct 2,North Reading,-,2,2501748955,48955,Town
+25,017,001408,25017001408,North Reading Town Precinct 3,North Reading,-,3,2501748955,48955,Town
+25,017,001409,25017001409,North Reading Town Precinct 4,North Reading,-,4,2501748955,48955,Town
+25,017,001489,25017001489,Pepperell Town Precinct 1,Pepperell,-,1,2501752805,52805,Town
+25,017,001490,25017001490,Pepperell Town Precinct 2,Pepperell,-,2,2501752805,52805,Town
+25,017,001491,25017001491,Pepperell Town Precinct 3,Pepperell,-,3,2501752805,52805,Town
+25,017,001577,25017001577,Reading Town Precinct 1,Reading,-,1,2501756130,56130,Town
+25,017,001578,25017001578,Reading Town Precinct 2,Reading,-,2,2501756130,56130,Town
+25,017,001579,25017001579,Reading Town Precinct 3,Reading,-,3,2501756130,56130,Town
+25,017,001580,25017001580,Reading Town Precinct 4,Reading,-,4,2501756130,56130,Town
+25,017,001581,25017001581,Reading Town Precinct 5,Reading,-,5,2501756130,56130,Town
+25,017,001582,25017001582,Reading Town Precinct 6,Reading,-,6,2501756130,56130,Town
+25,017,001583,25017001583,Reading Town Precinct 7,Reading,-,7,2501756130,56130,Town
+25,017,001584,25017001584,Reading Town Precinct 8,Reading,-,8,2501756130,56130,Town
+25,017,001677,25017001677,Sherborn Town Precinct 1,Sherborn,-,1,2501761380,61380,Town
+25,017,001678,25017001678,Shirley Town Precinct 1,Shirley,-,1,2501761590,61590,Town
+25,017,001695,25017001695,Somerville City Ward 1 Precinct 1,Somerville,1,1,2501762535,62535,City
+25,017,001696,25017001696,Somerville City Ward 1 Precinct 2,Somerville,1,2,2501762535,62535,City
+25,017,001697,25017001697,Somerville City Ward 1 Precinct 3,Somerville,1,3,2501762535,62535,City
+25,017,001698,25017001698,Somerville City Ward 2 Precinct 1,Somerville,2,1,2501762535,62535,City
+25,017,001699,25017001699,Somerville City Ward 2 Precinct 2,Somerville,2,2,2501762535,62535,City
+25,017,001700,25017001700,Somerville City Ward 2 Precinct 3,Somerville,2,3,2501762535,62535,City
+25,017,001701,25017001701,Somerville City Ward 3 Precinct 1,Somerville,3,1,2501762535,62535,City
+25,017,001702,25017001702,Somerville City Ward 3 Precinct 2,Somerville,3,2,2501762535,62535,City
+25,017,001703,25017001703,Somerville City Ward 3 Precinct 3,Somerville,3,3,2501762535,62535,City
+25,017,001704,25017001704,Somerville City Ward 4 Precinct 1,Somerville,4,1,2501762535,62535,City
+25,017,001705,25017001705,Somerville City Ward 4 Precinct 2,Somerville,4,2,2501762535,62535,City
+25,017,001706,25017001706,Somerville City Ward 4 Precinct 3,Somerville,4,3,2501762535,62535,City
+25,017,001707,25017001707,Somerville City Ward 5 Precinct 1,Somerville,5,1,2501762535,62535,City
+25,017,001708,25017001708,Somerville City Ward 5 Precinct 2,Somerville,5,2,2501762535,62535,City
+25,017,001709,25017001709,Somerville City Ward 5 Precinct 3,Somerville,5,3,2501762535,62535,City
+25,017,001710,25017001710,Somerville City Ward 6 Precinct 1,Somerville,6,1,2501762535,62535,City
+25,017,001711,25017001711,Somerville City Ward 6 Precinct 2,Somerville,6,2,2501762535,62535,City
+25,017,001712,25017001712,Somerville City Ward 6 Precinct 3,Somerville,6,3,2501762535,62535,City
+25,017,001713,25017001713,Somerville City Ward 7 Precinct 1,Somerville,7,1,2501762535,62535,City
+25,017,001714,25017001714,Somerville City Ward 7 Precinct 2,Somerville,7,2,2501762535,62535,City
+25,017,001715,25017001715,Somerville City Ward 7 Precinct 3,Somerville,7,3,2501762535,62535,City
+25,017,001804,25017001804,Stoneham Town Precinct 1,Stoneham,-,1,2501767665,67665,Town
+25,017,001805,25017001805,Stoneham Town Precinct 2,Stoneham,-,2,2501767665,67665,Town
+25,017,001806,25017001806,Stoneham Town Precinct 3,Stoneham,-,3,2501767665,67665,Town
+25,017,001807,25017001807,Stoneham Town Precinct 4,Stoneham,-,4,2501767665,67665,Town
+25,017,001808,25017001808,Stoneham Town Precinct 5,Stoneham,-,5,2501767665,67665,Town
+25,017,001809,25017001809,Stoneham Town Precinct 6,Stoneham,-,6,2501767665,67665,Town
+25,017,001810,25017001810,Stoneham Town Precinct 7,Stoneham,-,7,2501767665,67665,Town
+25,017,001819,25017001819,Stow Town Precinct 1,Stow,-,1,2501768050,68050,Town
+25,017,001820,25017001820,Stow Town Precinct 2,Stow,-,2,2501768050,68050,Town
+25,017,001824,25017001824,Sudbury Town Precinct 1,Sudbury,-,1,2501768260,68260,Town
+25,017,001825,25017001825,Sudbury Town Precinct 2,Sudbury,-,2,2501768260,68260,Town
+25,017,001826,25017001826,Sudbury Town Precinct 3,Sudbury,-,3,2501768260,68260,Town
+25,017,001827,25017001827,Sudbury Town Precinct 4,Sudbury,-,4,2501768260,68260,Town
+25,017,001828,25017001828,Sudbury Town Precinct 5,Sudbury,-,5,2501768260,68260,Town
+25,017,001863,25017001863,Tewksbury Town Precinct 1,Tewksbury,-,1,2501769415,69415,Town
+25,017,001864,25017001864,Tewksbury Town Precinct 1A,Tewksbury,-,1A,2501769415,69415,Town
+25,017,001865,25017001865,Tewksbury Town Precinct 2,Tewksbury,-,2,2501769415,69415,Town
+25,017,001866,25017001866,Tewksbury Town Precinct 2A,Tewksbury,-,2A,2501769415,69415,Town
+25,017,001867,25017001867,Tewksbury Town Precinct 3,Tewksbury,-,3,2501769415,69415,Town
+25,017,001868,25017001868,Tewksbury Town Precinct 3A,Tewksbury,-,3A,2501769415,69415,Town
+25,017,001869,25017001869,Tewksbury Town Precinct 4,Tewksbury,-,4,2501769415,69415,Town
+25,017,001870,25017001870,Tewksbury Town Precinct 4A,Tewksbury,-,4A,2501769415,69415,Town
+25,017,001874,25017001874,Townsend Town Precinct 1,Townsend,-,1,2501770360,70360,Town
+25,017,001875,25017001875,Townsend Town Precinct 2,Townsend,-,2,2501770360,70360,Town
+25,017,001876,25017001876,Townsend Town Precinct 3,Townsend,-,3,2501770360,70360,Town
+25,017,001878,25017001878,Tyngsborough Town Precinct 1,Tyngsborough,-,1,2501771025,71025,Town
+25,017,001879,25017001879,Tyngsborough Town Precinct 2,Tyngsborough,-,2,2501771025,71025,Town
+25,017,001880,25017001880,Tyngsborough Town Precinct 3,Tyngsborough,-,3,2501771025,71025,Town
+25,017,001881,25017001881,Tyngsborough Town Precinct 4,Tyngsborough,-,4,2501771025,71025,Town
+25,017,001889,25017001889,Wakefield Town Precinct 1,Wakefield,-,1,2501772215,72215,Town
+25,017,001890,25017001890,Wakefield Town Precinct 2,Wakefield,-,2,2501772215,72215,Town
+25,017,001891,25017001891,Wakefield Town Precinct 3,Wakefield,-,3,2501772215,72215,Town
+25,017,001892,25017001892,Wakefield Town Precinct 4,Wakefield,-,4,2501772215,72215,Town
+25,017,001893,25017001893,Wakefield Town Precinct 5,Wakefield,-,5,2501772215,72215,Town
+25,017,001894,25017001894,Wakefield Town Precinct 6,Wakefield,-,6,2501772215,72215,Town
+25,017,001895,25017001895,Wakefield Town Precinct 7,Wakefield,-,7,2501772215,72215,Town
+25,017,001905,25017001905,Waltham City Ward 1 Precinct 1,Waltham,1,1,2501772600,72600,City
+25,017,001906,25017001906,Waltham City Ward 1 Precinct 2,Waltham,1,2,2501772600,72600,City
+25,017,001907,25017001907,Waltham City Ward 2 Precinct 1,Waltham,2,1,2501772600,72600,City
+25,017,001908,25017001908,Waltham City Ward 2 Precinct 2,Waltham,2,2,2501772600,72600,City
+25,017,001909,25017001909,Waltham City Ward 3 Precinct 1,Waltham,3,1,2501772600,72600,City
+25,017,001910,25017001910,Waltham City Ward 3 Precinct 2,Waltham,3,2,2501772600,72600,City
+25,017,001911,25017001911,Waltham City Ward 4 Precinct 1,Waltham,4,1,2501772600,72600,City
+25,017,001912,25017001912,Waltham City Ward 4 Precinct 2,Waltham,4,2,2501772600,72600,City
+25,017,001913,25017001913,Waltham City Ward 5 Precinct 1,Waltham,5,1,2501772600,72600,City
+25,017,001914,25017001914,Waltham City Ward 5 Precinct 2,Waltham,5,2,2501772600,72600,City
+25,017,001915,25017001915,Waltham City Ward 6 Precinct 1,Waltham,6,1,2501772600,72600,City
+25,017,001916,25017001916,Waltham City Ward 6 Precinct 2,Waltham,6,2,2501772600,72600,City
+25,017,001917,25017001917,Waltham City Ward 7 Precinct 1,Waltham,7,1,2501772600,72600,City
+25,017,001918,25017001918,Waltham City Ward 7 Precinct 2,Waltham,7,2,2501772600,72600,City
+25,017,001919,25017001919,Waltham City Ward 8 Precinct 1,Waltham,8,1,2501772600,72600,City
+25,017,001920,25017001920,Waltham City Ward 8 Precinct 2,Waltham,8,2,2501772600,72600,City
+25,017,001921,25017001921,Waltham City Ward 9 Precinct 1,Waltham,9,1,2501772600,72600,City
+25,017,001922,25017001922,Waltham City Ward 9 Precinct 2,Waltham,9,2,2501772600,72600,City
+25,017,001935,25017001935,Watertown Town Precinct 1,Watertown,-,1,2501773440,73440,Town_City
+25,017,001936,25017001936,Watertown Town Precinct 10,Watertown,-,10,2501773440,73440,Town_City
+25,017,001937,25017001937,Watertown Town Precinct 11,Watertown,-,11,2501773440,73440,Town_City
+25,017,001938,25017001938,Watertown Town Precinct 12,Watertown,-,12,2501773440,73440,Town_City
+25,017,001939,25017001939,Watertown Town Precinct 2,Watertown,-,2,2501773440,73440,Town_City
+25,017,001940,25017001940,Watertown Town Precinct 3,Watertown,-,3,2501773440,73440,Town_City
+25,017,001941,25017001941,Watertown Town Precinct 4,Watertown,-,4,2501773440,73440,Town_City
+25,017,001942,25017001942,Watertown Town Precinct 5,Watertown,-,5,2501773440,73440,Town_City
+25,017,001943,25017001943,Watertown Town Precinct 6,Watertown,-,6,2501773440,73440,Town_City
+25,017,001944,25017001944,Watertown Town Precinct 7,Watertown,-,7,2501773440,73440,Town_City
+25,017,001945,25017001945,Watertown Town Precinct 8,Watertown,-,8,2501773440,73440,Town_City
+25,017,001946,25017001946,Watertown Town Precinct 9,Watertown,-,9,2501773440,73440,Town_City
+25,017,001947,25017001947,Wayland Town Precinct 1,Wayland,-,1,2501773790,73790,Town
+25,017,001948,25017001948,Wayland Town Precinct 2,Wayland,-,2,2501773790,73790,Town
+25,017,001949,25017001949,Wayland Town Precinct 3,Wayland,-,3,2501773790,73790,Town
+25,017,001950,25017001950,Wayland Town Precinct 4,Wayland,-,4,2501773790,73790,Town
+25,017,002000,25017002000,Westford Town Precinct 1,Westford,-,1,2501776135,76135,Town
+25,017,002001,25017002001,Westford Town Precinct 2,Westford,-,2,2501776135,76135,Town
+25,017,002002,25017002002,Westford Town Precinct 3,Westford,-,3,2501776135,76135,Town
+25,017,002003,25017002003,Westford Town Precinct 4,Westford,-,4,2501776135,76135,Town
+25,017,002004,25017002004,Westford Town Precinct 5,Westford,-,5,2501776135,76135,Town
+25,017,002005,25017002005,Westford Town Precinct 6,Westford,-,6,2501776135,76135,Town
+25,017,002009,25017002009,Weston Town Precinct 1,Weston,-,1,2501777255,77255,Town
+25,017,002010,25017002010,Weston Town Precinct 2,Weston,-,2,2501777255,77255,Town
+25,017,002011,25017002011,Weston Town Precinct 3,Weston,-,3,2501777255,77255,Town
+25,017,002012,25017002012,Weston Town Precinct 4,Weston,-,4,2501777255,77255,Town
+25,017,002053,25017002053,Wilmington Town Precinct 1,Wilmington,-,1,2501780230,80230,Town
+25,017,002054,25017002054,Wilmington Town Precinct 2,Wilmington,-,2,2501780230,80230,Town
+25,017,002055,25017002055,Wilmington Town Precinct 3,Wilmington,-,3,2501780230,80230,Town
+25,017,002056,25017002056,Wilmington Town Precinct 4,Wilmington,-,4,2501780230,80230,Town
+25,017,002057,25017002057,Wilmington Town Precinct 5,Wilmington,-,5,2501780230,80230,Town
+25,017,002058,25017002058,Wilmington Town Precinct 6,Wilmington,-,6,2501780230,80230,Town
+25,017,002062,25017002062,Winchester Town Precinct 1,Winchester,-,1,2501780510,80510,Town
+25,017,002063,25017002063,Winchester Town Precinct 2,Winchester,-,2,2501780510,80510,Town
+25,017,002064,25017002064,Winchester Town Precinct 3,Winchester,-,3,2501780510,80510,Town
+25,017,002065,25017002065,Winchester Town Precinct 4,Winchester,-,4,2501780510,80510,Town
+25,017,002066,25017002066,Winchester Town Precinct 5,Winchester,-,5,2501780510,80510,Town
+25,017,002067,25017002067,Winchester Town Precinct 6,Winchester,-,6,2501780510,80510,Town
+25,017,002068,25017002068,Winchester Town Precinct 7,Winchester,-,7,2501780510,80510,Town
+25,017,002069,25017002069,Winchester Town Precinct 8,Winchester,-,8,2501780510,80510,Town
+25,017,002077,25017002077,Woburn City Ward 1 Precinct 1,Woburn,1,1,2501781035,81035,City
+25,017,002078,25017002078,Woburn City Ward 1 Precinct 2,Woburn,1,2,2501781035,81035,City
+25,017,002079,25017002079,Woburn City Ward 2 Precinct 1,Woburn,2,1,2501781035,81035,City
+25,017,002080,25017002080,Woburn City Ward 2 Precinct 2,Woburn,2,2,2501781035,81035,City
+25,017,002081,25017002081,Woburn City Ward 3 Precinct 1,Woburn,3,1,2501781035,81035,City
+25,017,002082,25017002082,Woburn City Ward 3 Precinct 2,Woburn,3,2,2501781035,81035,City
+25,017,002083,25017002083,Woburn City Ward 4 Precinct 1,Woburn,4,1,2501781035,81035,City
+25,017,002084,25017002084,Woburn City Ward 4 Precinct 2,Woburn,4,2,2501781035,81035,City
+25,017,002085,25017002085,Woburn City Ward 5 Precinct 1,Woburn,5,1,2501781035,81035,City
+25,017,002086,25017002086,Woburn City Ward 5 Precinct 2,Woburn,5,2,2501781035,81035,City
+25,017,002087,25017002087,Woburn City Ward 6 Precinct 1,Woburn,6,1,2501781035,81035,City
+25,017,002088,25017002088,Woburn City Ward 6 Precinct 2,Woburn,6,2,2501781035,81035,City
+25,017,002089,25017002089,Woburn City Ward 7 Precinct 1,Woburn,7,1,2501781035,81035,City
+25,017,002090,25017002090,Woburn City Ward 7 Precinct 2,Woburn,7,2,2501781035,81035,City
+25,019,001279,25019001279,Nantucket Precinct 1,Nantucket,-,1,2501943790,43790,Town
+25,021,000104,25021000104,Avon Town Precinct 1,Avon,-,1,2502102935,02935,Town
+25,021,000131,25021000131,Bellingham Town Precinct 1,Bellingham,-,1,2502104930,04930,Town
+25,021,000132,25021000132,Bellingham Town Precinct 2,Bellingham,-,2,2502104930,04930,Town
+25,021,000133,25021000133,Bellingham Town Precinct 3,Bellingham,-,3,2502104930,04930,Town
+25,021,000134,25021000134,Bellingham Town Precinct 4,Bellingham,-,4,2502104930,04930,Town
+25,021,000135,25021000135,Bellingham Town Precinct 5,Bellingham,-,5,2502104930,04930,Town
+25,021,000442,25021000442,Braintree Town Precinct 1A,Braintree,-,1A,2502107740,07740,Town_City
+25,021,000443,25021000443,Braintree Town Precinct 1B,Braintree,-,1B,2502107740,07740,Town_City
+25,021,000444,25021000444,Braintree Town Precinct 2A,Braintree,-,2A,2502107740,07740,Town_City
+25,021,000445,25021000445,Braintree Town Precinct 2B,Braintree,-,2B,2502107740,07740,Town_City
+25,021,000446,25021000446,Braintree Town Precinct 3A,Braintree,-,3A,2502107740,07740,Town_City
+25,021,000447,25021000447,Braintree Town Precinct 3B,Braintree,-,3B,2502107740,07740,Town_City
+25,021,000448,25021000448,Braintree Town Precinct 4A,Braintree,-,4A,2502107740,07740,Town_City
+25,021,000449,25021000449,Braintree Town Precinct 4B,Braintree,-,4B,2502107740,07740,Town_City
+25,021,000450,25021000450,Braintree Town Precinct 5A,Braintree,-,5A,2502107740,07740,Town_City
+25,021,000451,25021000451,Braintree Town Precinct 5B,Braintree,-,5B,2502107740,07740,Town_City
+25,021,000452,25021000452,Braintree Town Precinct 6A,Braintree,-,6A,2502107740,07740,Town_City
+25,021,000453,25021000453,Braintree Town Precinct 6B,Braintree,-,6B,2502107740,07740,Town_City
+25,021,000494,25021000494,Brookline Town Precinct 1,Brookline,-,1,2502109175,09175,Town
+25,021,000495,25021000495,Brookline Town Precinct 10,Brookline,-,10,2502109175,09175,Town
+25,021,000496,25021000496,Brookline Town Precinct 11,Brookline,-,11,2502109175,09175,Town
+25,021,000497,25021000497,Brookline Town Precinct 12,Brookline,-,12,2502109175,09175,Town
+25,021,000498,25021000498,Brookline Town Precinct 13,Brookline,-,13,2502109175,09175,Town
+25,021,000499,25021000499,Brookline Town Precinct 14,Brookline,-,14,2502109175,09175,Town
+25,021,000500,25021000500,Brookline Town Precinct 15,Brookline,-,15,2502109175,09175,Town
+25,021,000501,25021000501,Brookline Town Precinct 16,Brookline,-,16,2502109175,09175,Town
+25,021,000502,25021000502,Brookline Town Precinct 2,Brookline,-,2,2502109175,09175,Town
+25,021,000503,25021000503,Brookline Town Precinct 3,Brookline,-,3,2502109175,09175,Town
+25,021,000504,25021000504,Brookline Town Precinct 4,Brookline,-,4,2502109175,09175,Town
+25,021,000505,25021000505,Brookline Town Precinct 5,Brookline,-,5,2502109175,09175,Town
+25,021,000506,25021000506,Brookline Town Precinct 6,Brookline,-,6,2502109175,09175,Town
+25,021,000507,25021000507,Brookline Town Precinct 7,Brookline,-,7,2502109175,09175,Town
+25,021,000508,25021000508,Brookline Town Precinct 8,Brookline,-,8,2502109175,09175,Town
+25,021,000509,25021000509,Brookline Town Precinct 9,Brookline,-,9,2502109175,09175,Town
+25,021,000551,25021000551,Canton Town Precinct 1,Canton,-,1,2502111315,11315,Town
+25,021,000552,25021000552,Canton Town Precinct 2,Canton,-,2,2502111315,11315,Town
+25,021,000553,25021000553,Canton Town Precinct 3,Canton,-,3,2502111315,11315,Town
+25,021,000554,25021000554,Canton Town Precinct 4,Canton,-,4,2502111315,11315,Town
+25,021,000555,25021000555,Canton Town Precinct 5,Canton,-,5,2502111315,11315,Town
+25,021,000556,25021000556,Canton Town Precinct 6,Canton,-,6,2502111315,11315,Town
+25,021,000619,25021000619,Cohasset Town Precinct 1,Cohasset,-,1,2502114640,14640,Town
+25,021,000620,25021000620,Cohasset Town Precinct 2,Cohasset,-,2,2502114640,14640,Town
+25,021,000648,25021000648,Dedham Town Precinct 1,Dedham,-,1,2502116495,16495,Town
+25,021,000649,25021000649,Dedham Town Precinct 2,Dedham,-,2,2502116495,16495,Town
+25,021,000650,25021000650,Dedham Town Precinct 3,Dedham,-,3,2502116495,16495,Town
+25,021,000651,25021000651,Dedham Town Precinct 4,Dedham,-,4,2502116495,16495,Town
+25,021,000652,25021000652,Dedham Town Precinct 5,Dedham,-,5,2502116495,16495,Town
+25,021,000653,25021000653,Dedham Town Precinct 6,Dedham,-,6,2502116495,16495,Town
+25,021,000654,25021000654,Dedham Town Precinct 7,Dedham,-,7,2502116495,16495,Town
+25,021,000666,25021000666,Dover Town Precinct 1,Dover,-,1,2502117405,17405,Town
+25,021,000778,25021000778,Foxborough Town Precinct 1,Foxborough,-,1,2502124820,24820,Town
+25,021,000779,25021000779,Foxborough Town Precinct 2,Foxborough,-,2,2502124820,24820,Town
+25,021,000780,25021000780,Foxborough Town Precinct 3,Foxborough,-,3,2502124820,24820,Town
+25,021,000781,25021000781,Foxborough Town Precinct 4,Foxborough,-,4,2502124820,24820,Town
+25,021,000782,25021000782,Foxborough Town Precinct 5,Foxborough,-,5,2502124820,24820,Town
+25,021,000801,25021000801,Franklin Town Precinct 1,Franklin,-,1,2502125172,25172,Town_City
+25,021,000802,25021000802,Franklin Town Precinct 2,Franklin,-,2,2502125172,25172,Town_City
+25,021,000803,25021000803,Franklin Town Precinct 3,Franklin,-,3,2502125172,25172,Town_City
+25,021,000804,25021000804,Franklin Town Precinct 4,Franklin,-,4,2502125172,25172,Town_City
+25,021,000805,25021000805,Franklin Town Precinct 5,Franklin,-,5,2502125172,25172,Town_City
+25,021,000806,25021000806,Franklin Town Precinct 6,Franklin,-,6,2502125172,25172,Town_City
+25,021,000807,25021000807,Franklin Town Precinct 7,Franklin,-,7,2502125172,25172,Town_City
+25,021,000808,25021000808,Franklin Town Precinct 8,Franklin,-,8,2502125172,25172,Town_City
+25,021,000916,25021000916,Holbrook Town Precinct 1,Holbrook,-,1,2502130455,30455,Town
+25,021,000917,25021000917,Holbrook Town Precinct 2,Holbrook,-,2,2502130455,30455,Town
+25,021,000918,25021000918,Holbrook Town Precinct 3,Holbrook,-,3,2502130455,30455,Town
+25,021,000919,25021000919,Holbrook Town Precinct 4,Holbrook,-,4,2502130455,30455,Town
+25,021,001177,25021001177,Medfield Town Precinct 1,Medfield,-,1,2502139765,39765,Town
+25,021,001178,25021001178,Medfield Town Precinct 2,Medfield,-,2,2502139765,39765,Town
+25,021,001179,25021001179,Medfield Town Precinct 3,Medfield,-,3,2502139765,39765,Town
+25,021,001180,25021001180,Medfield Town Precinct 4,Medfield,-,4,2502139765,39765,Town
+25,021,001197,25021001197,Medway Town Precinct 1,Medway,-,1,2502139975,39975,Town
+25,021,001198,25021001198,Medway Town Precinct 2,Medway,-,2,2502139975,39975,Town
+25,021,001199,25021001199,Medway Town Precinct 3,Medway,-,3,2502139975,39975,Town
+25,021,001200,25021001200,Medway Town Precinct 4,Medway,-,4,2502139975,39975,Town
+25,021,001251,25021001251,Millis Town Precinct 1,Millis,-,1,2502141515,41515,Town
+25,021,001252,25021001252,Millis Town Precinct 2,Millis,-,2,2502141515,41515,Town
+25,021,001253,25021001253,Millis Town Precinct 3,Millis,-,3,2502141515,41515,Town
+25,021,001255,25021001255,Milton Town Precinct 1,Milton,-,1,2502141690,41690,Town
+25,021,001256,25021001256,Milton Town Precinct 10,Milton,-,10,2502141690,41690,Town
+25,021,001257,25021001257,Milton Town Precinct 2,Milton,-,2,2502141690,41690,Town
+25,021,001258,25021001258,Milton Town Precinct 3,Milton,-,3,2502141690,41690,Town
+25,021,001259,25021001259,Milton Town Precinct 4,Milton,-,4,2502141690,41690,Town
+25,021,001260,25021001260,Milton Town Precinct 5,Milton,-,5,2502141690,41690,Town
+25,021,001261,25021001261,Milton Town Precinct 6,Milton,-,6,2502141690,41690,Town
+25,021,001262,25021001262,Milton Town Precinct 7,Milton,-,7,2502141690,41690,Town
+25,021,001263,25021001263,Milton Town Precinct 8,Milton,-,8,2502141690,41690,Town
+25,021,001264,25021001264,Milton Town Precinct 9,Milton,-,9,2502141690,41690,Town
+25,021,001290,25021001290,Needham Town Precinct A,Needham,-,A,2502144105,44105,Town
+25,021,001291,25021001291,Needham Town Precinct B,Needham,-,B,2502144105,44105,Town
+25,021,001292,25021001292,Needham Town Precinct C,Needham,-,C,2502144105,44105,Town
+25,021,001293,25021001293,Needham Town Precinct D,Needham,-,D,2502144105,44105,Town
+25,021,001294,25021001294,Needham Town Precinct E,Needham,-,E,2502144105,44105,Town
+25,021,001295,25021001295,Needham Town Precinct F,Needham,-,F,2502144105,44105,Town
+25,021,001296,25021001296,Needham Town Precinct G,Needham,-,G,2502144105,44105,Town
+25,021,001297,25021001297,Needham Town Precinct H,Needham,-,H,2502144105,44105,Town
+25,021,001298,25021001298,Needham Town Precinct I,Needham,-,I,2502144105,44105,Town
+25,021,001299,25021001299,Needham Town Precinct J,Needham,-,J,2502144105,44105,Town
+25,021,001380,25021001380,Norfolk Town Precinct 1,Norfolk,-,1,2502146050,46050,Town
+25,021,001381,25021001381,Norfolk Town Precinct 2,Norfolk,-,2,2502146050,46050,Town
+25,021,001382,25021001382,Norfolk Town Precinct 3,Norfolk,-,3,2502146050,46050,Town
+25,021,001441,25021001441,Norwood Town Precinct 1,Norwood,-,1,2502150250,50250,Town
+25,021,001442,25021001442,Norwood Town Precinct 2,Norwood,-,2,2502150250,50250,Town
+25,021,001443,25021001443,Norwood Town Precinct 3,Norwood,-,3,2502150250,50250,Town
+25,021,001444,25021001444,Norwood Town Precinct 4,Norwood,-,4,2502150250,50250,Town
+25,021,001445,25021001445,Norwood Town Precinct 5,Norwood,-,5,2502150250,50250,Town
+25,021,001446,25021001446,Norwood Town Precinct 6,Norwood,-,6,2502150250,50250,Town
+25,021,001447,25021001447,Norwood Town Precinct 7,Norwood,-,7,2502150250,50250,Town
+25,021,001448,25021001448,Norwood Town Precinct 8,Norwood,-,8,2502150250,50250,Town
+25,021,001449,25021001449,Norwood Town Precinct 9,Norwood,-,9,2502150250,50250,Town
+25,021,001510,25021001510,Plainville Town Precinct 1,Plainville,-,1,2502154100,54100,Town
+25,021,001511,25021001511,Plainville Town Precinct 2,Plainville,-,2,2502154100,54100,Town
+25,021,001512,25021001512,Plainville Town Precinct 3,Plainville,-,3,2502154100,54100,Town
+25,021,001531,25021001531,Quincy City Ward 1 Precinct 1,Quincy,1,1,2502155745,55745,City
+25,021,001532,25021001532,Quincy City Ward 1 Precinct 2,Quincy,1,2,2502155745,55745,City
+25,021,001533,25021001533,Quincy City Ward 1 Precinct 3,Quincy,1,3,2502155745,55745,City
+25,021,001534,25021001534,Quincy City Ward 1 Precinct 4,Quincy,1,4,2502155745,55745,City
+25,021,001535,25021001535,Quincy City Ward 1 Precinct 5,Quincy,1,5,2502155745,55745,City
+25,021,001536,25021001536,Quincy City Ward 2 Precinct 1,Quincy,2,1,2502155745,55745,City
+25,021,001537,25021001537,Quincy City Ward 2 Precinct 2,Quincy,2,2,2502155745,55745,City
+25,021,001538,25021001538,Quincy City Ward 2 Precinct 3,Quincy,2,3,2502155745,55745,City
+25,021,001539,25021001539,Quincy City Ward 2 Precinct 4,Quincy,2,4,2502155745,55745,City
+25,021,001540,25021001540,Quincy City Ward 2 Precinct 5,Quincy,2,5,2502155745,55745,City
+25,021,001541,25021001541,Quincy City Ward 3 Precinct 1,Quincy,3,1,2502155745,55745,City
+25,021,001542,25021001542,Quincy City Ward 3 Precinct 2,Quincy,3,2,2502155745,55745,City
+25,021,001543,25021001543,Quincy City Ward 3 Precinct 3,Quincy,3,3,2502155745,55745,City
+25,021,001544,25021001544,Quincy City Ward 3 Precinct 4,Quincy,3,4,2502155745,55745,City
+25,021,001545,25021001545,Quincy City Ward 3 Precinct 5,Quincy,3,5,2502155745,55745,City
+25,021,001546,25021001546,Quincy City Ward 4 Precinct 1,Quincy,4,1,2502155745,55745,City
+25,021,001547,25021001547,Quincy City Ward 4 Precinct 2,Quincy,4,2,2502155745,55745,City
+25,021,001548,25021001548,Quincy City Ward 4 Precinct 3,Quincy,4,3,2502155745,55745,City
+25,021,001549,25021001549,Quincy City Ward 4 Precinct 4,Quincy,4,4,2502155745,55745,City
+25,021,001550,25021001550,Quincy City Ward 4 Precinct 5,Quincy,4,5,2502155745,55745,City
+25,021,001551,25021001551,Quincy City Ward 5 Precinct 1,Quincy,5,1,2502155745,55745,City
+25,021,001552,25021001552,Quincy City Ward 5 Precinct 2,Quincy,5,2,2502155745,55745,City
+25,021,001553,25021001553,Quincy City Ward 5 Precinct 3,Quincy,5,3,2502155745,55745,City
+25,021,001554,25021001554,Quincy City Ward 5 Precinct 4,Quincy,5,4,2502155745,55745,City
+25,021,001555,25021001555,Quincy City Ward 5 Precinct 5,Quincy,5,5,2502155745,55745,City
+25,021,001556,25021001556,Quincy City Ward 6 Precinct 1,Quincy,6,1,2502155745,55745,City
+25,021,001557,25021001557,Quincy City Ward 6 Precinct 2,Quincy,6,2,2502155745,55745,City
+25,021,001558,25021001558,Quincy City Ward 6 Precinct 3,Quincy,6,3,2502155745,55745,City
+25,021,001559,25021001559,Quincy City Ward 6 Precinct 4,Quincy,6,4,2502155745,55745,City
+25,021,001560,25021001560,Quincy City Ward 6 Precinct 5,Quincy,6,5,2502155745,55745,City
+25,021,001561,25021001561,Randolph Town Precinct 1,Randolph,-,1,2502156000,56000,Town_City
+25,021,001562,25021001562,Randolph Town Precinct 10,Randolph,-,10,2502156000,56000,Town_City
+25,021,001563,25021001563,Randolph Town Precinct 11,Randolph,-,11,2502156000,56000,Town_City
+25,021,001564,25021001564,Randolph Town Precinct 12,Randolph,-,12,2502156000,56000,Town_City
+25,021,001565,25021001565,Randolph Town Precinct 2,Randolph,-,2,2502156000,56000,Town_City
+25,021,001566,25021001566,Randolph Town Precinct 3,Randolph,-,3,2502156000,56000,Town_City
+25,021,001567,25021001567,Randolph Town Precinct 4,Randolph,-,4,2502156000,56000,Town_City
+25,021,001568,25021001568,Randolph Town Precinct 5,Randolph,-,5,2502156000,56000,Town_City
+25,021,001569,25021001569,Randolph Town Precinct 6,Randolph,-,6,2502156000,56000,Town_City
+25,021,001570,25021001570,Randolph Town Precinct 7,Randolph,-,7,2502156000,56000,Town_City
+25,021,001571,25021001571,Randolph Town Precinct 8,Randolph,-,8,2502156000,56000,Town_City
+25,021,001572,25021001572,Randolph Town Precinct 9,Randolph,-,9,2502156000,56000,Town_City
+25,021,001670,25021001670,Sharon Town Precinct 1,Sharon,-,1,2502160785,60785,Town
+25,021,001671,25021001671,Sharon Town Precinct 2,Sharon,-,2,2502160785,60785,Town
+25,021,001672,25021001672,Sharon Town Precinct 3,Sharon,-,3,2502160785,60785,Town
+25,021,001673,25021001673,Sharon Town Precinct 4,Sharon,-,4,2502160785,60785,Town
+25,021,001674,25021001674,Sharon Town Precinct 5,Sharon,-,5,2502160785,60785,Town
+25,021,001811,25021001811,Stoughton Town Precinct 1,Stoughton,-,1,2502167945,67945,Town
+25,021,001812,25021001812,Stoughton Town Precinct 2,Stoughton,-,2,2502167945,67945,Town
+25,021,001813,25021001813,Stoughton Town Precinct 3,Stoughton,-,3,2502167945,67945,Town
+25,021,001814,25021001814,Stoughton Town Precinct 4,Stoughton,-,4,2502167945,67945,Town
+25,021,001815,25021001815,Stoughton Town Precinct 5,Stoughton,-,5,2502167945,67945,Town
+25,021,001816,25021001816,Stoughton Town Precinct 6,Stoughton,-,6,2502167945,67945,Town
+25,021,001817,25021001817,Stoughton Town Precinct 7,Stoughton,-,7,2502167945,67945,Town
+25,021,001818,25021001818,Stoughton Town Precinct 8,Stoughton,-,8,2502167945,67945,Town
+25,021,001897,25021001897,Walpole Town Precinct 1,Walpole,-,1,2502172495,72495,Town
+25,021,001898,25021001898,Walpole Town Precinct 2,Walpole,-,2,2502172495,72495,Town
+25,021,001899,25021001899,Walpole Town Precinct 3,Walpole,-,3,2502172495,72495,Town
+25,021,001900,25021001900,Walpole Town Precinct 4,Walpole,-,4,2502172495,72495,Town
+25,021,001901,25021001901,Walpole Town Precinct 5,Walpole,-,5,2502172495,72495,Town
+25,021,001902,25021001902,Walpole Town Precinct 6,Walpole,-,6,2502172495,72495,Town
+25,021,001903,25021001903,Walpole Town Precinct 7,Walpole,-,7,2502172495,72495,Town
+25,021,001904,25021001904,Walpole Town Precinct 8,Walpole,-,8,2502172495,72495,Town
+25,021,001956,25021001956,Wellesley Town Precinct A,Wellesley,-,A,2502174175,74175,Town
+25,021,001957,25021001957,Wellesley Town Precinct B,Wellesley,-,B,2502174175,74175,Town
+25,021,001958,25021001958,Wellesley Town Precinct C,Wellesley,-,C,2502174175,74175,Town
+25,021,001959,25021001959,Wellesley Town Precinct D,Wellesley,-,D,2502174175,74175,Town
+25,021,001960,25021001960,Wellesley Town Precinct E,Wellesley,-,E,2502174175,74175,Town
+25,021,001961,25021001961,Wellesley Town Precinct F,Wellesley,-,F,2502174175,74175,Town
+25,021,001962,25021001962,Wellesley Town Precinct G,Wellesley,-,G,2502174175,74175,Town
+25,021,001963,25021001963,Wellesley Town Precinct H,Wellesley,-,H,2502174175,74175,Town
+25,021,002018,25021002018,Westwood Town Precinct 1,Westwood,-,1,2502178690,78690,Town
+25,021,002019,25021002019,Westwood Town Precinct 3,Westwood,-,3,2502178690,78690,Town
+25,021,002020,25021002020,Westwood Town Precinct 4,Westwood,-,4,2502178690,78690,Town
+25,021,002021,25021002021,WestwoodTown Precinct 2,Westwood,-,2,2502178690,78690,Town
+25,021,002022,25021002022,Weymouth Town Precinct 1,Weymouth,-,1,2502178972,78972,Town_City
+25,021,002023,25021002023,Weymouth Town Precinct 10,Weymouth,-,10,2502178972,78972,Town_City
+25,021,002024,25021002024,Weymouth Town Precinct 11,Weymouth,-,11,2502178972,78972,Town_City
+25,021,002025,25021002025,Weymouth Town Precinct 12,Weymouth,-,12,2502178972,78972,Town_City
+25,021,002026,25021002026,Weymouth Town Precinct 13,Weymouth,-,13,2502178972,78972,Town_City
+25,021,002027,25021002027,Weymouth Town Precinct 14,Weymouth,-,14,2502178972,78972,Town_City
+25,021,002028,25021002028,Weymouth Town Precinct 15,Weymouth,-,15,2502178972,78972,Town_City
+25,021,002029,25021002029,Weymouth Town Precinct 16,Weymouth,-,16,2502178972,78972,Town_City
+25,021,002030,25021002030,Weymouth Town Precinct 17,Weymouth,-,17,2502178972,78972,Town_City
+25,021,002031,25021002031,Weymouth Town Precinct 18,Weymouth,-,18,2502178972,78972,Town_City
+25,021,002032,25021002032,Weymouth Town Precinct 2,Weymouth,-,2,2502178972,78972,Town_City
+25,021,002033,25021002033,Weymouth Town Precinct 3,Weymouth,-,3,2502178972,78972,Town_City
+25,021,002034,25021002034,Weymouth Town Precinct 4,Weymouth,-,4,2502178972,78972,Town_City
+25,021,002035,25021002035,Weymouth Town Precinct 5,Weymouth,-,5,2502178972,78972,Town_City
+25,021,002036,25021002036,Weymouth Town Precinct 6,Weymouth,-,6,2502178972,78972,Town_City
+25,021,002037,25021002037,Weymouth Town Precinct 7,Weymouth,-,7,2502178972,78972,Town_City
+25,021,002038,25021002038,Weymouth Town Precinct 8,Weymouth,-,8,2502178972,78972,Town_City
+25,021,002039,25021002039,Weymouth Town Precinct 9,Weymouth,-,9,2502178972,78972,Town_City
+25,021,002142,25021002142,Wrentham Town Precinct 1,Wrentham,-,1,2502182315,82315,Town
+25,021,002143,25021002143,Wrentham Town Precinct 2,Wrentham,-,2,2502182315,82315,Town
+25,021,002144,25021002144,Wrentham Town Precinct 3,Wrentham,-,3,2502182315,82315,Town
+25,023,000001,25023000001,Abington Town Precinct 1,Abington,-,1,2502300170,00170,Town
+25,023,000002,25023000002,Abington Town Precinct 2,Abington,-,2,2502300170,00170,Town
+25,023,000003,25023000003,Abington Town Precinct 3,Abington,-,3,2502300170,00170,Town
+25,023,000004,25023000004,Abington Town Precinct 4,Abington,-,4,2502300170,00170,Town
+25,023,000005,25023000005,Abington Town Precinct 5,Abington,-,5,2502300170,00170,Town
+25,023,000457,25023000457,Bridgewater Town Precinct 1,Bridgewater,-,1,2502308130,08130,Town_City
+25,023,000458,25023000458,Bridgewater Town Precinct 2,Bridgewater,-,2,2502308130,08130,Town_City
+25,023,000459,25023000459,Bridgewater Town Precinct 3,Bridgewater,-,3,2502308130,08130,Town_City
+25,023,000460,25023000460,Bridgewater Town Precinct 4,Bridgewater,-,4,2502308130,08130,Town_City
+25,023,000461,25023000461,Bridgewater Town Precinct 5,Bridgewater,-,5,2502308130,08130,Town_City
+25,023,000462,25023000462,Bridgewater Town Precinct 6,Bridgewater,-,6,2502308130,08130,Town_City
+25,023,000463,25023000463,Bridgewater Town Precinct 7,Bridgewater,-,7,2502308130,08130,Town_City
+25,023,000465,25023000465,Brockton City Ward 1 Precinct A,Brockton,1,A,2502309000,09000,City
+25,023,000466,25023000466,Brockton City Ward 1 Precinct B,Brockton,1,B,2502309000,09000,City
+25,023,000467,25023000467,Brockton City Ward 1 Precinct C,Brockton,1,C,2502309000,09000,City
+25,023,000468,25023000468,Brockton City Ward 1 Precinct D,Brockton,1,D,2502309000,09000,City
+25,023,000469,25023000469,Brockton City Ward 2 Precinct A,Brockton,2,A,2502309000,09000,City
+25,023,000470,25023000470,Brockton City Ward 2 Precinct B,Brockton,2,B,2502309000,09000,City
+25,023,000471,25023000471,Brockton City Ward 2 Precinct C,Brockton,2,C,2502309000,09000,City
+25,023,000472,25023000472,Brockton City Ward 2 Precinct D,Brockton,2,D,2502309000,09000,City
+25,023,000473,25023000473,Brockton City Ward 3 Precinct A,Brockton,3,A,2502309000,09000,City
+25,023,000474,25023000474,Brockton City Ward 3 Precinct B,Brockton,3,B,2502309000,09000,City
+25,023,000475,25023000475,Brockton City Ward 3 Precinct C,Brockton,3,C,2502309000,09000,City
+25,023,000476,25023000476,Brockton City Ward 3 Precinct D,Brockton,3,D,2502309000,09000,City
+25,023,000477,25023000477,Brockton City Ward 4 Precinct A,Brockton,4,A,2502309000,09000,City
+25,023,000478,25023000478,Brockton City Ward 4 Precinct B,Brockton,4,B,2502309000,09000,City
+25,023,000479,25023000479,Brockton City Ward 4 Precinct C,Brockton,4,C,2502309000,09000,City
+25,023,000480,25023000480,Brockton City Ward 4 Precinct D,Brockton,4,D,2502309000,09000,City
+25,023,000481,25023000481,Brockton City Ward 5 Precinct A,Brockton,5,A,2502309000,09000,City
+25,023,000482,25023000482,Brockton City Ward 5 Precinct B,Brockton,5,B,2502309000,09000,City
+25,023,000483,25023000483,Brockton City Ward 5 Precinct C,Brockton,5,C,2502309000,09000,City
+25,023,000484,25023000484,Brockton City Ward 5 Precinct D,Brockton,5,D,2502309000,09000,City
+25,023,000485,25023000485,Brockton City Ward 6 Precinct A,Brockton,6,A,2502309000,09000,City
+25,023,000486,25023000486,Brockton City Ward 6 Precinct B,Brockton,6,B,2502309000,09000,City
+25,023,000487,25023000487,Brockton City Ward 6 Precinct C,Brockton,6,C,2502309000,09000,City
+25,023,000488,25023000488,Brockton City Ward 6 Precinct D,Brockton,6,D,2502309000,09000,City
+25,023,000489,25023000489,Brockton City Ward 7 Precinct A,Brockton,7,A,2502309000,09000,City
+25,023,000490,25023000490,Brockton City Ward 7 Precinct B,Brockton,7,B,2502309000,09000,City
+25,023,000491,25023000491,Brockton City Ward 7 Precinct C,Brockton,7,C,2502309000,09000,City
+25,023,000492,25023000492,Brockton City Ward 7 Precinct D,Brockton,7,D,2502309000,09000,City
+25,023,000558,25023000558,Carver Town Precinct 1,Carver,-,1,2502311665,11665,Town
+25,023,000559,25023000559,Carver Town Precinct 2,Carver,-,2,2502311665,11665,Town
+25,023,000560,25023000560,Carver Town Precinct 3,Carver,-,3,2502311665,11665,Town
+25,023,000680,25023000680,Duxbury Town Precinct 1,Duxbury,-,1,2502317895,17895,Town
+25,023,000681,25023000681,Duxbury Town Precinct 2,Duxbury,-,2,2502317895,17895,Town
+25,023,000682,25023000682,Duxbury Town Precinct 3,Duxbury,-,3,2502317895,17895,Town
+25,023,000683,25023000683,Duxbury Town Precinct 4,Duxbury,-,4,2502317895,17895,Town
+25,023,000684,25023000684,Duxbury Town Precinct 5,Duxbury,-,5,2502317895,17895,Town
+25,023,000685,25023000685,Duxbury Town Precinct 6,Duxbury,-,6,2502317895,17895,Town
+25,023,000686,25023000686,East Bridgewater Town Precinct 1,East Bridgewater,-,1,2502318455,18455,Town
+25,023,000687,25023000687,East Bridgewater Town Precinct 2,East Bridgewater,-,2,2502318455,18455,Town
+25,023,000688,25023000688,East Bridgewater Town Precinct 3,East Bridgewater,-,3,2502318455,18455,Town
+25,023,000689,25023000689,East Bridgewater Town Precinct 4,East Bridgewater,-,4,2502318455,18455,Town
+25,023,000865,25023000865,Halifax Town Precinct 1,Halifax,-,1,2502327795,27795,Town
+25,023,000866,25023000866,Halifax Town Precinct 2,Halifax,-,2,2502327795,27795,Town
+25,023,000872,25023000872,Hanover Town Precinct 1,Hanover,-,1,2502328285,28285,Town
+25,023,000873,25023000873,Hanover Town Precinct 2,Hanover,-,2,2502328285,28285,Town
+25,023,000874,25023000874,Hanover Town Precinct 3,Hanover,-,3,2502328285,28285,Town
+25,023,000875,25023000875,Hanover Town Precinct 4,Hanover,-,4,2502328285,28285,Town
+25,023,000876,25023000876,Hanson Town Precinct 1,Hanson,-,1,2502328495,28495,Town
+25,023,000877,25023000877,Hanson Town Precinct 2,Hanson,-,2,2502328495,28495,Town
+25,023,000878,25023000878,Hanson Town Precinct 3,Hanson,-,3,2502328495,28495,Town
+25,023,000909,25023000909,Hingham Town Precinct 1,Hingham,-,1,2502330210,30210,Town
+25,023,000910,25023000910,Hingham Town Precinct 2,Hingham,-,2,2502330210,30210,Town
+25,023,000911,25023000911,Hingham Town Precinct 3,Hingham,-,3,2502330210,30210,Town
+25,023,000912,25023000912,Hingham Town Precinct 4,Hingham,-,4,2502330210,30210,Town
+25,023,000913,25023000913,Hingham Town Precinct 5,Hingham,-,5,2502330210,30210,Town
+25,023,000914,25023000914,Hingham Town Precinct 6,Hingham,-,6,2502330210,30210,Town
+25,023,000957,25023000957,Hull Town Precinct 1,Hull,-,1,2502331645,31645,Town
+25,023,000958,25023000958,Hull Town Precinct 2,Hull,-,2,2502331645,31645,Town
+25,023,000959,25023000959,Hull Town Precinct 3,Hull,-,3,2502331645,31645,Town
+25,023,000965,25023000965,Kingston Town Precinct 1,Kingston,-,1,2502333220,33220,Town
+25,023,000966,25023000966,Kingston Town Precinct 2,Kingston,-,2,2502333220,33220,Town
+25,023,000967,25023000967,Kingston Town Precinct 3,Kingston,-,3,2502333220,33220,Town
+25,023,000968,25023000968,Kingston Town Precinct 4,Kingston,-,4,2502333220,33220,Town
+25,023,000969,25023000969,Lakeville Town Precinct 1,Lakeville,-,1,2502333920,33920,Town
+25,023,000970,25023000970,Lakeville Town Precinct 2,Lakeville,-,2,2502333920,33920,Town
+25,023,000971,25023000971,Lakeville Town Precinct 3,Lakeville,-,3,2502333920,33920,Town
+25,023,001145,25023001145,Marion Town Precinct 1,Marion,-,1,2502338540,38540,Town
+25,023,001160,25023001160,Marshfield Town Precinct 1,Marshfield,-,1,2502338855,38855,Town
+25,023,001161,25023001161,Marshfield Town Precinct 2,Marshfield,-,2,2502338855,38855,Town
+25,023,001162,25023001162,Marshfield Town Precinct 3,Marshfield,-,3,2502338855,38855,Town
+25,023,001163,25023001163,Marshfield Town Precinct 4,Marshfield,-,4,2502338855,38855,Town
+25,023,001164,25023001164,Marshfield Town Precinct 5,Marshfield,-,5,2502338855,38855,Town
+25,023,001165,25023001165,Marshfield Town Precinct 6,Marshfield,-,6,2502338855,38855,Town
+25,023,001166,25023001166,Marshfield Town Precinct 7,Marshfield,-,7,2502338855,38855,Town
+25,023,001172,25023001172,Mattapoisett Town Precinct 1,Mattapoisett,-,1,2502339450,39450,Town
+25,023,001230,25023001230,Middleborough Town Precinct 1,Middleborough,-,1,2502340850,40850,Town
+25,023,001231,25023001231,Middleborough Town Precinct 2,Middleborough,-,2,2502340850,40850,Town
+25,023,001232,25023001232,Middleborough Town Precinct 3,Middleborough,-,3,2502340850,40850,Town
+25,023,001233,25023001233,Middleborough Town Precinct 4,Middleborough,-,4,2502340850,40850,Town
+25,023,001234,25023001234,Middleborough Town Precinct 5,Middleborough,-,5,2502340850,40850,Town
+25,023,001235,25023001235,Middleborough Town Precinct 6,Middleborough,-,6,2502340850,40850,Town
+25,023,001438,25023001438,Norwell Town Precinct 1,Norwell,-,1,2502350145,50145,Town
+25,023,001439,25023001439,Norwell Town Precinct 2,Norwell,-,2,2502350145,50145,Town
+25,023,001440,25023001440,Norwell Town Precinct 3,Norwell,-,3,2502350145,50145,Town
+25,023,001484,25023001484,Pembroke Town Precinct 1,Pembroke,-,1,2502352630,52630,Town
+25,023,001485,25023001485,Pembroke Town Precinct 2,Pembroke,-,2,2502352630,52630,Town
+25,023,001486,25023001486,Pembroke Town Precinct 3,Pembroke,-,3,2502352630,52630,Town
+25,023,001487,25023001487,Pembroke Town Precinct 4,Pembroke,-,4,2502352630,52630,Town
+25,023,001488,25023001488,Pembroke Town Precinct 5,Pembroke,-,5,2502352630,52630,Town
+25,023,001513,25023001513,Plymouth Town Precinct 1,Plymouth,-,1,2502354310,54310,Town
+25,023,001514,25023001514,Plymouth Town Precinct 10,Plymouth,-,10,2502354310,54310,Town
+25,023,001515,25023001515,Plymouth Town Precinct 11,Plymouth,-,11,2502354310,54310,Town
+25,023,001516,25023001516,Plymouth Town Precinct 12,Plymouth,-,12,2502354310,54310,Town
+25,023,001517,25023001517,Plymouth Town Precinct 13,Plymouth,-,13,2502354310,54310,Town
+25,023,001518,25023001518,Plymouth Town Precinct 14,Plymouth,-,14,2502354310,54310,Town
+25,023,001519,25023001519,Plymouth Town Precinct 15,Plymouth,-,15,2502354310,54310,Town
+25,023,001520,25023001520,Plymouth Town Precinct 2,Plymouth,-,2,2502354310,54310,Town
+25,023,001521,25023001521,Plymouth Town Precinct 3,Plymouth,-,3,2502354310,54310,Town
+25,023,001522,25023001522,Plymouth Town Precinct 4,Plymouth,-,4,2502354310,54310,Town
+25,023,001523,25023001523,Plymouth Town Precinct 5,Plymouth,-,5,2502354310,54310,Town
+25,023,001524,25023001524,Plymouth Town Precinct 6,Plymouth,-,6,2502354310,54310,Town
+25,023,001525,25023001525,Plymouth Town Precinct 7,Plymouth,-,7,2502354310,54310,Town
+25,023,001526,25023001526,Plymouth Town Precinct 8,Plymouth,-,8,2502354310,54310,Town
+25,023,001527,25023001527,Plymouth Town Precinct 9,Plymouth,-,9,2502354310,54310,Town
+25,023,001528,25023001528,Plympton Town Precinct 1,Plympton,-,1,2502354415,54415,Town
+25,023,001607,25023001607,Rochester Town Precinct 1,Rochester,-,1,2502357600,57600,Town
+25,023,001608,25023001608,Rockland Town Precinct 1,Rockland,-,1,2502357775,57775,Town
+25,023,001609,25023001609,Rockland Town Precinct 2,Rockland,-,2,2502357775,57775,Town
+25,023,001610,25023001610,Rockland Town Precinct 3,Rockland,-,3,2502357775,57775,Town
+25,023,001611,25023001611,Rockland Town Precinct 4,Rockland,-,4,2502357775,57775,Town
+25,023,001612,25023001612,Rockland Town Precinct 5,Rockland,-,5,2502357775,57775,Town
+25,023,001613,25023001613,Rockland Town Precinct 6,Rockland,-,6,2502357775,57775,Town
+25,023,001660,25023001660,Scituate Town Precinct 1,Scituate,-,1,2502360330,60330,Town
+25,023,001661,25023001661,Scituate Town Precinct 2,Scituate,-,2,2502360330,60330,Town
+25,023,001662,25023001662,Scituate Town Precinct 3,Scituate,-,3,2502360330,60330,Town
+25,023,001663,25023001663,Scituate Town Precinct 4,Scituate,-,4,2502360330,60330,Town
+25,023,001664,25023001664,Scituate Town Precinct 5,Scituate,-,5,2502360330,60330,Town
+25,023,001665,25023001665,Scituate Town Precinct 6,Scituate,-,6,2502360330,60330,Town
+25,023,001926,25023001926,Wareham Town Precinct 1,Wareham,-,1,2502372985,72985,Town
+25,023,001927,25023001927,Wareham Town Precinct 2,Wareham,-,2,2502372985,72985,Town
+25,023,001928,25023001928,Wareham Town Precinct 3,Wareham,-,3,2502372985,72985,Town
+25,023,001929,25023001929,Wareham Town Precinct 4,Wareham,-,4,2502372985,72985,Town
+25,023,001930,25023001930,Wareham Town Precinct 5,Wareham,-,5,2502372985,72985,Town
+25,023,001931,25023001931,Wareham Town Precinct 6,Wareham,-,6,2502372985,72985,Town
+25,023,001969,25023001969,West Bridgewater Town Precinct 1,West Bridgewater,-,1,2502375260,75260,Town
+25,023,001970,25023001970,West Bridgewater Town Precinct 2,West Bridgewater,-,2,2502375260,75260,Town
+25,023,002041,25023002041,Whitman Town Precinct 1,Whitman,-,1,2502379530,79530,Town
+25,023,002042,25023002042,Whitman Town Precinct 2,Whitman,-,2,2502379530,79530,Town
+25,023,002043,25023002043,Whitman Town Precinct 3,Whitman,-,3,2502379530,79530,Town
+25,023,002044,25023002044,Whitman Town Precinct 4,Whitman,-,4,2502379530,79530,Town
+25,025,000101,25025000101,Boston City Ward 1 Precinct 1,Boston,1,1,2502507000,07000,City
+25,025,000102,25025000102,Boston City Ward 1 Precinct 2,Boston,1,2,2502507000,07000,City
+25,025,000103,25025000103,Boston City Ward 1 Precinct 3,Boston,1,3,2502507000,07000,City
+25,025,000104,25025000104,Boston City Ward 1 Precinct 4,Boston,1,4,2502507000,07000,City
+25,025,000105,25025000105,Boston City Ward 1 Precinct 5,Boston,1,5,2502507000,07000,City
+25,025,000106,25025000106,Boston City Ward 1 Precinct 6,Boston,1,6,2502507000,07000,City
+25,025,000107,25025000107,Boston City Ward 1 Precinct 7,Boston,1,7,2502507000,07000,City
+25,025,000108,25025000108,Boston City Ward 1 Precinct 8,Boston,1,8,2502507000,07000,City
+25,025,000109,25025000109,Boston City Ward 1 Precinct 9,Boston,1,9,2502507000,07000,City
+25,025,000110,25025000110,Boston City Ward 1 Precinct 10,Boston,1,10,2502507000,07000,City
+25,025,000111,25025000111,Boston City Ward 1 Precinct 11,Boston,1,11,2502507000,07000,City
+25,025,000112,25025000112,Boston City Ward 1 Precinct 12,Boston,1,12,2502507000,07000,City
+25,025,000113,25025000113,Boston City Ward 1 Precinct 13,Boston,1,13,2502507000,07000,City
+25,025,000114,25025000114,Boston City Ward 1 Precinct 14,Boston,1,14,2502507000,07000,City
+25,025,000115,25025000115,Boston City Ward 1 Precinct 15,Boston,1,15,2502507000,07000,City
+25,025,000201,25025000201,Boston City Ward 2 Precinct 1,Boston,2,1,2502507000,07000,City
+25,025,000202,25025000202,Boston City Ward 2 Precinct 2,Boston,2,2,2502507000,07000,City
+25,025,000203,25025000203,Boston City Ward 2 Precinct 3,Boston,2,3,2502507000,07000,City
+25,025,000204,25025000204,Boston City Ward 2 Precinct 4,Boston,2,4,2502507000,07000,City
+25,025,000205,25025000205,Boston City Ward 2 Precinct 5,Boston,2,5,2502507000,07000,City
+25,025,000206,25025000206,Boston City Ward 2 Precinct 6,Boston,2,6,2502507000,07000,City
+25,025,000207,25025000207,Boston City Ward 2 Precinct 7,Boston,2,7,2502507000,07000,City
+25,025,000301,25025000301,Boston City Ward 3 Precinct 1,Boston,3,1,2502507000,07000,City
+25,025,000302,25025000302,Boston City Ward 3 Precinct 2,Boston,3,2,2502507000,07000,City
+25,025,000303,25025000303,Boston City Ward 3 Precinct 3,Boston,3,3,2502507000,07000,City
+25,025,000304,25025000304,Boston City Ward 3 Precinct 4,Boston,3,4,2502507000,07000,City
+25,025,000305,25025000305,Boston City Ward 3 Precinct 5,Boston,3,5,2502507000,07000,City
+25,025,000306,25025000306,Boston City Ward 3 Precinct 6,Boston,3,6,2502507000,07000,City
+25,025,000307,25025000307,Boston City Ward 3 Precinct 7,Boston,3,7,2502507000,07000,City
+25,025,000308,25025000308,Boston City Ward 3 Precinct 8,Boston,3,8,2502507000,07000,City
+25,025,000401,25025000401,Boston City Ward 4 Precinct 1,Boston,4,1,2502507000,07000,City
+25,025,000402,25025000402,Boston City Ward 4 Precinct 2,Boston,4,2,2502507000,07000,City
+25,025,000403,25025000403,Boston City Ward 4 Precinct 3,Boston,4,3,2502507000,07000,City
+25,025,000404,25025000404,Boston City Ward 4 Precinct 4,Boston,4,4,2502507000,07000,City
+25,025,000405,25025000405,Boston City Ward 4 Precinct 5,Boston,4,5,2502507000,07000,City
+25,025,000406,25025000406,Boston City Ward 4 Precinct 6,Boston,4,6,2502507000,07000,City
+25,025,000407,25025000407,Boston City Ward 4 Precinct 7,Boston,4,7,2502507000,07000,City
+25,025,000408,25025000408,Boston City Ward 4 Precinct 8,Boston,4,8,2502507000,07000,City
+25,025,000409,25025000409,Boston City Ward 4 Precinct 9,Boston,4,9,2502507000,07000,City
+25,025,000410,25025000410,Boston City Ward 4 Precinct 10,Boston,4,10,2502507000,07000,City
+25,025,000501,25025000501,Boston City Ward 5 Precinct 1,Boston,5,1,2502507000,07000,City
+25,025,000502,25025000502,Boston City Ward 5 Precinct 2,Boston,5,2,2502507000,07000,City
+25,025,000503,25025000503,Boston City Ward 5 Precinct 3,Boston,5,3,2502507000,07000,City
+25,025,000504,25025000504,Boston City Ward 5 Precinct 4,Boston,5,4,2502507000,07000,City
+25,025,000505,25025000505,Boston City Ward 5 Precinct 5,Boston,5,5,2502507000,07000,City
+25,025,000506,25025000506,Boston City Ward 5 Precinct 6,Boston,5,6,2502507000,07000,City
+25,025,000507,25025000507,Boston City Ward 5 Precinct 7,Boston,5,7,2502507000,07000,City
+25,025,000508,25025000508,Boston City Ward 5 Precinct 8,Boston,5,8,2502507000,07000,City
+25,025,000509,25025000509,Boston City Ward 5 Precinct 9,Boston,5,9,2502507000,07000,City
+25,025,000510,25025000510,Boston City Ward 5 Precinct 10,Boston,5,10,2502507000,07000,City
+25,025,000511,25025000511,Boston City Ward 5 Precinct 11,Boston,5,11,2502507000,07000,City
+25,025,000576,25025000576,Chelsea City Ward 1 Precinct 1,Chelsea,1,1,2502513205,13205,City
+25,025,000577,25025000577,Chelsea City Ward 1 Precinct 2,Chelsea,1,2,2502513205,13205,City
+25,025,000578,25025000578,Chelsea City Ward 1 Precinct 3,Chelsea,1,3,2502513205,13205,City
+25,025,000579,25025000579,Chelsea City Ward 1 Precinct 4,Chelsea,1,4,2502513205,13205,City
+25,025,000580,25025000580,Chelsea City Ward 2 Precinct 1,Chelsea,2,1,2502513205,13205,City
+25,025,000581,25025000581,Chelsea City Ward 2 Precinct 2,Chelsea,2,2,2502513205,13205,City
+25,025,000582,25025000582,Chelsea City Ward 2 Precinct 3,Chelsea,2,3,2502513205,13205,City
+25,025,000583,25025000583,Chelsea City Ward 2 Precinct 4,Chelsea,2,4,2502513205,13205,City
+25,025,000584,25025000584,Chelsea City Ward 3 Precinct 1,Chelsea,3,1,2502513205,13205,City
+25,025,000585,25025000585,Chelsea City Ward 3 Precinct 2,Chelsea,3,2,2502513205,13205,City
+25,025,000586,25025000586,Chelsea City Ward 3 Precinct 3,Chelsea,3,3,2502513205,13205,City
+25,025,000587,25025000587,Chelsea City Ward 3 Precinct 4,Chelsea,3,4,2502513205,13205,City
+25,025,000588,25025000588,Chelsea City Ward 4 Precinct 1,Chelsea,4,1,2502513205,13205,City
+25,025,000589,25025000589,Chelsea City Ward 4 Precinct 2,Chelsea,4,2,2502513205,13205,City
+25,025,000590,25025000590,Chelsea City Ward 4 Precinct 3,Chelsea,4,3,2502513205,13205,City
+25,025,000591,25025000591,Chelsea City Ward 4 Precinct 4,Chelsea,4,4,2502513205,13205,City
+25,025,000601,25025000601,Boston City Ward 6 Precinct 1,Boston,6,1,2502507000,07000,City
+25,025,000602,25025000602,Boston City Ward 6 Precinct 2,Boston,6,2,2502507000,07000,City
+25,025,000603,25025000603,Boston City Ward 6 Precinct 3,Boston,6,3,2502507000,07000,City
+25,025,000604,25025000604,Boston City Ward 6 Precinct 4,Boston,6,4,2502507000,07000,City
+25,025,000605,25025000605,Boston City Ward 6 Precinct 5,Boston,6,5,2502507000,07000,City
+25,025,000606,25025000606,Boston City Ward 6 Precinct 6,Boston,6,6,2502507000,07000,City
+25,025,000607,25025000607,Boston City Ward 6 Precinct 7,Boston,6,7,2502507000,07000,City
+25,025,000608,25025000608,Boston City Ward 6 Precinct 8,Boston,6,8,2502507000,07000,City
+25,025,000609,25025000609,Boston City Ward 6 Precinct 9,Boston,6,9,2502507000,07000,City
+25,025,000701,25025000701,Boston City Ward 7 Precinct 1,Boston,7,1,2502507000,07000,City
+25,025,000702,25025000702,Boston City Ward 7 Precinct 2,Boston,7,2,2502507000,07000,City
+25,025,000703,25025000703,Boston City Ward 7 Precinct 3,Boston,7,3,2502507000,07000,City
+25,025,000704,25025000704,Boston City Ward 7 Precinct 4,Boston,7,4,2502507000,07000,City
+25,025,000705,25025000705,Boston City Ward 7 Precinct 5,Boston,7,5,2502507000,07000,City
+25,025,000706,25025000706,Boston City Ward 7 Precinct 6,Boston,7,6,2502507000,07000,City
+25,025,000707,25025000707,Boston City Ward 7 Precinct 7,Boston,7,7,2502507000,07000,City
+25,025,000708,25025000708,Boston City Ward 7 Precinct 8,Boston,7,8,2502507000,07000,City
+25,025,000709,25025000709,Boston City Ward 7 Precinct 9,Boston,7,9,2502507000,07000,City
+25,025,000710,25025000710,Boston City Ward 7 Precinct 10,Boston,7,10,2502507000,07000,City
+25,025,000801,25025000801,Boston City Ward 8 Precinct 1,Boston,8,1,2502507000,07000,City
+25,025,000802,25025000802,Boston City Ward 8 Precinct 2,Boston,8,2,2502507000,07000,City
+25,025,000803,25025000803,Boston City Ward 8 Precinct 3,Boston,8,3,2502507000,07000,City
+25,025,000804,25025000804,Boston City Ward 8 Precinct 4,Boston,8,4,2502507000,07000,City
+25,025,000805,25025000805,Boston City Ward 8 Precinct 5,Boston,8,5,2502507000,07000,City
+25,025,000806,25025000806,Boston City Ward 8 Precinct 6,Boston,8,6,2502507000,07000,City
+25,025,000807,25025000807,Boston City Ward 8 Precinct 7,Boston,8,7,2502507000,07000,City
+25,025,000901,25025000901,Boston City Ward 9 Precinct 1,Boston,9,1,2502507000,07000,City
+25,025,000902,25025000902,Boston City Ward 9 Precinct 2,Boston,9,2,2502507000,07000,City
+25,025,000903,25025000903,Boston City Ward 9 Precinct 3,Boston,9,3,2502507000,07000,City
+25,025,000904,25025000904,Boston City Ward 9 Precinct 4,Boston,9,4,2502507000,07000,City
+25,025,000905,25025000905,Boston City Ward 9 Precinct 5,Boston,9,5,2502507000,07000,City
+25,025,001001,25025001001,Boston City Ward 10 Precinct 1,Boston,10,1,2502507000,07000,City
+25,025,001002,25025001002,Boston City Ward 10 Precinct 2,Boston,10,2,2502507000,07000,City
+25,025,001003,25025001003,Boston City Ward 10 Precinct 3,Boston,10,3,2502507000,07000,City
+25,025,001004,25025001004,Boston City Ward 10 Precinct 4,Boston,10,4,2502507000,07000,City
+25,025,001005,25025001005,Boston City Ward 10 Precinct 5,Boston,10,5,2502507000,07000,City
+25,025,001006,25025001006,Boston City Ward 10 Precinct 6,Boston,10,6,2502507000,07000,City
+25,025,001007,25025001007,Boston City Ward 10 Precinct 7,Boston,10,7,2502507000,07000,City
+25,025,001008,25025001008,Boston City Ward 10 Precinct 8,Boston,10,8,2502507000,07000,City
+25,025,001009,25025001009,Boston City Ward 10 Precinct 9,Boston,10,9,2502507000,07000,City
+25,025,001101,25025001101,Boston City Ward 11 Precinct 1,Boston,11,1,2502507000,07000,City
+25,025,001102,25025001102,Boston City Ward 11 Precinct 2,Boston,11,2,2502507000,07000,City
+25,025,001103,25025001103,Boston City Ward 11 Precinct 3,Boston,11,3,2502507000,07000,City
+25,025,001104,25025001104,Boston City Ward 11 Precinct 4,Boston,11,4,2502507000,07000,City
+25,025,001105,25025001105,Boston City Ward 11 Precinct 5,Boston,11,5,2502507000,07000,City
+25,025,001106,25025001106,Boston City Ward 11 Precinct 6,Boston,11,6,2502507000,07000,City
+25,025,001107,25025001107,Boston City Ward 11 Precinct 7,Boston,11,7,2502507000,07000,City
+25,025,001108,25025001108,Boston City Ward 11 Precinct 8,Boston,11,8,2502507000,07000,City
+25,025,001109,25025001109,Boston City Ward 11 Precinct 9,Boston,11,9,2502507000,07000,City
+25,025,001110,25025001110,Boston City Ward 11 Precinct 10,Boston,11,10,2502507000,07000,City
+25,025,001201,25025001201,Boston City Ward 12 Precinct 1,Boston,12,1,2502507000,07000,City
+25,025,001202,25025001202,Boston City Ward 12 Precinct 2,Boston,12,2,2502507000,07000,City
+25,025,001203,25025001203,Boston City Ward 12 Precinct 3,Boston,12,3,2502507000,07000,City
+25,025,001204,25025001204,Boston City Ward 12 Precinct 4,Boston,12,4,2502507000,07000,City
+25,025,001205,25025001205,Boston City Ward 12 Precinct 5,Boston,12,5,2502507000,07000,City
+25,025,001206,25025001206,Boston City Ward 12 Precinct 6,Boston,12,6,2502507000,07000,City
+25,025,001207,25025001207,Boston City Ward 12 Precinct 7,Boston,12,7,2502507000,07000,City
+25,025,001208,25025001208,Boston City Ward 12 Precinct 8,Boston,12,8,2502507000,07000,City
+25,025,001209,25025001209,Boston City Ward 12 Precinct 9,Boston,12,9,2502507000,07000,City
+25,025,001301,25025001301,Boston City Ward 13 Precinct 1,Boston,13,1,2502507000,07000,City
+25,025,001302,25025001302,Boston City Ward 13 Precinct 2,Boston,13,2,2502507000,07000,City
+25,025,001303,25025001303,Boston City Ward 13 Precinct 3,Boston,13,3,2502507000,07000,City
+25,025,001304,25025001304,Boston City Ward 13 Precinct 4,Boston,13,4,2502507000,07000,City
+25,025,001305,25025001305,Boston City Ward 13 Precinct 5,Boston,13,5,2502507000,07000,City
+25,025,001306,25025001306,Boston City Ward 13 Precinct 6,Boston,13,6,2502507000,07000,City
+25,025,001307,25025001307,Boston City Ward 13 Precinct 7,Boston,13,7,2502507000,07000,City
+25,025,001308,25025001308,Boston City Ward 13 Precinct 8,Boston,13,8,2502507000,07000,City
+25,025,001309,25025001309,Boston City Ward 13 Precinct 9,Boston,13,9,2502507000,07000,City
+25,025,001310,25025001310,Boston City Ward 13 Precinct 10,Boston,13,10,2502507000,07000,City
+25,025,001401,25025001401,Boston City Ward 14 Precinct 1,Boston,14,1,2502507000,07000,City
+25,025,001402,25025001402,Boston City Ward 14 Precinct 2,Boston,14,2,2502507000,07000,City
+25,025,001403,25025001403,Boston City Ward 14 Precinct 3,Boston,14,3,2502507000,07000,City
+25,025,001404,25025001404,Boston City Ward 14 Precinct 4,Boston,14,4,2502507000,07000,City
+25,025,001405,25025001405,Boston City Ward 14 Precinct 5,Boston,14,5,2502507000,07000,City
+25,025,001406,25025001406,Boston City Ward 14 Precinct 6,Boston,14,6,2502507000,07000,City
+25,025,001407,25025001407,Boston City Ward 14 Precinct 7,Boston,14,7,2502507000,07000,City
+25,025,001408,25025001408,Boston City Ward 14 Precinct 8,Boston,14,8,2502507000,07000,City
+25,025,001409,25025001409,Boston City Ward 14 Precinct 9,Boston,14,9,2502507000,07000,City
+25,025,001410,25025001410,Boston City Ward 14 Precinct 10,Boston,14,10,2502507000,07000,City
+25,025,001411,25025001411,Boston City Ward 14 Precinct 11,Boston,14,11,2502507000,07000,City
+25,025,001412,25025001412,Boston City Ward 14 Precinct 12,Boston,14,12,2502507000,07000,City
+25,025,001413,25025001413,Boston City Ward 14 Precinct 13,Boston,14,13,2502507000,07000,City
+25,025,001414,25025001414,Boston City Ward 14 Precinct 14,Boston,14,14,2502507000,07000,City
+25,025,001501,25025001501,Boston City Ward 15 Precinct 1,Boston,15,1,2502507000,07000,City
+25,025,001502,25025001502,Boston City Ward 15 Precinct 2,Boston,15,2,2502507000,07000,City
+25,025,001503,25025001503,Boston City Ward 15 Precinct 3,Boston,15,3,2502507000,07000,City
+25,025,001504,25025001504,Boston City Ward 15 Precinct 4,Boston,15,4,2502507000,07000,City
+25,025,001505,25025001505,Boston City Ward 15 Precinct 5,Boston,15,5,2502507000,07000,City
+25,025,001506,25025001506,Boston City Ward 15 Precinct 6,Boston,15,6,2502507000,07000,City
+25,025,001507,25025001507,Boston City Ward 15 Precinct 7,Boston,15,7,2502507000,07000,City
+25,025,001508,25025001508,Boston City Ward 15 Precinct 8,Boston,15,8,2502507000,07000,City
+25,025,001509,25025001509,Boston City Ward 15 Precinct 9,Boston,15,9,2502507000,07000,City
+25,025,001588,25025001588,Revere City Ward 1 Precinct 1,Revere,1,1,2502556585,56585,City
+25,025,001589,25025001589,Revere City Ward 1 Precinct 2,Revere,1,2,2502556585,56585,City
+25,025,001590,25025001590,Revere City Ward 1 Precinct 3,Revere,1,3,2502556585,56585,City
+25,025,001591,25025001591,Revere City Ward 2 Precinct 1,Revere,2,1,2502556585,56585,City
+25,025,001592,25025001592,Revere City Ward 2 Precinct 2,Revere,2,2,2502556585,56585,City
+25,025,001593,25025001593,Revere City Ward 2 Precinct 3,Revere,2,3,2502556585,56585,City
+25,025,001594,25025001594,Revere City Ward 3 Precinct 1,Revere,3,1,2502556585,56585,City
+25,025,001595,25025001595,Revere City Ward 3 Precinct 2,Revere,3,2,2502556585,56585,City
+25,025,001596,25025001596,Revere City Ward 3 Precinct 3,Revere,3,3,2502556585,56585,City
+25,025,001597,25025001597,Revere City Ward 4 Precinct 1,Revere,4,1,2502556585,56585,City
+25,025,001598,25025001598,Revere City Ward 4 Precinct 2,Revere,4,2,2502556585,56585,City
+25,025,001599,25025001599,Revere City Ward 4 Precinct 3,Revere,4,3,2502556585,56585,City
+25,025,001600,25025001600,Revere City Ward 5 Precinct 1,Revere,5,1,2502556585,56585,City
+25,025,001601,25025001601,Boston City Ward 16 Precinct 1,Boston,16,1,2502507000,07000,City
+25,025,001602,25025001602,Boston City Ward 16 Precinct 2,Boston,16,2,2502507000,07000,City
+25,025,001603,25025001603,Boston City Ward 16 Precinct 3,Boston,16,3,2502507000,07000,City
+25,025,001604,25025001604,Boston City Ward 16 Precinct 4,Boston,16,4,2502507000,07000,City
+25,025,001605,25025001605,Boston City Ward 16 Precinct 5,Boston,16,5,2502507000,07000,City
+25,025,001606,25025001606,Boston City Ward 16 Precinct 6,Boston,16,6,2502507000,07000,City
+25,025,001607,25025001607,Boston City Ward 16 Precinct 7,Boston,16,7,2502507000,07000,City
+25,025,001608,25025001608,Boston City Ward 16 Precinct 8,Boston,16,8,2502507000,07000,City
+25,025,001609,25025001609,Boston City Ward 16 Precinct 9,Boston,16,9,2502507000,07000,City
+25,025,001610,25025001610,Boston City Ward 16 Precinct 10,Boston,16,10,2502507000,07000,City
+25,025,001611,25025001611,Boston City Ward 16 Precinct 11,Boston,16,11,2502507000,07000,City
+25,025,001612,25025001612,Boston City Ward 16 Precinct 12,Boston,16,12,2502507000,07000,City
+25,025,001701,25025001701,Boston City Ward 17 Precinct 1,Boston,17,1,2502507000,07000,City
+25,025,001702,25025001702,Boston City Ward 17 Precinct 2,Boston,17,2,2502507000,07000,City
+25,025,001703,25025001703,Boston City Ward 17 Precinct 3,Boston,17,3,2502507000,07000,City
+25,025,001704,25025001704,Boston City Ward 17 Precinct 4,Boston,17,4,2502507000,07000,City
+25,025,001705,25025001705,Boston City Ward 17 Precinct 5,Boston,17,5,2502507000,07000,City
+25,025,001706,25025001706,Boston City Ward 17 Precinct 6,Boston,17,6,2502507000,07000,City
+25,025,001707,25025001707,Boston City Ward 17 Precinct 7,Boston,17,7,2502507000,07000,City
+25,025,001708,25025001708,Boston City Ward 17 Precinct 8,Boston,17,8,2502507000,07000,City
+25,025,001709,25025001709,Boston City Ward 17 Precinct 9,Boston,17,9,2502507000,07000,City
+25,025,001710,25025001710,Boston City Ward 17 Precinct 10,Boston,17,10,2502507000,07000,City
+25,025,001711,25025001711,Boston City Ward 17 Precinct 11,Boston,17,11,2502507000,07000,City
+25,025,001712,25025001712,Boston City Ward 17 Precinct 12,Boston,17,12,2502507000,07000,City
+25,025,001713,25025001713,Boston City Ward 17 Precinct 13,Boston,17,13,2502507000,07000,City
+25,025,001714,25025001714,Boston City Ward 17 Precinct 14,Boston,17,14,2502507000,07000,City
+25,025,001801,25025001801,Boston City Ward 18 Precinct 1,Boston,18,1,2502507000,07000,City
+25,025,001802,25025001802,Boston City Ward 18 Precinct 2,Boston,18,2,2502507000,07000,City
+25,025,001803,25025001803,Boston City Ward 18 Precinct 3,Boston,18,3,2502507000,07000,City
+25,025,001804,25025001804,Boston City Ward 18 Precinct 4,Boston,18,4,2502507000,07000,City
+25,025,001805,25025001805,Boston City Ward 18 Precinct 5,Boston,18,5,2502507000,07000,City
+25,025,001806,25025001806,Boston City Ward 18 Precinct 6,Boston,18,6,2502507000,07000,City
+25,025,001807,25025001807,Boston City Ward 18 Precinct 7,Boston,18,7,2502507000,07000,City
+25,025,001808,25025001808,Boston City Ward 18 Precinct 8,Boston,18,8,2502507000,07000,City
+25,025,001809,25025001809,Boston City Ward 18 Precinct 9,Boston,18,9,2502507000,07000,City
+25,025,001810,25025001810,Boston City Ward 18 Precinct 10,Boston,18,10,2502507000,07000,City
+25,025,001811,25025001811,Boston City Ward 18 Precinct 11,Boston,18,11,2502507000,07000,City
+25,025,001812,25025001812,Boston City Ward 18 Precinct 12,Boston,18,12,2502507000,07000,City
+25,025,001813,25025001813,Boston City Ward 18 Precinct 13,Boston,18,13,2502507000,07000,City
+25,025,001814,25025001814,Boston City Ward 18 Precinct 14,Boston,18,14,2502507000,07000,City
+25,025,001815,25025001815,Boston City Ward 18 Precinct 15,Boston,18,15,2502507000,07000,City
+25,025,001816,25025001816,Boston City Ward 18 Precinct 16,Boston,18,16,2502507000,07000,City
+25,025,001817,25025001817,Boston City Ward 18 Precinct 17,Boston,18,17,2502507000,07000,City
+25,025,001818,25025001818,Boston City Ward 18 Precinct 18,Boston,18,18,2502507000,07000,City
+25,025,001819,25025001819,Boston City Ward 18 Precinct 19,Boston,18,19,2502507000,07000,City
+25,025,001820,25025001820,Boston City Ward 18 Precinct 20,Boston,18,20,2502507000,07000,City
+25,025,001821,25025001821,Boston City Ward 18 Precinct 21,Boston,18,21,2502507000,07000,City
+25,025,001822,25025001822,Boston City Ward 18 Precinct 22,Boston,18,22,2502507000,07000,City
+25,025,001901,25025001901,Boston City Ward 19 Precinct 1,Boston,19,1,2502507000,07000,City
+25,025,001902,25025001902,Boston City Ward 19 Precinct 2,Boston,19,2,2502507000,07000,City
+25,025,001903,25025001903,Boston City Ward 19 Precinct 3,Boston,19,3,2502507000,07000,City
+25,025,001904,25025001904,Boston City Ward 19 Precinct 4,Boston,19,4,2502507000,07000,City
+25,025,001905,25025001905,Boston City Ward 19 Precinct 5,Boston,19,5,2502507000,07000,City
+25,025,001906,25025001906,Boston City Ward 19 Precinct 6,Boston,19,6,2502507000,07000,City
+25,025,001907,25025001907,Boston City Ward 19 Precinct 7,Boston,19,7,2502507000,07000,City
+25,025,001908,25025001908,Boston City Ward 19 Precinct 8,Boston,19,8,2502507000,07000,City
+25,025,001909,25025001909,Boston City Ward 19 Precinct 9,Boston,19,9,2502507000,07000,City
+25,025,001910,25025001910,Boston City Ward 19 Precinct 10,Boston,19,10,2502507000,07000,City
+25,025,001911,25025001911,Boston City Ward 19 Precinct 11,Boston,19,11,2502507000,07000,City
+25,025,001912,25025001912,Boston City Ward 19 Precinct 12,Boston,19,12,2502507000,07000,City
+25,025,001913,25025001913,Boston City Ward 19 Precinct 13,Boston,19,13,2502507000,07000,City
+25,025,002001,25025002001,Boston City Ward 20 Precinct 1,Boston,20,1,2502507000,07000,City
+25,025,002002,25025002002,Boston City Ward 20 Precinct 2,Boston,20,2,2502507000,07000,City
+25,025,002003,25025002003,Boston City Ward 20 Precinct 3,Boston,20,3,2502507000,07000,City
+25,025,002004,25025002004,Boston City Ward 20 Precinct 4,Boston,20,4,2502507000,07000,City
+25,025,002005,25025002005,Boston City Ward 20 Precinct 5,Boston,20,5,2502507000,07000,City
+25,025,002006,25025002006,Boston City Ward 20 Precinct 6,Boston,20,6,2502507000,07000,City
+25,025,002007,25025002007,Boston City Ward 20 Precinct 7,Boston,20,7,2502507000,07000,City
+25,025,002008,25025002008,Boston City Ward 20 Precinct 8,Boston,20,8,2502507000,07000,City
+25,025,002009,25025002009,Boston City Ward 20 Precinct 9,Boston,20,9,2502507000,07000,City
+25,025,002010,25025002010,Boston City Ward 20 Precinct 10,Boston,20,10,2502507000,07000,City
+25,025,002011,25025002011,Boston City Ward 20 Precinct 11,Boston,20,11,2502507000,07000,City
+25,025,002012,25025002012,Boston City Ward 20 Precinct 12,Boston,20,12,2502507000,07000,City
+25,025,002013,25025002013,Boston City Ward 20 Precinct 13,Boston,20,13,2502507000,07000,City
+25,025,002014,25025002014,Boston City Ward 20 Precinct 14,Boston,20,14,2502507000,07000,City
+25,025,002015,25025002015,Boston City Ward 20 Precinct 15,Boston,20,15,2502507000,07000,City
+25,025,002016,25025002016,Boston City Ward 20 Precinct 16,Boston,20,16,2502507000,07000,City
+25,025,002017,25025002017,Boston City Ward 20 Precinct 17,Boston,20,17,2502507000,07000,City
+25,025,002018,25025002018,Boston City Ward 20 Precinct 18,Boston,20,18,2502507000,07000,City
+25,025,002019,25025002019,Boston City Ward 20 Precinct 19,Boston,20,19,2502507000,07000,City
+25,025,002020,25025002020,Boston City Ward 20 Precinct 20,Boston,20,20,2502507000,07000,City
+25,025,002023,25025002023,Boston City Ward 20 Precinct 23,Boston,20,23,2502507000,07000,City
+25,025,002071,25025002071,Winthrop Town Precinct 1,Winthrop,-,1,2502581005,81005,Town_City
+25,025,002072,25025002072,Winthrop Town Precinct 2,Winthrop,-,2,2502581005,81005,Town_City
+25,025,002073,25025002073,Winthrop Town Precinct 3,Winthrop,-,3,2502581005,81005,Town_City
+25,025,002074,25025002074,Winthrop Town Precinct 4,Winthrop,-,4,2502581005,81005,Town_City
+25,025,002075,25025002075,Winthrop Town Precinct 5,Winthrop,-,5,2502581005,81005,Town_City
+25,025,002076,25025002076,Winthrop Town Precinct 6,Winthrop,-,6,2502581005,81005,Town_City
+25,025,002101,25025002101,Boston City Ward 21 Precinct 1,Boston,21,1,2502507000,07000,City
+25,025,002102,25025002102,Boston City Ward 21 Precinct 2,Boston,21,2,2502507000,07000,City
+25,025,002103,25025002103,Boston City Ward 21 Precinct 3,Boston,21,3,2502507000,07000,City
+25,025,002104,25025002104,Boston City Ward 21 Precinct 4,Boston,21,4,2502507000,07000,City
+25,025,002105,25025002105,Boston City Ward 21 Precinct 5,Boston,21,5,2502507000,07000,City
+25,025,002106,25025002106,Boston City Ward 21 Precinct 6,Boston,21,6,2502507000,07000,City
+25,025,002107,25025002107,Boston City Ward 21 Precinct 7,Boston,21,7,2502507000,07000,City
+25,025,002108,25025002108,Boston City Ward 21 Precinct 8,Boston,21,8,2502507000,07000,City
+25,025,002109,25025002109,Boston City Ward 21 Precinct 9,Boston,21,9,2502507000,07000,City
+25,025,002110,25025002110,Boston City Ward 21 Precinct 10,Boston,21,10,2502507000,07000,City
+25,025,002111,25025002111,Boston City Ward 21 Precinct 11,Boston,21,11,2502507000,07000,City
+25,025,002112,25025002112,Boston City Ward 21 Precinct 12,Boston,21,12,2502507000,07000,City
+25,025,002113,25025002113,Boston City Ward 21 Precinct 13,Boston,21,13,2502507000,07000,City
+25,025,002114,25025002114,Boston City Ward 21 Precinct 14,Boston,21,14,2502507000,07000,City
+25,025,002115,25025002115,Boston City Ward 21 Precinct 15,Boston,21,15,2502507000,07000,City
+25,025,002116,25025002116,Boston City Ward 21 Precinct 16,Boston,21,16,2502507000,07000,City
+25,025,002201,25025002201,Boston City Ward 22 Precinct 1,Boston,22,1,2502507000,07000,City
+25,025,002202,25025002202,Boston City Ward 22 Precinct 2,Boston,22,2,2502507000,07000,City
+25,025,002203,25025002203,Boston City Ward 22 Precinct 3,Boston,22,3,2502507000,07000,City
+25,025,002204,25025002204,Boston City Ward 22 Precinct 4,Boston,22,4,2502507000,07000,City
+25,025,002205,25025002205,Boston City Ward 22 Precinct 5,Boston,22,5,2502507000,07000,City
+25,025,002206,25025002206,Boston City Ward 22 Precinct 6,Boston,22,6,2502507000,07000,City
+25,025,002207,25025002207,Boston City Ward 22 Precinct 7,Boston,22,7,2502507000,07000,City
+25,025,002208,25025002208,Boston City Ward 22 Precinct 8,Boston,22,8,2502507000,07000,City
+25,025,002209,25025002209,Boston City Ward 22 Precinct 9,Boston,22,9,2502507000,07000,City
+25,025,002210,25025002210,Boston City Ward 22 Precinct 10,Boston,22,10,2502507000,07000,City
+25,025,002211,25025002211,Boston City Ward 22 Precinct 11,Boston,22,11,2502507000,07000,City
+25,025,002212,25025002212,Boston City Ward 22 Precinct 12,Boston,22,12,2502507000,07000,City
+25,025,002213,25025002213,Boston City Ward 22 Precinct 13,Boston,22,13,2502507000,07000,City
+25,025,00502A,2502500502A,Boston City Ward 5 Precinct 2A,Boston,5,2A,2502507000,07000,City
+25,025,016010,25025016010,Revere City Ward 5 Precinct 2,Revere,5,2,2502556585,56585,City
+25,025,016020,25025016020,Revere City Ward 5 Precinct 3,Revere,5,3,2502556585,56585,City
+25,025,016030,25025016030,Revere City Ward 6 Precinct 1,Revere,6,1,2502556585,56585,City
+25,025,016040,25025016040,Revere City Ward 6 Precinct 2,Revere,6,2,2502556585,56585,City
+25,025,016050,25025016050,Revere City Ward 6 Precinct 3,Revere,6,3,2502556585,56585,City
+25,027,000076,25027000076,Ashburnham Town Precinct 1,Ashburnham,-,1,2502701885,01885,Town
+25,027,000084,25027000084,Athol Town Precinct 1,Athol,-,1,2502702480,02480,Town
+25,027,000085,25027000085,Athol Town Precinct 2,Athol,-,2,2502702480,02480,Town
+25,027,000086,25027000086,Athol Town Precinct 3,Athol,-,3,2502702480,02480,Town
+25,027,000099,25027000099,Auburn Town Precinct 1,Auburn,-,1,2502702760,02760,Town
+25,027,000100,25027000100,Auburn Town Precinct 2,Auburn,-,2,2502702760,02760,Town
+25,027,000101,25027000101,Auburn Town Precinct 3,Auburn,-,3,2502702760,02760,Town
+25,027,000102,25027000102,Auburn Town Precinct 4,Auburn,-,4,2502702760,02760,Town
+25,027,000103,25027000103,Auburn Town Precinct 5,Auburn,-,5,2502702760,02760,Town
+25,027,000120,25027000120,Barre Town Precinct 1,Barre,-,1,2502703740,03740,Town
+25,027,000121,25027000121,Barre Town Precinct 2,Barre,-,2,2502703740,03740,Town
+25,027,000146,25027000146,Berlin Town Precinct 1,Berlin,-,1,2502705490,05490,Town
+25,027,000171,25027000171,Blackstone Town Precinct 1,Blackstone,-,1,2502706015,06015,Town
+25,027,000172,25027000172,Blackstone Town Precinct 2,Blackstone,-,2,2502706015,06015,Town
+25,027,000173,25027000173,Blackstone Town Precinct 3,Blackstone,-,3,2502706015,06015,Town
+25,027,000175,25027000175,Bolton Town Precinct 1,Bolton,-,1,2502706365,06365,Town
+25,027,000441,25027000441,Boylston Town Precinct 1,Boylston,-,1,2502707525,07525,Town
+25,027,000493,25027000493,Brookfield Town Precinct 1,Brookfield,-,1,2502709105,09105,Town
+25,027,000562,25027000562,Charlton Town Precinct 1,Charlton,-,1,2502712715,12715,Town
+25,027,000563,25027000563,Charlton Town Precinct 2,Charlton,-,2,2502712715,12715,Town
+25,027,000564,25027000564,Charlton Town Precinct 3,Charlton,-,3,2502712715,12715,Town
+25,027,000565,25027000565,Charlton Town Precinct 4,Charlton,-,4,2502712715,12715,Town
+25,027,000615,25027000615,Clinton Town Precinct 1,Clinton,-,1,2502714395,14395,Town
+25,027,000616,25027000616,Clinton Town Precinct 2,Clinton,-,2,2502714395,14395,Town
+25,027,000617,25027000617,Clinton Town Precinct 3,Clinton,-,3,2502714395,14395,Town
+25,027,000618,25027000618,Clinton Town Precinct 4,Clinton,-,4,2502714395,14395,Town
+25,027,000663,25027000663,Douglas Town Precinct 1,Douglas,-,1,2502717300,17300,Town
+25,027,000664,25027000664,Douglas Town Precinct 2,Douglas,-,2,2502717300,17300,Town
+25,027,000665,25027000665,Douglas Town Precinct 3,Douglas,-,3,2502717300,17300,Town
+25,027,000676,25027000676,Dudley Town Precinct 1,Dudley,-,1,2502717685,17685,Town
+25,027,000677,25027000677,Dudley Town Precinct 2,Dudley,-,2,2502717685,17685,Town
+25,027,000678,25027000678,Dudley Town Precinct 3,Dudley,-,3,2502717685,17685,Town
+25,027,000690,25027000690,East Brookfield Town Precinct 1,East Brookfield,-,1,2502718560,18560,Town
+25,027,000765,25027000765,Fitchburg City Ward 1 Precinct A,Fitchburg,1,A,2502723875,23875,City
+25,027,000766,25027000766,Fitchburg City Ward 1 Precinct B,Fitchburg,1,B,2502723875,23875,City
+25,027,000767,25027000767,Fitchburg City Ward 2 Precinct A,Fitchburg,2,A,2502723875,23875,City
+25,027,000768,25027000768,Fitchburg City Ward 2 Precinct B,Fitchburg,2,B,2502723875,23875,City
+25,027,000769,25027000769,Fitchburg City Ward 3 Precinct A,Fitchburg,3,A,2502723875,23875,City
+25,027,000770,25027000770,Fitchburg City Ward 3 Precinct B,Fitchburg,3,B,2502723875,23875,City
+25,027,000771,25027000771,Fitchburg City Ward 4 Precinct A,Fitchburg,4,A,2502723875,23875,City
+25,027,000772,25027000772,Fitchburg City Ward 4 Precinct B,Fitchburg,4,B,2502723875,23875,City
+25,027,000773,25027000773,Fitchburg City Ward 5 Precinct A,Fitchburg,5,A,2502723875,23875,City
+25,027,000774,25027000774,Fitchburg City Ward 5 Precinct B,Fitchburg,5,B,2502723875,23875,City
+25,027,000775,25027000775,Fitchburg City Ward 6 Precinct A,Fitchburg,6,A,2502723875,23875,City
+25,027,000776,25027000776,Fitchburg City Ward 6 Precinct B,Fitchburg,6,B,2502723875,23875,City
+25,027,000812,25027000812,Gardner City Ward 1 Precinct A,Gardner,1,A,2502725485,25485,City
+25,027,000813,25027000813,Gardner City Ward 1 Precinct B,Gardner,1,B,2502725485,25485,City
+25,027,000814,25027000814,Gardner City Ward 2 Precinct A,Gardner,2,A,2502725485,25485,City
+25,027,000815,25027000815,Gardner City Ward 2 Precinct B,Gardner,2,B,2502725485,25485,City
+25,027,000816,25027000816,Gardner City Ward 3 Precinct A,Gardner,3,A,2502725485,25485,City
+25,027,000817,25027000817,Gardner City Ward 3 Precinct B,Gardner,3,B,2502725485,25485,City
+25,027,000818,25027000818,Gardner City Ward 4 Precinct A,Gardner,4,A,2502725485,25485,City
+25,027,000819,25027000819,Gardner City Ward 4 Precinct B,Gardner,4,B,2502725485,25485,City
+25,027,000820,25027000820,Gardner City Ward 5 Precinct A,Gardner,5,A,2502725485,25485,City
+25,027,000821,25027000821,Gardner City Ward 5 Precinct B,Gardner,5,B,2502725485,25485,City
+25,027,000838,25027000838,Grafton Town Precinct 1,Grafton,-,1,2502726430,26430,Town
+25,027,000839,25027000839,Grafton Town Precinct 2,Grafton,-,2,2502726430,26430,Town
+25,027,000840,25027000840,Grafton Town Precinct 3,Grafton,-,3,2502726430,26430,Town
+25,027,000841,25027000841,Grafton Town Precinct 4,Grafton,-,4,2502726430,26430,Town
+25,027,000842,25027000842,Grafton Town Precinct 5,Grafton,-,5,2502726430,26430,Town
+25,027,000879,25027000879,Hardwick Town Precinct 1,Hardwick,-,1,2502728740,28740,Town
+25,027,000880,25027000880,Harvard Town Precinct 1,Harvard,-,1,2502728950,28950,Town
+25,027,000920,25027000920,Holden Town Precinct 1,Holden,-,1,2502730560,30560,Town
+25,027,000921,25027000921,Holden Town Precinct 2,Holden,-,2,2502730560,30560,Town
+25,027,000922,25027000922,Holden Town Precinct 3,Holden,-,3,2502730560,30560,Town
+25,027,000923,25027000923,Holden Town Precinct 4,Holden,-,4,2502730560,30560,Town
+25,027,000924,25027000924,Holden Town Precinct 5,Holden,-,5,2502730560,30560,Town
+25,027,000944,25027000944,Hopedale Town Precinct 1,Hopedale,-,1,2502730945,30945,Town
+25,027,000949,25027000949,Hubbardston Town Precinct 1,Hubbardston,-,1,2502731435,31435,Town
+25,027,000972,25027000972,Lancaster Town Precinct 1,Lancaster,-,1,2502734165,34165,Town
+25,027,000973,25027000973,Lancaster Town Precinct 2,Lancaster,-,2,2502734165,34165,Town
+25,027,001000,25027001000,Leicester Town Precinct 1,Leicester,-,1,2502734795,34795,Town
+25,027,001001,25027001001,Leicester Town Precinct 2,Leicester,-,2,2502734795,34795,Town
+25,027,001002,25027001002,Leicester Town Precinct 3,Leicester,-,3,2502734795,34795,Town
+25,027,001003,25027001003,Leicester Town Precinct 4,Leicester,-,4,2502734795,34795,Town
+25,027,001005,25027001005,Leominster City Ward 1 Precinct A,Leominster,1,A,2502735075,35075,City
+25,027,001006,25027001006,Leominster City Ward 1 Precinct B,Leominster,1,B,2502735075,35075,City
+25,027,001007,25027001007,Leominster City Ward 1 Precinct C,Leominster,1,C,2502735075,35075,City
+25,027,001008,25027001008,Leominster City Ward 2 Precinct A,Leominster,2,A,2502735075,35075,City
+25,027,001009,25027001009,Leominster City Ward 2 Precinct B,Leominster,2,B,2502735075,35075,City
+25,027,001010,25027001010,Leominster City Ward 2 Precinct C,Leominster,2,C,2502735075,35075,City
+25,027,001011,25027001011,Leominster City Ward 3 Precinct A,Leominster,3,A,2502735075,35075,City
+25,027,001012,25027001012,Leominster City Ward 3 Precinct B,Leominster,3,B,2502735075,35075,City
+25,027,001013,25027001013,Leominster City Ward 3 Precinct C,Leominster,3,C,2502735075,35075,City
+25,027,001014,25027001014,Leominster City Ward 4 Precinct A,Leominster,4,A,2502735075,35075,City
+25,027,001015,25027001015,Leominster City Ward 4 Precinct B,Leominster,4,B,2502735075,35075,City
+25,027,001016,25027001016,Leominster City Ward 4 Precinct C,Leominster,4,C,2502735075,35075,City
+25,027,001017,25027001017,Leominster City Ward 5 Precinct A,Leominster,5,A,2502735075,35075,City
+25,027,001018,25027001018,Leominster City Ward 5 Precinct B,Leominster,5,B,2502735075,35075,City
+25,027,001019,25027001019,Leominster City Ward 5 Precinct C,Leominster,5,C,2502735075,35075,City
+25,027,001080,25027001080,Lunenburg Town Precinct A,Lunenburg,-,A,2502737420,37420,Town
+25,027,001081,25027001081,Lunenburg Town Precinct B,Lunenburg,-,B,2502737420,37420,Town
+25,027,001082,25027001082,Lunenburg Town Precinct C,Lunenburg,-,C,2502737420,37420,Town
+25,027,001083,25027001083,Lunenburg Town Precinct D,Lunenburg,-,D,2502737420,37420,Town
+25,027,001215,25027001215,Mendon Town Precinct 1,Mendon,-,1,2502740255,40255,Town
+25,027,001239,25027001239,Milford Town Precinct 1,Milford,-,1,2502741165,41165,Town
+25,027,001240,25027001240,Milford Town Precinct 2,Milford,-,2,2502741165,41165,Town
+25,027,001241,25027001241,Milford Town Precinct 3,Milford,-,3,2502741165,41165,Town
+25,027,001242,25027001242,Milford Town Precinct 4,Milford,-,4,2502741165,41165,Town
+25,027,001243,25027001243,Milford Town Precinct 5,Upton,-,5,2502771480,71480,Town
+25,027,001244,25027001244,Milford Town Precinct 6,Milford,-,6,2502741165,41165,Town
+25,027,001245,25027001245,Milford Town Precinct 7,Milford,-,7,2502741165,41165,Town
+25,027,001246,25027001246,Milford Town Precinct 8,Milford,-,8,2502741165,41165,Town
+25,027,001247,25027001247,Millbury Town Precinct 1,Millbury,-,1,2502741340,41340,Town
+25,027,001248,25027001248,Millbury Town Precinct 2,Millbury,-,2,2502741340,41340,Town
+25,027,001249,25027001249,Millbury Town Precinct 3,Millbury,-,3,2502741340,41340,Town
+25,027,001250,25027001250,Millbury Town Precinct 4,Millbury,-,4,2502741340,41340,Town
+25,027,001254,25027001254,Millville Town Precinct 1,Millville,-,1,2502741585,41585,Town
+25,027,001337,25027001337,New Braintree Town Precinct 1,New Braintree,-,1,2502745105,45105,Town
+25,027,001405,25027001405,North Brookfield Town Precinct 1,North Brookfield,-,1,2502747135,47135,Town
+25,027,001424,25027001424,Northborough Town Precinct 1,Northborough,-,1,2502746820,46820,Town
+25,027,001425,25027001425,Northborough Town Precinct 2,Northborough,-,2,2502746820,46820,Town
+25,027,001426,25027001426,Northborough Town Precinct 3,Northborough,-,3,2502746820,46820,Town
+25,027,001427,25027001427,Northborough Town Precinct 4,Northborough,-,4,2502746820,46820,Town
+25,027,001428,25027001428,Northbridge Town Precinct 1,Northbridge,-,1,2502746925,46925,Town
+25,027,001429,25027001429,Northbridge Town Precinct 2,Northbridge,-,2,2502746925,46925,Town
+25,027,001430,25027001430,Northbridge Town Precinct 3,Northbridge,-,3,2502746925,46925,Town
+25,027,001431,25027001431,Northbridge Town Precinct 4,Northbridge,-,4,2502746925,46925,Town
+25,027,001451,25027001451,Oakham Town Precinct 1,Oakham,-,1,2502750670,50670,Town
+25,027,001456,25027001456,Oxford Town Precinct 1,Oxford,-,1,2502751825,51825,Town
+25,027,001457,25027001457,Oxford Town Precinct 2,Oxford,-,2,2502751825,51825,Town
+25,027,001458,25027001458,Oxford Town Precinct 3,Oxford,-,3,2502751825,51825,Town
+25,027,001459,25027001459,Oxford Town Precinct 4,Oxford,-,4,2502751825,51825,Town
+25,027,001464,25027001464,Paxton Town Precinct 1,Paxton,-,1,2502752420,52420,Town
+25,027,001493,25027001493,Petersham Town Precinct 1,Petersham,-,1,2502753120,53120,Town
+25,027,001494,25027001494,Phillipston Town Precinct 1,Phillipston,-,1,2502753225,53225,Town
+25,027,001529,25027001529,Princeton Town Precinct 1,Princeton,-,1,2502755395,55395,Town
+25,027,001619,25027001619,Royalston Town Precinct 1,Royalston,-,1,2502758580,58580,Town
+25,027,001620,25027001620,Royalston Town Precinct 2,Royalston,-,2,2502758580,58580,Town
+25,027,001622,25027001622,Rutland Town Precinct 1,Rutland,-,1,2502758825,58825,Town
+25,027,001623,25027001623,Rutland Town Precinct 2,Rutland,-,2,2502758825,58825,Town
+25,027,001624,25027001624,Rutland Town Precinct 3,Rutland,-,3,2502758825,58825,Town
+25,027,001679,25027001679,Shrewsbury Town Precinct 1,Shrewsbury,-,1,2502761800,61800,Town
+25,027,001680,25027001680,Shrewsbury Town Precinct 10,Shrewsbury,-,10,2502761800,61800,Town
+25,027,001681,25027001681,Shrewsbury Town Precinct 2,Shrewsbury,-,2,2502761800,61800,Town
+25,027,001682,25027001682,Shrewsbury Town Precinct 3,Shrewsbury,-,3,2502761800,61800,Town
+25,027,001683,25027001683,Shrewsbury Town Precinct 4,Shrewsbury,-,4,2502761800,61800,Town
+25,027,001684,25027001684,Shrewsbury Town Precinct 5,Shrewsbury,-,5,2502761800,61800,Town
+25,027,001685,25027001685,Shrewsbury Town Precinct 6,Shrewsbury,-,6,2502761800,61800,Town
+25,027,001686,25027001686,Shrewsbury Town Precinct 7,Shrewsbury,-,7,2502761800,61800,Town
+25,027,001687,25027001687,Shrewsbury Town Precinct 8,Shrewsbury,-,8,2502761800,61800,Town
+25,027,001688,25027001688,Shrewsbury Town Precinct 9,Shrewsbury,-,9,2502761800,61800,Town
+25,027,001722,25027001722,Southborough Town Precinct 1,Southborough,-,1,2502763165,63165,Town
+25,027,001723,25027001723,Southborough Town Precinct 2,Southborough,-,2,2502763165,63165,Town
+25,027,001724,25027001724,Southborough Town Precinct 3,Southborough,-,3,2502763165,63165,Town
+25,027,001725,25027001725,Southbridge Town Precinct 1,Southbridge,-,1,2502763345,63345,Town_City
+25,027,001726,25027001726,Southbridge Town Precinct 2,Southbridge,-,2,2502763345,63345,Town_City
+25,027,001727,25027001727,Southbridge Town Precinct 3,Southbridge,-,3,2502763345,63345,Town_City
+25,027,001728,25027001728,Southbridge Town Precinct 4,Southbridge,-,4,2502763345,63345,Town_City
+25,027,001729,25027001729,Southbridge Town Precinct 5,Southbridge,-,5,2502763345,63345,Town_City
+25,027,001733,25027001733,Spencer Town Precinct 1,Spencer,-,1,2502766105,66105,Town
+25,027,001734,25027001734,Spencer Town Precinct 2,Spencer,-,2,2502766105,66105,Town
+25,027,001735,25027001735,Spencer Town Precinct 3,Spencer,-,3,2502766105,66105,Town
+25,027,001736,25027001736,Spencer Town Precinct 4,Spencer,-,4,2502766105,66105,Town
+25,027,001801,25027001801,Sterling Town Precinct 1,Sterling,-,1,2502767385,67385,Town
+25,027,001802,25027001802,Sterling Town Precinct 2,Sterling,-,2,2502767385,67385,Town
+25,027,001821,25027001821,Sturbridge Town Precinct 1,Sturbridge,-,1,2502768155,68155,Town
+25,027,001822,25027001822,Sturbridge Town Precinct 2,Sturbridge,-,2,2502768155,68155,Town
+25,027,001823,25027001823,Sturbridge Town Precinct 3,Sturbridge,-,3,2502768155,68155,Town
+25,027,001830,25027001830,Sutton Town Precinct 1,Sutton,-,1,2502768610,68610,Town
+25,027,001831,25027001831,Sutton Town Precinct 2,Sutton,-,2,2502768610,68610,Town
+25,027,001832,25027001832,Sutton Town Precinct 3,Sutton,-,3,2502768610,68610,Town
+25,027,001860,25027001860,Templeton Town Precinct A,Templeton,-,A,2502769275,69275,Town
+25,027,001861,25027001861,Templeton Town Precinct B,Templeton,-,B,2502769275,69275,Town
+25,027,001862,25027001862,Templeton Town Precinct C,Templeton,-,C,2502769275,69275,Town
+25,027,001883,25027001883,Upton Town Precinct 1,Upton,-,1,2502771480,71480,Town
+25,027,001884,25027001884,Upton Town Precinct 2,Upton,-,2,2502771480,71480,Town
+25,027,001885,25027001885,Uxbridge Town Precinct 1,Uxbridge,-,1,2502771620,71620,Town
+25,027,001886,25027001886,Uxbridge Town Precinct 2,Uxbridge,-,2,2502771620,71620,Town
+25,027,001887,25027001887,Uxbridge Town Precinct 3,Uxbridge,-,3,2502771620,71620,Town
+25,027,001888,25027001888,Uxbridge Town Precinct 4,Uxbridge,-,4,2502771620,71620,Town
+25,027,001932,25027001932,Warren Town Precinct A,Warren,-,A,2502773090,73090,Town
+25,027,001951,25027001951,Webster Town Precinct 1,Webster,-,1,2502773895,73895,Town
+25,027,001952,25027001952,Webster Town Precinct 2,Webster,-,2,2502773895,73895,Town
+25,027,001953,25027001953,Webster Town Precinct 3,Webster,-,3,2502773895,73895,Town
+25,027,001954,25027001954,Webster Town Precinct 4,Webster,-,4,2502773895,73895,Town
+25,027,001955,25027001955,Webster Town Precinct 5,Webster,-,5,2502773895,73895,Town
+25,027,001967,25027001967,West Boylston Town Precinct 1,West Boylston,-,1,2502775155,75155,Town
+25,027,001968,25027001968,West Boylston Town Precinct 2,West Boylston,-,2,2502775155,75155,Town
+25,027,001971,25027001971,West Brookfield Town Precinct 1,West Brookfield,-,1,2502775400,75400,Town
+25,027,001983,25027001983,Westborough Town Precinct 1,Westborough,-,1,2502775015,75015,Town
+25,027,001984,25027001984,Westborough Town Precinct 2,Westborough,-,2,2502775015,75015,Town
+25,027,001985,25027001985,Westborough Town Precinct 3,Westborough,-,3,2502775015,75015,Town
+25,027,001986,25027001986,Westborough Town Precinct 4,Westborough,-,4,2502775015,75015,Town
+25,027,001987,25027001987,Westborough Town Precinct 5,Westborough,-,5,2502775015,75015,Town
+25,027,002007,25027002007,Westminster Town Precinct 1,Westminster,-,1,2502777010,77010,Town
+25,027,002008,25027002008,Westminster Town Precinct 2,Westminster,-,2,2502777010,77010,Town
+25,027,002059,25027002059,Winchendon Town Precinct 1,Winchendon,-,1,2502780405,80405,Town
+25,027,002060,25027002060,Winchendon Town Precinct 2,Winchendon,-,2,2502780405,80405,Town
+25,027,002061,25027002061,Winchendon Town Precinct 3,Winchendon,-,3,2502780405,80405,Town
+25,027,002091,25027002091,Worcester City Ward 1 Precinct 1,Worcester,1,1,2502782000,82000,City
+25,027,002092,25027002092,Worcester City Ward 1 Precinct 2,Worcester,1,2,2502782000,82000,City
+25,027,002093,25027002093,Worcester City Ward 1 Precinct 3,Worcester,1,3,2502782000,82000,City
+25,027,002094,25027002094,Worcester City Ward 1 Precinct 4,Worcester,1,4,2502782000,82000,City
+25,027,002095,25027002095,Worcester City Ward 1 Precinct 5,Worcester,1,5,2502782000,82000,City
+25,027,002096,25027002096,Worcester City Ward 10 Precinct 1,Worcester,10,1,2502782000,82000,City
+25,027,002097,25027002097,Worcester City Ward 10 Precinct 2,Worcester,10,2,2502782000,82000,City
+25,027,002098,25027002098,Worcester City Ward 10 Precinct 3,Worcester,10,3,2502782000,82000,City
+25,027,002099,25027002099,Worcester City Ward 10 Precinct 4,Worcester,10,4,2502782000,82000,City
+25,027,002100,25027002100,Worcester City Ward 10 Precinct 5,Worcester,10,5,2502782000,82000,City
+25,027,002101,25027002101,Worcester City Ward 2 Precinct 1,Worcester,2,1,2502782000,82000,City
+25,027,002102,25027002102,Worcester City Ward 2 Precinct 2,Worcester,2,2,2502782000,82000,City
+25,027,002103,25027002103,Worcester City Ward 2 Precinct 3,Worcester,2,3,2502782000,82000,City
+25,027,002104,25027002104,Worcester City Ward 2 Precinct 4,Worcester,2,4,2502782000,82000,City
+25,027,002105,25027002105,Worcester City Ward 2 Precinct 5,Worcester,2,5,2502782000,82000,City
+25,027,002106,25027002106,Worcester City Ward 3 Precinct 1,Worcester,3,1,2502782000,82000,City
+25,027,002107,25027002107,Worcester City Ward 3 Precinct 2,Worcester,3,2,2502782000,82000,City
+25,027,002108,25027002108,Worcester City Ward 3 Precinct 3,Worcester,3,3,2502782000,82000,City
+25,027,002109,25027002109,Worcester City Ward 3 Precinct 4,Worcester,3,4,2502782000,82000,City
+25,027,002110,25027002110,Worcester City Ward 3 Precinct 5,Worcester,3,5,2502782000,82000,City
+25,027,002111,25027002111,Worcester City Ward 4 Precinct 1,Worcester,4,1,2502782000,82000,City
+25,027,002112,25027002112,Worcester City Ward 4 Precinct 2,Worcester,4,2,2502782000,82000,City
+25,027,002113,25027002113,Worcester City Ward 4 Precinct 3,Worcester,4,3,2502782000,82000,City
+25,027,002114,25027002114,Worcester City Ward 4 Precinct 4,Worcester,4,4,2502782000,82000,City
+25,027,002115,25027002115,Worcester City Ward 4 Precinct 5,Worcester,4,5,2502782000,82000,City
+25,027,002116,25027002116,Worcester City Ward 5 Precinct 1,Worcester,5,1,2502782000,82000,City
+25,027,002117,25027002117,Worcester City Ward 5 Precinct 2,Worcester,5,2,2502782000,82000,City
+25,027,002118,25027002118,Worcester City Ward 5 Precinct 3,Worcester,5,3,2502782000,82000,City
+25,027,002119,25027002119,Worcester City Ward 5 Precinct 4,Worcester,5,4,2502782000,82000,City
+25,027,002120,25027002120,Worcester City Ward 5 Precinct 5,Worcester,5,5,2502782000,82000,City
+25,027,002121,25027002121,Worcester City Ward 6 Precinct 1,Worcester,6,1,2502782000,82000,City
+25,027,002122,25027002122,Worcester City Ward 6 Precinct 2,Worcester,6,2,2502782000,82000,City
+25,027,002123,25027002123,Worcester City Ward 6 Precinct 3,Worcester,6,3,2502782000,82000,City
+25,027,002124,25027002124,Worcester City Ward 6 Precinct 4,Worcester,6,4,2502782000,82000,City
+25,027,002125,25027002125,Worcester City Ward 6 Precinct 5,Worcester,6,5,2502782000,82000,City
+25,027,002126,25027002126,Worcester City Ward 7 Precinct 1,Worcester,7,1,2502782000,82000,City
+25,027,002127,25027002127,Worcester City Ward 7 Precinct 2,Worcester,7,2,2502782000,82000,City
+25,027,002128,25027002128,Worcester City Ward 7 Precinct 3,Worcester,7,3,2502782000,82000,City
+25,027,002129,25027002129,Worcester City Ward 7 Precinct 4,Worcester,7,4,2502782000,82000,City
+25,027,002130,25027002130,Worcester City Ward 7 Precinct 5,Worcester,7,5,2502782000,82000,City
+25,027,002131,25027002131,Worcester City Ward 8 Precinct 1,Worcester,8,1,2502782000,82000,City
+25,027,002132,25027002132,Worcester City Ward 8 Precinct 2,Worcester,8,2,2502782000,82000,City
+25,027,002133,25027002133,Worcester City Ward 8 Precinct 3,Worcester,8,3,2502782000,82000,City
+25,027,002134,25027002134,Worcester City Ward 8 Precinct 4,Worcester,8,4,2502782000,82000,City
+25,027,002135,25027002135,Worcester City Ward 8 Precinct 5,Worcester,8,5,2502782000,82000,City
+25,027,002136,25027002136,Worcester City Ward 9 Precinct 1,Worcester,9,1,2502782000,82000,City
+25,027,002137,25027002137,Worcester City Ward 9 Precinct 2,Worcester,9,2,2502782000,82000,City
+25,027,002138,25027002138,Worcester City Ward 9 Precinct 3,Worcester,9,3,2502782000,82000,City
+25,027,002139,25027002139,Worcester City Ward 9 Precinct 4,Worcester,9,4,2502782000,82000,City
+25,027,002140,25027002140,Worcester City Ward 9 Precinct 5,Worcester,9,5,2502782000,82000,City

@@ -1,0 +1,408 @@
+---
+title: "An overview of the 2022 State Senate Primaries"
+description: |
+    A short discussion of redistricting and an overview
+    of each State Senate primary race.
+author:
+  - name: Brent Benson
+    url: https://massnumbers.us/brentbenson
+date: 2022-07-05
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r libraries, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE)
+options(digits=1, knitr.kable.NA="")
+library(kableExtra)
+library(tidyverse)
+library(sf)
+library(tmap)
+library(readxl)
+library(viridis)
+library(tidycensus)
+library(tigris)
+```
+```{r senate-districts}
+sen_dist <- read_excel("../../_data/2020/MA_State_Senate_Race_2022.xlsx", sheet="Districts")
+
+sen_cand <- read_excel("../../_data/2020/MA_State_Senate_Race_2022.xlsx", sheet="Contested") %>%
+    rename(Inc = Incumbent)
+
+sen_geom <- read_sf("../../_gis/SENATE2021/SENATE2021_POLY.shp", as_tibble=TRUE) %>%
+    st_make_valid() %>%
+    select(Number=SENDISTNUM) %>%
+    st_transform(st_crs(6491)) %>%
+    left_join(sen_dist, by="Number") %>%
+    relocate(District)
+
+sen_geom_12 <- read_sf("../../_gis/senate2012/SENATE2012_POLY.shp", as_tibble=TRUE) %>%
+    st_make_valid() %>%
+    st_transform(st_crs(6491))
+
+tmap_mode(mode="view")
+```
+
+It may be the middle of summer, but there is a lot going on in Massachusetts
+state legislature campaigns. This post spends some time looking at
+redistricting, specifically the new majority minority state senate districts,
+and then at each of the contested state senate primaries.
+
+## New majority minority districts
+
+The Massachusetts State Senate lines have been redrawn by the legislature after
+the 2020 Census as required by the constitution. Redistricting established
+two new majority minority districts.
+
+The First Essex State Senate District—one of the new majority districts—contains
+all of Lawrence, all of Methuen, and about 5 precincts of Haverhill. The
+previous lines of the district left out Lawrence and included a large number of
+largely white communities. The new lines result in a voting age population that
+is 36% White, 56% Hispanic, 10% Black, and 3% Asian. The First Essex incumbent,
+Diana DiZoglio (D—Methuen), is running for Auditor, leaving an open race for a
+competitive field of candidates from Lawrence and Methuen (see the First Essex
+primary overview below).
+
+```{r first-essex-redist, layout="l-body-outset", fig.cap="*First Essex State Senate District*"}
+sen_19 <- sen_geom %>% filter(Number == 19)
+sen_old_19 <- sen_geom_12 %>% filter(SEN_DIST == "First Essex")
+
+sen_19_map <- (
+    tm_shape(sen_19, bbox=st_bbox(st_union(sen_19, sen_old_19))) +
+        tm_fill(col = viridis(1), alpha = 0.5) +
+        tm_shape(sen_old_19) +
+        tm_borders(lwd = 2, lty = "dashed") +
+        tm_basemap("OpenStreetMap")
+)
+tmap_leaflet(sen_19_map)
+```
+
+The other newly created majority minority is the Middlesex and Suffolk District
+with incumbent Sal DiDomenico (D—Everett). Redistricting has added diverse
+sections of Cambridgeport and East Cambridge, while removing parts of Boston's
+West End, Allston, and Brighton neighborhoods. The district ends up with a
+demographic mix of 46% White, 24% Hispanic, 12% Black, and 15% Asian. DiDomenico
+does not have primary or general election challenger.
+
+```{r middlesex-and-suffolk-redist, layout="l-body-outset", fig.cap="*Middlesex and Suffolk State Senate District*"}
+sen_26 <- sen_geom %>% filter(Number == 26)
+sen_old_26 <- sen_geom_12 %>% filter(SEN_DIST == "Middlesex and Suffolk")
+
+sen_26_map <- (
+    tm_shape(sen_26) +
+        tm_fill(col = viridis(1), alpha = 0.5) +
+        tm_shape(sen_old_26) +
+        tm_borders(lwd = 2, lty = "dashed") +
+        tm_basemap("OpenStreetMap")
+)
+tmap_leaflet(sen_26_map)
+```
+
+The other majority minority State Senate districts are the Springfield-based
+Hampden district of Adam Gomez (D—Springfield), the Boston-based Second Suffolk
+district of Sonia Change-Diaz (D—Boston) who ran an unsuccessful campaign for
+Governor, and the Second Plymouth and Norfolk district with incumbent
+Senator Michael Brady (D—Brockton).
+
+The full State Senate map is given here with dashed lines for previous State
+Senate district lines and some demographics (partisan lean, etc.).
+
+```{r new-district-map, layout="l-body-outset", fig.cap="*MA State Senate Districts (2022)*"}
+new_sen_map <- (tm_shape(sen_geom) +
+                    tm_borders(lwd=2) +
+                    tm_fill(col="PVI_N",
+                            palette=c("red", "white", "blue"),
+                            midpoint=0,
+                            alpha=0.5,
+                            popup.vars=c("Incumbent",
+                                         "PVI",
+                                         "NH_White_Pct",
+                                         "Old District",
+                                         "primaries")) +
+                    tm_shape(sen_geom_12) +
+                    tm_borders(lwd=2, lty="dashed") +
+                    tm_basemap("OpenStreetMap"))
+tmap_leaflet(new_sen_map)
+```
+
+## State Senate Primary Overview
+
+There are ten State Senate districts with contested primaries. There are three
+Democratic incumbents with primary challengers—Joan Lovely (D—Salem), Walter
+Timility (D—Milton), Michael Brady (D-Brockton)—and one Republican with a
+primary challenge, Patrick O'Connor (R-Weymouth).
+
+There are five open seats with four having just a Democratic primary, and one
+seat—Hampden, Hampshire and Worcester—with both a Democratic and Republican
+primary.
+
+```{r state-senate-districts}
+sen_dist %>% select(c(District,
+                      PVI,
+                      inc_status,
+                      Incumbent,
+                      primaries)) %>%
+    kbl() %>%
+    kable_styling()
+```
+
+```{r district-setup}
+vtd_to_city_town <- read_csv("../../_data/2020/ma_vtds_city_town_fips.csv") %>%
+    select(vtd_fips, city_town, Ward, Pct, city_town_fips, type)
+
+ma_vtds <- voting_districts(state=25) %>%
+    rename(state_code = STATEFP20,
+           county_code = COUNTYFP20,
+           vtd_code = VTDST20,
+           vtd_fips = GEOID20) %>%
+    filter(vtd_code != "ZZZZZZ") %>%
+    left_join(vtd_to_city_town, by="vtd_fips") %>%
+    st_transform(st_crs(6491))
+
+ma_towns <- read_sf("../../_gis/townssurvey_shp/TOWNSSURVEY_POLYM.shp",
+                    as_tibble=TRUE) %>%
+    st_make_valid() %>%
+    mutate(city_town = str_to_title(TOWN)) %>%
+    select(city_town) %>%
+    st_transform(st_crs(6491))
+
+ma_towns_dems <- read_csv("../../_data/2020/ma_city_town_demographics_pvi_2020.csv") %>%
+    mutate(city_town = str_replace(city_town, "Manchester-by-the-Sea", "Manchester")) %>%
+    rename(white_pct = race_white_pct,
+           black_pct = race_black_pct,
+           hispanic_pct = race_hispanic_pct,
+           asian_pct = race_asian_pct) %>%
+    select(city_town_fips, city_town, PVI, PVI_N, total_population,
+           white_pct, black_pct, hispanic_pct, asian_pct)
+
+ma_towns_geom <- merge(ma_towns, ma_towns_dems, by="city_town") %>%
+    mutate(center = st_centroid(geometry))
+
+ma_vtds_pvi <- read_csv("../../_data/2020/ma_precinct_pvi_2020.csv")
+    
+ma_vtds_dems <- read_csv("../../_data/2020/ma_census_2020_daves.csv") %>%
+    rename(total_population = Tot_2020_tot) %>%
+    mutate(white_pct = Wh_2020_tot/total_population,
+           black_pct = BlC_2020_tot/total_population,
+           hispanic_pct = His_2020_tot/total_population,
+           asian_pct = AsnC_2020_tot/total_population) %>%
+    select(vtd_fips, total_population, white_pct, black_pct,
+           hispanic_pct, asian_pct)
+
+ma_vtds_geom <- ma_vtds %>%
+    mutate(center = st_centroid(geometry)) %>%
+    left_join(ma_vtds_pvi, by=c("city_town", "Ward", "Pct")) %>%
+    left_join(ma_vtds_dems, by="vtd_fips")
+
+ma_sen <- read_sf("../../_gis/SENATE2021/SENATE2021_POLY.shp", as_tibble=TRUE) %>%
+    st_make_valid() %>%
+    select(SENDISTNUM, SEN_DIST) %>%
+    st_transform(st_crs(6491))
+
+ma_house_12 <- read_sf("../../_gis/house2012/HOUSE2012_POLY.shp", as_tibble=TRUE) %>%
+    st_make_valid() %>%
+    st_transform(st_crs(6491))
+
+ma_city_town_num_pcts <- ma_vtds_geom %>%
+    st_drop_geometry() %>%
+    group_by(city_town) %>%
+    summarize(num_precincts = n())
+```
+## Berkshire, Hampden, Franklin and Hampshire
+
+```{r bhfh-setup}
+ma_sen_1 <- ma_sen %>%
+    filter(SENDISTNUM == 1)
+
+ma_towns_1 <- ma_towns_geom %>%
+    mutate(in_district = ((st_contains(ma_sen_1, ma_towns_geom$center, sparse=FALSE) %>% colSums()) == 1)) %>%
+    filter(in_district) %>%
+    select(-in_district)
+
+ma_house_berk_2 <- ma_house_12 %>%
+    filter(DIST_CODE == "BERK02")
+
+ma_sen_cands_1 <- tibble(
+    candidate=c("Paul W. Mark", "Huff Tyler Templeton III", "Brendan M. Phair"),
+    party=c("Democrat", "Democrat", "Unenrolled"),
+    city_town=c("Peru", "Williamstown", "Pittsfield")) %>%
+    merge((ma_towns_1 %>% select(city_town, center)), by="city_town") %>%
+    select(-geometry) %>%
+    st_as_sf(sf_column_name="center") %>%
+    relocate(candidate)
+```
+
+```{r bhfh-map, layout="l-body-outset", fig.cap="*Berkshire, Hampden, Franklin and Hampshire*   "}
+ma_sen_1_map <- (tm_shape(ma_towns_1, bbox=st_bbox(st_union(ma_sen_1, ma_house_berk_2))) +
+                     tm_borders(lwd=0.5) + tm_fill(col="PVI_N",
+                                                   palette=c("#FF4949", "white", "#0F4392"),
+                                                   midpoint=0,
+                                                   alpha=0.5,
+                                                   popup.vars=c("PVI", "total_population", "white_pct",
+                                                                "black_pct", "hispanic_pct",
+                                                                "asian_pct")) +
+                     # tm_text(text="city_town", size=0.5) + 
+                     tm_shape(ma_sen_1) + tm_borders(lwd=4) +
+                     tm_shape(ma_house_berk_2) + tm_borders(lwd=3, lty="dashed") +
+                     tm_shape(ma_sen_cands_1) +
+                     tm_symbols(ymod=-0.6, size=0.2, col="black", popup.vars=c("party", "city_town")) +
+                     # tm_text(ymod=-1, text="candidate", size=0.5) +
+                     tm_basemap("OpenStreetMap"))
+tmap_leaflet(ma_sen_1_map)
+```
+
+```{r bhfh-cand}
+sen_cand %>%
+    filter(SENDISTNUM == 1) %>%
+    select(District,
+           cpf_id,
+           Inc,
+           Candidate,
+           Party,
+           city_town) %>%
+    kbl() %>%
+    kable_styling()
+```
+
+The newly created and enormous Berkshire, Hampden, Franklin and Hampshire
+district contains 57 cities and towns in Western Massachusetts. The incumbent of
+the existing and similarly named Berkshire, Hampshire, Franklin and Hampden
+district, Adam Hinds (D—Pittsfield) ran an unsuccessful campaign for Lieutenant
+Governor, leaving this district without an incumbent senator.
+
+The Democratic primary will feature sitting State Representative Paul Mark
+(D—Peru) whose current Second Berkshire State Representative district is 
+outlined in the map, and Williamstown small business manager and activist
+Huff Templeton III. Representative Mark will have a considerable advantage
+as almost a quarter of the Senate district's Democratic primary voters will
+have seen him on the ballot, and likely will have voted for him in the past.
+
+The D+18 Partisan Voter Index (PVI) will make the winner of the Democratic
+primary the prohibitive favorite in November's general election against
+unenrolled candidate Brendan Phair of Pittsfield.
+
+## Hampden, Hampshire and Worcester
+
+```{r hhw-setup}
+ma_sen_4 <- ma_sen %>%
+    filter(SENDISTNUM == 4)
+
+ma_towns_4 <- ma_towns_geom %>%
+    mutate(in_district = ((st_contains(ma_sen_4, ma_towns_geom$center, sparse=FALSE) %>% colSums()) == 1)) %>%
+    filter(in_district) %>%
+    select(-in_district)
+
+ma_vtds_4 <- ma_vtds_geom %>%
+    mutate(in_district = ((st_contains(ma_sen_4, ma_vtds_geom$center, sparse=FALSE) %>% colSums()) == 1)) %>%
+    filter(in_district) %>%
+    select(-in_district)
+
+ma_4_num_pcts <- ma_vtds_4 %>%
+    st_drop_geometry() %>%
+    group_by(city_town) %>%
+    summarize(num_precincts = n())
+
+ma_4_completes <- ma_4_num_pcts %>%
+    left_join((ma_city_town_num_pcts %>% rename(total_precincts = num_precincts)), by="city_town") %>%
+    mutate(complete = (num_precincts == total_precincts))
+
+ma_full_towns_4 <- ma_4_completes %>%
+    filter(complete) %>%
+    select(city_town) %>%
+    left_join(ma_towns_4, by="city_town") %>%
+    select(name=city_town, PVI, white_pct, black_pct,
+           hispanic_pct, asian_pct, geometry)
+
+ma_precincts_4 <- ma_4_completes %>%
+    filter(!complete) %>%
+    select(city_town) %>%
+    left_join(ma_vtds_4, by="city_town") %>%
+    mutate(name = str_c(city_town, Ward, Pct, sep=" ")) %>%
+    select(name, PVI, white_pct, black_pct, hispanic_pct, asian_pct, geometry)
+
+## ma_towns_pcts_4 <- rbind(ma_full_towns, ma_precincts_4)) %>%
+##     st
+
+ma_house_hampd_7 <- ma_house_12 %>%
+    filter(DIST_CODE == "HAMPD07")
+
+ma_sen_cands_4 <- tibble(
+    candidate=c("Sydney R. Levin-Epstein",
+                "Jacob R. Oliveira",
+                "John Harding",
+                "William E. Johnson"),
+    party=c("Democrat", "Democrat", "Republican", "Republican"),
+    city_town=c("Longmeadow", "Ludlow", "East Longmeadow", "Granby")) %>%
+    merge((ma_towns_4 %>% select(city_town, center)), by="city_town") %>%
+    select(-geometry) %>%
+    st_as_sf(sf_column_name="center") %>%
+    relocate(candidate)
+```
+
+```{r hhw-map, layout="l-body-outset", fig.cap="*Hampden, Hampshire and Worcester*m"}
+## ma_sen_4_map <- (tm_shape(ma_towns_4, bbox=st_bbox(st_union(ma_sen_4, ma_house_hampd_7))) +
+##                  tm_borders(lwd=0.5) + tm_fill(col="PVI_N",
+##                                                palette=c("red", "white", "blue"),
+##                                                midpoint=0,
+##                                                alpha=0.5,
+##                                                popup.vars=c("PVI", "white_pct",
+##                                                             "black_pct", "hispanic_pct",
+##                                                             "asian_pct")) +
+##                  tm_shape(ma_precincts_4) +
+##                  tm_borders(lwd=0.5) + tm_fill(col="PVI_N",
+##                                                palette=c("red", "white", "blue"),
+##                                                midpoint=0,
+##                                                alpha=0.5,
+##                                                popup.vars=c("PVI", "white_pct",
+##                                                             "black_pct", "hispanic_pct",
+##                                                             "asian_pct")) +
+##                  # tm_text(text="city_town", size=0.5) + 
+##                  tm_shape(ma_sen_4) + tm_borders(lwd=4) +
+##                  tm_shape(ma_house_hampd_7) + tm_borders(lwd=3, lty="dashed") +
+##                  tm_shape(ma_sen_cands_4) +
+##                  tm_symbols(ymod=-0.6, size=0.2, col="black", popup.vars=c("party", "city_town")) +
+##                  tm_text(ymod=-1.5, text="candidate", size=0.5) +
+##                  tm_basemap("OpenStreetMap"))
+
+## tmap_leaflet(ma_sen_4_map)
+```
+
+```{r hhw-cand}
+sen_cand %>%
+    filter(SENDISTNUM == 4) %>%
+    select(District,
+           cpf_id,
+           Inc,
+           Candidate,
+           Party,
+           city_town) %>%
+    kbl() %>%
+    kable_styling()
+```
+
+The new Hampden, Hampshire and Worcester district is closely related to the
+previous First Hampden and Hampshire district currently held by Eric
+Lesser (D—Longmeadow) who is running for Lieutenant Governor. It is the only
+state senate seat to feature both a Democratic and Republican primary.
+
+On the Democratic side, first term State Representative Jacob Oliveira
+(D—Ludlow) faces campaign strategist Sydney Levin-Epstein of Longmeadow. The
+map shows the overlap of the Oliveira-held Seventh Hampden State Rep district.
+
+The two GOP candidates are John Harding of East Longmeadow, a former military
+office who says he has been called by God to run, and William Johnson, a
+business owner from Granby.
+
+## First Worcester
+
+## First Essex
+
+```{r first-essex-setup}
+```
+
+```{r first-essex-map}
+```
+
+```{r first-essex-cands}
+```
