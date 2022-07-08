@@ -55,14 +55,16 @@ The Massachusetts State Senate lines have been redrawn by the legislature after
 the 2020 Census as required by the constitution. Redistricting established
 two new majority minority districts.
 
-The First Essex State Senate District—one of the new majority districts—contains
-all of Lawrence, all of Methuen, and about 5 precincts of Haverhill. The
-previous lines of the district left out Lawrence and included a large number of
-largely white communities. The new lines result in a voting age population that
-is 36% White, 56% Hispanic, 10% Black, and 3% Asian. The First Essex incumbent,
-Diana DiZoglio (D—Methuen), is running for Auditor, leaving an open race for a
-competitive field of candidates from Lawrence and Methuen (see the First Essex
-primary overview below).
+The First Essex State Senate District—one of the new majority
+districts—contains all of Lawrence, all of Methuen, and approximately
+5 precincts of Haverhill (give or take a few census blocks). The
+previous lines of the district (the dotted line in the map below) did
+not include Lawrence and instead included a large number of largely
+white communities. The new lines result in a voting age population
+that is 36% White, 56% Hispanic, 10% Black, and 3% Asian. The First
+Essex incumbent, Diana DiZoglio (D—Methuen), is running for Auditor,
+leaving an open race for a competitive field of candidates from
+Lawrence and Methuen (see the First Essex primary overview below).
 
 ```{r first-essex-redist, layout="l-body-outset", fig.cap="*First Essex State Senate District*"}
 sen_19 <- sen_geom %>% filter(Number == 19)
