@@ -10,12 +10,18 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## About this blog
 
-The Mass. Numbers blog uses data like election results,
-poll results, candidate campaign finance reports, and
-census data to evaluate Massachusetts politics and
-policy.
+The Mass. Numbers blog uses data like election results, poll results,
+candidate campaign finance reports, and census data to evaluate
+Massachusetts politics and policy.
 
-Some of our most popular posts are about the partisan
-lean of Massachusetts cities and towns, and ratings of
-state legislative races based on historical outcomes.
+Some of our most popular posts are about the partisan lean of
+Massachusetts cities and towns, and ratings of state legislative races
+based on historical outcomes. The original hosting site for the
+blog was (https://massnumbers.blogspot.com).
+
+This new incarnation of the blog has a goal of transparency and
+reproducibility by hosting the site on GitHub and including all of the
+data and source code used to produce the blog's analysis. The full
+source code can be accessed from a link on the menu bar or from [this
+link](https://github.com/massnumbers/blog).
 
