@@ -19,7 +19,7 @@ compiled through a process called *knitting* into the
 
 In addition to the Distill and Rmarkdown frameworks, the other
 essential tool that makes the interactive maps on this site is the
-(tmap)[https://cran.r-project.org/web/packages/tmap/vignettes/tmap-getstarted.html]
+[tmap](https://cran.r-project.org/web/packages/tmap/vignettes/tmap-getstarted.html)
 package the switches seamlessly between creating static map plots, and
 interactive web-based maps using [leaflet](https://leafletjs.com/). I
 have been looking for an easy-to-use interactive mapping framework
