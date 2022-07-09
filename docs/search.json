@@ -6,14 +6,14 @@
       "description": "Some additional details about the Mass. Numbers blog",
       "author": [],
       "contents": "\nAbout this blog\nThe Mass. Numbers blog uses data like election results, poll results, candidate campaign finance reports, and census data to evaluate Massachusetts politics and policy.\nSome of our most popular posts are about the partisan lean of Massachusetts cities and towns, and ratings of state legislative races based on historical outcomes. The original hosting site for the blog was https://massnumbers.blogspot.com.\nThis new incarnation of the blog has a goal of transparency and reproducibility by hosting the site on GitHub and including all of the data and source code used to produce the blog’s analysis. The full source code can be accessed from a link on the menu bar or from https://github.com/massnumbers/blog.\n\n\n\n",
-      "last_modified": "2022-07-09T12:08:11-04:00"
+      "last_modified": "2022-07-09T12:18:14-04:00"
     },
     {
       "path": "index.html",
       "title": "Mass. Numbers",
       "author": [],
       "contents": "\n\n\n\n",
-      "last_modified": "2022-07-09T12:08:12-04:00"
+      "last_modified": "2022-07-09T12:18:14-04:00"
     }
   ],
   "collections": ["posts/posts.json"]

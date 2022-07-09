@@ -522,7 +522,7 @@ ma_towns_pcts_19 <- rbind(ma_full_towns_19, ma_precincts_19)
 ma_sen_cands_19 <- candidate_locations(sen_cand, 19)
 ```
 
-```{r first-essex-map}
+```{r first-essex-map, layout="l-body-outset", fig.cap="*First Essex Senate District*m"}
 ma_sen_19_map <- (tm_shape(ma_towns_pcts_19) +
                   tm_borders(lwd=0.5) + tm_fill(col="PVI_N",
                                                 palette=c("red", "white", "blue"),
