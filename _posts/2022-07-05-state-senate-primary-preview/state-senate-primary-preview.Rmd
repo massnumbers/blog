@@ -6,7 +6,8 @@ description: |
 author:
   - name: Brent Benson
     url: https://twitter.com/bwbensonjr
-date: 2022-07-05
+date: 2022-07-09
+preview: images/berk_hamp_frank_hamp.png
 output:
   distill::distill_article:
     self_contained: false
@@ -261,7 +262,7 @@ ma_sen_1_map <- (tm_shape(ma_towns_1, bbox=st_bbox(st_union(ma_sen_1, ma_house_b
                      tm_shape(ma_house_berk_2) + tm_borders(lwd=3, lty="dashed") +
                      tm_shape(ma_sen_cands_1) +
                      tm_symbols(ymod=-0.6, size=0.2, col="black", popup.vars=c("Party", "city_town")) +
-                     # tm_text(ymod=-1, text="candidate", size=0.5) +
+                     # tm_text(ymod=-1, text="Candidate", size=0.5) +
                      tm_basemap("OpenStreetMap"))
 tmap_leaflet(ma_sen_1_map)
 ```
