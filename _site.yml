@@ -3,6 +3,7 @@ title: "Mass. Numbers"
 description: |
   A qualitative look at Massachusetts politics and policy
 output_dir: "docs"
+google_analytics: "G-GS463FHP94"
 theme: massnumbers.css
 navbar:
   logo:
