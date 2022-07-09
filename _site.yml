@@ -7,6 +7,7 @@ theme: massnumbers.css
 navbar:
   logo:
       image: images/ma_shape.png
+  source_url: https://github.com/massnumbers/blog
   right:
     - text: "Home"
       href: index.html
