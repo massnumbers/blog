@@ -477,7 +477,7 @@ sen_cand %>%
 
 ## First Essex
 
-```{r first-essex-setup}
+```{r first-essex-setup, layout="l-body-outset", fig.cap="*First Essex State Senate District*m"}
 ma_sen_19 <- ma_sen %>%
     filter(SENDISTNUM == 19)
 
