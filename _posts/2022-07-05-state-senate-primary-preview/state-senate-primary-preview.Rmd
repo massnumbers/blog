@@ -48,6 +48,8 @@ sen_geom_12 <- read_sf("../../_gis/senate2012/SENATE2012_POLY.shp", as_tibble=TR
 
 tmap_mode(mode="view")
 one_m_sq <- set_units(1, m^2)
+two_k_m_sq <- set_units(2000, m^2)
+five_k_m_sq <- set_units(5000, m^2)
 ```
 
 It may be the middle of summer, but there is a lot going on in Massachusetts
@@ -120,7 +122,7 @@ Senate district lines and some demographics (partisan lean, etc.).
 new_sen_map <- (tm_shape(sen_geom) +
                     tm_borders(lwd=2) +
                     tm_fill(col="PVI_N",
-                            palette=c("red", "white", "blue"),
+                            palette=c("#FF4949", "white", "#0F4392"),
                             midpoint=0,
                             alpha=0.5,
                             popup.vars=c("Incumbent",
@@ -217,8 +219,53 @@ ma_city_town_num_pcts <- ma_vtds_geom %>%
     group_by(city_town) %>%
     summarize(num_precincts = n())
 
-## Function to compute spatial locations for
-## candidates to include on map.
+ward_precinct_name <- function(city_town, ward, precinct) {
+    str_c(city_town,
+          if_else(ward == "-", "", str_c("Ward ", ward)),
+          str_c("Precinct ", precinct),
+          sep=" ")
+}
+
+## Determine which towns and precincts are in the district.
+## If a whole town is contained in the district, include the
+## whole town, otherwise, include by precinct.
+##
+town_precinct_mix <- function(sen_dist_geom, towns_geom, vtds_geom, city_town_num_pcts) {
+    towns <- st_intersection(sen_dist_geom, towns_geom) %>%
+        filter(st_area(geometry) > five_k_m_sq)
+    vtds <- st_intersection(sen_dist_geom, vtds_geom) %>%
+        filter(st_area(geometry) > one_m_sq)
+    num_pcts <- vtds %>%
+        st_drop_geometry() %>%
+        group_by(city_town) %>%
+        summarize(num_precincts = n())
+    completes <- num_pcts %>%
+        left_join((city_town_num_pcts %>% rename(total_precincts = num_precincts)), by="city_town") %>%
+        mutate(complete = (num_precincts == total_precincts))
+    full_towns <- right_join(
+            towns,
+            (completes %>%
+             filter(complete) %>%
+             select(city_town)),
+            by="city_town") %>% 
+        select(name=city_town, PVI, PVI_N, total_population,
+               white_pct, black_pct, hispanic_pct, asian_pct)
+    precincts <- right_join(
+            vtds,
+            (completes %>%
+             filter(!complete) %>%
+             select(city_town)),
+            by="city_town") %>%
+        mutate(name=ward_precinct_name(city_town, Ward, Pct)) %>%
+        select(name, PVI, PVI_N, total_population, white_pct,
+               black_pct, hispanic_pct, asian_pct)
+    towns_precincts <- rbind(full_towns, precincts)
+    towns_precincts
+}
+
+## Return the candidates for a particular district and compute
+## candidate locations for placing on map.
+## 
 candidate_locations <- function(cand_list, sen_dist_num) {
     cand_list %>%
         filter(SENDISTNUM == sen_dist_num) %>%
@@ -229,6 +276,44 @@ candidate_locations <- function(cand_list, sen_dist_num) {
                                pull(geometry))) %>%
         st_as_sf()
 }
+
+district_map <- function(sen_dist, towns_pcts, candidates, house_dist) {
+    if (missing(house_dist)) {
+        bbox <- NULL
+    } else {
+        bbox <- st_bbox(st_union(sen_dist, house_dist))
+    }
+    base_map <- (tm_shape(towns_pcts, bbox=bbox) +
+                 tm_borders(lwd=0.5) +
+                 tm_fill(col="PVI_N",
+                         palette=c("#FF4949", "white", "#0F4392"),
+                         midpoint=0,
+                         alpha=0.5,
+                         popup.vars=c("PVI", "total_population", "white_pct",
+                                      "black_pct", "hispanic_pct", "asian_pct")) +
+                 tm_shape(sen_dist) + tm_borders(lwd=3))
+    if (!missing(house_dist)) {
+        base_map <- base_map + (tm_shape(house_dist) + tm_borders(lwd=3, lty="dashed"))
+    }
+    (base_map + 
+      tm_shape(candidates) +
+      tm_symbols(ymod=-0.6, size=0.2, col="black", popup.vars=c("Party", "city_town")) +
+      tm_basemap("OpenStreetMap"))
+}
+
+## Produce a readable version of candidates for a particular Senate district
+candidate_table <- function(candidates, dist_num) {
+    candidates %>%
+        filter(SENDISTNUM == dist_num) %>%
+        select(District,
+               cpf_id,
+               Inc,
+               Candidate,
+               Party,
+               city_town) %>%
+        kbl() %>%
+        kable_styling()
+}
 ```
 ## Berkshire, Hampden, Franklin and Hampshire
 
@@ -236,10 +321,8 @@ candidate_locations <- function(cand_list, sen_dist_num) {
 ma_sen_1 <- ma_sen %>%
     filter(SENDISTNUM == 1)
 
-ma_towns_1 <- ma_towns_geom %>%
-    mutate(in_district = ((st_contains(ma_sen_1, ma_towns_geom$center, sparse=FALSE) %>% colSums()) == 1)) %>%
-    filter(in_district) %>%
-    select(-in_district)
+ma_towns_1 <-st_intersection(ma_sen_1, ma_towns_geom) %>%
+    filter(st_area(geometry) > five_k_m_sq)
 
 ma_house_berk_2 <- ma_house_12 %>%
     filter(DIST_CODE == "BERK02")
@@ -249,35 +332,12 @@ ma_sen_cands_1 <- candidate_locations(sen_cand, 1)
 ```
 
 ```{r bhfh-map, layout="l-body-outset", fig.cap="*Berkshire, Hampden, Franklin and Hampshire*   "}
-ma_sen_1_map <- (tm_shape(ma_towns_1, bbox=st_bbox(st_union(ma_sen_1, ma_house_berk_2))) +
-                     tm_borders(lwd=0.5) + tm_fill(col="PVI_N",
-                                                   palette=c("#FF4949", "white", "#0F4392"),
-                                                   midpoint=0,
-                                                   alpha=0.5,
-                                                   popup.vars=c("PVI", "total_population", "white_pct",
-                                                                "black_pct", "hispanic_pct",
-                                                                "asian_pct")) +
-                     # tm_text(text="city_town", size=0.5) + 
-                     tm_shape(ma_sen_1) + tm_borders(lwd=4) +
-                     tm_shape(ma_house_berk_2) + tm_borders(lwd=3, lty="dashed") +
-                     tm_shape(ma_sen_cands_1) +
-                     tm_symbols(ymod=-0.6, size=0.2, col="black", popup.vars=c("Party", "city_town")) +
-                     # tm_text(ymod=-1, text="Candidate", size=0.5) +
-                     tm_basemap("OpenStreetMap"))
+ma_sen_1_map <- district_map(ma_sen_1, ma_towns_1, ma_sen_cands_1, ma_house_berk_2)
 tmap_leaflet(ma_sen_1_map)
 ```
 
 ```{r bhfh-cand}
-sen_cand %>%
-    filter(SENDISTNUM == 1) %>%
-    select(District,
-           cpf_id,
-           Inc,
-           Candidate,
-           Party,
-           city_town) %>%
-    kbl() %>%
-    kable_styling()
+candidate_table(sen_cand, 1)
 ```
 
 The newly created and enormous Berkshire, Hampden, Franklin and Hampshire
@@ -303,45 +363,11 @@ unenrolled candidate Brendan Phair of Pittsfield.
 ma_sen_4 <- ma_sen %>%
     filter(SENDISTNUM == 4)
 
-ma_towns_4 <- ma_towns_geom %>%
-    mutate(in_district = ((st_contains(ma_sen_4, ma_towns_geom$center, sparse=FALSE) %>% colSums()) == 1)) %>%
-    filter(in_district) %>%
-    select(-in_district)
-
-ma_vtds_4 <- ma_vtds_geom %>%
-    mutate(in_district = ((st_contains(ma_sen_4, ma_vtds_geom$center, sparse=FALSE) %>% colSums()) == 1)) %>%
-    filter(in_district) %>%
-    select(-in_district)
-
-ma_4_num_pcts <- ma_vtds_4 %>%
-    st_drop_geometry() %>%
-    group_by(city_town) %>%
-    summarize(num_precincts = n())
-
-ma_4_completes <- ma_4_num_pcts %>%
-    left_join((ma_city_town_num_pcts %>% rename(total_precincts = num_precincts)), by="city_town") %>%
-    mutate(complete = (num_precincts == total_precincts))
-
-ma_full_towns_4 <- right_join(
-    ma_towns_4,
-    (ma_4_completes %>%
-         filter(complete) %>%
-         select(city_town)),
-    by="city_town") %>%
-    select(name=city_town, PVI, PVI_N, white_pct,
-           black_pct, hispanic_pct, asian_pct)
-
-ma_precincts_4 <- right_join(
-    ma_vtds_4,
-    (ma_4_completes %>%
-         filter(!complete) %>%
-         select(city_town)),
-    by="city_town") %>%
-    mutate(name=str_c(city_town, Ward, Pct, sep=" ")) %>%
-    select(name, PVI, PVI_N, white_pct, black_pct,
-           hispanic_pct, asian_pct)
-
-ma_towns_pcts_4 <- rbind(ma_full_towns_4, ma_precincts_4)
+ma_towns_pcts_4 <- town_precinct_mix(
+                        ma_sen_4,
+                        ma_towns_geom,
+                        ma_vtds_geom,
+                        ma_city_town_num_pcts)
 
 ma_house_hampd_7 <- ma_house_12 %>%
     filter(DIST_CODE == "HAMPD07")
@@ -350,34 +376,13 @@ ma_sen_cands_4 <- candidate_locations(sen_cand, 4)
 ```
 
 ```{r hhw-map, layout="l-body-outset", fig.cap="*Hampden, Hampshire and Worcester*m"}
-ma_sen_4_map <- (tm_shape(ma_towns_pcts_4) +
-                  tm_borders(lwd=0.5) + tm_fill(col="PVI_N",
-                                                palette=c("red", "white", "blue"),
-                                                midpoint=0,
-                                                alpha=0.5,
-                                                popup.vars=c("PVI", "white_pct",
-                                                             "black_pct", "hispanic_pct",
-                                                             "asian_pct")) + 
-                    tm_shape(ma_sen_4) + tm_borders(lwd=4) + 
-                    tm_shape(ma_house_hampd_7) + tm_borders(lwd=3, lty="dashed") + 
-                    tm_shape(ma_sen_cands_4) +
-                    tm_symbols(ymod=-0.6, size=0.2, col="black", popup.vars=c("Party", "city_town")) +
-                    tm_basemap("OpenStreetMap"))
+ma_sen_4_map <- district_map(ma_sen_4, ma_towns_pcts_4, ma_sen_cands_4, ma_house_hampd_7)
 
 tmap_leaflet(ma_sen_4_map)
 ```
 
 ```{r hhw-cand}
-sen_cand %>%
-    filter(SENDISTNUM == 4) %>%
-    select(District,
-           cpf_id,
-           Inc,
-           Candidate,
-           Party,
-           city_town) %>%
-    kbl() %>%
-    kable_styling()
+candidate_table(sen_cand, 4)
 ```
 
 The new Hampden, Hampshire and Worcester district is closely related to the
@@ -399,155 +404,195 @@ business owner from Granby.
 ma_sen_9 <- ma_sen %>%
     filter(SENDISTNUM == 9)
 
-ma_towns_9 <- ma_towns_geom %>%
-    mutate(in_district = ((st_contains(ma_sen_9, ma_towns_geom$center, sparse=FALSE) %>% colSums()) == 1)) %>%
-    filter(in_district) %>%
-    select(-in_district)
-
-ma_vtds_9 <- st_intersection(ma_sen_9, ma_vtds_geom) %>%
-    filter(st_area(geometry) > one_m_sq)
-
-ma_vtds_9 <- ma_vtds_geom %>%
-    mutate(in_district = ((st_contains(ma_sen_9, ma_vtds_geom$center, sparse=FALSE) %>% colSums()) == 1)) %>%
-    filter(in_district) %>%
-    select(-in_district)
-
-ma_9_num_pcts <- ma_vtds_9 %>%
-    st_drop_geometry() %>%
-    group_by(city_town) %>%
-    summarize(num_precincts = n())
-
-ma_9_completes <- ma_9_num_pcts %>%
-    left_join((ma_city_town_num_pcts %>% rename(total_precincts = num_precincts)), by="city_town") %>%
-    mutate(complete = (num_precincts == total_precincts))
-
-ma_full_towns_9 <- right_join(
-    ma_towns_9,
-    (ma_9_completes %>%
-         filter(complete) %>%
-         select(city_town)),
-    by="city_town") %>%
-    select(name=city_town, PVI, PVI_N, white_pct,
-           black_pct, hispanic_pct, asian_pct)
-
-ma_precincts_9 <- right_join(
-    ma_vtds_9,
-    (ma_9_completes %>%
-         filter(!complete) %>%
-         select(city_town)),
-    by="city_town") %>%
-    mutate(name=str_c(city_town, Ward, Pct, sep=" ")) %>%
-    select(name, PVI, PVI_N, white_pct, black_pct,
-           hispanic_pct, asian_pct)
-
-ma_towns_pcts_9 <- rbind(ma_full_towns_9, ma_precincts_9)
+ma_towns_pcts_9 <- town_precinct_mix(
+                        ma_sen_9,
+                        ma_towns_geom,
+                        ma_vtds_geom,
+                        ma_city_town_num_pcts)
 
 ma_sen_cands_9 <- candidate_locations(sen_cand, 9)
 ```
 
 ```{r first-worc-map, layout="l-body-outset", fig.cap="*Hampden, Hampshire and Worcester*m"}
-ma_sen_9_map <- (tm_shape(ma_towns_pcts_9) +
-                  tm_borders(lwd=0.5) + tm_fill(col="PVI_N",
-                                                palette=c("red", "white", "blue"),
-                                                midpoint=0,
-                                                alpha=0.5,
-                                                popup.vars=c("PVI", "white_pct",
-                                                             "black_pct", "hispanic_pct",
-                                                             "asian_pct")) + 
-                    tm_shape(ma_sen_9) + tm_borders(lwd=4) + 
-                    tm_shape(ma_sen_cands_9) +
-                    tm_symbols(ymod=-0.6, size=0.2, col="black", popup.vars=c("Party", "city_town")) +
-                    tm_basemap("OpenStreetMap"))
+ma_sen_9_map <- district_map(ma_sen_9, ma_towns_pcts_9, ma_sen_cands_9)
 
 tmap_leaflet(ma_sen_9_map)
 ```
 
 ```{r first-worc-cand}
-sen_cand %>%
-    filter(SENDISTNUM == 9) %>%
-    select(District,
-           cpf_id,
-           Inc,
-           Candidate,
-           Party,
-           city_town) %>%
-    kbl() %>%
-    kable_styling()
+candidate_table(sen_cand, 9)
 ```
 
 ## First Essex
 
-```{r first-essex-setup, layout="l-body-outset", fig.cap="*First Essex State Senate District*m"}
+```{r first-essex-setup}
 ma_sen_19 <- ma_sen %>%
     filter(SENDISTNUM == 19)
 
-ma_towns_19 <- ma_towns_geom %>%
-    mutate(in_district = ((st_contains(ma_sen_19, ma_towns_geom$center, sparse=FALSE) %>% colSums()) == 1)) %>%
-    filter(in_district) %>%
-    select(-in_district)
-
-ma_vtds_19 <- st_intersection(ma_sen_19, ma_vtds_geom) %>%
-    filter(st_area(geometry) > one_m_sq)
-
-ma_19_num_pcts <- ma_vtds_19 %>%
-    st_drop_geometry() %>%
-    group_by(city_town) %>%
-    summarize(num_precincts = n())
-
-ma_19_completes <- ma_19_num_pcts %>%
-    left_join((ma_city_town_num_pcts %>% rename(total_precincts = num_precincts)), by="city_town") %>%
-    mutate(complete = (num_precincts == total_precincts))
-
-ma_full_towns_19 <- right_join(
-    ma_towns_19,
-    (ma_19_completes %>%
-         filter(complete) %>%
-         select(city_town)),
-    by="city_town") %>%
-    select(name=city_town, PVI, PVI_N, white_pct,
-           black_pct, hispanic_pct, asian_pct)
-
-ma_precincts_19 <- right_join(
-    ma_vtds_19,
-    (ma_19_completes %>%
-         filter(!complete) %>%
-         select(city_town)),
-    by="city_town") %>%
-    mutate(name=str_c(city_town, Ward, Pct, sep=" ")) %>%
-    select(name, PVI, PVI_N, white_pct, black_pct,
-           hispanic_pct, asian_pct)
-
-ma_towns_pcts_19 <- rbind(ma_full_towns_19, ma_precincts_19)
+ma_towns_pcts_19 <- town_precinct_mix(
+                        ma_sen_19,
+                        ma_towns_geom,
+                        ma_vtds_geom,
+                        ma_city_town_num_pcts)
 
 ma_sen_cands_19 <- candidate_locations(sen_cand, 19)
 ```
 
 ```{r first-essex-map, layout="l-body-outset", fig.cap="*First Essex Senate District*m"}
-ma_sen_19_map <- (tm_shape(ma_towns_pcts_19) +
-                  tm_borders(lwd=0.5) + tm_fill(col="PVI_N",
-                                                palette=c("red", "white", "blue"),
-                                                midpoint=0,
-                                                alpha=0.5,
-                                                popup.vars=c("PVI", "white_pct",
-                                                             "black_pct", "hispanic_pct",
-                                                             "asian_pct")) + 
-                    tm_shape(ma_sen_19) + tm_borders(lwd=4) + 
-                    tm_shape(ma_sen_cands_19) +
-                    tm_symbols(ymod=-0.6, size=0.2, col="black", popup.vars=c("Party", "city_town")) +
-                    tm_basemap("OpenStreetMap"))
-
+ma_sen_19_map <- district_map(ma_sen_19, ma_towns_pcts_19, ma_sen_cands_19)
 tmap_leaflet(ma_sen_19_map)
 ```
 
 ```{r first-essex-cands}
-sen_cand %>%
-    filter(SENDISTNUM == 19) %>%
-    select(District,
-           cpf_id,
-           Inc,
-           Candidate,
-           Party,
-           city_town) %>%
-    kbl() %>%
-    kable_styling()
+candidate_table(sen_cand, 19)
+```
+
+## Second Essex
+
+```{r second-essex-setup}
+ma_sen_22 <- ma_sen %>%
+    filter(SENDISTNUM == 22)
+
+ma_towns_pcts_22 <- town_precinct_mix(
+                        ma_sen_22,
+                        ma_towns_geom,
+                        ma_vtds_geom,
+                        ma_city_town_num_pcts)
+
+ma_sen_cands_22 <- candidate_locations(sen_cand, 22)
+```
+
+```{r second-essex-map, layout="l-body-outset", fig.cap="*Second Essex State Senate District*m"}
+ma_sen_22_map <- district_map(ma_sen_22, ma_towns_pcts_22, ma_sen_cands_22)
+
+tmap_leaflet(ma_sen_22_map)
+```
+
+```{r second-essex-cands}
+candidate_table(sen_cand, 22)
+```
+
+## Second Suffolk
+
+```{r second-suffolk-setup}
+ma_sen_29 <- ma_sen %>%
+    filter(SENDISTNUM == 29)
+
+ma_towns_pcts_29 <- town_precinct_mix(
+                        ma_sen_29,
+                        ma_towns_geom,
+                        ma_vtds_geom,
+                        ma_city_town_num_pcts)
+
+ma_sen_cands_29 <- candidate_locations(sen_cand, 29)
+```
+
+```{r second-suffolk-map, layout="l-body-outset", fig.cap="*Second Suffolk State Senate District*m"}
+ma_sen_29_map <- district_map(ma_sen_29, ma_towns_pcts_29, ma_sen_cands_29)
+
+tmap_leaflet(ma_sen_29_map)
+```
+
+```{r second-suffolk-cands}
+candidate_table(sen_cand, 29)
+```
+
+## First Plymouth and Norfolk
+
+```{r fpn-setup}
+ma_sen_31 <- ma_sen %>%
+    filter(SENDISTNUM == 31)
+
+ma_towns_pcts_31 <- town_precinct_mix(
+                        ma_sen_31,
+                        ma_towns_geom,
+                        ma_vtds_geom,
+                        ma_city_town_num_pcts)
+
+ma_sen_cands_31 <- candidate_locations(sen_cand, 31)
+```
+
+```{r fpn-map, layout="l-body-outset", fig.cap="*First Plymouth and Norfolk District*"}
+ma_sen_31_map <- district_map(ma_sen_31, ma_towns_pcts_31, ma_sen_cands_31)
+
+tmap_leaflet(ma_sen_31_map)
+```
+
+```{r fpn-cands}
+candidate_table(sen_cand, 31)
+```
+
+## Norfolk, Plymouth and Bristol
+
+```{r npb-setup}
+ma_sen_33 <- ma_sen %>%
+    filter(SENDISTNUM == 33)
+
+ma_towns_pcts_33 <- town_precinct_mix(
+                        ma_sen_33,
+                        ma_towns_geom,
+                        ma_vtds_geom,
+                        ma_city_town_num_pcts)
+
+ma_sen_cands_33 <- candidate_locations(sen_cand, 33)
+```
+
+```{r npb-map, layout="l-body-outset", fig.cap="*Norfolk, Plymouth and Bristol District*"}
+ma_sen_33_map <- district_map(ma_sen_33, ma_towns_pcts_33, ma_sen_cands_33)
+
+tmap_leaflet(ma_sen_33_map)
+```
+
+```{r npb-cands}
+candidate_table(sen_cand, 33)
+```
+
+## Second Plymouth and Norfolk
+
+```{r spn-setup}
+ma_sen_34 <- ma_sen %>%
+    filter(SENDISTNUM == 34)
+
+ma_towns_pcts_34 <- town_precinct_mix(
+                        ma_sen_34,
+                        ma_towns_geom,
+                        ma_vtds_geom,
+                        ma_city_town_num_pcts)
+
+ma_sen_cands_34 <- candidate_locations(sen_cand, 34)
+```
+
+```{r spn-map, layout="l-body-outset", fig.cap="*Second Plymouth and Norfolk*"}
+ma_sen_34_map <- district_map(ma_sen_34, ma_towns_pcts_34, ma_sen_cands_34)
+
+tmap_leaflet(ma_sen_34_map)
+```
+
+```{r spn-cands}
+candidate_table(sen_cand, 34)
+```
+
+## Cape and Islands
+
+```{r cape-islands-setup}
+ma_sen_40 <- ma_sen %>%
+    filter(SENDISTNUM == 40)
+
+ma_towns_pcts_40 <- town_precinct_mix(
+                        ma_sen_40,
+                        ma_towns_geom,
+                        ma_vtds_geom,
+                        ma_city_town_num_pcts)
+
+ma_sen_cands_40 <- candidate_locations(sen_cand, 40)
+```
+
+```{r cape-islands-map, layout="l-body-outset", fig.cap="*Second Plymouth and Norfolk*"}
+ma_sen_40_map <- district_map(ma_sen_40, ma_towns_pcts_40, ma_sen_cands_40)
+
+tmap_leaflet(ma_sen_40_map)
+```
+
+```{r cape-islands-cands}
+candidate_table(sen_cand, 40)
 ```
