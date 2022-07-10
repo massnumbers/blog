@@ -347,7 +347,7 @@ district, Adam Hinds (D—Pittsfield) ran an unsuccessful campaign for Lieutenan
 Governor, leaving this district without an incumbent senator.
 
 The Democratic primary will feature sitting State Representative Paul Mark
-(D—Peru) whose current Second Berkshire State Representative district is 
+(D—Becket) whose current Second Berkshire State Representative district is 
 outlined in the map, and Williamstown small business manager and activist
 Huff Templeton III. Representative Mark will have a considerable advantage
 as almost a quarter of the Senate district's Democratic primary voters will
@@ -388,11 +388,21 @@ candidate_table(sen_cand, 4)
 The new Hampden, Hampshire and Worcester district is closely related to the
 previous First Hampden and Hampshire district currently held by Eric
 Lesser (D—Longmeadow) who is running for Lieutenant Governor. It is the only
-state senate seat to feature both a Democratic and Republican primary.
+state senate seat to feature both a Democratic and Republican primary in 2022.
 
 On the Democratic side, first term State Representative Jacob Oliveira
-(D—Ludlow) faces campaign strategist Sydney Levin-Epstein of Longmeadow. The
-map shows the overlap of the Oliveira-held Seventh Hampden State Rep district.
+(D—Ludlow) faces campaign strategist Sydney Levin-Epstein of
+Longmeadow. The dashed line on map shows the overlap of the
+Oliveira-held Seventh Hampden State Rep district.
+
+Oliveira comes off a hotly contested State Rep win where he defeated
+Republican James "Chip" Harrington by 134 votes after a
+recount. Perennial candidate Harrington is running for state rep again
+against Democrat Aaron Saunders of Belchertown.
+
+Levin-Epstein served as Deputy Finance Director for Ed Markey's 2020
+re-election campaign and is bringing her political organizing
+experience to bear on her own campaign this year.
 
 The two GOP candidates are John Harding of East Longmeadow, a former military
 office who says he has been called by God to run, and William Johnson, a
@@ -423,6 +433,24 @@ tmap_leaflet(ma_sen_9_map)
 candidate_table(sen_cand, 9)
 ```
 
+Senator Harriet Chandler (D-Worcester) is retiring after a 31-year
+career in public service. There are two Democrats vying for the
+Democratic nomination in the First Worcester district, comprised of
+much of Worcester, Boylston, West Boylston, Northborough, Berlin,
+and Bolton.
+
+Robyn Kennedy of Worcester is the Executive Director or the YWCA of
+Central Massachusetts and has the backing of former Governor Deval
+Patrick and his Worcester-based Lt. Governor Tim Murray.
+
+Joseph Petty is the former mayor of Worcester and has gained the
+endorsement of Senator Ed Markey.
+
+The winner of the Democratic primary will face undeclared candidate
+Liz Mair of Berlin former online communications director for
+the Republican National Committee. The Democrat will have a strong
+advantage in this D+17 district.
+
 ## First Essex
 
 ```{r first-essex-setup}
@@ -445,6 +473,38 @@ tmap_leaflet(ma_sen_19_map)
 
 ```{r first-essex-cands}
 candidate_table(sen_cand, 19)
+```
+
+As mentioned in the redistricting section of this post, the First
+Essex district is a new majority minority district containing all of
+Lawrence, all of Methuen, and some inner precincts of Haverhill.
+There is no incumbent senator running as Diana DiZoglio (D-Methuen) is
+running for auditor.
+
+Pavel Payano is an at-large City Councilor in Lawrence; Doris
+Rodriguiez is a tax layer with public and private sector
+experience; and Eunice Zeigler is a City Councilor from Methuen.
+
+A look at the total number of votes from each of the cities in
+the precincts contained in the First Essex District show that
+over 50% of the votes come from Lawrence, while 26% come from
+Methuen, and 23% from Haverhill, giving the Lawrence candidates
+somewhat of an advantage.
+
+```{r first-essex-votes-per-city}
+votes_per_city <- st_intersection(ma_sen_19, ma_vtds_geom) %>%
+    filter(st_area(geometry) > one_m_sq) %>%
+    st_drop_geometry() %>%
+    left_join(read_csv("../../_data/2020/ma_precincts_districts_16_20_pres.csv"),
+              by=c("city_town", "Ward", "Pct")) %>%
+    mutate(pres_votes = sum(Biden_20, Trump_20, Clinton_16, Trump_16)) %>%
+    group_by(city_town) %>%
+    summarize(votes = sum(pres_votes)) %>%
+    mutate(percent = votes/sum(votes))
+
+votes_per_city %>%
+    kbl(format.args=list(scientific=FALSE, big.mark=",")) %>%
+    kable_styling()
 ```
 
 ## Second Essex
