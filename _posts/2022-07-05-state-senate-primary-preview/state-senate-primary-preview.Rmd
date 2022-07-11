@@ -7,6 +7,7 @@ author:
   - name: Brent Benson
     url: https://twitter.com/bwbensonjr
 date: 2022-07-09
+base_url: https://www.massnumbers.us
 preview: images/berk_hamp_frank_hamp.png
 output:
   distill::distill_article:
@@ -71,7 +72,7 @@ previous lines of the district (the dotted line in the map below) did
 not include Lawrence and instead included a large number of largely
 white communities. The new lines result in a voting age population
 that is 36% White, 56% Hispanic, 10% Black, and 3% Asian. The First
-Essex incumbent, Diana DiZoglio (D—Methuen), is running for Auditor,
+Essex incumbent, Diana DiZoglio (D-Methuen), is running for Auditor,
 leaving an open race for a competitive field of candidates from
 Lawrence and Methuen (see the First Essex primary overview below).
 
@@ -90,7 +91,7 @@ tmap_leaflet(sen_19_map)
 ```
 
 The other newly created majority minority is the Middlesex and Suffolk District
-with incumbent Sal DiDomenico (D—Everett). Redistricting has added diverse
+with incumbent Sal DiDomenico (D-Everett). Redistricting has added diverse
 sections of Cambridgeport and East Cambridge, while removing parts of Boston's
 West End, Allston, and Brighton neighborhoods. The district ends up with a
 demographic mix of 46% White, 24% Hispanic, 12% Black, and 15% Asian. DiDomenico
@@ -111,10 +112,10 @@ tmap_leaflet(sen_26_map)
 ```
 
 The other majority minority State Senate districts are the Springfield-based
-Hampden district of Adam Gomez (D—Springfield), the Boston-based Second Suffolk
-district of Sonia Change-Diaz (D—Boston) who ran an unsuccessful campaign for
+Hampden district of Adam Gomez (D-Springfield), the Boston-based Second Suffolk
+district of Sonia Change-Diaz (D-Boston) who ran an unsuccessful campaign for
 Governor, and the Second Plymouth and Norfolk district with incumbent
-Senator Michael Brady (D—Brockton).
+Senator Michael Brady (D-Brockton).
 
 The full State Senate map is given here with dashed lines for previous State
 Senate district lines and some demographics (partisan lean, etc.).
@@ -140,8 +141,8 @@ tmap_leaflet(new_sen_map)
 ## State Senate Primary Overview
 
 There are ten State Senate districts with contested primaries. There are three
-Democratic incumbents with primary challengers—Joan Lovely (D—Salem), Walter
-Timility (D—Milton), Michael Brady (D-Brockton)—and one Republican with a
+Democratic incumbents with primary challengers—Joan Lovely (D-Salem), Walter
+Timility (D-Milton), Michael Brady (D-Brockton)—and one Republican with a
 primary challenge, Patrick O'Connor (R-Weymouth).
 
 There are five open seats with four having just a Democratic primary, and one
@@ -154,7 +155,7 @@ sen_dist %>% select(c(District,
                       inc_status,
                       Incumbent,
                       primaries)) %>%
-    kbl() %>%
+    kbl(caption="2022 State Senate districts, post-redistricting",) %>%
     kable_styling()
 ```
 
@@ -349,11 +350,11 @@ candidate_table(sen_cand, 1)
 The newly created and enormous Berkshire, Hampden, Franklin and Hampshire
 district contains 57 cities and towns in Western Massachusetts. The incumbent of
 the existing and similarly named Berkshire, Hampshire, Franklin and Hampden
-district, Adam Hinds (D—Pittsfield) ran an unsuccessful campaign for Lieutenant
+district, Adam Hinds (D-Pittsfield) ran an unsuccessful campaign for Lieutenant
 Governor, leaving this district without an incumbent senator.
 
 The Democratic primary will feature sitting State Representative Paul Mark
-(D—Becket) whose current Second Berkshire State Representative district is 
+(D-Becket) whose current Second Berkshire State Representative district is 
 outlined in the map, and Williamstown small business manager and activist
 Huff Templeton III. Representative Mark will have a considerable advantage
 as almost a quarter of the Senate district's Democratic primary voters will
@@ -393,11 +394,11 @@ candidate_table(sen_cand, 4)
 
 The new Hampden, Hampshire and Worcester district is closely related to the
 previous First Hampden and Hampshire district currently held by Eric
-Lesser (D—Longmeadow) who is running for Lieutenant Governor. It is the only
+Lesser (D-Longmeadow) who is running for Lieutenant Governor. It is the only
 state senate seat to feature both a Democratic and Republican primary in 2022.
 
 On the Democratic side, first term State Representative Jacob Oliveira
-(D—Ludlow) faces campaign strategist Sydney Levin-Epstein of
+(D-Ludlow) faces campaign strategist Sydney Levin-Epstein of
 Longmeadow. The dashed line on map shows the overlap of the
 Oliveira-held Seventh Hampden State Rep district.
 
@@ -547,9 +548,13 @@ legislature with people from atypical political backgrounds.
 
 The winner for the Democratic primary will face Republican Damian
 Anketell who seems to have previously run for Essex County Sheriff as
-a Democrat. The D+12 district will likely go to the Democrat,
-regardless of primary outcome, while the incumbency advantage
-of Lovely would make it highly unlikely for a GOP pickup.
+a Democrat. Anketell has been featured at Mass. GOP events promoted by
+Howie Carr to get a referendum question on the ballot to deny
+drivers licenses for undocumented immigrants.
+
+The D+12 district will likely go to the Democrat, regardless of
+primary outcome, but the incumbency advantage of Lovely would make it
+highly unlikely for a GOP pickup.
 
 ## Second Suffolk
 
@@ -584,21 +589,23 @@ candidate_table(sen_cand, 29)
 
 Senator Sonia Chang-Diaz (D-Boston) decided to run for Massachusetts
 Governor, rather than for re-election to the State Senate, leaving the
-true blue Second Suffolk District open. There are five candidates
-vying for the Democratic nomination and the primary winner will take
-office in January, given that no non-Democratic candidates qualified for
-the race, not to mention its status as the most Democratic
-Massachusetts state senate district with a whopping PVI of D+42.
+true blue Second Suffolk District as an open seat. There are five
+candidates vying for the Democratic nomination and the primary winner
+will take office in January, given that no non-Democratic candidates
+qualified for the race, not to mention its status as the most
+Democratic Massachusetts state senate district with a whopping PVI of
+D+42.
 
-There are two sitting State Representatives in the race for the Second Suffolk.
-Nika Elguardo (D-Jamaica Plain) represents the 15th Suffolk State Representative
-District (dotted outline in the map), and Liz Miranda (D-Boston) represents the
-5th Suffolk State Representative District (dashed outline in the map). Neither
-of these state rep. districts overlaps with Second Suffolk State Senat district
-to a large extent.
+There are two sitting State Representatives in the race for the Second
+Suffolk.  Nika Elguardo (D-Jamaica Plain) represents the 15th Suffolk
+State Representative District (dotted outline in the map), and Liz
+Miranda (D-Boston) represents the 5th Suffolk State Representative
+District (dashed outline in the map). Neither of these state
+representative districts overlaps with Second Suffolk State Senate
+district to a large extent.
 
-Miniard Culpepper is a Baptist minister, lawyer, and community activist. James
-Grant is a former law enforcement officer and teacher.
+Miniard Culpepper is a Baptist minister, lawyer, and community
+activist. James Grant is a former law enforcement officer and teacher.
 
 Diane Wilkerson is a former State Senator who was convicted went to prison for
 accepting bribes related to granting of liquor licenses. She is out of prison
