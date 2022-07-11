@@ -17,6 +17,7 @@ output:
 knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE)
 options(digits=1, knitr.kable.NA="")
 library(kableExtra)
+library(formattable)
 library(tidyverse)
 library(sf)
 library(tmap)
@@ -500,10 +501,11 @@ votes_per_city <- st_intersection(ma_sen_19, ma_vtds_geom) %>%
     mutate(pres_votes = sum(Biden_20, Trump_20, Clinton_16, Trump_16)) %>%
     group_by(city_town) %>%
     summarize(votes = sum(pres_votes)) %>%
-    mutate(percent = votes/sum(votes))
+    mutate(percent = percent(votes/sum(votes), 0))
 
 votes_per_city %>%
-    kbl(format.args=list(scientific=FALSE, big.mark=",")) %>%
+    kbl(caption="First Essex vote distribution 2016/2020 presidential",
+        format.args=list(scientific=FALSE, big.mark=",")) %>%
     kable_styling()
 ```
 
