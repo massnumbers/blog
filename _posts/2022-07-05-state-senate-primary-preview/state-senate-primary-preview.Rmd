@@ -278,11 +278,13 @@ candidate_locations <- function(cand_list, sen_dist_num) {
         st_as_sf()
 }
 
-district_map <- function(sen_dist, towns_pcts, candidates, house_dist) {
-    if (missing(house_dist)) {
+district_map <- function(sen_dist, towns_pcts, candidates, house_dist_1, house_dist_2) {
+    if (missing(house_dist_1)) {
         bbox <- NULL
+    } else if (missing(house_dist_2)) {
+        bbox <- st_bbox(st_union(sen_dist, house_dist_1))
     } else {
-        bbox <- st_bbox(st_union(sen_dist, house_dist))
+        bbox <- st_bbox(st_union(sen_dist, house_dist_1, house_dist_2))
     }
     base_map <- (tm_shape(towns_pcts, bbox=bbox) +
                  tm_borders(lwd=0.5) +
@@ -293,8 +295,11 @@ district_map <- function(sen_dist, towns_pcts, candidates, house_dist) {
                          popup.vars=c("PVI", "total_population", "white_pct",
                                       "black_pct", "hispanic_pct", "asian_pct")) +
                  tm_shape(sen_dist) + tm_borders(lwd=3))
-    if (!missing(house_dist)) {
-        base_map <- base_map + (tm_shape(house_dist) + tm_borders(lwd=3, lty="dashed"))
+    if (!missing(house_dist_1)) {
+        base_map <- base_map + (tm_shape(house_dist_1) + tm_borders(lwd=2.5, lty="dashed"))
+    }
+    if (!missing(house_dist_2)) {
+        base_map <- base_map + (tm_shape(house_dist_2) + tm_borders(lwd=2.5, lty="dotted"))
     }
     (base_map + 
       tm_shape(candidates) +
@@ -534,6 +539,18 @@ tmap_leaflet(ma_sen_22_map)
 candidate_table(sen_cand, 22)
 ```
 
+Assistant Majority Leader Joan Lovely (D-Salem) faces a primary
+challenge from Kyle Davis of Danvers. Davis has pursued a career as an
+artist and performer, supporting himself with day jobs as a waiter and
+food delivery driver, and is running in a attempt to diversify the
+legislature with people from atypical political backgrounds.
+
+The winner for the Democratic primary will face Republican Damian
+Anketell who seems to have previously run for Essex County Sheriff as
+a Democrat. The D+12 district will likely go to the Democrat,
+regardless of primary outcome, while the incumbency advantage
+of Lovely would make it highly unlikely for a GOP pickup.
+
 ## Second Suffolk
 
 ```{r second-suffolk-setup}
@@ -546,11 +563,17 @@ ma_towns_pcts_29 <- town_precinct_mix(
                         ma_vtds_geom,
                         ma_city_town_num_pcts)
 
+ma_house_5th_suffolk <- ma_house_12 %>%
+    filter(DIST_CODE == "SUFF05")
+
+ma_house_15th_suffolk <- ma_house_12 %>%
+    filter(DIST_CODE == "SUFF15")
+
 ma_sen_cands_29 <- candidate_locations(sen_cand, 29)
 ```
 
 ```{r second-suffolk-map, layout="l-body-outset", fig.cap="*Second Suffolk State Senate District*m"}
-ma_sen_29_map <- district_map(ma_sen_29, ma_towns_pcts_29, ma_sen_cands_29)
+ma_sen_29_map <- district_map(ma_sen_29, ma_towns_pcts_29, ma_sen_cands_29, ma_house_5th_suffolk, ma_house_15th_suffolk)
 
 tmap_leaflet(ma_sen_29_map)
 ```
@@ -558,6 +581,28 @@ tmap_leaflet(ma_sen_29_map)
 ```{r second-suffolk-cands}
 candidate_table(sen_cand, 29)
 ```
+
+Senator Sonia Chang-Diaz (D-Boston) decided to run for Massachusetts
+Governor, rather than for re-election to the State Senate, leaving the
+true blue Second Suffolk District open. There are five candidates
+vying for the Democratic nomination and the primary winner will take
+office in January, given that no non-Democratic candidates qualified for
+the race, not to mention its status as the most Democratic
+Massachusetts state senate district with a whopping PVI of D+42.
+
+There are two sitting State Representatives in the race for the Second Suffolk.
+Nika Elguardo (D-Jamaica Plain) represents the 15th Suffolk State Representative
+District (dotted outline in the map), and Liz Miranda (D-Boston) represents the
+5th Suffolk State Representative District (dashed outline in the map). Neither
+of these state rep. districts overlaps with Second Suffolk State Senat district
+to a large extent.
+
+Miniard Culpepper is a Baptist minister, lawyer, and community activist. James
+Grant is a former law enforcement officer and teacher.
+
+Diane Wilkerson is a former State Senator who was convicted went to prison for
+accepting bribes related to granting of liquor licenses. She is out of prison
+and again running for public office.
 
 ## First Plymouth and Norfolk
 
