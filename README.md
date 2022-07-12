@@ -12,10 +12,11 @@ that the site contains not only the readable HTML output, but also
 contains all of the data and code used to make the maps,
 visualizations, and models.
 
-The Rmarkdown source files are in the `_posts` directory and get
-compiled through a process called *knitting* into the
-`docs/posts` directory. The supporting data files are in the
-`_data` directory.
+The Rmarkdown source files are in post-specific subdirectories of the
+`_posts` directory in files with the `.Rmd` extension. These file
+contain Markdown interspersed with R code and get compiled through a
+process called *knitting* into the `docs/posts` directory. The
+supporting data files are in the `_data` directory.
 
 In addition to the Distill and Rmarkdown frameworks, the other
 essential tool that makes the interactive maps on this site is the

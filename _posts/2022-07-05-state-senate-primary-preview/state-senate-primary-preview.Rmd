@@ -188,7 +188,8 @@ ma_towns_dems <- read_csv("../../_data/2020/ma_city_town_demographics_pvi_2020.c
            white_pct, black_pct, hispanic_pct, asian_pct)
 
 ma_towns_geom <- merge(ma_towns, ma_towns_dems, by="city_town") %>%
-    mutate(center = st_centroid(geometry))
+    mutate(center = st_centroid(geometry)) %>%
+    relocate(city_town)
 
 ma_vtds_pvi <- read_csv("../../_data/2020/ma_precinct_pvi_2020.csv")
     
@@ -328,7 +329,8 @@ ma_sen_1 <- ma_sen %>%
     filter(SENDISTNUM == 1)
 
 ma_towns_1 <-st_intersection(ma_sen_1, ma_towns_geom) %>%
-    filter(st_area(geometry) > five_k_m_sq)
+    filter(st_area(geometry) > five_k_m_sq) %>%
+    relocate(city_town)
 
 ma_house_berk_2 <- ma_house_12 %>%
     filter(DIST_CODE == "BERK02")
