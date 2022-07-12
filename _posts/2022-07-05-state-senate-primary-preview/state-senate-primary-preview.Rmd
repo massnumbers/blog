@@ -637,6 +637,30 @@ tmap_leaflet(ma_sen_31_map)
 candidate_table(sen_cand, 31)
 ```
 
+Senator Patrick O'Connor (D-Weymouth) is the only incumbent GOP
+senator to face electoral opposition in 2022. O'Connor is widely
+considered a moderate Republican in the Massachusetts vein. He did
+[vote against the final version of the MA ROE
+Act](https://www.patriotledger.com/story/news/2022/05/03/quincy-residents-protest-draft-opinion-would-overturn-roe-v-wade/9627424002/),
+citing issues of expanding third trimester abortions and removal of
+most parental consent.
+
+Senator O'Connor faces Marshfield Republican Ronald Patuto in the GOP
+primary. There isn't a great deal of information around Patuto's
+candidacy, but his Facebook timeline features promotions anti-masking
+and anti-vax rallies.
+
+While I am not publishing model-based predictions for the primaries,
+this race is one where the general election model shows a big
+difference between the probability of a GOP general election win if
+O'Connor, the incumbent wins the primary (93% likelihood of GOP win),
+and if Patuto, the challenger wins the primary (21% likelihood of GOP
+win). This contrast demonstrates the power of incumbency and the fact
+that this moderate-for-MA state senate district (it is the 13th most
+Republican-leaning State Senate District) has as a Partisan Voter
+Index (PVI) of D+9, making it an easy-enough Democratic target without
+an incumbent Republican on the ballot.
+
 ## Norfolk, Plymouth and Bristol
 
 ```{r npb-setup}
@@ -661,6 +685,22 @@ tmap_leaflet(ma_sen_33_map)
 ```{r npb-cands}
 candidate_table(sen_cand, 33)
 ```
+
+State Senator Walter Timilty (D-Milton) is considered on the
+conservative side of the Massachusetts Democratic Party. One recent
+example would be his "No" vote on the MA ROE Act to expand and codify
+the right to an abortion in Massachusetts.
+
+Timilty's challenger for the Democratic nomination is Kathleen
+Crogan-Camara who is running on a platform promoting disability
+rights, but is also challenging Timilty with a much more progressive
+view on issues like women's reproductive rights, LGBTQ+ rights, and
+immigrant rights.
+
+The winner of the Democratic primary will face another perennial
+candidate, Republican Brian Muello of Braintree who has run
+unsuccessfully for Mayor of Braintree, Braintree selectman, Braintree
+Town Clerk, and U.S. Senate.
 
 ## Second Plymouth and Norfolk
 
@@ -687,6 +727,34 @@ tmap_leaflet(ma_sen_34_map)
 candidate_table(sen_cand, 34)
 ```
 
+Another incumbent State Senator facing both a Democratic primary and a
+Republican general election challenger is Michael Brady
+(D-Brockton). As mentioned in the redistricting section, the Second
+Plymouth and Norfolk district is also newly minted majority minority
+district with 49% White, 35% Black, 8% Hispanic, and 3% Asian in
+terms of voting age population.
+
+Senator Brady has weathered some challenges over the past several
+years, having been arrested for drunk driving in 2018 and being
+stripped of his committee chairmanship. Brady has since been
+re-instated to his leadership positions, presumably after serving out
+his probation with a dismissal of charges as per agreement.
+
+Challenger Katrina Huff-Larmond, a Randolph Town Councilor, is
+campaigning on change, leadership, a deeper connection with the
+people. In addition, Huff-Larmond participated in the redistricting
+process and by running, is providing this newly majority minority
+district the choice of a candidate of color.
+
+The winner of the Democratic primary will face Republican Jim Gordon
+of Hanson who is running on a platform for parental review of
+educational material, restoring qualified immunity for law
+enforcement, and cutting taxes while increasing infrastructure
+spending. The simple, but fallible model I use for estimating general
+election results based on PVI, incumbency, and whether it is a
+presidential voting year gives Gordon a 2 out of 100 chance of winning
+against Brady and a 1 out of 10 chance at beating Huff-Larmond.
+
 ## Cape and Islands
 
 ```{r cape-islands-setup}
@@ -711,3 +779,9 @@ tmap_leaflet(ma_sen_40_map)
 ```{r cape-islands-cands}
 candidate_table(sen_cand, 40)
 ```
+
+State Senator Julian Cyr is free from Democratic primary challengers
+in 2022, but will face the winner of a two-way Republican primary in
+November. It is quite unlikely that the Republican nominee will unseat
+incumbent Cyr in the D+12 Cape and Islands District.
+
