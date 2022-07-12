@@ -2,6 +2,7 @@ name: "blog"
 title: "Mass. Numbers"
 description: |
   A qualitative look at Massachusetts politics and policy
+base_url: https://www.massnumbers.us
 output_dir: "docs"
 google_analytics: "G-GS463FHP94"
 theme: massnumbers.css

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
+  <channel>
+    <title>Mass. Numbers</title>
+    <link>https://www.massnumbers.us</link>
+    <atom:link href="https://www.massnumbers.us/index.xml" rel="self" type="application/rss+xml"/>
+    <description>A qualitative look at Massachusetts politics and policy
+</description>
+    <generator>Distill</generator>
+    <lastBuildDate>Sat, 09 Jul 2022 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>An overview of the 2022 State Senate Primaries</title>
+      <dc:creator>Brent Benson</dc:creator>
+      <link>https://www.massnumbers.us/posts/2022-07-05-state-senate-primary-preview</link>
+      <description>A short discussion of redistricting and an overview
+of each State Senate primary race.</description>
+      <guid>https://www.massnumbers.us/posts/2022-07-05-state-senate-primary-preview</guid>
+      <pubDate>Sat, 09 Jul 2022 00:00:00 +0000</pubDate>
+      <media:content url="https://www.massnumbers.us/images/berk_hamp_frank_hamp.png" medium="image" type="image/png"/>
+    </item>
+    <item>
+      <title>Welcome to Mass. Numbers</title>
+      <dc:creator>Brent Benson</dc:creator>
+      <link>https://www.massnumbers.us/posts/welcome</link>
+      <description>Welcome to the Mass. Numbers blog. Mass. Numbers takes
+a quantiative look as Massachusetts politics and policy.</description>
+      <guid>https://www.massnumbers.us/posts/welcome</guid>
+      <pubDate>Tue, 05 Jul 2022 00:00:00 +0000</pubDate>
+      <media:content url="https://www.massnumbers.us/posts/welcome/welcome_files/figure-html5/city-town-map-1.png" medium="image" type="image/png" width="1248" height="768"/>
+    </item>
+  </channel>
+</rss>
