@@ -6,6 +6,11 @@
     <atom:link href="https://www.massnumbers.us/index.xml" rel="self" type="application/rss+xml"/>
     <description>A qualitative look at Massachusetts politics and policy
 </description>
+    <image>
+      <title>Mass. Numbers</title>
+      <url>https://www.massnumbers.us/images/mass_numbers.png</url>
+      <link>https://www.massnumbers.us</link>
+    </image>
     <generator>Distill</generator>
     <lastBuildDate>Sat, 09 Jul 2022 00:00:00 +0000</lastBuildDate>
     <item>
