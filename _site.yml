@@ -4,6 +4,7 @@ description: |
   A qualitative look at Massachusetts politics and policy
 base_url: https://www.massnumbers.us
 output_dir: "docs"
+citation: false
 google_analytics: "G-GS463FHP94"
 theme: massnumbers.css
 favicon: images/numbers_ma.png

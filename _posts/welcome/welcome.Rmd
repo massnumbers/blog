@@ -7,6 +7,7 @@ author:
   - name: Brent Benson
     url: https://massnumbers.us/brentbenson
 date: 07-05-2022
+citation: false
 output:
   distill::distill_article:
     self_contained: false
