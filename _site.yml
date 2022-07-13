@@ -6,7 +6,7 @@ base_url: https://www.massnumbers.us
 output_dir: "docs"
 google_analytics: "G-GS463FHP94"
 theme: massnumbers.css
-favicon: images/mass_numbers.png
+favicon: images/numbers_ma.png
 navbar:
   logo:
       image: images/ma_shape.png

@@ -12,8 +12,6 @@ output:
     self_contained: false
 ---
 
-## City/Town Map
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE)
 
@@ -22,7 +20,7 @@ library(sf)
 library(tmap)
 ```
 
-```{r city-town-map-setup}
+```{r city-town-map-setup, fig.cap="Partisan Voter Index (PVI) ratings for MA municipalities"}
 ma_towns_dems <- read_csv("../../_data/2020/ma_city_town_demographics_pvi_2020.csv") %>%
     mutate(city_town = str_replace(city_town, "Manchester-by-the-Sea", "Manchester")) %>%
     rename(white_pct = race_white_pct,
@@ -51,5 +49,52 @@ city_town_map <- (
 city_town_map    
 ```
 
+## Welcome
 
+The Mass. Numbers blog began in November of 2012 with [a
+post](https://massnumbers.blogspot.com/2012/11/warren-realizes-largest-gains-in.html)
+comparing Elizabeth Warren's win over Scott Brown to Martha Coakley's
+2010 loss, observing that Warren's largest gains came in working class
+cities like Holyoke, Lawrence, Chelsea, and Brockton.
 
+Some of the things that enabled posts like these were [easily
+accessible fine-grained election
+results](https://electionstats.state.ma.us/) and a nice tool for
+creating interactive maps: Google Fusion Tables. As you might have
+seen by clicking on the first post, Google stopped supporting Google
+Fusion Tables in 2019.
+
+This new version of the Mass. Numbers blog is enabled by some other
+new tools. The technologies of
+[Rmarkdown](https://rmarkdown.rstudio.com/),
+[Distill](https://rstudio.github.io/distill/blog.html), and [GitHub
+Pages](https://pages.github.com/) allow for creating data-driven blog
+posts that can be compiled into nice looking web pages, but also allow
+for including all of the data and analysis that appear in the post.
+This is exciting because it reduces the number of steps between
+analysis and publishing a result, but also because it promotes
+transparency, open data journalism, and reproducible data science.
+
+If you read a post on this blog and are curious about how the analysis
+was done, you can look at the [linked GitHub
+repository](https://github.com/massnumbers/blog) and see the `.Rmd`
+source of the post and the referenced data, checked in and versioned
+in the repository.
+
+One other shout-out goes to the [tmap](https://r-tmap.github.io/tmap/)
+mapping library that does Google Fusion Tables one better by making it
+easy to create data driven maps, both static maps and interactive
+maps, with a simple configuration option. The fact that I can create
+the maps completely with code allows for a great deal of automation,
+reducing the amount of manual work to create a map, and resulting in
+something that is documented and reproducible.
+
+I am guessing that most readers of this blog are interested in the
+political analysis and data visualizations, but I felt that it made
+sense to explain the evolution of the technology behind this writing
+and to help others who are interested in reproducing the results, or
+want to take the analysis in another direction.
+
+I am interested in your feedback. You can send me feedback through my
+[`@bwbensonjr`](https://twitter.com/bwbensonjr) twitter, or using the
+email address with username `brent` and the domain of this website.
