@@ -53,112 +53,6 @@ one_m_sq <- set_units(1, m^2)
 two_k_m_sq <- set_units(2000, m^2)
 five_k_m_sq <- set_units(5000, m^2)
 ```
-
-It may be the middle of summer, but there is a lot going on in Massachusetts
-state legislature campaigns. This post spends some time looking at
-redistricting, specifically the new majority minority state senate districts,
-and then at each of the contested state senate primaries.
-
-## New majority minority districts
-
-The Massachusetts State Senate lines have been redrawn by the legislature after
-the 2020 Census as required by the constitution. Redistricting established
-two new majority minority districts.
-
-The First Essex State Senate District—one of the new majority
-districts—contains all of Lawrence, all of Methuen, and approximately
-5 precincts of Haverhill (give or take a few census blocks). The
-previous lines of the district (the dotted line in the map below) did
-not include Lawrence and instead included a large number of largely
-white communities. The new lines result in a voting age population
-that is 36% White, 56% Hispanic, 10% Black, and 3% Asian. The First
-Essex incumbent, Diana DiZoglio (D-Methuen), is running for Auditor,
-leaving an open race for a competitive field of candidates from
-Lawrence and Methuen (see the First Essex primary overview below).
-
-```{r first-essex-redist, layout="l-body-outset", fig.cap="*First Essex State Senate District*"}
-sen_19 <- sen_geom %>% filter(Number == 19)
-sen_old_19 <- sen_geom_12 %>% filter(SEN_DIST == "First Essex")
-
-sen_19_map <- (
-    tm_shape(sen_19, bbox=st_bbox(st_union(sen_19, sen_old_19))) +
-        tm_fill(col = viridis(1), alpha = 0.5) +
-        tm_shape(sen_old_19) +
-        tm_borders(lwd = 2, lty = "dashed") +
-        tm_basemap("OpenStreetMap")
-)
-tmap_leaflet(sen_19_map)
-```
-
-The other newly created majority minority is the Middlesex and Suffolk District
-with incumbent Sal DiDomenico (D-Everett). Redistricting has added diverse
-sections of Cambridgeport and East Cambridge, while removing parts of Boston's
-West End, Allston, and Brighton neighborhoods. The district ends up with a
-demographic mix of 46% White, 24% Hispanic, 12% Black, and 15% Asian. DiDomenico
-does not have primary or general election challenger.
-
-```{r middlesex-and-suffolk-redist, layout="l-body-outset", fig.cap="*Middlesex and Suffolk State Senate District*"}
-sen_26 <- sen_geom %>% filter(Number == 26)
-sen_old_26 <- sen_geom_12 %>% filter(SEN_DIST == "Middlesex and Suffolk")
-
-sen_26_map <- (
-    tm_shape(sen_26) +
-        tm_fill(col = viridis(1), alpha = 0.5) +
-        tm_shape(sen_old_26) +
-        tm_borders(lwd = 2, lty = "dashed") +
-        tm_basemap("OpenStreetMap")
-)
-tmap_leaflet(sen_26_map)
-```
-
-The other majority minority State Senate districts are the Springfield-based
-Hampden district of Adam Gomez (D-Springfield), the Boston-based Second Suffolk
-district of Sonia Change-Diaz (D-Boston) who ran an unsuccessful campaign for
-Governor, and the Second Plymouth and Norfolk district with incumbent
-Senator Michael Brady (D-Brockton).
-
-The full State Senate map is given here with dashed lines for previous State
-Senate district lines and some demographics (partisan lean, etc.).
-
-```{r new-district-map, layout="l-body-outset", fig.cap="*MA State Senate Districts (2022)*"}
-new_sen_map <- (tm_shape(sen_geom) +
-                    tm_borders(lwd=2) +
-                    tm_fill(col="PVI_N",
-                            palette=c("#FF4949", "white", "#0F4392"),
-                            midpoint=0,
-                            alpha=0.5,
-                            popup.vars=c("Incumbent",
-                                         "PVI",
-                                         "NH_White_Pct",
-                                         "Old District",
-                                         "primaries")) +
-                    tm_shape(sen_geom_12) +
-                    tm_borders(lwd=2, lty="dashed") +
-                    tm_basemap("OpenStreetMap"))
-tmap_leaflet(new_sen_map)
-```
-
-## State Senate Primary Overview
-
-There are ten State Senate districts with contested primaries. There are three
-Democratic incumbents with primary challengers—Joan Lovely (D-Salem), Walter
-Timility (D-Milton), Michael Brady (D-Brockton)—and one Republican with a
-primary challenge, Patrick O'Connor (R-Weymouth).
-
-There are five open seats with four having just a Democratic primary, and one
-seat—Hampden, Hampshire and Worcester—with both a Democratic and Republican
-primary.
-
-```{r state-senate-districts}
-sen_dist %>% select(c(District,
-                      PVI,
-                      inc_status,
-                      Incumbent,
-                      primaries)) %>%
-    kbl(caption="2022 State Senate districts, post-redistricting",) %>%
-    kable_styling()
-```
-
 ```{r district-setup}
 vtd_to_city_town <- read_csv("../../_data/2020/ma_vtds_city_town_fips.csv") %>%
     select(vtd_fips, city_town, Ward, Pct, city_town_fips, type)
@@ -280,6 +174,22 @@ candidate_locations <- function(cand_list, sen_dist_num) {
         st_as_sf()
 }
 
+redistrict_map <- function(sen_dist, towns_pcts, prev_dist) {
+    (tm_shape(towns_pcts, bbox=st_bbox(st_union(sen_dist, prev_dist))) +
+     tm_borders(lwd=0.5) +
+     tm_fill(col="minority_pct",
+             style="fixed",
+             breaks=c(0, 0.2, 0.5, 0.7, 1),
+             palette="PRGn",
+             midpoint=0.5,
+             alpha=0.7,
+             popup.vars=c("PVI", "total_population", "minority_pct", "white_pct", 
+                         "black_pct", "hispanic_pct", "asian_pct")) +
+    tm_shape(sen_dist) + tm_borders(lwd=3) +
+    tm_shape(prev_dist) + tm_borders(lwd=2.5, lty="dotted") +
+    tm_basemap("OpenStreetMap"))
+}
+
 district_map <- function(sen_dist, towns_pcts, candidates, house_dist_1, house_dist_2) {
     if (missing(house_dist_1)) {
         bbox <- NULL
@@ -323,6 +233,147 @@ candidate_table <- function(candidates, dist_num) {
         kable_styling()
 }
 ```
+
+It may be the middle of summer, but there is a lot going on in Massachusetts
+state legislature campaigns. This post spends some time looking at
+redistricting, specifically the new majority minority state senate districts,
+and then at each of the contested state senate primaries.
+
+## New majority minority districts
+
+The Massachusetts State Senate lines have been redrawn by the legislature after
+the 2020 Census as required by the constitution. One of the goals of the
+Voting Rights Act (VRA) is to encourage majority minority districts to allow
+minority communities to elect the candidate of their choice.
+
+The 2010-2011 MA redistricting based on the 2010 census was signed
+into law on November 21, 2011 and had three majority minority State
+Senate districts: the First Suffolk District running on the eastern
+side of Boston from South Boston down to Mattapan, the Second Suffolk
+District on the western side of Boston from the South End through
+Roxbury and Jamaica Plain into Hyde Park, and the Hampden District
+with West Springfield and most of Springfield and Chicopee.
+
+The most recent 2020-2021 redistricting process led by State Senator
+William Brownsberger (D-Belmont) was able to add three more majority
+minority districts: the First Essex, Middlesex and Suffolk, and Second
+Plymouth and Norfolk.
+
+The First Essex State Senate District contains all of Lawrence, all of
+Methuen, and approximately 5 precincts of Haverhill (give or take a
+few census blocks). The previous lines of the district (the dotted
+line in the map below) did not include Lawrence and instead included a
+large number of largely white communities. The new lines result in a
+voting age population that is 36% White, 56% Hispanic, 10% Black, and
+3% Asian. The First Essex incumbent, Diana DiZoglio (D-Methuen), is
+running for Auditor, leaving an open race for a competitive field of
+candidates from Lawrence and Methuen (see the First Essex primary
+overview below).
+
+```{r first-essex-redist, layout="l-body-outset", fig.cap="*First Essex District*"}
+sen_19 <- sen_geom %>% filter(Number == 19)
+sen_old_19 <- sen_geom_12 %>% filter(SEN_DIST == "First Essex")
+
+sen_towns_pcts_19 <- town_precinct_mix(
+                        sen_19,
+                        ma_towns_geom,
+                        ma_vtds_geom,
+                        ma_city_town_num_pcts) %>%
+    mutate(minority_pct = 1 - white_pct)
+
+sen_19_map <- redistrict_map(sen_19, sen_towns_pcts_19, sen_old_19)
+
+tmap_leaflet(sen_19_map)
+```
+
+The other newly created majority minority is the Middlesex and Suffolk District
+with incumbent Sal DiDomenico (D-Everett). Redistricting has added diverse
+sections of Cambridgeport and East Cambridge, while removing parts of Boston's
+West End, Allston, and Brighton neighborhoods. The district ends up with a
+demographic mix of 46% White, 24% Hispanic, 12% Black, and 15% Asian. DiDomenico
+does not have primary or general election challenger.
+
+```{r middlesex-and-suffolk-redist, layout="l-body-outset", fig.cap="*Middlesex and Suffolk District*"}
+sen_26 <- sen_geom %>% filter(Number == 26)
+sen_old_26 <- sen_geom_12 %>% filter(SEN_DIST == "Middlesex and Suffolk")
+
+sen_towns_pcts_26 <- town_precinct_mix(
+                        sen_26,
+                        ma_towns_geom,
+                        ma_vtds_geom,
+                        ma_city_town_num_pcts) %>%
+    mutate(minority_pct = 1 - white_pct)
+
+sen_26_map <- redistrict_map(sen_26, sen_towns_pcts_26, sen_old_26)
+
+tmap_leaflet(sen_26_map)
+```
+
+```{r spn-redist, layout="l-body-outset", fig.cap="*Second Plymouth and Norfolk District*"}
+sen_34 <- sen_geom %>% filter(Number == 34)
+sen_old_34 <- sen_geom_12 %>% filter(SEN_DIST == "Second Plymouth and Bristol")
+
+sen_towns_pcts_34 <- town_precinct_mix(
+                        sen_34,
+                        ma_towns_geom,
+                        ma_vtds_geom,
+                        ma_city_town_num_pcts) %>%
+    mutate(minority_pct = 1 - white_pct)
+
+sen_34_map <- redistrict_map(sen_34, sen_towns_pcts_34, sen_old_34)
+
+tmap_leaflet(sen_34_map)
+```
+
+The other majority minority State Senate districts are the Springfield-based
+Hampden district of Adam Gomez (D-Springfield), the Boston-based Second Suffolk
+district of Sonia Change-Diaz (D-Boston) who ran an unsuccessful campaign for
+Governor, and the Second Plymouth and Norfolk district with incumbent
+Senator Michael Brady (D-Brockton).
+
+The full State Senate map is given here with dashed lines for previous State
+Senate district lines and some demographics (partisan lean, etc.).
+
+```{r new-district-map, layout="l-body-outset", fig.cap="*MA State Senate Districts (2022)*"}
+new_sen_map <- (tm_shape(sen_geom) +
+                    tm_borders(lwd=2) +
+                    tm_fill(col="PVI_N",
+                            palette=c("#FF4949", "white", "#0F4392"),
+                            midpoint=0,
+                            alpha=0.5,
+                            popup.vars=c("Incumbent",
+                                         "PVI",
+                                         "NH_White_Pct",
+                                         "Old District",
+                                         "primaries")) +
+                    tm_shape(sen_geom_12) +
+                    tm_borders(lwd=2, lty="dashed") +
+                    tm_basemap("OpenStreetMap"))
+tmap_leaflet(new_sen_map)
+```
+
+## State Senate Primary Overview
+
+There are ten State Senate districts with contested primaries. There are three
+Democratic incumbents with primary challengers—Joan Lovely (D-Salem), Walter
+Timility (D-Milton), Michael Brady (D-Brockton)—and one Republican with a
+primary challenge, Patrick O'Connor (R-Weymouth).
+
+There are five open seats with four having just a Democratic primary, and one
+seat—Hampden, Hampshire and Worcester—with both a Democratic and Republican
+primary.
+
+```{r state-senate-districts}
+sen_dist %>% select(c(District,
+                      PVI,
+                      inc_status,
+                      Incumbent,
+                      primaries)) %>%
+    kbl(caption="2022 State Senate districts, post-redistricting",) %>%
+    kable_styling()
+```
+
+
 ## Berkshire, Hampden, Franklin and Hampshire
 
 ```{r bhfh-setup}

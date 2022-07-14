@@ -18,4 +18,4 @@ navbar:
     - text: "About"
       href: about.html
 output: distill::distill_article
-exclude: ["README.md"]
+exclude: ["README.md", "*~"]
