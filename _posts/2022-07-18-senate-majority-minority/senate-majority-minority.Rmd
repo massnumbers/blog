@@ -1,10 +1,10 @@
 ---
-title: "The number of MA State Senate majority minority districts is about to double"
+title: "A look at MA State Senate Redistricting"
 description: |
-  A look at the State Senate majority minority districts
-  after 2020-2021 redistricting.
+  There are few possibilities for districts that give voting power
+  to minority voters and candidates in Massachuestts
 author: Brent Benson
-date: 2022-07-18
+date: 2022-07-22
 citation: false
 preview: https://www.massnumbers.us/images/middlesex_and_suffolk_redist.png
 output:
@@ -157,7 +157,8 @@ town_precinct_mix <- function(sen_dist_geom, towns_geom, vtds_geom, city_town_nu
         mutate(name=ward_precinct_name(city_town, Ward, Pct)) %>%
         select(name, PVI, PVI_N, total_population, white_pct,
                black_pct, hispanic_pct, asian_pct)
-    towns_precincts <- rbind(full_towns, precincts)
+    towns_precincts <- rbind(full_towns, precincts) %>%
+        mutate(District = sen_dist_geom$District)
     towns_precincts
 }
 
@@ -179,13 +180,51 @@ redistrict_map <- function(sen_dist, towns_pcts, prev_dist) {
 
 ```
 
-## Decenial redistricting
+## Redistricting Concepts
 
 The Massachusetts State Senate lines have been redrawn by the
-legislature after the 2020 Census as required by the constitution. One
-of the goals of the Voting Rights Act (VRA) is to encourage majority
-minority districts to allow minority communities to elect the
-candidate of their choice.
+legislature after the 2020 Census as required by the constitution.
+Detailed guidelines used by the state legislatures can be found in the
+[Executive Summary of the Redistricting Red
+Book](https://www.ncsl.org/Portals/1/Documents/Redistricting/Exec_Summary_2020.pdf),
+published by the National Conference of State Legislatures.
+
+The primary responsibility given to redistricters by the constitution
+is to ensure equally-sized districts. For state legislatures, the
+courts have generally approved of redistricting plans where the
+largest and smallest districts are within 5 percent of the target
+population. The equally-sized mandate results in the shifting of
+district lines as populations change throughout the state.
+
+The next mandate from the Voting Rights Act (VRA) relates to race,
+color, and minority language groups.  While it is illegal to use race
+and ethnicity as factor in redistricting in the general case, it is
+also illegal to dilute concentrations of a minority voting block,
+resulting in that voting block not being able to elect its candidate
+of choice.
+
+While the short-hand concept of a majority-minority district is often
+used evaluating redistricting plans, it is often an oversimplification
+when examining minority voting block dilution. In particular, minority
+voting blocks do not usually vote as a monolith. It needs to be
+verified by analysis of historical voting patterns, but a district
+with 25% black voters and 30% hispanic is technically
+majority-minority, but gives neither the black voters nor the hispanic
+voters the ability to elect their preferred candidate.
+
+The newly drawn 2020-2021 Massachusetts State Senate district
+definitions increase the number of majority-minority districts from
+three to six, but we will see that only three of the districts contain
+a minority voting block with enough power to elect their candidate of
+choice. It is also clear from looking at the data that there aren't
+enough concentrated minority blocks to do any better, given the
+current population distribution in Massachusetts.
+
+## Concentrations of Minority Voting Blocks
+
+
+
+## Plan Details
 
 A little over ten years ago the 2010-2011 MA redistricting based on
 the 2010 census was signed into law on November 21, 2011. This plan
@@ -297,14 +336,68 @@ tmap_leaflet(sen_34_map)
 ```
 
 The Second Plymouth and Norfolk District was a late-comer to the
-majority minority district additions in the latest redistricting. [The
-first draft of the senate redistricting
-plan](https://www.bostonglobe.com/2021/10/19/metro/under-pressure-state-senate-redraws-map-adding-new-majority-minority-district-brockton/)
-left the Brockton-based district almost unchanged and grouped with the
-mostly white suburbs. Pressure from redistricting advocacy groups
-led to extending the district through Avon into parts of Randolph
-that moved the demographics of the district into majority minority.
+majority minority district additions during the latest redistricting
+process. The first draft of the senate redistricting plan left the
+Brockton-based district almost unchanged and grouped with the mostly
+white surrounding suburb of Hanover, Plympton and Easton. [Pressure
+from redistricting advocacy
+groups](https://www.bostonglobe.com/2021/10/19/metro/under-pressure-state-senate-redraws-map-adding-new-majority-minority-district-brockton/)
+led to a plan which extended the district through Avon into parts of
+Randolph that moved the demographics of the district into majority
+minority, while moving the white suburbs into adjacent districts.
 
+The newly configured district has attracted an experienced Democratic
+challenger in Randolph Town Councilor Katrina Huff-Larmond who could
+increase the number of black women in the senate above one, Lydia
+Edward (D-Boston), if she were to win the primary on September 16th.
 
+## The remaining majority minority districts
 
+```{r all-districts-map, fig.cap="*Remaining majority minority State Senate Districts*"}
+sen_3 <- sen_geom %>% filter(Number == 3)
+sen_towns_pcts_3 <- town_precinct_mix(
+                        sen_3,
+                        ma_towns_geom,
+                        ma_vtds_geom,
+                        ma_city_town_num_pcts) %>%
+    mutate(minority_pct = 1 - white_pct)
+
+sen_29 <- sen_geom %>% filter(Number == 29)
+sen_towns_pcts_29 <- town_precinct_mix(
+                        sen_29,
+                        ma_towns_geom,
+                        ma_vtds_geom,
+                        ma_city_town_num_pcts) %>%
+    mutate(minority_pct = 1 - white_pct)
+
+sen_30 <- sen_geom %>% filter(Number == 30)
+sen_towns_pcts_30 <- town_precinct_mix(
+                        sen_30,
+                        ma_towns_geom,
+                        ma_vtds_geom,
+                        ma_city_town_num_pcts) %>%
+    filter(!is.na(white_pct)) %>%
+    mutate(minority_pct = 1 - white_pct)
+
+maj_min_outlines <- rbind(sen_3, sen_29, sen_30)
+maj_min_tp <- rbind(sen_towns_pcts_3, sen_towns_pcts_29, sen_towns_pcts_30)
+
+maj_min_map <- (tm_shape(maj_min_tp) +
+                    tm_borders(lwd=0.5) +
+                     tm_fill(col="minority_pct",
+                            style="fixed",
+                            breaks=c(0, 0.2, 0.5, 0.7, 1),
+                           palette="PRGn",
+                            midpoint=0.5,
+                           alpha=0.7,
+                           popup.vars=c("PVI", "total_population", "minority_pct", "white_pct", 
+                                      "black_pct", "hispanic_pct", "asian_pct")) +
+                    tm_facets(by="District") +
+                    tm_shape(maj_min_outlines) + tm_borders(lwd=3) +
+                    tm_facets(by="District") +
+                    tm_basemap("OpenStreetMap"))
+
+## tmap_leaflet(maj_min_map)
+maj_min_map
+```
 
