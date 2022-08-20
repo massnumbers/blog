@@ -55,68 +55,13 @@ five_k_m_sq <- set_units(5000, m^2)
 seven_five_k_m_sq <- set_units(75000, m^2)
 ```
 
-```{r district-setup}
-vtd_to_city_town <- read_csv("../../_data/2020/ma_vtds_city_town_fips.csv") %>%
-    select(vtd_fips, city_town, Ward, Pct, city_town_fips, type)
-
-ma_vtds <- voting_districts(state=25, cb=TRUE) %>%
-    rename(state_code = STATEFP20,
-           county_code = COUNTYFP20,
-           vtd_code = VTDST20,
-           vtd_fips = GEOID20) %>%
-    filter(vtd_code != "ZZZZZZ") %>%
-    left_join(vtd_to_city_town, by="vtd_fips") %>%
-    st_transform(st_crs(6491))
-
+```{r precinct-setup}
 ma_towns <- read_sf("../../_gis/townssurvey_shp/TOWNSSURVEY_POLYM.shp",
                     as_tibble=TRUE) %>%
     st_make_valid() %>%
     mutate(city_town = str_to_title(TOWN)) %>%
     select(city_town) %>%
     st_transform(st_crs(6491))
-
-ma_towns_dems <- read_csv("../../_data/2020/ma_city_town_demographics_pvi_2020.csv") %>%
-    mutate(city_town = str_replace(city_town, "Manchester-by-the-Sea", "Manchester")) %>%
-    rename(white_pct = race_white_pct,
-           black_pct = race_black_pct,
-           hispanic_pct = race_hispanic_pct,
-           asian_pct = race_asian_pct) %>%
-    select(city_town_fips, city_town, PVI, PVI_N, total_population,
-           white_pct, black_pct, hispanic_pct, asian_pct)
-
-ma_towns_geom <- merge(ma_towns, ma_towns_dems, by="city_town") %>%
-    mutate(center = st_centroid(geometry)) %>%
-    relocate(city_town)
-
-ma_vtds_pvi <- read_csv("../../_data/2020/ma_precinct_pvi_2020.csv")
-    
-ma_vtds_dems <- read_csv("../../_data/2020/ma_census_2020_daves.csv") %>%
-    rename(total_population = Tot_2020_tot) %>%
-    mutate(white_pct = Wh_2020_tot/total_population,
-           black_pct = BlC_2020_tot/total_population,
-           hispanic_pct = His_2020_tot/total_population,
-           asian_pct = AsnC_2020_tot/total_population) %>%
-    select(vtd_fips, total_population, white_pct, black_pct,
-           hispanic_pct, asian_pct)
-
-ma_vtds_geom <- ma_vtds %>%
-    mutate(center = st_centroid(geometry)) %>%
-    left_join(ma_vtds_pvi, by=c("city_town", "Ward", "Pct")) %>%
-    left_join(ma_vtds_dems, by="vtd_fips")
-
-ma_sen <- read_sf("../../_gis/SENATE2021/SENATE2021_POLY.shp", as_tibble=TRUE) %>%
-    st_make_valid() %>%
-    select(SENDISTNUM, SEN_DIST) %>%
-    st_transform(st_crs(6491))
-
-ma_house_12 <- read_sf("../../_gis/house2012/HOUSE2012_POLY.shp", as_tibble=TRUE) %>%
-    st_make_valid() %>%
-    st_transform(st_crs(6491))
-
-ma_city_town_num_pcts <- ma_vtds_geom %>%
-    st_drop_geometry() %>%
-    group_by(city_town) %>%
-    summarize(num_precincts = n())
 
 ward_precinct_name <- function(city_town, ward, precinct) {
     str_c(city_town,
@@ -125,59 +70,80 @@ ward_precinct_name <- function(city_town, ward, precinct) {
           sep=" ")
 }
 
-## Determine which towns and precincts are in the district.
-## If a whole town is contained in the district, include the
-## whole town, otherwise, include by precinct.
-##
-town_precinct_mix <- function(sen_dist_geom, towns_geom, vtds_geom, city_town_num_pcts) {
-    towns <- st_intersection(sen_dist_geom, towns_geom) %>%
-        filter(st_area(geometry) > five_k_m_sq)
-    vtds <- st_intersection(sen_dist_geom, vtds_geom) %>%
-        filter(st_area(geometry) > one_m_sq)
-    num_pcts <- vtds %>%
-        st_drop_geometry() %>%
-        group_by(city_town) %>%
-        summarize(num_precincts = n())
-    completes <- num_pcts %>%
-        left_join((city_town_num_pcts %>% rename(total_precincts = num_precincts)), by="city_town") %>%
-        mutate(complete = (num_precincts == total_precincts))
-    full_towns <- right_join(
-            towns,
-            (completes %>%
-             filter(complete) %>%
-             select(city_town)),
-            by="city_town") %>% 
-        select(name=city_town, PVI, PVI_N, total_population,
-               white_pct, black_pct, hispanic_pct, asian_pct)
-    precincts <- right_join(
-            vtds,
-            (completes %>%
-             filter(!complete) %>%
-             select(city_town)),
-            by="city_town") %>%
-        mutate(name=ward_precinct_name(city_town, Ward, Pct)) %>%
-        select(name, PVI, PVI_N, total_population, white_pct,
-               black_pct, hispanic_pct, asian_pct)
-    towns_precincts <- rbind(full_towns, precincts) %>%
-        mutate(District = sen_dist_geom$District)
-    towns_precincts
+add_voting_percents <- function(df) {
+    df %>%
+        mutate(cvap_white_pct = cvap_2019_white/cvap_2019_total,
+               cvap_hispanic_pct = cvap_2019_hispanic/cvap_2019_total,
+               cvap_black_pct = cvap_2019_black/cvap_2019_total,
+               cvap_asian_pct = cvap_2019_asian/cvap_2019_total,
+               cvap_pred_group = case_when(((cvap_black_pct >= 0.4) &
+                                       (cvap_hispanic_pct >= 0.4)) ~ "Black_and_Hispanic",
+                                  (cvap_black_pct >= 0.4) ~ "Black",
+                                  (cvap_hispanic_pct >= 0.4) ~ "Hispanic",
+                                  (cvap_asian_pct >= 0.4) ~ "Asian",
+                                  TRUE ~ "White"),
+               vap_white_pct = vap_white_2020/vap_total_2020,
+               vap_hispanic_pct = vap_hispanic_2020/vap_total_2020,
+               vap_black_pct = vap_black_2020/vap_total_2020,
+               vap_asian_pct = vap_asian_2020/vap_total_2020,
+               vap_pred_group = case_when(((vap_black_pct >= 0.4) &
+                                       (vap_hispanic_pct >= 0.4)) ~ "Black_and_Hispanic",
+                                  (vap_black_pct >= 0.4) ~ "Black",
+                                  (vap_hispanic_pct >= 0.4) ~ "Hispanic",
+                                  (vap_asian_pct >= 0.4) ~ "Asian",
+                                  TRUE ~ "White"))
 }
 
-redistrict_map <- function(sen_dist, towns_pcts, prev_dist) {
-    (tm_shape(towns_pcts, bbox=st_bbox(st_union(sen_dist, prev_dist))) +
-     tm_borders(lwd=0.5) +
-     tm_fill(col="minority_pct",
-             style="fixed",
-             breaks=c(0, 0.2, 0.5, 0.7, 1),
-             palette="PRGn",
-             midpoint=0.5,
-             alpha=0.7,
-             popup.vars=c("PVI", "total_population", "minority_pct", "white_pct", 
-                         "black_pct", "hispanic_pct", "asian_pct")) +
-    tm_shape(sen_dist) + tm_borders(lwd=3) +
-    tm_shape(prev_dist) + tm_borders(lwd=2.5, lty="dotted") +
-    tm_basemap("OpenStreetMap"))
-}
+sen_dist_blks <- read_csv("../../_data/2020/ma_blocks_to_sen_dist_2021.csv",
+                          col_types=cols("c", "c", "i"))
+
+sen_vtd_demos <- read_csv("../../_data/2020/ma_sen_census_2020_daves.csv",
+                          col_types=cols(vtd_fips="c"))
+
+vtd_names <- read_csv("../../_data/2020/ma_vtds_city_town_fips.csv", col_types=cols(.default="c")) %>%
+    select(vtd_fips, city_town, Ward, Pct)
+
+vtd_full <- sen_vtd_demos %>%
+    select(-c(district_id, district_num, partial_pct)) %>%
+    group_by(vtd_fips) %>%
+    summarize_all(sum)
+
+vtd_demos <- vtd_names %>%
+    left_join(vtd_full, by="vtd_fips") %>%
+    add_voting_percents()
+
+vtd_geom <- voting_districts(state=25, cb=TRUE) %>%
+    select(vtd_fips = GEOID20) %>%
+    st_transform(6491) %>%
+    left_join(vtd_demos, by="vtd_fips") %>%
+    mutate(name = ward_precinct_name(city_town, Ward, Pct)) %>%
+    relocate(name)
+
+block_geom <- blocks(state=25, year=2020) %>%
+    select(block_fips = GEOID20) %>%
+    st_transform(6491)
+
+vtd_blks <- read_csv("../../_data/2020/ma_blocks_to_vtds.csv",
+                     col_types=cols(.default="c")) %>%
+    left_join(vtd_names, by="vtd_fips") %>%
+    inner_join(block_geom, by="block_fips")
+
+blks_sen_dist_vtd <- vtd_blks %>%
+    left_join(sen_dist_blks, by="block_fips")
+
+sen_vtds <- blks_sen_dist_vtd %>%
+    nest(blocks = c(block_fips, geometry)) %>%
+    group_by(vtd_fips) %>%
+    mutate(partial_pct = n() > 1) %>%
+    ungroup() %>%
+    mutate(geometry = map(blocks, ~st_union(.x$geometry))) %>%
+    unnest(geometry) %>%
+    select(-blocks)
+
+sen_vtd_comp <- sen_vtds %>%
+    left_join(sen_vtd_demos, by=c("vtd_fips", "district_id", "district_num")) %>%
+    add_voting_percents() %>%
+    st_as_sf()
 
 ```
 
@@ -236,46 +202,29 @@ numbers used to equally divide the districts, we will use total
 population, as required by the constitution.
 
 ```{r vtd-minority-precints}
-vtd_pop <- read_csv("../../_data/2020/ma_census_2020_daves.csv") %>%
-    select(vtd_fips, total_pop = Tot_2020_tot)
-
-vtd_cvap <- read_csv("../../_data/2020/ma_vtd_cvap_2020.csv",
-                     col_types=list(vtd_fips="c")) %>%
-    left_join(vtd_pop, by="vtd_fips") %>%
-    mutate(white_cvap_pct = cvap_white/cvap_total,
-           black_cvap_pct = cvap_black/cvap_total,
-           hispanic_cvap_pct = cvap_hispanic/cvap_total,
-           asian_cvap_pct = cvap_asian/cvap_total,
-           pred_group = case_when(((black_cvap_pct > 0.4) &
-                                       (hispanic_cvap_pct > 0.4)) ~ "Black_and_Hispanic",
-                                  (black_cvap_pct > 0.4) ~ "Black",
-                                  (hispanic_cvap_pct > 0.4) ~ "Hispanic",
-                                  (asian_cvap_pct > 0.4) ~ "Asian",
-                                  TRUE ~ "White"))
-
-vtd_cvap %>%
-    count(pred_group) %>%
+vtd_demos %>%
+    count(cvap_pred_group) %>%
     mutate(Percent = percent(n/sum(n), 0)) %>%
-    rename(`Predominant Group`=pred_group,
+    rename(`Predominant Group`=cvap_pred_group,
            `Precinct Count`=n) %>%
     arrange(desc(`Precinct Count`)) %>%
     kbl(caption="Predominant voting group by voting precinct") %>%
     kable_styling()
 ```
 
-If we look at the municipality of the 201 voting precincts that have a
-critical mass of minority voters by municipality (103+92+3+3) it guides us
+If we look at the municipality of the 204 voting precincts that have a
+critical mass of minority voters by municipality (103+94+5+3) it guides us
 towards which precincts might be grouped together into a single district
 to prevent dilution of that minority group's voting power.
 
 ```{r vtd-group-by-city}
-cvap_towns <- vtd_cvap %>%
-    filter(pred_group != "White") %>%
-    count(city_town, pred_group)
+cvap_towns <- vtd_demos %>%
+    filter(cvap_pred_group != "White") %>%
+    count(city_town, cvap_pred_group)
 
 cvap_towns %>%
     rename(`City/Town`=city_town,
-           `Predominant Group`=pred_group,
+           `Predominant Group`=cvap_pred_group,
            `Precinct Count`=n) %>%
     arrange(desc(`Precinct Count`)) %>%
     kbl(caption="Number of plausibly minority precincts by city/town") %>%
@@ -287,36 +236,27 @@ representation shows the limited number and concentration of such
 districts.
 
 ```{r vtd-minority-map, layout="l-page", fig.cap="*Predominant group for all MA precincts*"}
-ma_vtd_cvap <- voting_districts(state="MA", cb=TRUE) %>%
-    st_transform(6491) %>%
-    select(vtd_fips = GEOID20, geometry) %>%
-    right_join(vtd_cvap, by="vtd_fips") %>%
-    mutate(name = str_c(city_town, Ward, Pct, sep=" ")) %>%
-    relocate(name)
-
 color_list <- viridis(4)
 group_colors <- c(Black_and_Hispanic=color_list[4],
                   Black=color_list[1],
                   Hispanic=color_list[2],
                   Asian=color_list[3],
                   White=NA)
-popup_vars <- c("pred_group", "white_cvap_pct", "black_cvap_pct",
-                "hispanic_cvap_pct", "asian_cvap_pct")
+popup_vars <- c("cvap_pred_group", "cvap_white_pct", "cvap_black_pct",
+                "cvap_hispanic_pct", "cvap_asian_pct")
 
-ma_outline <- read_sf("../../_gis/outline25k/OUTLINE25K_POLY.shp", as_tibble=TRUE)
 cvap_town_outlines <- ma_towns %>% filter(city_town %in% unique(cvap_towns$city_town))
 
-
-pred_group_map <- (tm_shape(ma_vtd_cvap) +
+pred_group_map <- (tm_shape(vtd_geom) +
                        tm_borders(lwd=0.05) +
-                       tm_fill(col="pred_group",
+                       tm_fill(col="cvap_pred_group",
                                alpha=1,
                                title="",
                                palette=group_colors) +
                        tm_shape(cvap_town_outlines) +
                        tm_borders(lwd=0.6) +
                        tm_text(text="city_town", size=0.5, xmod=-1.25) +
-                       tm_shape(ma_outline) +
+                       tm_shape(ma_towns) +
                        tm_borders(lwd=0.7))
 
 tmap_mode(mode="plot")
@@ -329,13 +269,13 @@ elect a minority candidate of choice.
 
 ```{r cvap-detail, layout="l-body-outset", fig.cap="*Cities with large minority voting blocks*"}
 cvap_detail_map <- function(city_towns, fig_title, legend_show) {
-    (tm_shape((ma_vtd_cvap %>% filter(city_town %in% city_towns))) +
+    (tm_shape((vtd_geom %>% filter(city_town %in% city_towns))) +
      tm_borders(lwd=0.5, col="black") +
-     tm_fill(col="pred_group",
+     tm_fill(col="cvap_pred_group",
              alpha=1,
              title="",
              palette=group_colors) +
-     tm_shape((cvap_town_outlines %>% filter(city_town %in% city_towns))) +
+     tm_shape((ma_towns %>% filter(city_town %in% city_towns))) +
                        tm_borders(lwd=1) +
                        tm_text(text="city_town", size=0.75, xmod=4) +
      tm_layout(title=fig_title, title.size=0.7, legend.show=legend_show))
@@ -358,10 +298,10 @@ tmap_arrange(springfield_cvap_map,
 ```
 
 ```{r proto-dist-pops}
-springfield_cvap <- ma_vtd_cvap %>% filter(city_town %in% c("Springfield"))
-essex_1_cvap <- ma_vtd_cvap %>% filter(city_town %in% c("Haverhill", "Methuen", "Lawrence"))
-boston_cvap <- ma_vtd_cvap %>% filter(city_town %in% c("Boston"))
-brockt_rand_cvap <- ma_vtd_cvap %>% filter(city_town %in% c("Brockton", "Randolph"))
+## springfield_cvap <- ma_vtd_cvap %>% filter(city_town %in% c("Springfield"))
+## essex_1_cvap <- ma_vtd_cvap %>% filter(city_town %in% c("Haverhill", "Methuen", "Lawrence"))
+## boston_cvap <- ma_vtd_cvap %>% filter(city_town %in% c("Boston"))
+## brockt_rand_cvap <- ma_vtd_cvap %>% filter(city_town %in% c("Brockton", "Randolph"))
 ```
 
 ## Districts with Minority Power
@@ -377,24 +317,22 @@ group_colors_1 <- c(Black_and_Hispanic=color_list_1[4],
                     Hispanic=color_list_1[2],
                     Asian=color_list_1[3],
                     White=color_list_1[5])
-popup_vars_1 <- c("pred_group", "white_cvap_pct", "black_cvap_pct",
-                  "hispanic_cvap_pct", "asian_cvap_pct")
+popup_vars_1 <- c("cvap_pred_group", "cvap_white_pct", "cvap_black_pct",
+                  "cvap_hispanic_pct", "cvap_asian_pct")
 
 senate_geometry <- function(dist_number) {
     sen_geom %>% filter(Number == dist_number)
 }
 
-senate_precincts <- function(sen_dist) {
-    st_intersection(sen_dist, ma_vtd_cvap) %>%
-        filter(st_area(geometry) > seven_five_k_m_sq,
-               cvap_total > 0) %>%
-        relocate(name)
+senate_precincts <- function(n) {
+    sen_vtd_comp %>%
+        filter(district_num == n)
 }
 
 senate_map <- function(sen_dist, sen_pcts) {
     (tm_shape(sen_pcts) +
      tm_borders(lwd=0.75) +
-     tm_fill(col="pred_group",
+     tm_fill(col="cvap_pred_group",
              alpha=0.5,
              title="",
              palette=group_colors_1,
@@ -408,7 +346,7 @@ senate_map <- function(sen_dist, sen_pcts) {
 
 ```{r sen-hampden-map}
 sen_3 <- senate_geometry(3)
-sen_pcts_3 <- senate_precincts(sen_3)
+sen_pcts_3 <- senate_precincts(3)
 sen_3_map <- senate_map(sen_3, sen_pcts_3)
 tmap_leaflet(sen_3_map)
 ```
@@ -416,12 +354,12 @@ tmap_leaflet(sen_3_map)
 ```{r sen-hampden}
 summarize_dist <- function(sen_pcts) {
     sen_pcts %>%
-        summarize(total_pop = sum(total_pop),
-                  cvap_total = sum(cvap_total),
-                  cvap_hispanic = sum(cvap_hispanic),
-                  cvap_black = sum(cvap_black),
-                  cvap_asian = sum(cvap_asian),
-                  cvap_white = sum(cvap_white),
+        summarize(total_pop = sum(total_pop_2020),
+                  cvap_total = sum(cvap_2019_total),
+                  cvap_hispanic = sum(cvap_2019_hispanic),
+                  cvap_black = sum(cvap_2019_black),
+                  cvap_asian = sum(cvap_2019_asian),
+                  cvap_white = sum(cvap_2019_white),
                   cvap_hispanic_pct = percent(cvap_hispanic/cvap_total, 0),
                   cvap_black_pct = percent(cvap_black/cvap_total, 0),
                   cvap_asian_pct = percent(cvap_asian/cvap_total, 0),
@@ -459,7 +397,7 @@ a factor.
 
 ```{r first-essex-redist, fig.cap="*First Essex District*"}
 sen_19 <- senate_geometry(19)
-sen_pcts_19 <- senate_precincts(sen_19)
+sen_pcts_19 <- senate_precincts(19)
 sen_19_map <- senate_map(sen_19, sen_pcts_19)
 tmap_leaflet(sen_19_map)
 ```
@@ -487,7 +425,7 @@ Mass. Numbers State Sentate primary overview).
 
 ```{r second-suffolk-redist, fig.cap="*Second Suffolk District*"}
 sen_29 <- senate_geometry(29)
-sen_pcts_29 <- senate_precincts(sen_29)
+sen_pcts_29 <- senate_precincts(29)
 sen_29_map <- senate_map(sen_29, sen_pcts_29)
 tmap_leaflet(sen_29_map)
 ```
@@ -505,7 +443,7 @@ summarize_dist(sen_pcts_29) %>%
 
 ```{r middlesex-and-suffolk-redist, layout="l-body-outset", fig.cap="*Middlesex and Suffolk District*"}
 sen_26 <- senate_geometry(26)
-sen_pcts_26 <- senate_precincts(sen_26)
+sen_pcts_26 <- senate_precincts(26)
 sen_26_map <- senate_map(sen_26, sen_pcts_26)
 tmap_leaflet(sen_26_map)
 ```
@@ -533,7 +471,7 @@ the state senate.
 
 ```{r spn-redist, layout="l-body-outset", fig.cap="*Second Plymouth and Norfolk District*"}
 sen_34 <- senate_geometry(34)
-sen_pcts_34 <- senate_precincts(sen_34)
+sen_pcts_34 <- senate_precincts(34)
 sen_34_map <- senate_map(sen_34, sen_pcts_34)
 tmap_leaflet(sen_34_map)
 ```
@@ -559,63 +497,16 @@ Edward (D-Boston), if she were to win the primary on September 16th.
 
 ```{r sen-2nd-suffolk-map}
 sen_29 <- senate_geometry(29)
-sen_pcts_29 <- senate_precincts(sen_29)
+sen_pcts_29 <- senate_precincts(29)
 sen_29_map <- senate_map(sen_29, sen_pcts_29)
 tmap_leaflet(sen_29_map)
 ```
 
 ```{r sen-1st-suffolk-map}
 sen_30 <- senate_geometry(30)
-sen_pcts_30 <- senate_precincts(sen_30)
+sen_pcts_30 <- senate_precincts(30)
 sen_30_map <- senate_map(sen_30, sen_pcts_30)
 tmap_leaflet(sen_30_map)
 ```
 
-# ```{r all-districts-map, fig.cap="*Remaining majority minority State Senate Districts*"}
-# sen_3 <- sen_geom %>% filter(Number == 3)
-# sen_towns_pcts_3 <- town_precinct_mix(
-#                         sen_3,
-#                         ma_towns_geom,
-#                         ma_vtds_geom,
-#                         ma_city_town_num_pcts) %>%
-#     mutate(minority_pct = 1 - white_pct)
-# 
-# sen_29 <- sen_geom %>% filter(Number == 29)
-# sen_towns_pcts_29 <- town_precinct_mix(
-#                         sen_29,
-#                         ma_towns_geom,
-#                         ma_vtds_geom,
-#                         ma_city_town_num_pcts) %>%
-#     mutate(minority_pct = 1 - white_pct)
-# 
-# sen_30 <- sen_geom %>% filter(Number == 30)
-# sen_towns_pcts_30 <- town_precinct_mix(
-#                         sen_30,
-#                         ma_towns_geom,
-#                         ma_vtds_geom,
-#                         ma_city_town_num_pcts) %>%
-#     filter(!is.na(white_pct)) %>%
-#     mutate(minority_pct = 1 - white_pct)
-# 
-# maj_min_outlines <- rbind(sen_3, sen_29, sen_30)
-# maj_min_tp <- rbind(sen_towns_pcts_3, sen_towns_pcts_29, sen_towns_pcts_30)
-# 
-# maj_min_map <- (tm_shape(maj_min_tp) +
-#                     tm_borders(lwd=0.5) +
-#                      tm_fill(col="minority_pct",
-#                             style="fixed",
-#                             breaks=c(0, 0.2, 0.5, 0.7, 1),
-#                            palette="PRGn",
-#                             midpoint=0.5,
-#                            alpha=0.7,
-#                            popup.vars=c("PVI", "total_population", "minority_pct", "white_pct", 
-#                                       "black_pct", "hispanic_pct", "asian_pct")) +
-#                     tm_facets(by="District") +
-#                     tm_shape(maj_min_outlines) + tm_borders(lwd=3) +
-#                     tm_facets(by="District") +
-#                     tm_basemap("OpenStreetMap"))
-# 
-# ## tmap_leaflet(maj_min_map)
-# maj_min_map
-# ```
 
