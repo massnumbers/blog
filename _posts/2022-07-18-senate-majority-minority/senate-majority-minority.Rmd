@@ -5,9 +5,8 @@ description: |
     Massachusetts but only three give minority voters a robust chance of
     electing their candidate of choice
 author: Brent Benson
-date: 2022-07-22
+date: 2022-08-20
 citation: false
-preview: https://www.massnumbers.us/images/middlesex_and_suffolk_redist.png
 output:
   distill::distill_article:
     self_contained: false
