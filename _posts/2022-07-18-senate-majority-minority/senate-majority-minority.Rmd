@@ -139,11 +139,15 @@ sen_vtds <- blks_sen_dist_vtd %>%
     unnest(geometry) %>%
     select(-blocks)
 
-sen_vtd_comp <- sen_vtds %>%
-    left_join(sen_vtd_demos, by=c("vtd_fips", "district_id", "district_num")) %>%
+sen_dist_names <- sen_dist %>%
+    select(district_num = Number,
+           district = District)
+
+sen_vtd_comp <- sen_dist_names %>%
+    right_join(sen_vtds, by="district_num") %>%
+    left_join(sen_vtd_demos, by=c("vtd_fips", "district_id", "district_num", "partial_pct")) %>%
     add_voting_percents() %>%
     st_as_sf()
-
 ```
 
 ## Redistricting Concepts
@@ -305,9 +309,9 @@ tmap_arrange(springfield_cvap_map,
 
 ## Districts with Minority Power
 
-The Hampden, First Essex, and Second Suffolk Districts contain a large enough
-percentage of a particular minority group to allow for election of a 
-canidate of choice by that minority group.
+The new Hampden, First Essex, and Second Suffolk Districts contain a
+large enough percentage of a particular minority group to allow for
+election of a canidate of choice by that minority group.
 
 ```{r district-map-setup}
 color_list_1 <- viridis(5)
@@ -350,28 +354,68 @@ sen_3_map <- senate_map(sen_3, sen_pcts_3)
 tmap_leaflet(sen_3_map)
 ```
 
-```{r sen-hampden}
+```{r summarize-districts}
 summarize_dist <- function(sen_pcts) {
     sen_pcts %>%
-        summarize(total_pop = sum(total_pop_2020),
+        st_drop_geometry() %>%
+        group_by(district) %>%
+        summarize(total_total = sum(total_pop_2020),
+                  total_hispanic = sum(total_hispanic_2020),
+                  total_black = sum(total_black_2020),
+                  total_asian = sum(total_asian_2020),
+                  total_white = sum(total_white_2020),
+                  total_hispanic_pct = total_hispanic/total_total,
+                  total_black_pct = total_black/total_total,
+                  total_asian_pct = total_asian/total_total,
+                  total_white_pct = total_white/total_total,
+                  total_minority_pct = 1 - total_white_pct,
+                  vap_total = sum(vap_total_2020),
+                  vap_hispanic = sum(vap_hispanic_2020),
+                  vap_black = sum(vap_black_2020),
+                  vap_asian = sum(vap_asian_2020),
+                  vap_white = sum(vap_white_2020),
+                  vap_hispanic_pct = vap_hispanic/vap_total,
+                  vap_black_pct = vap_black/vap_total,
+                  vap_asian_pct = vap_asian/vap_total,
+                  vap_white_pct = vap_white/vap_total,
+                  vap_minority_pct = 1 - vap_white_pct,
                   cvap_total = sum(cvap_2019_total),
                   cvap_hispanic = sum(cvap_2019_hispanic),
                   cvap_black = sum(cvap_2019_black),
                   cvap_asian = sum(cvap_2019_asian),
                   cvap_white = sum(cvap_2019_white),
-                  cvap_hispanic_pct = percent(cvap_hispanic/cvap_total, 0),
-                  cvap_black_pct = percent(cvap_black/cvap_total, 0),
-                  cvap_asian_pct = percent(cvap_asian/cvap_total, 0),
-                  cvap_white_pct = percent(cvap_white/cvap_total, 0)) %>%
-         st_drop_geometry()
+                  cvap_hispanic_pct = cvap_hispanic/cvap_total,
+                  cvap_black_pct = cvap_black/cvap_total,
+                  cvap_asian_pct = cvap_asian/cvap_total,
+                  cvap_white_pct = cvap_white/cvap_total,
+                  cvap_minority_pct = 1 - cvap_white_pct) %>%
+         select(-ends_with(c("_hispanic", "_black", "_asian", "_white"))) %>%
+         pivot_longer(cols=!district,
+                      names_sep="_",
+                      names_to=c("stat", "group")) %>%
+         pivot_wider(id_cols=c(district, stat),
+                     names_from=group,
+                     values_from=value)
 }
 
-summarize_dist(sen_pcts_3) %>%
-    select(total_pop, cvap_total, cvap_hispanic_pct,
-           cvap_black_pct, cvap_asian_pct, cvap_white_pct) %>%
-    kbl(caption="Hampden District Demographics",
-        format.args=list(scientific=FALSE, big.mark=",")) %>%
-    kable_styling()
+summary_table <- function(sen_summary, caption) {
+    sen_summary %>%
+        mutate(stat = str_replace_all(stat, c("total"="Total Population",
+                                              "cvap"="Citizen Voting Age Population",
+                                              "vap"="Voting Age Population")),
+               hispanic = percent(hispanic, 0),
+               black = percent(black, 0),
+               asian = percent(asian, 0),
+               white = percent(white, 0),
+               minority = percent(minority, 0)) %>%
+        kbl(caption=caption,
+            format.args=list(scientific=FALSE, big.mark=",")) %>%
+        kable_styling()
+}
+```
+
+```{r sen-hampden}
+summary_table(summarize_dist(sen_pcts_3), "Hampden District Demographics")
 ```
 
 The Hampden State Senate District contains 90 percent of Springfield's
@@ -380,17 +424,18 @@ has about as many Hispanic voters as non-Hispanic white voters,
 giving that voting block a chance at electing their preferred
 candidate.
 
-The current version of the Hampden district has a similar makeup
-and in 2020 Springfield City Councilor Alex Gomez defeated
-incumbent State Senator James Welch in the Democratic primary.
+The pre-2021 version of the Hampden district had a similar
+characteristics. In 2020 Springfield City Councilor Alex Gomez
+defeated incumbent State Senator James Welch in the Democratic
+primary.
 
 A simple ecological regression model that uses Gomez's margin over
 Welch as the response variable and the CVAP Hispanic percent and
 whether the voter is in Springfield as interacting explanatory
-variables ends up explaining 90 percent of the variation in the
-margin. Hispanic voters were much more likely to vote for Gomez,
-with knowing about Gomez as a Springfield voter also playing
-a factor.
+variables ends up explaining 90 percent of the variation in the margin
+of the 2020 Hampden District Democratic primary vote. Hispanic voters
+were much more likely to vote for Gomez, with knowing about Gomez as a
+Springfield voter also playing a factor.
 
 ## The First Essex District
 
@@ -402,23 +447,23 @@ tmap_leaflet(sen_19_map)
 ```
 
 ```{r sen-first-essex}
-summarize_dist(sen_pcts_19) %>%
-    select(total_pop, cvap_total, cvap_hispanic_pct,
-           cvap_black_pct, cvap_asian_pct, cvap_white_pct) %>%
-    kbl(format.args=list(scientific=FALSE, big.mark=",")) %>%
-    kable_styling()
+summary_table(summarize_dist(sen_pcts_19), "First Essex District Demographics")
 ```
 
-The First Essex State Senate District contains all of Lawrence, all of
-Methuen, and approximately 5 precincts of Haverhill (give or take a
-few census blocks). The previous lines of the district did not include
-Lawrence and instead included a large number of largely white
+The new First Essex State Senate District contains all of Lawrence,
+all of Methuen, and approximately 5 precincts of Haverhill (give or
+take a few census blocks). The previous lines of the district did not
+include Lawrence and instead included a large number of largely white
 surrounding communities. The new lines result in a voting age
 population that is 36% White, 56% Hispanic, 10% Black, and 3%
-Asian. The First Essex incumbent, Diana DiZoglio (D-Methuen), is
+Asian. There is an almost 10 point difference when looking at Hispanic
+citizen voting age population, showing the large assimilation of
+immigrants, and somewhat limiting voting power. 
+
+The First Essex incumbent, Diana DiZoglio (D-Methuen), is
 running for Auditor, leaving an open race for a competitive field of
-candidates from Lawrence and Methuen (check out the upcoming
-Mass. Numbers State Sentate primary overview).
+candidates from Lawrence (Pavel Payano and Doris Rodriguez) and
+Methuen (Eunice Zeigler).
 
 ## The Second Suffolk District
 
@@ -430,21 +475,81 @@ tmap_leaflet(sen_29_map)
 ```
 
 ```{r sen-second-suffolk}
-summarize_dist(sen_pcts_29) %>%
-    select(total_pop, cvap_total, cvap_hispanic_pct,
-           cvap_black_pct, cvap_asian_pct, cvap_white_pct) %>%
-    kbl(format.args=list(scientific=FALSE, big.mark=",")) %>%
-    kable_styling()
+summary_table(summarize_dist(sen_pcts_29), "Second Suffolk District Demographics")
 ```
 
+The State Senate redistricting challenge in Boston is to create a
+district that gives candidate of choice power to black voters in
+Boston, whose numbers are large, but not large enough to give voting
+majorities in two districts. The 2020-2021 Senate redistricters
+shifted majority-black precincts from the First Suffolk District
+to the Second Suffolk, give a black citizen age voting population
+of 47%.
+
+There is a very competitive 2022 Democratic primary for the Second
+Suffolk District featuring Miniard Culpepper, Nika Elugardo, James
+Grant, Liz Miranda, and Dianne Wilkerson.
+
+## The remaining majority minority districts
+
+While there are three more majority-minority State Senate
+districts, none of contain a large enough block of minority
+voters to provide candidate of choice power to any one
+minority group.
+
+## The Second Plymouth and Norfolk District
+
+```{r spn-redist, fig.cap="*Second Plymouth and Norfolk District*"}
+sen_34 <- senate_geometry(34)
+sen_pcts_34 <- senate_precincts(34)
+sen_34_map <- senate_map(sen_34, sen_pcts_34)
+tmap_leaflet(sen_34_map)
+```
+
+```{r sen-spn-summary}
+summary_table(summarize_dist(sen_pcts_34), "Second Plymouth and Norfolk District Demographics")
+```
+
+The Second Plymouth and Norfolk District was a late-comer to the
+majority minority district additions during the latest redistricting
+process. The first draft of the senate redistricting plan left the
+Brockton-based district almost unchanged and grouped with the mostly
+white surrounding suburb of Hanover, Plympton and Easton. [Pressure
+from redistricting advocacy
+groups](https://www.bostonglobe.com/2021/10/19/metro/under-pressure-state-senate-redraws-map-adding-new-majority-minority-district-brockton/)
+led to a plan which extended the district through Avon into parts of
+Randolph that moved the demographics of the district into majority
+minority, while moving the white suburbs into adjacent districts.
+
+The newly configured district has attracted an experienced Democratic
+challenger in Randolph Town Councilor Katrina Huff-Larmond who could
+increase the number of black women in the senate above one, Lydia
+Edward (D-Boston), if she were to win the primary on September 16th.
+
+
+## The First Suffolk District
+
+```{r sen-1st-suffolk-map}
+sen_30 <- senate_geometry(30)
+sen_pcts_30 <- senate_precincts(30)
+sen_30_map <- senate_map(sen_30, sen_pcts_30)
+tmap_leaflet(sen_30_map)
+```
+```{r sen-1st-suffolk-summary}
+summary_table(summarize_dist(sen_pcts_30), "First Suffolk District Demographics")
+```
 
 ## The Middlesex and Suffolk District
 
-```{r middlesex-and-suffolk-redist, layout="l-body-outset", fig.cap="*Middlesex and Suffolk District*"}
+```{r middlesex-and-suffolk-redist, fig.cap="*Middlesex and Suffolk District*"}
 sen_26 <- senate_geometry(26)
 sen_pcts_26 <- senate_precincts(26)
 sen_26_map <- senate_map(sen_26, sen_pcts_26)
 tmap_leaflet(sen_26_map)
+```
+
+```{r sen-m-and-s-summary}
+summary_table(summarize_dist(sen_pcts_26), "Middlesex and Suffolk District Demographics")
 ```
 
 The Middelsex and Suffolk state senate district represented by Sal
@@ -465,47 +570,4 @@ Senate District. The Third Suffolk is not majority minority, but will
 continue to be represented by Edwards, the only black woman in the
 Massachusetts State Senate, and one of only three people of color in
 the state senate.
-
-## The Second Plymouth and Norfolk District
-
-```{r spn-redist, layout="l-body-outset", fig.cap="*Second Plymouth and Norfolk District*"}
-sen_34 <- senate_geometry(34)
-sen_pcts_34 <- senate_precincts(34)
-sen_34_map <- senate_map(sen_34, sen_pcts_34)
-tmap_leaflet(sen_34_map)
-```
-
-The Second Plymouth and Norfolk District was a late-comer to the
-majority minority district additions during the latest redistricting
-process. The first draft of the senate redistricting plan left the
-Brockton-based district almost unchanged and grouped with the mostly
-white surrounding suburb of Hanover, Plympton and Easton. [Pressure
-from redistricting advocacy
-groups](https://www.bostonglobe.com/2021/10/19/metro/under-pressure-state-senate-redraws-map-adding-new-majority-minority-district-brockton/)
-led to a plan which extended the district through Avon into parts of
-Randolph that moved the demographics of the district into majority
-minority, while moving the white suburbs into adjacent districts.
-
-The newly configured district has attracted an experienced Democratic
-challenger in Randolph Town Councilor Katrina Huff-Larmond who could
-increase the number of black women in the senate above one, Lydia
-Edward (D-Boston), if she were to win the primary on September 16th.
-
-## The remaining majority minority districts
-
-
-```{r sen-2nd-suffolk-map}
-sen_29 <- senate_geometry(29)
-sen_pcts_29 <- senate_precincts(29)
-sen_29_map <- senate_map(sen_29, sen_pcts_29)
-tmap_leaflet(sen_29_map)
-```
-
-```{r sen-1st-suffolk-map}
-sen_30 <- senate_geometry(30)
-sen_pcts_30 <- senate_precincts(30)
-sen_30_map <- senate_map(sen_30, sen_pcts_30)
-tmap_leaflet(sen_30_map)
-```
-
 
