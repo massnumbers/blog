@@ -147,6 +147,8 @@ sen_vtd_comp <- sen_dist_names %>%
     right_join(sen_vtds, by="district_num") %>%
     left_join(sen_vtd_demos, by=c("vtd_fips", "district_id", "district_num", "partial_pct")) %>%
     add_voting_percents() %>%
+    mutate(name = ward_precinct_name(city_town, Ward, Pct)) %>%
+    relocate(name) %>%
     st_as_sf()
 ```
 
@@ -350,7 +352,7 @@ senate_map <- function(sen_dist, sen_pcts) {
 ```{r sen-hampden-map}
 sen_3 <- senate_geometry(3)
 sen_pcts_3 <- senate_precincts(3)
-sen_3_map <- senate_map(sen_3, sen_pcts_3)
+sen_3_map <- senate_map(sen_3, (sen_pcts_3 %>% filter(Ward != "1")))
 tmap_leaflet(sen_3_map)
 ```
 
@@ -400,6 +402,7 @@ summarize_dist <- function(sen_pcts) {
 
 summary_table <- function(sen_summary, caption) {
     sen_summary %>%
+        select(-district) %>%
         mutate(stat = str_replace_all(stat, c("total"="Total Population",
                                               "cvap"="Citizen Voting Age Population",
                                               "vap"="Voting Age Population")),
@@ -531,13 +534,25 @@ Edward (D-Boston), if she were to win the primary on September 16th.
 
 ```{r sen-1st-suffolk-map}
 sen_30 <- senate_geometry(30)
-sen_pcts_30 <- senate_precincts(30)
+sen_pcts_30 <- senate_precincts(30) %>%
+    erase_water(area_threshold=0.6) %>%
+    st_make_valid()
+    
 sen_30_map <- senate_map(sen_30, sen_pcts_30)
 tmap_leaflet(sen_30_map)
 ```
 ```{r sen-1st-suffolk-summary}
 summary_table(summarize_dist(sen_pcts_30), "First Suffolk District Demographics")
 ```
+
+The First Suffolk District is currently represented by Nick Collins of
+South Boston. While the seat was held by Linda Dorcena Forry of
+Dorchester from 2013 through 2018, the demographics of the district
+are not particularly favorable for electing a black state senator. The
+2020-2021 senate redistricting committe chose to shore up the Second
+Suffolk District to give its black voters the ability to elect their
+candidate of choice, leaving the First Suffolk with a black citizen
+voting age population of around 23%.
 
 ## The Middlesex and Suffolk District
 
@@ -553,21 +568,8 @@ summary_table(summarize_dist(sen_pcts_26), "Middlesex and Suffolk District Demog
 ```
 
 The Middelsex and Suffolk state senate district represented by Sal
-DiDomenico (D-Everett) has been redrawn adding diverse sections of
+DiDomenico (D-Everett) has been redrawn adding  sections of
 Cambridgeport and East Cambridge, while removing parts of Boston's
-West End, Allston, and Brighton neighborhoods. The district ends up
-with a demographic mix of 46% White, 24% Hispanic, 12% Black, and 15%
-Asian. The previous incarnation of this district would have been a
-majority minority district with the latest demographic information,
-but the new lines reinforce its majority minority demographic.
-
-While DiDomenico does not have primary or general election challenger,
-Lydia Edwards, the incumbent of the current First Suffolk and
-Middlesex District which contains some of the same Cambridgeport and
-East Cambridge neighborhoods as the new Middlesex and Suffolk
-district, is running unchallenged in the new Third Suffolk State
-Senate District. The Third Suffolk is not majority minority, but will
-continue to be represented by Edwards, the only black woman in the
-Massachusetts State Senate, and one of only three people of color in
-the state senate.
-
+West End, Allston, and Brighton neighborhoods. While the overall
+population is 58% minority, the citizen voting age population is 39%
+minority and the largest minority voting block are hispanics at 17%.
