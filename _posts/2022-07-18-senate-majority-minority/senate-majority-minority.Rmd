@@ -15,6 +15,7 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE)
 options(digits=1, knitr.kable.NA="")
+tmap_options(check.and.fix=TRUE)
 library(kableExtra)
 library(formattable)
 library(tidyverse)
@@ -157,8 +158,8 @@ sen_vtd_comp <- sen_dist_names %>%
 The Massachusetts State Senate lines have been redrawn by the
 legislature after the 2020 Census as required by the constitution.
 For a guide to the redistricting principles used by the state
-legislatures, check out the [Executive Summary of the Redistricting
-Red
+legislatures, a good reference is the [Executive Summary of the
+Redistricting Red
 Book](https://www.ncsl.org/Portals/1/Documents/Redistricting/Exec_Summary_2020.pdf),
 published by the National Conference of State Legislatures.
 
@@ -181,7 +182,7 @@ evaluating redistricting plans, it is usually an oversimplification which does
 not addequately address minority voting block dilution. In particular, minority
 groups do not usually vote as a monolith. A district with 25% black voters and
 30% hispanic voters is technically majority-minority, but gives neither the
-black voters nor the Hispanic voters the ability to elect their preferred
+black voters nor the hispanic voters the ability to elect their preferred
 candidate. (In practice, redistricting bodies can use techniques like
 ecological regression to analyze and account for historical voting patterns and
 tendencies.)
@@ -352,7 +353,7 @@ senate_map <- function(sen_dist, sen_pcts) {
 ```{r sen-hampden-map}
 sen_3 <- senate_geometry(3)
 sen_pcts_3 <- senate_precincts(3)
-sen_3_map <- senate_map(sen_3, (sen_pcts_3 %>% filter(Ward != "1")))
+sen_3_map <- senate_map(sen_3, sen_pcts_3)
 tmap_leaflet(sen_3_map)
 ```
 
@@ -423,7 +424,7 @@ summary_table(summarize_dist(sen_pcts_3), "Hampden District Demographics")
 
 The Hampden State Senate District contains 90 percent of Springfield's
 precincts and 60 percent of Chicopee's precincts. The district
-has about as many Hispanic voters as non-Hispanic white voters,
+has about as many hispanic voters as non-hispanic white voters,
 giving that voting block a chance at electing their preferred
 candidate.
 
@@ -433,10 +434,10 @@ defeated incumbent State Senator James Welch in the Democratic
 primary.
 
 A simple ecological regression model that uses Gomez's margin over
-Welch as the response variable and the CVAP Hispanic percent and
+Welch as the response variable and the CVAP hispanic percent and
 whether the voter is in Springfield as interacting explanatory
 variables ends up explaining 90 percent of the variation in the margin
-of the 2020 Hampden District Democratic primary vote. Hispanic voters
+of the 2020 Hampden District Democratic primary vote. hispanic voters
 were much more likely to vote for Gomez, with knowing about Gomez as a
 Springfield voter also playing a factor.
 
@@ -459,9 +460,9 @@ take a few census blocks). The previous lines of the district did not
 include Lawrence and instead included a large number of largely white
 surrounding communities. The new lines result in a voting age
 population that is 36% White, 56% Hispanic, 10% Black, and 3%
-Asian. There is an almost 10 point difference when looking at Hispanic
+Asian. There is an almost 10 point difference when looking at hispanic
 citizen voting age population, showing the large assimilation of
-immigrants, and somewhat limiting voting power. 
+immigrants, and somewhat limiting voting power.
 
 The First Essex incumbent, Diana DiZoglio (D-Methuen), is
 running for Auditor, leaving an open race for a competitive field of
@@ -538,7 +539,7 @@ sen_pcts_30 <- senate_precincts(30) %>%
     erase_water(area_threshold=0.6) %>%
     st_make_valid()
     
-sen_30_map <- senate_map(sen_30, sen_pcts_30)
+sen_30_map <- senate_map(sen_30, (sen_pcts_30 %>% filter(Ward != "1")))
 tmap_leaflet(sen_30_map)
 ```
 ```{r sen-1st-suffolk-summary}
