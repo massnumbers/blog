@@ -5,7 +5,7 @@ description: |
     Massachusetts but only three give minority voters a robust chance of
     electing their candidate of choice
 author: Brent Benson
-date: 2022-08-20
+date: 2022-08-22
 citation: false
 output:
   distill::distill_article:
@@ -15,7 +15,6 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE)
 options(digits=1, knitr.kable.NA="")
-tmap_options(check.and.fix=TRUE)
 library(kableExtra)
 library(formattable)
 library(tidyverse)
@@ -27,6 +26,7 @@ library(tidycensus)
 library(tigris)
 library(units)
 library(nominatimlite)
+tmap_options(check.and.fix=TRUE)
 ```
 
 ```{r senate-districts}
@@ -153,6 +153,21 @@ sen_vtd_comp <- sen_dist_names %>%
     st_as_sf()
 ```
 
+## Overview
+
+This deep-dive on the 2020-2021 Massachusetts State Senate
+redistricting focuses on the Voting Rights Act's requirement to create
+districts that disallow the dilution of minority voting blocks. By
+looking at the predominant voting group in each Massachusetts precinct
+we see the opportunity and limits of what can be achieved in
+for Massachusetts State Senate districts.
+
+While there are six state senate districts that are technically
+majority-minority in the newly created districts, only three
+provide a particular minority voting block with the power to
+elect its candidate of choice, and that is the best that can be
+done given Massachusetts voter demographics.
+
 ## Redistricting Concepts
 
 The Massachusetts State Senate lines have been redrawn by the
@@ -177,15 +192,16 @@ redistricting in the general case, it is also illegal to dilute
 concentrations of a minority voting block, resulting in that voting
 block not being able to elect its candidate of choice.
 
-While the short-hand concept of a majority-minority district is often used when
-evaluating redistricting plans, it is usually an oversimplification which does
-not addequately address minority voting block dilution. In particular, minority
-groups do not usually vote as a monolith. A district with 25% black voters and
-30% hispanic voters is technically majority-minority, but gives neither the
-black voters nor the hispanic voters the ability to elect their preferred
+While the short-hand concept of a majority-minority district is often
+used when evaluating redistricting plans, it is usually an
+oversimplification which does not addequately address minority voting
+block dilution. In particular, minority groups do not usually vote as
+a monolith. A district with 25% black voters and 30% hispanic voters
+is technically majority-minority, but gives neither the black voters
+nor the hispanic voters the ability to elect their preferred
 candidate. (In practice, redistricting bodies can use techniques like
-ecological regression to analyze and account for historical voting patterns and
-tendencies.)
+ecological regression to analyze and account for historical voting
+patterns and tendencies to understand the voting blocks in play.)
 
 The newly drawn 2020-2021 Massachusetts State Senate districts
 increase the number of majority-minority districts from
@@ -197,15 +213,17 @@ to do any better at this time.
 
 ## Concentrations of Minority Voting Blocks
 
-Let's first look at the 2,152 voting precincts in Massachusetts by flagging 
-any precinct that has a citizen votaing age population (CVAP) for a
-minority group that is over 40% of the total citizen voting age population.
+Let's first look at the 2,152 voting precincts in Massachusetts by
+flagging any precinct that has a citizen voting age population (CVAP)
+for a minority group that is over 40% of the total citizen voting age
+population.
 
 We use citizen voting age population because that is the actual
 number of people who are eligible to vote, a better determinant of
-voting power than total population. When we look at the population
-numbers used to equally divide the districts, we will use total
-population, as required by the constitution.
+voting power than total population. We will also use voting age
+population and overall population numbers when looking at specific
+districts, but CVAP makes sense as the number to consider for
+voting fairness.
 
 ```{r vtd-minority-precints}
 vtd_demos %>%
@@ -218,10 +236,10 @@ vtd_demos %>%
     kable_styling()
 ```
 
-If we look at the municipality of the 204 voting precincts that have a
-critical mass of minority voters by municipality (103+94+5+3) it guides us
-towards which precincts might be grouped together into a single district
-to prevent dilution of that minority group's voting power.
+If we look at the municipality of the 203 voting precincts that have a
+critical mass of minority voters (102+94+5+3) it guides us towards
+which precincts might be grouped together into a single district to
+prevent dilution of that minority group's voting power.
 
 ```{r vtd-group-by-city}
 cvap_towns <- vtd_demos %>%
@@ -301,13 +319,6 @@ tmap_arrange(springfield_cvap_map,
              boston_cvap_map,
              brockt_rand_cvap_map,
              ncol=2)
-```
-
-```{r proto-dist-pops}
-## springfield_cvap <- ma_vtd_cvap %>% filter(city_town %in% c("Springfield"))
-## essex_1_cvap <- ma_vtd_cvap %>% filter(city_town %in% c("Haverhill", "Methuen", "Lawrence"))
-## boston_cvap <- ma_vtd_cvap %>% filter(city_town %in% c("Boston"))
-## brockt_rand_cvap <- ma_vtd_cvap %>% filter(city_town %in% c("Brockton", "Randolph"))
 ```
 
 ## Districts with Minority Power
@@ -433,13 +444,14 @@ characteristics. In 2020 Springfield City Councilor Alex Gomez
 defeated incumbent State Senator James Welch in the Democratic
 primary.
 
-A simple ecological regression model that uses Gomez's margin over
-Welch as the response variable and the CVAP hispanic percent and
-whether the voter is in Springfield as interacting explanatory
-variables ends up explaining 90 percent of the variation in the margin
-of the 2020 Hampden District Democratic primary vote. hispanic voters
-were much more likely to vote for Gomez, with knowing about Gomez as a
-Springfield voter also playing a factor.
+A simple precinct-level ecological regression model that uses Gomez's
+margin over Welch as the response variable and the CVAP hispanic
+percent and whether the voter is in Springfield as interacting
+explanatory variables ends up explaining 90 percent of the variation
+in the margin of the 2020 Hampden District Democratic primary
+vote. Hispanic voters were much more likely to vote for Gomez,
+especially those who lived in Springfield an knew of Gomez from the
+City Council.
 
 ## The First Essex District
 
@@ -454,15 +466,18 @@ tmap_leaflet(sen_19_map)
 summary_table(summarize_dist(sen_pcts_19), "First Essex District Demographics")
 ```
 
-The new First Essex State Senate District contains all of Lawrence,
-all of Methuen, and approximately 5 precincts of Haverhill (give or
-take a few census blocks). The previous lines of the district did not
-include Lawrence and instead included a large number of largely white
-surrounding communities. The new lines result in a voting age
-population that is 36% White, 56% Hispanic, 10% Black, and 3%
-Asian. There is an almost 10 point difference when looking at hispanic
-citizen voting age population, showing the large assimilation of
-immigrants, and somewhat limiting voting power.
+The First Essex District is the first successful attempt to create a
+majority hispanic Lawrence-based State Senate district by carving out
+largely hispanic precincts in Haverhill to add to Lawrence's large
+hispanic population.
+
+The district contains all of Lawrence, all of Methuen, and
+approximately 11 precincts of Haverhill (give or take a few census
+blocks). The new lines result in a voting age population that is
+36% White, 56% Hispanic, 10% Black, and 3% Asian. There is an almost
+10 point difference when looking at hispanic citizen voting age
+population, showing the large assimilation of immigrants, and somewhat
+limiting voting power.
 
 The First Essex incumbent, Diana DiZoglio (D-Methuen), is
 running for Auditor, leaving an open race for a competitive field of
@@ -483,7 +498,7 @@ summary_table(summarize_dist(sen_pcts_29), "Second Suffolk District Demographics
 ```
 
 The State Senate redistricting challenge in Boston is to create a
-district that gives candidate of choice power to black voters in
+district that gives candidate-of-choice power to black voters in
 Boston, whose numbers are large, but not large enough to give voting
 majorities in two districts. The 2020-2021 Senate redistricters
 shifted majority-black precincts from the First Suffolk District
@@ -491,8 +506,8 @@ to the Second Suffolk, give a black citizen age voting population
 of 47%.
 
 There is a very competitive 2022 Democratic primary for the Second
-Suffolk District featuring Miniard Culpepper, Nika Elugardo, James
-Grant, Liz Miranda, and Dianne Wilkerson.
+Suffolk District featuring Miniard Culpepper, Nika Elugardo, Liz
+Miranda, and Dianne Wilkerson.
 
 ## The remaining majority minority districts
 
@@ -574,3 +589,11 @@ Cambridgeport and East Cambridge, while removing parts of Boston's
 West End, Allston, and Brighton neighborhoods. While the overall
 population is 58% minority, the citizen voting age population is 39%
 minority and the largest minority voting block are hispanics at 17%.
+
+## Conclusion
+
+The Massachusetts State Senate redistricting committee adhered
+to the letter and the spirit of the Voting Rights Act by
+doing its best to group together minority voting blocks and
+create districts with true minority voting power.
+

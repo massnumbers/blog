@@ -12,7 +12,7 @@
       <link>https://www.massnumbers.us</link>
     </image>
     <generator>Distill</generator>
-    <lastBuildDate>Sat, 20 Aug 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 22 Aug 2022 00:00:00 +0000</lastBuildDate>
     <item>
       <title>A look at MA State Senate Redistricting</title>
       <dc:creator>Brent Benson</dc:creator>
@@ -21,18 +21,8 @@
 Massachusetts but only three give minority voters a robust chance of
 electing their candidate of choice</description>
       <guid>https://www.massnumbers.us/posts/2022-07-18-senate-majority-minority</guid>
-      <pubDate>Sat, 20 Aug 2022 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 22 Aug 2022 00:00:00 +0000</pubDate>
       <media:content url="https://www.massnumbers.us/posts/2022-07-18-senate-majority-minority/senate-majority-minority_files/figure-html5/vtd-minority-map-1.png" medium="image" type="image/png" width="1248" height="768"/>
-    </item>
-    <item>
-      <title>An overview of the 2022 State Senate Primaries</title>
-      <dc:creator>Brent Benson</dc:creator>
-      <link>https://www.massnumbers.us/posts/2022-07-05-state-senate-primary-preview</link>
-      <description>A short discussion of redistricting and an overview
-of each State Senate primary race.</description>
-      <guid>https://www.massnumbers.us/posts/2022-07-05-state-senate-primary-preview</guid>
-      <pubDate>Sat, 09 Jul 2022 00:00:00 +0000</pubDate>
-      <media:content url="https://www.massnumbers.us/images/berk_hamp_frank_hamp.png" medium="image" type="image/png"/>
     </item>
     <item>
       <title>Welcome to Mass. Numbers</title>
@@ -41,7 +31,7 @@ of each State Senate primary race.</description>
       <description>Welcome to the Mass. Numbers blog. Mass. Numbers takes
 a quantiative look as Massachusetts politics and policy.</description>
       <guid>https://www.massnumbers.us/posts/welcome</guid>
-      <pubDate>Tue, 05 Jul 2022 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 21 Aug 2022 00:00:00 +0000</pubDate>
       <media:content url="https://www.massnumbers.us/posts/welcome/welcome_files/figure-html5/city-town-map-1.png" medium="image" type="image/png" width="1248" height="768"/>
     </item>
   </channel>
