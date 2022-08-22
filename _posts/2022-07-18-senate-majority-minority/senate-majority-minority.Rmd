@@ -325,7 +325,7 @@ tmap_arrange(springfield_cvap_map,
 
 The new Hampden, First Essex, and Second Suffolk Districts contain a
 large enough percentage of a particular minority group to allow for
-election of a canidate of choice by that minority group.
+election of a candidate of choice by that minority group.
 
 ```{r district-map-setup}
 color_list_1 <- viridis(5)
