@@ -1,13 +1,11 @@
 ---
 title: "An overview of the 2022 State Senate Primaries"
 description: |
-    A short discussion of redistricting and an overview
-    of each State Senate primary race.
+    A look at the ten contested MA State Senate primaries
 author:
   - name: Brent Benson
     url: https://twitter.com/bwbensonjr
 date: 2022-08-25
-draft: true
 citation: false
 preview: https://www.massnumbers.us/images/berk_hamp_frank_hamp.png
 output:
@@ -21,6 +19,7 @@ options(digits=1, knitr.kable.NA="")
 library(kableExtra)
 library(formattable)
 library(tidyverse)
+library(forcats)
 library(sf)
 library(tmap)
 library(readxl)
@@ -33,10 +32,13 @@ library(nominatimlite)
 ```{r senate-districts}
 sen_dist <- read_excel("../../_data/2020/MA_State_Senate_Race_2022.xlsx", sheet="Districts")
 
+leg_ocpf <- read_csv("../../_data/2020/ma_leg_ocpf_summary_july_2022.csv")
+
 sen_cand <- read_csv("../../_data/2020/ma_state_senate_cands_2022_contested_addr.csv") %>%
     rename(Inc = Incumbent) %>%
     mutate(address = str_c(street_address, city_town, "MA", sep=", ")) %>%
-    select(-street_address)
+    select(-street_address) %>%
+    left_join(leg_ocpf, by="cpf_id")
 
 sen_geom <- read_sf("../../_gis/SENATE2021/SENATE2021_POLY.shp", as_tibble=TRUE) %>%
     st_make_valid() %>%
@@ -222,118 +224,30 @@ district_map <- function(sen_dist, towns_pcts, candidates, house_dist_1, house_d
 
 ## Produce a readable version of candidates for a particular Senate district
 candidate_table <- function(candidates, dist_num) {
-    candidates %>%
-        filter(SENDISTNUM == dist_num) %>%
-        select(District,
-               cpf_id,
-               Inc,
+    dist_candidates <- candidates %>%
+        filter(SENDISTNUM == dist_num)
+
+    caption <- str_c((dist_candidates %>%
+                          slice(n=1) %>%
+                          pull(District)),
+                     " candidates (year-to-date $)")
+
+    dist_candidates %>%
+        mutate(Candidate = str_c("[", Candidate, "](", url, '){target="_blank"}', sep="")) %>%
+        select(Inc,
                Candidate,
                Party,
-               city_town) %>%
-        kbl() %>%
+               city_town,
+               receipts,
+               spent = expenditures,
+               cash = end) %>%
+        mutate(receipts = currency(receipts, digits=0),
+               spent = currency(spent, digits=0),
+               cash = currency(cash, digits=0)) %>%
+        kbl(caption=caption) %>%
         kable_styling()
 }
 ```
-
-It may be the middle of summer, but there is a lot going on in Massachusetts
-state legislature campaigns. This post spends some time looking at
-redistricting, specifically the new majority minority state senate districts,
-and then at each of the contested state senate primaries.
-
-## New majority minority districts
-
-The Massachusetts State Senate lines have been redrawn by the legislature after
-the 2020 Census as required by the constitution. One of the goals of the
-Voting Rights Act (VRA) is to encourage majority minority districts to allow
-minority communities to elect the candidate of their choice.
-
-The 2010-2011 MA redistricting based on the 2010 census was signed
-into law on November 21, 2011 and had three majority minority State
-Senate districts: the First Suffolk District running on the eastern
-side of Boston from South Boston down to Mattapan, the Second Suffolk
-District on the western side of Boston from the South End through
-Roxbury and Jamaica Plain into Hyde Park, and the Hampden District
-with West Springfield and most of Springfield and Chicopee.
-
-The most recent 2020-2021 redistricting process led by State Senator
-William Brownsberger (D-Belmont) was able to add three more majority
-minority districts: the First Essex, Middlesex and Suffolk, and Second
-Plymouth and Norfolk.
-
-The First Essex State Senate District contains all of Lawrence, all of
-Methuen, and approximately 5 precincts of Haverhill (give or take a
-few census blocks). The previous lines of the district (the dotted
-line in the map below) did not include Lawrence and instead included a
-large number of largely white communities. The new lines result in a
-voting age population that is 36% White, 56% Hispanic, 10% Black, and
-3% Asian. The First Essex incumbent, Diana DiZoglio (D-Methuen), is
-running for Auditor, leaving an open race for a competitive field of
-candidates from Lawrence and Methuen (see the First Essex primary
-overview below).
-
-```{r first-essex-redist, layout="l-body-outset", fig.cap="*First Essex District*"}
-sen_19 <- sen_geom %>% filter(Number == 19)
-sen_old_19 <- sen_geom_12 %>% filter(SEN_DIST == "First Essex")
-
-sen_towns_pcts_19 <- town_precinct_mix(
-                        sen_19,
-                        ma_towns_geom,
-                        ma_vtds_geom,
-                        ma_city_town_num_pcts) %>%
-    mutate(minority_pct = 1 - white_pct)
-
-sen_19_map <- redistrict_map(sen_19, sen_towns_pcts_19, sen_old_19)
-
-tmap_leaflet(sen_19_map)
-```
-
-The other newly created majority minority is the Middlesex and Suffolk District
-with incumbent Sal DiDomenico (D-Everett). Redistricting has added diverse
-sections of Cambridgeport and East Cambridge, while removing parts of Boston's
-West End, Allston, and Brighton neighborhoods. The district ends up with a
-demographic mix of 46% White, 24% Hispanic, 12% Black, and 15% Asian. DiDomenico
-does not have primary or general election challenger.
-
-```{r middlesex-and-suffolk-redist, layout="l-body-outset", fig.cap="*Middlesex and Suffolk District*"}
-sen_26 <- sen_geom %>% filter(Number == 26)
-sen_old_26 <- sen_geom_12 %>% filter(SEN_DIST == "Middlesex and Suffolk")
-
-sen_towns_pcts_26 <- town_precinct_mix(
-                        sen_26,
-                        ma_towns_geom,
-                        ma_vtds_geom,
-                        ma_city_town_num_pcts) %>%
-    mutate(minority_pct = 1 - white_pct)
-
-sen_26_map <- redistrict_map(sen_26, sen_towns_pcts_26, sen_old_26)
-
-tmap_leaflet(sen_26_map)
-```
-
-```{r spn-redist, layout="l-body-outset", fig.cap="*Second Plymouth and Norfolk District*"}
-sen_34 <- sen_geom %>% filter(Number == 34)
-sen_old_34 <- sen_geom_12 %>% filter(SEN_DIST == "Second Plymouth and Bristol")
-
-sen_towns_pcts_34 <- town_precinct_mix(
-                        sen_34,
-                        ma_towns_geom,
-                        ma_vtds_geom,
-                        ma_city_town_num_pcts) %>%
-    mutate(minority_pct = 1 - white_pct)
-
-sen_34_map <- redistrict_map(sen_34, sen_towns_pcts_34, sen_old_34)
-
-tmap_leaflet(sen_34_map)
-```
-
-The other majority minority State Senate districts are the Springfield-based
-Hampden district of Adam Gomez (D-Springfield), the Boston-based Second Suffolk
-district of Sonia Change-Diaz (D-Boston) who ran an unsuccessful campaign for
-Governor, and the Second Plymouth and Norfolk district with incumbent
-Senator Michael Brady (D-Brockton).
-
-The full State Senate map is given here with dashed lines for previous State
-Senate district lines and some demographics (partisan lean, etc.).
 
 ```{r new-district-map, layout="l-body-outset", fig.cap="*MA State Senate Districts (2022)*"}
 new_sen_map <- (tm_shape(sen_geom) +
@@ -347,33 +261,46 @@ new_sen_map <- (tm_shape(sen_geom) +
                                          "NH_White_Pct",
                                          "Old District",
                                          "primaries")) +
-                    tm_shape(sen_geom_12) +
-                    tm_borders(lwd=2, lty="dashed") +
+                    ## tm_shape(sen_geom_12) +
+                    ## tm_borders(lwd=2, lty="dashed") +
                     tm_basemap("OpenStreetMap"))
 tmap_leaflet(new_sen_map)
 ```
 
 ## State Senate Primary Overview
 
-There are ten State Senate districts with contested primaries. There are three
-Democratic incumbents with primary challengers—Joan Lovely (D-Salem), Walter
-Timility (D-Milton), Michael Brady (D-Brockton)—and one Republican with a
-primary challenge, Patrick O'Connor (R-Weymouth).
+There are ten State Senate districts with contested primaries. There
+are three Democratic incumbents with primary challengers—Joan Lovely
+(D-Salem), Walter Timility (D-Milton), Michael Brady (D-Brockton)—and
+one Republican with a primary challenge, Patrick O'Connor
+(R-Weymouth).
 
-There are five open seats with four having just a Democratic primary, and one
-seat—Hampden, Hampshire and Worcester—with both a Democratic and Republican
-primary.
+There are five open seats. Four of the open seats have a Democratic
+primary only, and one seat—Hampden, Hampshire and Worcester—has
+both a Democratic and Republican primary.
 
 ```{r state-senate-districts}
-sen_dist %>% select(c(District,
-                      PVI,
-                      inc_status,
-                      Incumbent,
-                      primaries)) %>%
-    kbl(caption="2022 State Senate districts, post-redistricting",) %>%
+sen_dist %>%
+    mutate(inc_status = fct_recode(inc_status,
+                                   Dem="Dem_Incumbent",
+                                   GOP="GOP_Incumbent",
+                                   None="No_Incumbent")) %>%
+    select(c(District,
+             PVI,
+             `Inc. Pary`=inc_status,
+              Incumbent,
+              primaries)) %>%
+    kbl(caption="2022 State Senate districts (last incumbent)*",) %>%
     kable_styling()
 ```
 
+## District/Primary Breakdowns
+
+In the following sections focusing on each district/primary race, the
+map shows a measure of partisanship (PVI) of each town (or precinct in
+districts where cities or towns are split), overlaps of any incumbent
+districts, and a small dot indicating the home region of each
+candidate.
 
 ## Berkshire, Hampden, Franklin and Hampshire
 
@@ -392,7 +319,7 @@ ma_sen_cands_1 <- candidate_locations(sen_cand, 1)
 
 ```
 
-```{r bhfh-map, layout="l-body-outset", fig.cap="*Berkshire, Hampden, Franklin and Hampshire*   "}
+```{r bhfh-map, fig.cap="*Berkshire, Hampden, Franklin and Hampshire*   "}
 ma_sen_1_map <- district_map(ma_sen_1, ma_towns_1, ma_sen_cands_1, ma_house_berk_2)
 tmap_leaflet(ma_sen_1_map)
 ```
@@ -407,12 +334,14 @@ the existing and similarly named Berkshire, Hampshire, Franklin and Hampden
 district, Adam Hinds (D-Pittsfield) ran an unsuccessful campaign for Lieutenant
 Governor, leaving this district without an incumbent senator.
 
-The Democratic primary will feature sitting State Representative Paul Mark
-(D-Becket) whose current Second Berkshire State Representative district is 
-outlined in the map, and Williamstown small business manager and activist
-Huff Templeton III. Representative Mark will have a considerable advantage
-as almost a quarter of the Senate district's Democratic primary voters will
-have seen him on the ballot, and likely will have voted for him in the past.
+The Democratic primary will feature sitting State Representative Paul
+Mark (D-Becket) whose current Second Berkshire State Representative
+district is outlined in the map, and Williamstown former small
+business owner and local municipal board member Huff Templeton
+III. Representative Mark will have an advantage as about 20% of the
+Senate district's Democratic primary voters will have seen him on the
+ballot (using an average of vote totals from previous elections), and
+likely will have voted for him in the past.
 
 The D+18 Partisan Voter Index (PVI) will make the winner of the Democratic
 primary the prohibitive favorite in November's general election against
@@ -436,7 +365,7 @@ ma_house_hampd_7 <- ma_house_12 %>%
 ma_sen_cands_4 <- candidate_locations(sen_cand, 4)
 ```
 
-```{r hhw-map, layout="l-body-outset", fig.cap="*Hampden, Hampshire and Worcester*m"}
+```{r hhw-map, fig.cap="*Hampden, Hampshire and Worcester*m"}
 ma_sen_4_map <- district_map(ma_sen_4, ma_towns_pcts_4, ma_sen_cands_4, ma_house_hampd_7)
 
 tmap_leaflet(ma_sen_4_map)
@@ -465,9 +394,8 @@ Levin-Epstein served as Deputy Finance Director for Ed Markey's 2020
 re-election campaign and is bringing her political organizing
 experience to bear on her own campaign this year.
 
-The two GOP candidates are John Harding of East Longmeadow, a former military
-office who says he has been called by God to run, and William Johnson, a
-business owner from Granby.
+The two GOP candidates are John Harding of East Longmeadow, a former
+military office, and William Johnson, a business owner from Granby.
 
 ## First Worcester
 
@@ -484,7 +412,7 @@ ma_towns_pcts_9 <- town_precinct_mix(
 ma_sen_cands_9 <- candidate_locations(sen_cand, 9)
 ```
 
-```{r first-worc-map, layout="l-body-outset", fig.cap="*Hampden, Hampshire and Worcester*m"}
+```{r first-worc-map, fig.cap="*Hampden, Hampshire and Worcester*m"}
 ma_sen_9_map <- district_map(ma_sen_9, ma_towns_pcts_9, ma_sen_cands_9)
 
 tmap_leaflet(ma_sen_9_map)
@@ -504,12 +432,24 @@ Robyn Kennedy of Worcester is the Executive Director or the YWCA of
 Central Massachusetts and has the backing of former Governor Deval
 Patrick and his Worcester-based Lt. Governor Tim Murray.
 
-Joseph Petty is the former mayor of Worcester and has gained the
-endorsement of Senator Ed Markey.
+Joseph Petty has been serving as the mayor of Worcester since 2012 and
+has gained the endorsement of Senator Ed Markey.
+
+Despite the Markey endorsement for Petty, Kennedy has been getting
+support from many of the more progressive groups. Petty has been
+running on his experience, presenting an establishment candidate
+message.
+
+Petty started with $48,859 in his mayoral campaign account when he
+changed its purpose to the State Senate seat in February, 2022, giving
+him a big head start over Kennedy who was starting from
+scratch. Kennedy has since raised approximately two thirds as much as
+Petty, spent about half, and had about 40% of Petty's cash on hand as
+of the end of July.
 
 The winner of the Democratic primary will face undeclared candidate
-Liz Mair of Berlin former online communications director for
-the Republican National Committee. The Democrat will have a strong
+Lisa Mair of Berlin who is running on a platform of informed
+medical consent and lower taxes. The Democrat will have a strong
 advantage in this D+17 district.
 
 ## First Essex
@@ -527,7 +467,7 @@ ma_towns_pcts_19 <- town_precinct_mix(
 ma_sen_cands_19 <- candidate_locations(sen_cand, 19)
 ```
 
-```{r first-essex-map, layout="l-body-outset", fig.cap="*First Essex Senate District*m"}
+```{r first-essex-map, fig.cap="*First Essex Senate District*m"}
 ma_sen_19_map <- district_map(ma_sen_19, ma_towns_pcts_19, ma_sen_cands_19)
 tmap_leaflet(ma_sen_19_map)
 ```
@@ -536,15 +476,18 @@ tmap_leaflet(ma_sen_19_map)
 candidate_table(sen_cand, 19)
 ```
 
-As mentioned in the redistricting section of this post, the First
-Essex district is a new majority minority district containing all of
-Lawrence, all of Methuen, and some inner precincts of Haverhill.
-There is no incumbent senator running as Diana DiZoglio (D-Methuen) is
-running for auditor.
+As mentioned in our[redistricting
+post](https://www.massnumbers.us/posts/2022-07-18-senate-majority-minority/),
+the First Essex district is a new majority-Hispanic district
+containing all of Lawrence, all of Methuen, and some inner precincts
+of Haverhill.  There is no incumbent senator running as Diana DiZoglio
+(D-Methuen) is running for auditor.
 
 Pavel Payano is an at-large City Councilor in Lawrence; Doris
-Rodriguiez is a tax layer with public and private sector
-experience; and Eunice Zeigler is a City Councilor from Methuen.
+Rodriguiez is a tax layer from Lawrence with public and private sector
+experience; and Eunice Zeigler is a City Councilor from Methuen. Payano
+and Zeigler have been able to raise and spend similar amounts
+of campaign funds.
 
 A look at the total number of votes from each of the cities in
 the precincts contained in the First Essex District show that
@@ -584,7 +527,7 @@ ma_towns_pcts_22 <- town_precinct_mix(
 ma_sen_cands_22 <- candidate_locations(sen_cand, 22)
 ```
 
-```{r second-essex-map, layout="l-body-outset", fig.cap="*Second Essex State Senate District*m"}
+```{r second-essex-map, fig.cap="*Second Essex State Senate District*m"}
 ma_sen_22_map <- district_map(ma_sen_22, ma_towns_pcts_22, ma_sen_cands_22)
 
 tmap_leaflet(ma_sen_22_map)
@@ -600,15 +543,29 @@ artist and performer, supporting himself with day jobs as a waiter and
 food delivery driver, and is running in a attempt to diversify the
 legislature with people from atypical political backgrounds.
 
+Senator Lovely's fundraising isn't particularly strong for an
+incumbent State Senator, but challenger Davis's numbers are weaker
+than they appear based on totals. The $27-28,000 raised and spent
+numbers seem reasonable until you look at the particulars. There was a
+mistaken transfer into the account of $15,000 (since transfered out)
+and a mistaken personal expense written as a check from the account
+for $2,483 (since returned), combined with candidate loans to the
+campaign of $2,400 and $1,500 which brings the actual amount raised
+from non-candidate sources to $6,185.
+
 The winner for the Democratic primary will face Republican Damian
 Anketell who seems to have previously run for Essex County Sheriff as
 a Democrat. Anketell has been featured at Mass. GOP events promoted by
 Howie Carr to get a referendum question on the ballot to deny
-drivers licenses for undocumented immigrants.
+drivers licenses for undocumented immigrants. Anketell has made
+the extraordinary move of filling out Office of Campaign and
+Political Finance (OCPF) from CPF D104 which states that he will
+not raise or expend campaign funds in this race.
 
 The D+12 district will likely go to the Democrat, regardless of
 primary outcome, but the incumbency advantage of Lovely would make it
-highly unlikely for a GOP pickup.
+highly unlikely for a GOP pickup, especially with the promise of
+no money raised or spent by the GOP candidate.
 
 ## Second Suffolk
 
@@ -631,7 +588,7 @@ ma_house_15th_suffolk <- ma_house_12 %>%
 ma_sen_cands_29 <- candidate_locations(sen_cand, 29)
 ```
 
-```{r second-suffolk-map, layout="l-body-outset", fig.cap="*Second Suffolk State Senate District*m"}
+```{r second-suffolk-map, fig.cap="*Second Suffolk State Senate District*m"}
 ma_sen_29_map <- district_map(ma_sen_29, ma_towns_pcts_29, ma_sen_cands_29, ma_house_5th_suffolk, ma_house_15th_suffolk)
 
 tmap_leaflet(ma_sen_29_map)
@@ -644,11 +601,12 @@ candidate_table(sen_cand, 29)
 Senator Sonia Chang-Diaz (D-Boston) decided to run for Massachusetts
 Governor, rather than for re-election to the State Senate, leaving the
 true blue Second Suffolk District as an open seat. There are five
-candidates vying for the Democratic nomination and the primary winner
-will take office in January, given that no non-Democratic candidates
-qualified for the race, not to mention its status as the most
-Democratic Massachusetts state senate district with a whopping PVI of
-D+42.
+candidates vying for the Democratic nomination, although James Grant
+does not seem to pursuing a strong campaign, raising money, or
+participating in debates. The primary winner will take office in
+January, given that no non-Democratic candidates qualified for the
+race, not to mention its status as the most Democratic Massachusetts
+state senate district with a whopping PVI of D+42.
 
 There are two sitting State Representatives in the race for the Second
 Suffolk.  Nika Elguardo (D-Jamaica Plain) represents the 15th Suffolk
@@ -658,12 +616,23 @@ District (dashed outline in the map). Neither of these state
 representative districts overlaps with Second Suffolk State Senate
 district to a large extent.
 
-Miniard Culpepper is a Baptist minister, lawyer, and community
-activist. James Grant is a former law enforcement officer and teacher.
+Miniard Culpepper is a Baptist minister, lawyer, community activist,
+and former regional counsel for the Department of Housing and Urban
+Development (HUD).
 
-Diane Wilkerson is a former State Senator who was convicted went to prison for
-accepting bribes related to granting of liquor licenses. She is out of prison
-and again running for public office.
+Diane Wilkerson is a former State Senator who plead guitly to
+extortion charges and spent two and a half years in prison. Wilkerson
+is attempting to make a political comeback, counting on voters to
+forgive the transgressions for which she has paid a steep price.
+
+Culpepper, Elugardo, and Miranda have all raised serious amounts of
+campaign money. Miranda wins the fundraising and spending titles so
+far, having raised $172,074 and spent $188,753. Elugardo has raised
+$102,324 and spent $111,936 this year. Culpepper raised more than
+Elugardo in the same period, $157,273, but has only spent $45,935. It
+is not quite to the point as of July 31 filing that having Culpepper's
+$111,338 left in the bank is a liability, but the closer it gets to
+primary day, the less useful unspent dollars become.
 
 ## First Plymouth and Norfolk
 
@@ -680,7 +649,7 @@ ma_towns_pcts_31 <- town_precinct_mix(
 ma_sen_cands_31 <- candidate_locations(sen_cand, 31)
 ```
 
-```{r fpn-map, layout="l-body-outset", fig.cap="*First Plymouth and Norfolk District*"}
+```{r fpn-map, fig.cap="*First Plymouth and Norfolk District*"}
 ma_sen_31_map <- district_map(ma_sen_31, ma_towns_pcts_31, ma_sen_cands_31)
 
 tmap_leaflet(ma_sen_31_map)
@@ -696,12 +665,15 @@ considered a moderate Republican in the Massachusetts vein. He did
 [vote against the final version of the MA ROE
 Act](https://www.patriotledger.com/story/news/2022/05/03/quincy-residents-protest-draft-opinion-would-overturn-roe-v-wade/9627424002/),
 citing issues of expanding third trimester abortions and removal of
-most parental consent.
+most parental consent, but is a proponent of clean energy and
+universal full-day kindergarten.
 
 Senator O'Connor faces Marshfield Republican Ronald Patuto in the GOP
-primary. There isn't a great deal of information around Patuto's
-candidacy, but his Facebook timeline features promotions anti-masking
-and anti-vax rallies.
+primary. There isn't a great deal of campaign information about Patuto
+on the internet, but [a radio forum on
+WATD](https://959watd.com/blog/2022/08/audio-from-watd-political-forum-for-state-senate-candidates-in-the-plymouth-and-norfolk-district/)
+has Patuto arguing for less regulation of the lobstering business
+where he gets his livelihood, and against public school mask mandates.
 
 While I am not publishing model-based predictions for the primaries,
 this race is one where the general election model shows a big
@@ -712,7 +684,11 @@ win). This contrast demonstrates the power of incumbency and the fact
 that this moderate-for-MA state senate district (it is the 13th most
 Republican-leaning State Senate District) has as a Partisan Voter
 Index (PVI) of D+9, making it an easy-enough Democratic target without
-an incumbent Republican on the ballot.
+a moderate incumbent Republican on the ballot.
+
+However, the Democratic candidate for the First Plymouth and Norfolk
+District, Robert Stephens Jr. Hanson, is nowhere to be found on the
+internet and has not raised any campaign funds as of July 31.
 
 ## Norfolk, Plymouth and Bristol
 
@@ -729,7 +705,7 @@ ma_towns_pcts_33 <- town_precinct_mix(
 ma_sen_cands_33 <- candidate_locations(sen_cand, 33)
 ```
 
-```{r npb-map, layout="l-body-outset", fig.cap="*Norfolk, Plymouth and Bristol District*"}
+```{r npb-map, fig.cap="*Norfolk, Plymouth and Bristol District*"}
 ma_sen_33_map <- district_map(ma_sen_33, ma_towns_pcts_33, ma_sen_cands_33)
 
 tmap_leaflet(ma_sen_33_map)
@@ -748,7 +724,9 @@ Timilty's challenger for the Democratic nomination is Kathleen
 Crogan-Camara who is running on a platform promoting disability
 rights, but is also challenging Timilty with a much more progressive
 view on issues like women's reproductive rights, LGBTQ+ rights, and
-immigrant rights.
+immigrant rights. Crogan-Camara has gotten the endorsement of the
+Planned Parenthood Action Fund and has raised enough money
+to run a creditable campaign.
 
 The winner of the Democratic primary will face another perennial
 candidate, Republican Brian Muello of Braintree who has run
@@ -770,7 +748,7 @@ ma_towns_pcts_34 <- town_precinct_mix(
 ma_sen_cands_34 <- candidate_locations(sen_cand, 34)
 ```
 
-```{r spn-map, layout="l-body-outset", fig.cap="*Second Plymouth and Norfolk*"}
+```{r spn-map, fig.cap="*Second Plymouth and Norfolk*"}
 ma_sen_34_map <- district_map(ma_sen_34, ma_towns_pcts_34, ma_sen_cands_34)
 
 tmap_leaflet(ma_sen_34_map)
@@ -782,10 +760,13 @@ candidate_table(sen_cand, 34)
 
 Another incumbent State Senator facing both a Democratic primary and a
 Republican general election challenger is Michael Brady
-(D-Brockton). As mentioned in the redistricting section, the Second
-Plymouth and Norfolk district is also newly minted majority minority
-district with 49% White, 35% Black, 8% Hispanic, and 3% Asian in
-terms of voting age population.
+(D-Brockton). As mentioned in [our redistricting
+post](https://www.massnumbers.us/posts/2022-07-18-senate-majority-minority/),
+the Second Plymouth and Norfolk district is also newly minted majority
+minority district with 49% White, 35% Black, 8% Hispanic, and 3% Asian
+in terms of voting age population. However, the black citizen voting
+age population is only 28% of the electorate, making this a difficult
+district for a black voting block to elect its candidate of choice.
 
 Senator Brady has weathered some challenges over the past several
 years, having been arrested for drunk driving in 2018 and being
@@ -796,14 +777,16 @@ his probation with a dismissal of charges as per agreement.
 Challenger Katrina Huff-Larmond, a Randolph Town Councilor, is
 campaigning on change, leadership, a deeper connection with the
 people. In addition, Huff-Larmond participated in the redistricting
-process and by running, is providing this newly majority minority
-district the choice of a candidate of color.
+process and created a more diverse senate district in the process.
+Huff-Larmond has raised $17,314 for the race so far, not
+insignificant, but still at a disadvantage to Brady's larger and
+longer-term campaign funds.
 
 The winner of the Democratic primary will face Republican Jim Gordon
 of Hanson who is running on a platform for parental review of
 educational material, restoring qualified immunity for law
 enforcement, and cutting taxes while increasing infrastructure
-spending. The simple, but fallible model I use for estimating general
+spending. The simple model I use for estimating general
 election results based on PVI, incumbency, and whether it is a
 presidential voting year gives Gordon a 2 out of 100 chance of winning
 against Brady and a 1 out of 10 chance at beating Huff-Larmond.
@@ -823,7 +806,7 @@ ma_towns_pcts_40 <- town_precinct_mix(
 ma_sen_cands_40 <- candidate_locations(sen_cand, 40)
 ```
 
-```{r cape-islands-map, layout="l-body-outset", fig.cap="*Second Plymouth and Norfolk*"}
+```{r cape-islands-map, fig.cap="*Second Plymouth and Norfolk*"}
 ma_sen_40_map <- district_map(ma_sen_40, ma_towns_pcts_40, ma_sen_cands_40)
 
 tmap_leaflet(ma_sen_40_map)
@@ -837,4 +820,17 @@ State Senator Julian Cyr is free from Democratic primary challengers
 in 2022, but will face the winner of a two-way Republican primary in
 November. It is quite unlikely that the Republican nominee will unseat
 incumbent Cyr in the D+12 Cape and Islands District.
+
+Daralyn Heywood is a private investigator and former State Police
+lieutenant running on a anti-illegal immigrant and pro-America platform.
+
+Christopher Lauzon is a former cruise deck-hand who now works in
+a family-owned auto repair business in Hyanis. Lauzon is running
+on a platform of lowering taxes, reducing regulation, and
+supporting and defending law enforcement.
+
+Both GOP candidates have raised at the lower end of the spectrum
+for credible state senate challenger campaign funds, and are
+nowhere close to Senator Cyr's ability to raise, spend, and
+save campaign cash.
 
