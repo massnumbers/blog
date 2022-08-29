@@ -16,6 +16,8 @@ output:
 ```{r libraries, include=FALSE}
 knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE)
 options(digits=1, knitr.kable.NA="")
+
+library(metathis)
 library(kableExtra)
 library(formattable)
 library(tidyverse)
@@ -29,8 +31,26 @@ library(tigris)
 library(units)
 library(nominatimlite)
 ```
+
+```{r post-meta}
+meta() %>%
+    meta_description("A look at the ten contested MA State Senate primaries") %>%
+    meta_viewport() %>%
+    meta_social(
+        title = "An overview of the 2022 State Senate Primaries",
+        url = "https://www.massnumbers.us/posts/2022-07-05-state-senate-primary-preview/",
+        image = "https://www.massnumbers.us/images/berk_hamp_frank_hamp.png",
+        image_alt = "The precincts of the Berkshire, Hampshire, Frankling and Hampden district",
+        og_type = "article",
+        og_author = "Brent Benson",
+        twitter_card_type = "summary_large_image",
+        twitter_creator = "@bwbensonjr"
+    )
+```
+
 ```{r senate-districts}
-sen_dist <- read_excel("../../_data/2020/MA_State_Senate_Race_2022.xlsx", sheet="Districts")
+sen_dist <- read_excel("../../_data/2020/MA_State_Senate_Race_2022.xlsx",
+                       sheet="Districts")
 
 leg_ocpf <- read_csv("../../_data/2020/ma_leg_ocpf_summary_july_2022.csv")
 
@@ -202,7 +222,7 @@ district_map <- function(sen_dist, towns_pcts, candidates, house_dist_1, house_d
         bbox <- st_bbox(st_union(sen_dist, house_dist_1, house_dist_2))
     }
     base_map <- (tm_shape(towns_pcts, bbox=bbox) +
-                 tm_borders(lwd=0.5) +
+                 tm_borders(lwd=1) +
                  tm_fill(col="PVI_N",
                          palette=c("#FF4949", "white", "#0F4392"),
                          midpoint=0,
@@ -220,6 +240,34 @@ district_map <- function(sen_dist, towns_pcts, candidates, house_dist_1, house_d
       tm_shape(candidates) +
       tm_symbols(ymod=-0.6, size=0.2, col="black", popup.vars=c("Party", "city_town")) +
       tm_basemap("OpenStreetMap"))
+}
+
+district_map_plot <- function(sen_dist, towns_pcts, candidates, house_dist_1, house_dist_2) {
+    if (missing(house_dist_1)) {
+        bbox <- NULL
+    } else if (missing(house_dist_2)) {
+        bbox <- st_bbox(st_union(sen_dist, house_dist_1))
+    } else {
+        bbox <- st_bbox(st_union(sen_dist, house_dist_1, house_dist_2))
+    }
+    base_map <- (tm_shape(towns_pcts, bbox=bbox) +
+                 tm_borders(lwd=0.5) +
+                 tm_fill(col="PVI_N",
+                         palette=c("#FF4949", "white", "#0F4392"),
+                         midpoint=0,
+                         alpha=0.5,
+                         popup.vars=c("PVI", "total_population", "white_pct",
+                                      "black_pct", "hispanic_pct", "asian_pct")) +
+                 tm_shape(sen_dist) + tm_borders(lwd=3))
+    if (!missing(house_dist_1)) {
+        base_map <- base_map + (tm_shape(house_dist_1) + tm_borders(lwd=2.5, lty="dashed"))
+    }
+    if (!missing(house_dist_2)) {
+        base_map <- base_map + (tm_shape(house_dist_2) + tm_borders(lwd=2.5, lty="dotted"))
+    }
+    (base_map + 
+      tm_shape(candidates) +
+      tm_symbols(ymod=-0.6, size=0.2, col="black", popup.vars=c("Party", "city_town")))
 }
 
 ## Produce a readable version of candidates for a particular Senate district
