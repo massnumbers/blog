@@ -1,0 +1,843 @@
+---
+title: "An overview of the 2022 State Representative Primaries"
+description: |
+   A look at the MA State Representative contested primaries
+author: Brent Benson
+date: 2022-08-31
+citation: false
+preview: https://www.massnumbers.us/images/first_middlesex_candidates.png
+output:
+  distill::distill_article:
+    self_contained: false
+draft: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE)
+
+library(metathis)
+library(kableExtra)
+library(tidyverse)
+library(tigris)
+library(readxl)
+library(forcats)
+library(tmap)
+library(formattable)
+library(sf)
+library(kableExtra)
+library(nominatimlite)
+```
+
+```{r post-meta}
+meta() %>%
+    meta_description("A look at the MA State Representative contested primaries") %>%
+    meta_viewport() %>%
+    meta_social(
+        title = "An overview of the 2022 State Representative Primaries",
+        url = "https://www.massnumbers.us/posts/2022-08-31-state-rep-primaries/",
+        image = "https://www.massnumbers.us/images/first_middlesex_candidates.png",
+        image_alt = "The precincts and candidates for the 1st Middlesex State Rep race",
+        og_type = "article",
+        og_author = "Brent Benson",
+        twitter_card_type = "summary_large_image",
+        twitter_creator = "@bwbensonjr"
+    )
+```
+
+```{r support-code}
+ocpf_location <- read_csv("../../_data/2020/ma_house_ocpf_addr_aug_2022.csv",
+                          col_types=cols(cpf_id = "c")) %>%
+    select(cpf_id, lat, lon)
+
+house_cands <- read_excel("../../_data/2020/MA_State_Rep_Races_2022.xlsx",
+                          sheet="Contested") %>%
+    rename(district_id = Code) %>%
+    left_join(ocpf_location, by="cpf_id") %>%
+    relocate(Candidate)
+
+house_cands_geom <- house_cands %>%
+    st_as_sf(coords = c("lon", "lat"), crs="+proj=longlat +datum=WGS84") %>%
+    st_transform(6491)
+
+## PVI
+
+Biden_20 <- 81281502
+Trump_20 <- 74222593
+Clinton_16 <- 65853514
+Trump_16 <- 62984828
+
+dem_percent <- function(dem_20, gop_20, dem_16, gop_16) {
+    dem_votes <- dem_20 + dem_16
+    gop_votes <- gop_20 + gop_16
+    dem_pct <- dem_votes/(dem_votes + gop_votes)
+    dem_pct
+}
+
+pvi_string <- function(pvi_n) {
+    case_when(
+        pvi_n <= 0.5 ~ str_c("R+", round(abs(pvi_n))),
+        pvi_n >= 0.5 ~ str_c("D+", round(pvi_n)),
+        TRUE ~ "EVEN"
+        )
+}
+
+US_PVI_2020 <- dem_percent(Biden_20, Trump_20, Clinton_16, Trump_16)
+
+add_pvi <- function(df) {
+    df %>%
+        mutate(PVI_N = ((dem_percent(pres_2020_dem,
+                                     pres_2020_gop,
+                                     pres_2016_dem,
+                                     pres_2016_gop) - US_PVI_2020) * 100),
+               PVI = pvi_string(PVI_N))
+    
+}
+
+add_voting_percents <- function(df) {
+    df %>%
+        mutate(cvap_white_pct = cvap_2019_white/cvap_2019_total,
+               cvap_hispanic_pct = cvap_2019_hispanic/cvap_2019_total,
+               cvap_black_pct = cvap_2019_black/cvap_2019_total,
+               cvap_asian_pct = cvap_2019_asian/cvap_2019_total,
+               cvap_pred_group = case_when(((cvap_black_pct >= 0.4) &
+                                       (cvap_hispanic_pct >= 0.4)) ~ "Black_and_Hispanic",
+                                  (cvap_black_pct >= 0.4) ~ "Black",
+                                  (cvap_hispanic_pct >= 0.4) ~ "Hispanic",
+                                  (cvap_asian_pct >= 0.4) ~ "Asian",
+                                  TRUE ~ "White"),
+               vap_white_pct = vap_white_2020/vap_total_2020,
+               vap_hispanic_pct = vap_hispanic_2020/vap_total_2020,
+               vap_black_pct = vap_black_2020/vap_total_2020,
+               vap_asian_pct = vap_asian_2020/vap_total_2020,
+               vap_pred_group = case_when(((vap_black_pct >= 0.4) &
+                                       (vap_hispanic_pct >= 0.4)) ~ "Black_and_Hispanic",
+                                  (vap_black_pct >= 0.4) ~ "Black",
+                                  (vap_hispanic_pct >= 0.4) ~ "Hispanic",
+                                  (vap_asian_pct >= 0.4) ~ "Asian",
+                                  TRUE ~ "White"))
+}
+
+ward_precinct_name <- function(city_town, ward, precinct, partial_pct, partial_pct_num, single_pct) {
+    if_else(single_pct,
+            city_town,
+            str_c(city_town,
+                  if_else(ward == "-", "", str_c(" Ward ", ward)),
+                  str_c(" Precinct ", precinct),
+                  if_else(partial_pct, str_c(" (part ", partial_pct_num, ")"), "")))
+}
+
+house_dist_blks <- read_csv("../../_data/2020/ma_blocks_to_house_dist_2021.csv",
+                            col_types=cols("c", "c"))
+
+house_vtd_demos <- read_csv("../../_data/2020/ma_house_census_2020_daves.csv",
+                            col_types=cols(vtd_fips="c"))
+
+vtd_demos <- house_vtd_demos %>%
+    select(-c(district_id, partial_pct)) %>%
+    group_by(vtd_fips) %>%
+    summarize_all(sum)
+
+vtd_names <- read_csv("../../_data/2020/ma_vtds_city_town_fips.csv",
+                      col_types=cols(.default="c")) %>%
+    select(vtd_fips, city_town, Ward, Pct)
+
+vtd_geom <- voting_districts(state=25, cb=TRUE) %>%
+    select(vtd_fips = GEOID20) %>%
+    st_transform(6491) %>%
+    left_join(vtd_names, by="vtd_fips") %>%
+    left_join(vtd_demos, by="vtd_fips")
+
+block_geom <- blocks(state=25, year=2020) %>%
+    select(block_fips = GEOID20) %>%
+    st_transform(6491)
+
+vtd_blks <- read_csv("../../_data/2020/ma_blocks_to_vtds.csv",
+                     col_types=cols(.default="c")) %>%
+    left_join(vtd_names, by="vtd_fips") %>%
+    inner_join(block_geom, by="block_fips")
+
+blks_house_dist_vtd <- vtd_blks %>%
+    left_join(house_dist_blks, by="block_fips")
+
+house_vtds <- blks_house_dist_vtd %>%
+    nest(blocks = c(block_fips, geometry)) %>%
+    group_by(vtd_fips) %>%
+    mutate(partial_pct = (n() > 1),
+           partial_pct_num = row_number()) %>%
+    ungroup() %>%
+    group_by(city_town) %>%
+    mutate(single_pct = (n() == 1)) %>%
+    ungroup() %>%
+    mutate(geometry = map(blocks, ~st_union(.x$geometry))) %>%
+    unnest(geometry) %>%
+    select(-blocks)
+
+house_vtd_comp <- house_vtds %>%
+    left_join(house_vtd_demos,
+              by=c("vtd_fips", "district_id", "partial_pct")) %>%
+    mutate(name = ward_precinct_name(city_town,
+                                     Ward,
+                                     Pct,
+                                     partial_pct,
+                                     partial_pct_num,
+                                     single_pct)) %>%
+    add_pvi() %>%
+    add_voting_percents() %>%
+    relocate(name) %>%
+    st_as_sf()
+
+## New 2021 House Districts
+
+house_dist_demos <- house_vtd_demos %>%
+    select(-c(vtd_fips, partial_pct)) %>%
+    group_by(district_id) %>%
+    summarize_all(sum) %>%
+    add_pvi() %>%
+    add_voting_percents() %>%
+    select(district_id, PVI, PVI_N,
+           cvap_white_pct, cvap_hispanic_pct, cvap_black_pct, cvap_asian_pct, cvap_pred_group,          
+           vap_white_pct, vap_hispanic_pct, vap_black_pct, vap_asian_pct, vap_pred_group)
+
+house_dists <- read_excel("../../_data/2020/MA_State_Rep_Races_2022.xlsx",
+                          sheet="Races") %>%
+    select(district_id = Code,
+           District,
+           inc_status,
+           Incumbent,
+           Primaries) %>%
+    mutate(inc_status = fct_recode(inc_status,
+                                   Dem="Dem_Incumbent",
+                                   GOP="GOP_Incumbent",
+                                   None="No_Incumbent"),
+           Primaries = replace_na(Primaries, "")) %>%
+    left_join(house_dist_demos, by="district_id")
+
+house_geom <- read_sf("../../_gis/HOUSE2021/HOUSE2021_POLY.shp") %>%
+    st_make_valid() %>%
+    st_transform(6491) %>%
+    select(district_id = DIST_CODE) %>%
+    left_join(house_dists, by="district_id") %>%
+    arrange(district_id) %>%
+    relocate(District)
+
+## Maps
+
+percent_zero <- function(n) {
+    percent(n, 0)
+}
+
+district_map <- function(dist_id, has_water=FALSE) {
+    dist_cands <- house_cands_geom %>%
+        filter(district_id == dist_id)
+    
+    dist_outline <- house_geom %>%
+        filter(district_id == dist_id)
+
+    dist_vtds <- house_vtd_comp %>%
+        filter(district_id == dist_id)
+    if (has_water) {
+        dist_vtds <- dist_vtds %>%
+            erase_water(area_threshold=0.6)
+    }
+    base_map <- (tm_shape(dist_outline) +
+                 tm_borders(lwd=3) +
+                 tm_shape(dist_vtds) +
+                 tm_borders(lwd=1) +
+                 tm_fill(col="PVI_N",
+                         palette=c("#FF4949", "white", "#0F4392"),
+                         midpoint=0,
+                         alpha=0.7,
+                         popup.vars=c("PVI")))
+    if (nrow(dist_cands) > 0) {
+        base_map <- (base_map + 
+                     tm_shape(dist_cands) +
+                     tm_symbols(col="Party",
+                                legend.col.show=FALSE,
+                                size=0.3,
+                                palette=c(D="blue", R="red", U="gray"),
+                                popup.vars=c("Party", "city_town", "Incumbent")))
+    }
+    (base_map + tm_basemap("OpenStreetMap"))
+}
+
+district_table <- function(dist_id) {
+    cands <- house_cands %>%
+        filter(district_id == dist_id)
+    
+    dist_name <- (cands %>% slice(1) %>% pull(District))
+    caption <- str_c(dist_name, " District Candidates")
+
+    cands %>%
+        select(Inc = Incumbent,
+               Candidate,
+               Party,
+               city_town,
+               receipts,
+               spent = expenditures,
+               cash = end) %>%
+        mutate(receipts = currency(receipts, digits=0),
+               spent = currency(spent, digits=0),
+               cash = currency(cash, digits=0)) %>%
+        kbl(caption=caption) %>%
+        kable_styling()
+}
+
+tmap_mode(mode="view")
+```
+
+```{r new-district-map, layout="l-page", fig.cap="*MA State Representative Districts (2022)*"}
+dist_popup_vars <- c(
+    "Incumbent",
+    "inc_status",
+    "PVI",
+    "Primaries",
+    "Hispanic CVAP"="cvap_hispanic_pct",
+    "Black CVAP"="cvap_black_pct",
+    "Asian CVAP"="cvap_asian_pct",
+    "White CVAP"="cvap_white_pct"
+)
+
+dist_popup_format <- list(
+    cvap_hispanic_pct=list(fun=percent_zero),
+    cvap_black_pct=list(fun=percent_zero),
+    cvap_asian_pct=list(fun=percent_zero),
+    cvap_white_pct=list(fun=percent_zero)
+    )
+
+new_house_map <- (tm_shape(house_geom) +
+                    tm_borders(lwd=2) +
+                    tm_fill(col="PVI_N",
+                            palette=c("#FF4949", "white", "#0F4392"),
+                            midpoint=0,
+                            alpha=0.6,
+                            popup.format=dist_popup_format,
+                            popup.vars=dist_popup_vars) +
+                  tm_shape(house_cands_geom) +
+                  tm_symbols(col="Party",
+                             legend.col.show=FALSE,
+                             size=0.01,
+                             palette=c(D="blue", R="red", U="gray"),
+                             popup.vars=c("Party", "city_town")) +
+                  tm_basemap("OpenStreetMap"))
+
+tmap_leaflet(new_house_map)
+```
+
+## State Represenative Primary Overview
+
+There are 34 State Representative districts with contested primaries
+with the State Primary occurring on Sept 6, 2022. There are 19 open
+seats with 13 having a Democratic primary, 1 have a GOP primary, 4
+with only a general election matchup, and 1 seat&mdash;the 15th
+Essex&mdash;with a single candidate.
+
+There are There are 17 Democratic incumbents with primary challenges,
+while no Republican House incumbent faces a primary challenge. One
+incumbent Democrat, William Straus (D-Mattapoisett) of the 10th Bristol
+District, faces a primary challenge and two GOP challengers, only one
+of which will survive a Republican primary.
+
+```{r state-rep-districts}
+house_dists %>%
+    select(c(District,
+             PVI,
+             `Inc. Party`=inc_status,
+              Incumbent,
+              Primaries)) %>%
+    kbl(caption="2022 State Rep districts (last incumbent)*") %>%
+    kable_styling()
+```
+
+## Open Seats
+
+There are nineteen open State Representative seats of which
+thirteen have Democratic primaries and one has a Republican
+primary.
+
+## 4th Essex
+
+```{r essex-04-map, fig.cap="4th Essex District Map"}
+essex_04_map <- district_map("ESSEX04")
+tmap_leaflet(essex_04_map)
+```
+
+```{r essex-04-table}
+district_table("ESSEX04")
+```
+
+The entirely reconfigured 4th Essex district has a Hispanic citizen
+voting age population (CVAP) of 57%. The current 4th Essex
+representative, Jamie Belsito (D-Topsfield), as elected in a November
+2021 special election to replace Bradford Hill (R-Ipswich) was
+redistricted into the 13th Middlesex District represented by
+Sally Kerans (D-Danvers). Belsito does not appear to be challenging
+Kerans.
+
+Perennial candidate, former Mayor, and former State Representative
+William Lantigua is in the running, but has not raised any money and
+did not participate in [candidate
+forums](http://archive.methuentv.org/Video/7612) and debates.
+
+James McCarty is a Methuen City Councilor who is finishing up his time
+on the council due to term limits and is a current law student who plans
+to take the bar in July 2023.
+
+Estela Reyes is five term City Councilor from Lawrence and a long-term
+presence on the Lawrence political scene.
+
+The 4th Essex district is almost evenly split by population between
+Methuen and Lawrence, but 58% of the citizen age voting population
+comes from Methuen vs. 42% for Lawrence. There may end up being
+some level of splitting caused by the Lantigua candidacy, reducing
+the power of the Lawrence and hispanic voting populations.
+
+## 7th Essex
+
+```{r essex-07-map, fig.cap="7th Essex District Map"}
+essex_07_map <- district_map("ESSEX07", has_water=TRUE)
+tmap_leaflet(essex_07_map)
+```
+
+```{r essex-07-table}
+district_table("ESSEX07")
+```
+
+The 7th Essex District is one of the four State Representative
+districts that is comprised of a single, complete
+municipality&mdash;in this case Salem. State Representative
+Paul Tucker (D-Salem) chose to run for Essex County District
+Attorney, leaving the seat open.
+
+Manny Cruz is a former Tucker aide and current Vice Chair of the Salem
+Public School District School Committee. Cruz has received some high
+profile endorsements, including that of Salme Mayor Kim Driscoll, who
+is also a candidate for Lieutenant Governor.
+
+Domingo Dominguez is an at-large Salem City Councilor and was a
+[backer of Mayor Driscoll's
+challenger](https://www.salemnews.com/news/cruz-formally-launches-rep-campaign-dominguez-joins-race/article_c5871008-7861-11ec-8249-dffa552817fa.html)
+in the previous mayoral election.
+
+Candidate Gene Collins has not raised any money for the campaign and
+there is [little
+information](https://www.youtube.com/watch?v=T5VF73RE3io) about
+Collins or his platform in the news.
+
+## 8th Essex
+
+```{r essex-08-map, fig.cap="8th Essex District Map"}
+essex_08_map <- district_map("ESSEX08", has_water=TRUE)
+tmap_leaflet(essex_08_map)
+```
+
+```{r essex-08-table}
+district_table("ESSEX08")
+```
+
+There is a [crowded
+field](https://www.salemnews.com/news/5-enter-race-for-8th-essex-seat/article_3e245226-a62c-11ec-b19e-0fd3506550bc.html)
+vying to replace State Representative Lori Ehrlich (D-Marblehead) of
+who is leaving her 8th Essex seat to become Region 1 Administrator for
+the Federal Emergency Management Agency (FEMA).
+
+There are six Democratic candidates, three from Marblehead and three
+from Swampscott. The district also contains two precincts from Lynn.
+
+The [major story of the
+campaign](https://www.salemnews.com/election/battle-lines-drawn-in-8th-essex-rep-race-after-endorsements/article_c8957178-27b0-11ed-b8fe-6bf9a08733e4.html)
+has become the endorsement of political neophyte Tristan Smith by
+Massachusetts Senator Ed Markey, who has a long-standing relationship
+with Smith's father James Smith.
+
+There has also been a debate about candidates like Douglas Thompson
+who have significantly self-funded their campaigns, rather than
+being forced to compete with their ideas and credentials for
+more and smaller individual donations.
+
+## 8th Hampden
+
+```{r hampde-08-map, fig.cap="8th Hampden District Map"}
+hampden_08_map <- district_map("HAMPDEN08")
+tmap_leaflet(hampden_08_map)
+```
+
+```{r hampden-08-table}
+district_table("HAMPDEN08")
+```
+
+State Representative Joe Wagner (D-Chicopee) is retiring after having
+represented the 8th Hampden District for 30 years. The 8th consists of
+a little over three quarters of Chicopee, by population.
+
+The candidates for the Democratic nomination are Ward 1 City Councilor
+Joel McAuliffe and At Large City Councilor Shirley Arriaga.
+
+Arriaga is a public school teacher at Chicopee High School and is an
+Air Force veteran, and has received the endorsement of Attorney General
+and Governor candidate Maura Healey.
+
+McAuliffe has served as an aide to Mayor Richard Kos, and then State
+Senator Eric Lesser and has received the endorsement of Lesser.
+
+## 1st Middlesex
+
+```{r middle-01-map, fig.cap="1st Middlesex District Map"}
+middle_01_map <- district_map("MIDDLE01")
+tmap_leaflet(middle_01_map)
+```
+
+```{r middle-01-table}
+district_table("MIDDLE01")
+```
+
+The 1st Middlesex has been represented by State Representative Sheila
+Harrington (R-Groton) who has been appointed as Clerk Magistrate of
+the Gardner District Court. The district has been reconfigured to take
+three precincts of Lunenburg from the 37th Middlesex District and
+should be one of the most [competitive general election
+races](https://www.bostonglobe.com/2022/07/22/metro/little-red-pocket-new-hampshire-border-national-fissures-splitting-competitive-mass-state-rep-race/?event=event12)
+in November with a Partisan Voter Index (PVI) of D+2.
+
+The only primary is for the Republican nomination which features local
+farmer Andrew Sullivan of Townsend and Lynn Archambault of
+Pepperell. Sullivan has attempted to portray himself as a moderate
+conservative, while Archambault hews more to Trump-style politics.
+
+The winner of the GOP primary will face Democrat Margarate Scarsdale
+of Pepperell and undeclared candidate Catherine Lundeen.
+
+## 6th Middlesex
+
+```{r middle-06-map, fig.cap="6th Middlesex District Map"}
+middle_06_map <- district_map("MIDDLE06")
+tmap_leaflet(middle_06_map)
+```
+
+```{r middle-06-table}
+district_table("MIDDLE06")
+```
+
+The 6th Middlesex District was redistricted without attention
+to incumbent Maria Robinson (D-Framingham) who has been in 
+the process of taking a job with the U.S. Department of Energy.
+
+There are three candidates for the Democratic nomination: former
+Framingham City Councilor Margareth Shepard, Framingham School
+Committee member Priscila Sousa, and local activist and Former
+Framingham mayoral candidate Dhruba Sen.
+
+## Incumbent Challenges
+
+There are 17 incumbent House Democrats facing an intra-party primary
+challenge. There are no Republican incumbents facing a GOP primary
+challenge.
+
+## 4th Barnstable
+
+```{r barn-04-map, fig.cap="4th Barnstable District Map"}
+barn_04_map <- district_map("BARN04")
+tmap_leaflet(barn_04_map)
+```
+
+```{r barn-04-table}
+district_table("BARN04")
+```
+
+Eight term incumbent State Representative Sarah Peake (D-Provincetown)
+[faces
+challenger](https://www.wickedlocal.com/story/cape-codder/2022/08/17/jack-stanton-and-sarah-peake-face-off-democratic-primary/10305447002/)
+Jack Stanton, also of Provincetown. Stanton previously ran against
+Republican State Representative Randy Hunt in the 5th Barnstable
+district when he lived in Sandwhich. Peake, the Second Assistant
+Majority Leader in the House is stressing the need for more affordable
+housing, while Stanton is campaigning for increased transparency in
+the legislature with term limits for Speaker of the House.
+
+## 1st Berkshire
+
+```{r berk-01-map, fig.cap="1st Berkshire District Map"}
+berk_01_map <- district_map("BERK01")
+tmap_leaflet(berk_01_map)
+```
+
+```{r berk-01-table}
+district_table("BERK01")
+```
+
+State Representative John Barrett (D-North Adams) [faces a primary
+challenge](https://www.wamc.org/news/2022-08-25/1st-berkshire-district-challenger-kingsbury-evans-says-state-rep-barrett-mispresented-beacon-hill-transparency-at-north-adams-forum)
+from Paula Kingsbury-Evans who is a recent graduate of the
+Massachusetts College of Liberal Arts, also from North Adams. Barrett
+is the former Mayor of North Adams and was first elected in a 2017
+special election after the death of Representative Gailanne Cariddi.
+Kingsbury-Evans is also running on the issue of transparency in the
+legislature.
+
+## 9th Bristol
+
+```{r bristol-09-map, fig.cap="9th Bristol District Map"}
+bristol_09_map <- district_map("BRISTOL09")
+tmap_leaflet(bristol_09_map)
+```
+
+```{r bristol-09-table}
+district_table("BRISTOL09")
+```
+
+State Representative Christopher Markey (D-Dartmouth) [faces a
+challenge](https://dartmouth.theweektoday.com/article/state-rep-markey-face-first-primary-challenger-2014/58020)
+from New Bedford resident Cameron Costa, a 20 year old recent
+graduate of University of Massachusetts Dartmouth. Markey is
+stressing his experience, while Costa says that change is needed
+and is arguing for increased education funding.
+
+## 5th Essex
+
+```{r essex-05-map, fig.cap="5th Essex District Map"}
+essex_05_map <- district_map("ESSEX05")
+tmap_leaflet(essex_05_map)
+```
+
+```{r essex-05-table}
+district_table("ESSEX05")
+```
+
+State Representative Ann-Margaret Ferrante (D-Gloucester) [faces a
+primary
+challenge](https://www.gloucestertimes.com/election/rockporter-to-challenge-ferrante-in-primary/article_03639896-d623-11ec-bea9-ef1b0c302033.html)
+from D. Nathaniel Mulcahy of Rockport. Ferrante is Vice Chair of House
+Committee on Ways and Means, the important committee that determines
+spending. Mulcahy is a former teacher and is the Chair of the Rockport
+Democratic Town Committee. Mulcahy is campaigning for increased
+transparency in the legislature, a theme among Democratic challengers.
+
+## 16th Essex
+
+```{r essex-16-map, fig.cap="16th Essex District Map"}
+essex_16_map <- district_map("ESSEX16")
+tmap_leaflet(essex_16_map)
+```
+
+```{r essex-16-table}
+district_table("ESSEX16")
+```
+
+State Representative Marcos Devers (D-Lawrence) faces a [primary
+challenge](https://www.eagletribune.com/news/new_hampshire/16th-essex-state-representative-candidates-voice-views/article_40dcc364-0927-11ed-a77e-9f01431bcb43.html)
+from Francisco Paulino of Methuen. Devers has been an educator in the
+region for thirty years. Paulino is a 22 year old lawyer and tax
+associate who advises the City of Lawrence on economic development
+and has served on the Lawrence School Committee.
+
+## 11th Hampden
+
+```{r hampden-11-map, fig.cap="11th Hampden District Map"}
+hampden_11_map <- district_map("HAMPDEN11")
+tmap_leaflet(hampden_11_map)
+```
+
+```{r hampden-11-table}
+district_table("HAMPDEN11")
+```
+
+State Representative Bud Williams (D-Springfield) faces a challenge
+from Jynai McDonald, also of Springfield. Williams has served as
+State Representative of the 11th Hampden District since 2016 and
+before that was a fixture on the Springfield City Council. McDonald 
+is a local activist who has not held political office and wants
+to expand investments in the community.
+
+## 9th Middlesex
+
+```{r middle-09-map, fig.cap="9th Middlesex District Map"}
+middle_09_map <- district_map("MIDDLE09")
+tmap_leaflet(middle_09_map)
+```
+
+```{r middle-09-table}
+district_table("MIDDLE09")
+```
+
+State Representative Tom Stanley (D-Waltham) faces a [primary
+challenge](https://patch.com/massachusetts/waltham/heather-may-run-waltham-state-representative)
+from Heather May of Waltham. May is Chair of Waltham Demoractic Town
+Committee, a volunteer, and educator at Emerson College. May is
+running as an outsider and is calling for transparency and
+accountability. Stanley is running on his office's constituent
+services and successful passing of clean energy and economic
+development legislation.
+
+## 18th Middlesex
+
+```{r middle-18-map, fig.cap="18th Middlesex District Map"}
+middle_18_map <- district_map("MIDDLE18")
+tmap_leaflet(middle_18_map)
+```
+
+```{r middle-18-table}
+district_table("MIDDLE18")
+```
+
+State Representative Rady Mom (D-Lowell) faces two challengers for the
+Democratic nomination, recent UMass Lowell graduate Tara Hong and Lowell
+School Committee member Dominik Lay. When Mom was first elected to
+the legislature in 2014, he was the first Cambodian-American lawmaker in
+the country. His two challengers are also Cambodian born. Mom is running
+on his strong legislative record. Hong portrays himself as a progressive
+reformer, and Lay stresses independenc.
+
+## 21st Middlesex
+
+```{r middle-21-map, fig.cap="21st Middlesex District Map"}
+middle_21_map <- district_map("MIDDLE21")
+tmap_leaflet(middle_21_map)
+```
+
+```{r middle-21-table}
+district_table("MIDDLE21")
+```
+
+State Representative Kenneth Gordon (D-Bedford) faces a [primary
+challenge](https://www.thebedfordcitizen.org/2022/06/burlington-resident-24-challenges-rep-ken-gordon-in-primary/)
+from 24 year old Timothy Sullivan of Burlington. Sullivan is
+running on a platform of increasing affordability of public
+college education. Gordon has received endorsements from
+Congresswoman Catherine Clark and Senator Ed Markey.
+
+## 27th Middlesex
+
+```{r middle-27-map, fig.cap="27th Middlesex District Map"}
+middle_27_map <- district_map("MIDDLE27")
+tmap_leaflet(middle_27_map)
+```
+
+```{r middle-27-table}
+district_table("MIDDLE27")
+```
+
+First term State Representative Erika Uyterhoeven (D-Somerville) faces
+a [primary
+challenge](http://www.thesomervilletimes.com/archives/117222) from
+entrepreneur Jason Mackey, also of Somerville in the incredibly
+progressive D+39 27th Middlesex District. Uyterhoeven ran on an
+unapologetically Democratic Socialist platform in 2020 and the
+differences with Mackey are not large. Mackey stresses his personal
+story and work for social justice.
+
+## 28th Middlesex
+
+```{r middle-28-map, fig.cap="28th Middlesex District Map"}
+middle_28_map <- district_map("MIDDLE28")
+tmap_leaflet(middle_28_map)
+```
+
+```{r middle-28-table}
+district_table("MIDDLE28")
+```
+
+State Representative Joseph McGonagle (D-Everett) faces a [primary
+challenge](https://everettleader.com/2022/07/01/guerline-alcy-is-running-for-state-representative-against-rep-joe-mcgonagle/)
+from Everett city employee, financial professional, Haitian activist,
+and community organizer Guerline Alcy.
+
+## 35th Middlesex
+
+```{r middle-35-map, fig.cap="35th Middlesex District Map"}
+middle_35_map <- district_map("MIDDLE35")
+tmap_leaflet(middle_35_map)
+```
+
+```{r middle-35-table}
+district_table("MIDDLE35")
+```
+
+State Representative Paul Denato (D-Medford) faces a [primary
+challenge](https://patch.com/massachusetts/malden/nichole-mossalam-enters-state-rep-race-malden-medford)
+from Nichole Mossalam, founding director of The Islamic Cultural Center of Medford
+and former chair of Malden's Disability Commission.
+
+## 1st Norfolk
+
+```{r norfolk-01-map, fig.cap="1st Norfolk District Map"}
+norfolk_01_map <- district_map("NORFOLK01")
+tmap_leaflet(norfolk_01_map)
+```
+
+```{r norfolk-01-table}
+district_table("NORFOLK01")
+```
+
+State Representative Bruce Ayers (D-North Quincy) faces a [primary
+challenge](https://www.politico.com/newsletters/massachusetts-playbook/2022/04/27/dont-call-it-a-comeback-or-do-00028116)
+from small business owner Casey Dooley.
+
+## 6th Norfolk
+
+```{r norfolk-06-map, fig.cap="6th Norfolk District Map"}
+norfolk_06_map <- district_map("NORFOLK06")
+tmap_leaflet(norfolk_06_map)
+```
+
+```{r norfolk-06-table}
+district_table("NORFOLK06")
+```
+
+State Representative William Galvin (D-Canton) faces a [primary
+challenge](https://www.tamishacivil.com/about) from Tamisha Civil of
+Stoughton who is a probation officer and previously worked in the
+Suffolk County District Attorney's office.
+
+## 15th Norfolk
+
+```{r norfolk-15-map, fig.cap="15th Norfolk District Map"}
+norfolk_15_map <- district_map("NORFOLK15")
+tmap_leaflet(norfolk_15_map)
+```
+
+```{r norfolk-15-table}
+district_table("NORFOLK15")
+```
+
+The challange to State Representative Tommy Vitolo (D-Brookline) from
+Brookline Select Board Member Raul Fernandez has generated a [great
+deal of
+attention](https://commonwealthmagazine.org/politics/a-liberal-showdown-in-brookline-rep-race/)
+due to the number of high-profile endorsements on both
+sides. Governor Michael Dukakis is backing Vitolo, while
+Sonia Chang-Diaz and Joe Kennedy III are backing Fernandez.
+
+## 6th Suffolk
+
+```{r suffolk-06-map, fig.cap="6th Suffolk District Map"}
+suffolk_06_map <- district_map("SUFFOLK06")
+tmap_leaflet(suffolk_06_map)
+```
+
+```{r suffolk-06-table}
+district_table("SUFFOLK06")
+```
+
+State Representative Russell Holmes (D-Mattapan) faces a [primary
+challenge](https://www.dotnews.com/2022/sixth-suffolk-house-match-it-s-hardaway-v-holmes)
+from former elder services worker and consultant Haris Hardaway of
+Dorchester.
+
+## 17th Worcester
+
+```{r wor-17-map, fig.cap="17th Worcester District Map"}
+wor_17_map <- district_map("WOR17")
+tmap_leaflet(wor_17_map)
+```
+
+```{r wor-17-table}
+district_table("WOR17")
+```
+
+State Representative David LeBoeuf (D-Worcester) faces a [primary
+challenge](https://www.masslive.com/worcester/2022/05/worcester-rep-david-leboeuf-could-face-primary-challenger-following-drunken-driving-arrest-allegedly-blowing-4x-legal-limit.html?fr=operanews)
+from former Worcester Library Trustee Michelle Keane. LeBoeuf has been
+dealing with the after effects of a drunk driving charge and treatment
+for alcoholism. Keane has somewhat downplayed the drunk driving charge
+while making the case that she would be better able to affect change
+for the district.
+

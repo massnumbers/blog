@@ -367,7 +367,7 @@ ma_sen_cands_1 <- candidate_locations(sen_cand, 1)
 
 ```
 
-```{r bhfh-map, fig.cap="*Berkshire, Hampden, Franklin and Hampshire*   "}
+```{r bhfh-map, fig.cap="*Berkshire, Hampden, Franklin and Hampshire*"}
 ma_sen_1_map <- district_map(ma_sen_1, ma_towns_1, ma_sen_cands_1, ma_house_berk_2)
 tmap_leaflet(ma_sen_1_map)
 ```
