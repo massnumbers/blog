@@ -576,7 +576,7 @@ legislature.
 ## 9th Bristol
 
 ```{r bristol-09-map, fig.cap="9th Bristol District Map"}
-bristol_09_map <- district_map("BRISTOL09")
+bristol_09_map <- district_map("BRISTOL09", has_water=TRUE)
 tmap_leaflet(bristol_09_map)
 ```
 
@@ -759,7 +759,7 @@ and former chair of Malden's Disability Commission.
 ## 1st Norfolk
 
 ```{r norfolk-01-map, fig.cap="1st Norfolk District Map"}
-norfolk_01_map <- district_map("NORFOLK01")
+norfolk_01_map <- district_map("NORFOLK01", has_water=TRUE)
 tmap_leaflet(norfolk_01_map)
 ```
 
