@@ -526,6 +526,31 @@ Framingham City Councilor Margareth Shepard, Framingham School
 Committee member Priscila Sousa, and local activist and Former
 Framingham mayoral candidate Dhruba Sen.
 
+## 14th Middlesex
+
+```{r middle-14-map, fig.cap="14th Middlesex District Map"}
+middle_14_map <- district_map("MIDDLE14")
+tmap_leaflet(middle_14_map)
+```
+
+```{r middle-14-table}
+district_table("MIDDLE14")
+```
+
+The current 14th Middlesex State Representative Tami Gouveia (D-Acton)
+is running for Lieutenant Governor leaving the seat open. There
+Democrats [vying for the Democratic
+nomination](https://www.lowellsun.com/2022/09/03/democratic-candidates-vie-for-14th-middlesex-seat/).
+
+Vivian Birchall is a TV producer from Acton and has secured the
+endorsements of State Senator Jamie Eldridge (D-Acton) and State
+Representative Daniel Sena (D-Acton). Prosecutor Simon Cataldo of
+Concord is running largely on a reproductive rights platform and has
+the endorsement of the Planned Parenthood Advocy Fund of
+Massachusetts. Chelmsford Select Board Member Pat Wojtas has been
+running on her municipal experience and is advocating for a change
+to the states funding and local aide models.
+
 ## Incumbent Challenges
 
 There are 17 incumbent House Democrats facing an intra-party primary
