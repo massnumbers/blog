@@ -1,0 +1,374 @@
+---
+title: "Driscoll won Lieutenant Governor primary by having largest geographic reach"
+description: |
+  Lesser and Gouveia were not able to expand local support bases
+author: Brent Benson
+date: 2022-09-12
+citation: false
+preview: https://www.massnumbers.us/images/lt_gov_regionality.png
+output:
+  distill::distill_article:
+    self_contained: false
+draft: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE)
+
+library(metathis)
+library(kableExtra)
+library(tidyverse)
+library(tigris)
+library(sf)
+library(units)
+library(tmap)
+library(formattable)
+
+tmap_mode(mode="view")
+```
+
+```{r post-meta}
+meta() %>%
+    meta_description("Expansion beyond regional base was key to Driscoll LG victory") %>%
+    meta_viewport() %>%
+    meta_social(
+        title = "Driscoll won Lieutenant Governor primary by having largest geographic reach",
+        url = "https://www.massnumbers.us/posts/2022-09-10-lg-regional-candidates/",
+        image = "https://www.massnumbers.us/images/lt_gov_regionality.png",
+        image_alt = "The geographic range of each Lieutenant Governor Democratic primary candidate",
+        og_type = "article",
+        og_author = "Brent Benson",
+        twitter_card_type = "summary_large_image",
+        twitter_creator = "@bwbensonjr"
+    )
+```
+
+```{r lg-data}
+city_town_votes <- read_csv("../../_data/2020/ma_lt_gov_dem_primary_2022.csv") %>%
+    mutate(total_votes = Driscoll + Gouveia + Lesser,
+           max_votes = pmax(Driscoll, Gouveia, Lesser),
+           Driscoll_pct = Driscoll/total_votes,
+           Gouveia_pct = Gouveia/total_votes,
+           Lesser_pct = Lesser/total_votes,
+           winner = case_when(
+               0 == max_votes ~ "Unreported",
+               Driscoll == max_votes ~ "Driscoll",
+               Gouveia == max_votes ~ "Gouveia",
+               Lesser == max_votes ~ "Lesser"))
+
+total_votes <- city_town_votes %>%
+    select(city_town, Driscoll, Gouveia, Lesser) %>%
+    pivot_longer(cols=-city_town, names_to="candidate", values_to="votes") %>%
+    group_by(candidate) %>%
+    summarize(votes = sum(votes)) %>%
+    mutate(votes_pct = votes/sum(votes))
+
+## Combine City/Town geometry from MassGIS with votes
+city_town_geom <- read_sf("../../_gis/townssurvey_shp/TOWNSSURVEY_POLYM_GENCOAST.shp") %>%
+    st_make_valid() %>%
+    mutate(city_town = str_replace(str_to_title(TOWN),
+                                   "Manchester",
+                                   "Manchester-by-the-Sea"),
+           town_center = st_centroid(geometry)) %>%
+    select(city_town, town_center)
+
+## Use the center of each City/Town for distance calculation
+city_town_centers <- city_town_geom %>%
+    select(city_town, town_center) %>%
+    arrange(city_town) %>%
+    st_drop_geometry() %>%
+    st_as_sf(sf_column_name="town_center")
+
+## Calculate distance between each pair of municipalities and
+## put in a data-frame with columns city_town, city_town_2, distance
+
+dist_matrix <- set_units(st_distance(city_town_centers, city_town_centers), mi)
+colnames(dist_matrix) <- city_town_centers$city_town
+dist_df <- dist_matrix %>%
+    as_tibble() %>%
+    mutate(city_town = city_town_centers$city_town) %>%
+    relocate(city_town) %>%
+    pivot_longer(cols=-city_town,
+                 names_to="city_town_2",
+                 values_to="distance")
+
+lt_candidates <- city_town_centers %>%
+    right_join(tibble(
+        name=c("Kim Driscoll", "Tami Gouveia", "Eric Lesser"),
+        position=c("Mayor", "State Representative", "State Senator"),
+        candidate=c("Driscoll", "Gouveia", "Lesser"),
+        city_town=c("Salem", "Acton", "Longmeadow")),
+        by="city_town") %>%
+    left_join(total_votes, by="candidate") %>%
+    relocate(name) %>%
+    arrange(desc(votes))
+
+## Non-contiguous towns to leave out of distance calculation
+outlier_towns <- c(
+    "New Ashford",
+    "Windsor",
+    "Weston",
+    "Gosnold",
+    "Aquinnah"
+)
+
+## Calculate the distance between candidate home town
+## and farthest won town, disregarding non-contiguous
+## outliers
+lt_cand_geom <- lt_candidates %>%
+    left_join(dist_df, by="city_town") %>%
+    left_join((city_town_votes %>%
+               filter(!(city_town %in% outlier_towns)) %>%
+               select(city_town_2=city_town, winner)),
+              by="city_town_2") %>%
+    filter(city_town != city_town_2, candidate == winner) %>%
+    group_by(candidate) %>%
+    filter(distance == max(distance)) %>%
+    ungroup() %>%
+    rename(farthest_win = city_town_2,
+           win_distance = distance) %>%
+    select(-winner) %>%
+    left_join((city_town_centers %>%
+               as_tibble() %>%
+               rename(farthest_win = city_town,
+                      farthest_center = town_center)),
+              by="farthest_win") 
+
+## Create a line between candidate home town
+## and farthest won municipality.
+lt_lines <- lt_cand_geom %>%
+    as_tibble() %>%
+    rowwise() %>%
+    mutate(distance_line = st_cast(st_combine(c(town_center, farthest_center)), "LINESTRING")) %>%
+    ungroup() %>%
+    st_as_sf(sf_column_name="distance_line")
+```
+
+```{r lg-map-setup}
+county_geom <- counties(state="25", cb=TRUE, class="sf")
+
+popup_vars = c("winner",
+               "Driscoll", "Driscoll_pct",
+               "Lesser", "Lesser_pct",
+               "Gouveia", "Gouveia_pct")
+
+percent_zero <- function(n) {
+    percent(n, 0)
+}
+
+popup_format <- list(
+    Driscoll_pct=list(fun=percent_zero),
+    Lesser_pct=list(fun=percent_zero),
+    Gouveia_pct=list(fun=percent_zero)
+)
+
+m_blue <- "#0bb4ff"
+m_yellow <- "#e6d800"
+m_green <- "#00bfa0"
+m_light_gray <- "#cbd6e4"
+
+cat_palette <- c(
+    Driscoll = m_blue,
+    Gouveia = m_yellow,
+    Lesser = m_green,
+    Unreported = m_light_gray
+)
+```
+
+```{r lg-winner-map, layout="l-page", fig.height=5,fig.cap="Winner of MA Lt. Governor Democratic Primary"}
+lg_winner_map <- (
+    tm_shape(city_town) +
+    tm_fill(col="winner",
+            style="cat",
+            palette=cat_palette,
+            alpha=0.7,
+            popup.vars=popup_vars,
+            popup.format=popup_format) +
+    tm_borders(lwd=1) +
+    tm_shape(county_geom) +
+    tm_borders(lwd=2, col="black") +
+    tm_shape(lt_candidates) +
+    tm_symbols(col="black", size=0.3) +
+    tm_basemap("OpenStreetMap") +
+    tm_view(set.view=8)
+)
+tmap_leaflet(lg_winner_map)
+```
+
+```{r lg-results}
+lt_candidates %>%
+    as_tibble() %>%
+    mutate(votes_pct = percent(votes_pct, 0),
+           winner = if_else(votes == max(votes), "X", "")) %>%
+    select(name, city_town, position, votes, votes_pct, winner) %>%
+    kbl(caption="Results of 2022 Democratic Primary for Lieutenant Governor (unofficial, missing 2 towns)",
+        format.args=list(big.mark=",")) %>%
+    kable_styling()
+```
+
+The Massachusetts State Primary election on September 7 featured
+several hotly contested races for statewide consitutional offices,
+including a three-way race for the Democratic nomination for
+Lieutenant Governor. The candidates on the ballot were Kim Driscoll,
+mayor of Salem, Tami Gouveia of Acton, State Representative for the
+14th Middlesex District, and Eric Lessor of Longmeadow, State Senator
+for the 1st Hampden and Hampshire District. Another Western
+Massachusetts State Senator, Adam Hinds (D-Pittsfield), was in
+the early running, but failed to get the requisite 15% support
+at the Democratic convention in Worcester in early June.
+
+Mayor Driscoll [earned the endorsement of the state
+party](https://www.bostonglobe.com/2022/06/04/metro/mass-democratic-convention-activists-gather-healeys-star-set-rise/)
+at the convention, and held a [name recognition and preference
+lead](https://www.massincpolling.com/the-topline/new-poll-priorities-for-progress-democratic-primary-poll)
+over Lesser and Gouveia throughout much of the primary. Driscoll was
+also able to secure some Western Massachusetts support after Adam
+Hinds left the race, [securing
+nominations](https://www.politico.com/newsletters/massachusetts-playbook/2022/06/08/raising-massachusetts-00037998)
+from the mayors of Pittsfield and Easthampton.
+
+Senator Lesser came into the race with high hopes and a great deal of
+national Democratic support, having served in the Obama administration
+as Special Assistant to Senior Advisor David Axelrod. While Lesser
+called on his famous White House colleagues for help with fundraising
+and volunteer recruiting, he wasn't able to make major inroads in the
+non-western parts of the Commonwealth.
+
+Representative Gouveia was a favorite of [progressive
+activists](https://www.jpprogressives.com/2022/08/our-final-list-of-2022-primary-endorsements/)
+but had even more trouble with name recognition and geographic
+reach beyond the Route 2 corridor of Concord, Acton, Littleton,
+and Harvard.
+
+## Measuring Geographic Reach
+
+While the winning candidate map gives us an intuitive sense of each
+candidate's geographic reach, I found it useful to quantify the reach
+by finding the distances between each candidate's home community and
+all of the cities and towns where that candidate won the plurality of
+the vote. Taking the community with the maximum distance gives an idea
+of each candidate's geographic reach. I am ignoring several outlier
+towns for Driscoll and Lesser that aren't contiguously attached to the
+other supported areas.
+
+```{r lg-geographic-reach}
+lt_lines %>%
+    as_tibble() %>%
+    mutate(votes_pct = percent(votes_pct, 0),
+           win_distance = round(win_distance),
+           winner = if_else(votes == max(votes), "X", "")) %>%
+    select(name, city_town, farthest_win, win_distance) %>%
+    kbl(caption="Candidate geographic reach",
+        digits=3) %>%
+    kable_styling()
+```
+
+While Driscoll's maximum reach community was Nantucket, you can also
+see her range by her wins in Warwick, MA (74 miles) in Franklin County
+and Southbridge, MA (66 miles) near the western edge of Worcester
+County with only Sturbridge as a buffer between Lesser's home county
+of Hampden.
+
+```{r lg-winner-distance-map, layout="l-page", fig.height=5,fig.cap="Winner of MA Lt. Governor Democratic Primary w/distances"}
+lg_winner_dist_map <- (
+    tm_shape(city_town) +
+    tm_fill(col="winner",
+            style="cat",
+            palette=cat_palette,
+            alpha=0.7,
+            popup.vars=popup_vars,
+            popup.format=popup_format) +
+    tm_borders(lwd=1) +
+    tm_shape(county_geom) +
+    tm_borders(lwd=2, col="black") +
+    tm_shape(lt_candidates) +
+    tm_symbols(col="black", size=0.3) +
+    tm_shape(lt_lines) + tm_lines(lwd=2) +
+    tm_basemap("OpenStreetMap") +
+    tm_view(set.view=8)
+)
+tmap_leaflet(lg_winner_dist_map)
+```
+
+## Kim Driscoll Vote Share
+
+The Driscoll vote share map shows incredible strength on the North Shore
+in Essex County, as you would expect. While the percentages are not
+quite as large as Lesser's in his home district towns, the larger
+community sizes lead to much higher total margins. The only weak
+areas for Driscoll in Middlesex County are the Route 2 corridor
+towns of Gouveia's home district@mdash;while Driscoll maintains
+a second place standing in those towns.
+
+Driscoll took 50% of Boston with Lesser and Gouveia splitting
+the remaining 50% and remained strong in Worcester County,
+the South Shore, and on the Cape and the Islands.
+
+```{r lg-driscoll-map, layout="l-page", fig.height=5,fig.cap="Kim Driscoll vote share MA Lt. Governor Democractic Primary"}
+lg_driscoll_map <- (
+    tm_shape(city_town) +
+    tm_fill(col="Driscoll_pct",
+            alpha=0.7,
+            popup.vars=popup_vars,
+            popup.format=popup_format) +
+    tm_borders(lwd=1) +
+    tm_shape(county_geom) +
+    tm_borders(lwd=2, col="black") +
+    tm_shape(lt_candidates) +
+    tm_symbols(col="black", size=0.3) +
+    tm_basemap("OpenStreetMap") +
+    tm_view(set.view=8)
+)
+tmap_leaflet(lg_driscoll_map)
+```
+
+## Eric Lesser Vote Share
+
+Senator Lesser's voter stregth was limited almost exlusively to the
+Western Massachusetts counties of Hampden, Hampshire, and Franklin,
+and Berkshire County to a smaller extent. Lesser's frontier extends
+into a few towns at the edge of Worcester County, but not beyond.
+
+```{r lg-lesser-map, layout="l-page", fig.height=5,fig.cap="Eric Lesser vote share MA Lt. Governor Democractic Primary"}
+lg_lesser_map <- (
+    tm_shape(city_town) +
+    tm_fill(col="Lesser_pct",
+            alpha=0.7,
+            popup.vars=popup_vars,
+            popup.format=popup_format) +
+    tm_borders(lwd=1) +
+    tm_shape(county_geom) +
+    tm_borders(lwd=2, col="black") +
+    tm_shape(lt_candidates) +
+    tm_symbols(col="black", size=0.3) +
+    tm_basemap("OpenStreetMap") +
+    tm_view(set.view=8)
+)
+tmap_leaflet(lg_lesser_map)
+```
+
+## Tami Gouveia Vote Share
+
+Two-term State Representative Gouveia was able to get the endorsements of
+progressive organizations like the Massachusetts Teachers Assocation and
+Progressive Mass, but was not able to parlay that into wider name
+recognition around the Commonwealth.
+
+```{r lg-gouveia-map, layout="l-page", fig.height=5,fig.cap="Tami Gouveia vote share MA Lt. Governor Democractic Primary"}
+lg_gouveia_map <- (
+    tm_shape(city_town) +
+    tm_fill(col="Gouveia_pct",
+            alpha=0.7,
+            popup.vars=popup_vars,
+            popup.format=popup_format) +
+    tm_borders(lwd=1) +
+    tm_shape(county_geom) +
+    tm_borders(lwd=2, col="black") +
+    tm_shape(lt_candidates) +
+    tm_symbols(col="black", size=0.3) +
+    tm_basemap("OpenStreetMap") +
+    tm_view(set.view=8)
+)
+tmap_leaflet(lg_gouveia_map)
+```
+
