@@ -193,7 +193,7 @@ Monson,3,3,37,16,238,True
 Montague,6,6,340,202,618,True
 Monterey,1,1,44,38,76,True
 Montgomery,1,1,12,4,62,True
-Mount Washington,0,1,0,0,0,False
+Mount Washington,1,1,13,17,11,True
 Nahant,1,1,503,82,105,True
 Nantucket,1,1,444,150,269,True
 Natick,10,10,2012,1018,1474,True
@@ -317,7 +317,7 @@ Wayland,4,4,725,465,610,True
 Webster,6,6,467,154,388,True
 Wellesley,8,8,1517,551,1093,True
 Wellfleet,1,1,378,174,239,True
-Wendell,0,1,0,0,0,False
+Wendell,1,1,50,50,81,True
 Wenham,2,2,389,46,76,True
 West Boylston,2,2,418,156,300,True
 West Bridgewater,2,2,286,89,178,True

@@ -64,16 +64,17 @@ total_votes <- city_town_votes %>%
     mutate(votes_pct = votes/sum(votes))
 
 ## Combine City/Town geometry from MassGIS with votes
-city_town_geom <- read_sf("../../_gis/townssurvey_shp/TOWNSSURVEY_POLYM_GENCOAST.shp") %>%
+city_town <- read_sf("../../_gis/townssurvey_shp/TOWNSSURVEY_POLYM_GENCOAST.shp") %>%
     st_make_valid() %>%
     mutate(city_town = str_replace(str_to_title(TOWN),
                                    "Manchester",
                                    "Manchester-by-the-Sea"),
            town_center = st_centroid(geometry)) %>%
-    select(city_town, town_center)
+    select(city_town, town_center) %>%
+    left_join(city_town_votes, by="city_town")
 
 ## Use the center of each City/Town for distance calculation
-city_town_centers <- city_town_geom %>%
+city_town_centers <- city_town %>%
     select(city_town, town_center) %>%
     arrange(city_town) %>%
     st_drop_geometry() %>%
@@ -109,7 +110,8 @@ outlier_towns <- c(
     "Windsor",
     "Weston",
     "Gosnold",
-    "Aquinnah"
+    "Aquinnah",
+    "Mount Washington"
 )
 
 ## Calculate the distance between candidate home town
@@ -201,7 +203,7 @@ lt_candidates %>%
     mutate(votes_pct = percent(votes_pct, 0),
            winner = if_else(votes == max(votes), "X", "")) %>%
     select(name, city_town, position, votes, votes_pct, winner) %>%
-    kbl(caption="Results of 2022 Democratic Primary for Lieutenant Governor (unofficial, missing 2 towns)",
+    kbl(caption="Results of 2022 Democratic Primary for Lieutenant Governor (unofficial)",
         format.args=list(big.mark=",")) %>%
     kable_styling()
 ```
