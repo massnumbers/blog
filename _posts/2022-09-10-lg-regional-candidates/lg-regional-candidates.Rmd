@@ -63,12 +63,9 @@ total_votes <- city_town_votes %>%
     summarize(votes = sum(votes)) %>%
     mutate(votes_pct = votes/sum(votes))
 
-## Combine City/Town geometry from MassGIS with votes
-city_town <- read_sf("../../_gis/townssurvey_shp/TOWNSSURVEY_POLYM_GENCOAST.shp") %>%
-    st_make_valid() %>%
-    mutate(city_town = str_replace(str_to_title(TOWN),
-                                   "Manchester",
-                                   "Manchester-by-the-Sea"),
+## Combine City/Town geometry from Census with votes
+city_town <- county_subdivisions(state="25", cb=TRUE, class="sf") %>%
+    mutate(city_town = str_replace(NAME, fixed(" Town"), ""),
            town_center = st_centroid(geometry)) %>%
     select(city_town, town_center) %>%
     left_join(city_town_votes, by="city_town")
@@ -135,6 +132,10 @@ lt_cand_geom <- lt_candidates %>%
                rename(farthest_win = city_town,
                       farthest_center = town_center)),
               by="farthest_win") 
+
+## Get rid of unneeded intermediate state
+dist_df <- NULL
+dist_matrix <- NULL
 
 ## Create a line between candidate home town
 ## and farthest won municipality.
