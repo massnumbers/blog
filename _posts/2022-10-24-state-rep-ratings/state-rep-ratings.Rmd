@@ -158,6 +158,7 @@ tmap_mode(mode="view")
 
 rep_geom <- read_sf("../../_gis/HOUSE2021/HOUSE2021_POLY.shp") %>%
     st_make_valid() %>%
+    st_simplify(dTolerance=100, preserveTopology=TRUE) %>%
     select(district = REP_DIST) %>%
     right_join(rr_flat, by="district") %>%
     mutate(contested = (num_candidates > 1),
