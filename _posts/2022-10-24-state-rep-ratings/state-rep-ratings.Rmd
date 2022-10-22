@@ -1,0 +1,283 @@
+---
+title: "State Representative General Election Ratings"
+description: |
+   A model-based evaluation of the contested State Representative seats
+author: Brent Benson
+date: 2022-10-24
+output:
+  distill::distill_article:
+    self_contained: false
+draft: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE)
+
+library(metathis)
+library(tidyverse)
+library(readxl)
+library(rstanarm)
+library(humaniformat)
+library(gt)
+library(gtExtras)
+```
+
+```{r read-data}
+party_abbrev <- tibble(
+    party = c("Democratic",
+              "Independent",
+              "Republican",
+              "Unenrolled",
+              "Workers Party",
+              "Green-Rainbow Party",
+              "We The People",
+              "Non-Party Candidate"),
+    pty = c("D",
+            "I",
+            "R",
+            "U",
+            "W",
+            "GR",
+            "WTP",
+            "NP")
+)
+
+sc <- read_csv("../../_data/2020/ma_state_senate_cands_2022.csv") %>%
+    left_join(party_abbrev, by="party") %>%
+    mutate(cand_name_parsed = parse_names(candidate),
+           first_name = cand_name_parsed$first_name,
+           last_name = cand_name_parsed$last_name,
+           cand_label = str_c(last_name, " (", pty, "-", city_town, ")")) %>%
+    select(-office, -cand_name_parsed) %>%
+    nest(candidate = c(candidate, address, city_town, party, pty, first_name, last_name, cand_label)) %>%
+    mutate(num_candidates = map_dbl(candidate, nrow))
+
+sr <- read_excel("../../_data/2020/MA_State_Senate_Race_2022.xlsx") %>%
+    select(district = District,
+           dist_num = Number,
+           PVI_N,
+           PVI,
+           inc_status,
+           Incumbent,
+           dem_win_prob) %>%
+    left_join(sc, by="district") %>%
+    unnest(candidate) %>%
+    group_by(district) %>%
+    mutate(is_incumbent = case_when(
+              ((inc_status == "Dem_Incumbent") & (pty == "D")) ~ TRUE,
+              ((inc_status == "GOP_Incumbent") & (pty == "R")) ~ TRUE,
+              TRUE ~ FALSE)) %>%
+    ungroup() %>%
+    nest(candidate = c(candidate,
+                       address,
+                       city_town,
+                       party,
+                       pty,
+                       first_name,
+                       last_name,
+                       cand_label,
+                       is_incumbent))
+
+rc <- read_csv("../../_data/2020/ma_state_rep_cands_2022.csv") %>%
+    left_join(party_abbrev, by="party") %>%
+    mutate(cand_name_parsed = parse_names(candidate),
+           first_name = cand_name_parsed$first_name,
+           last_name = cand_name_parsed$last_name,
+           cand_label = str_c(last_name, " (", pty, "-", city_town, ")")) %>%
+    select(-office, -cand_name_parsed) %>%
+    nest(candidate = c(candidate, address, city_town, party, pty, first_name, last_name, cand_label)) %>%
+    mutate(num_candidates = map_dbl(candidate, nrow))
+
+rr <- read_excel("../../_data/2020/MA_State_Rep_Races_2022.xlsx") %>%
+    select(district = District,
+           dist_num = Number,
+           dist_code = Code,
+           PVI_N,
+           PVI,
+           inc_status,
+           Incumbent,
+           dem_win_prob) %>%
+    mutate(district = str_replace(district, " & ", " and ")) %>%
+    left_join(rc, by="district") %>%
+    unnest(candidate) %>%
+    group_by(district) %>%
+    mutate(is_incumbent = case_when(
+              ((inc_status == "Dem_Incumbent") & (pty == "D")) ~ TRUE,
+              ((inc_status == "GOP_Incumbent") & (pty == "R") & (district != "2nd Franklin")) ~ TRUE,
+              ((district == "2nd Franklin") & (candidate == "Susannah M. Whipps")) ~ TRUE,
+              TRUE ~ FALSE)) %>%
+    ungroup() %>%
+    nest(candidate = c(candidate,
+                       address,
+                       city_town,
+                       party,
+                       pty,
+                       cand_label,
+                       first_name,
+                       last_name,
+                       is_incumbent))
+```
+
+```{r leg-model}
+ma_leg <- read_csv("../../_data/2020/ma_leg_two_party_2008_2021_pvi.csv") %>%
+    mutate(dem_win = if_else(dem_percent > 0.5, 1, 0)) %>%
+    filter(!is_special)
+
+bm2 <- stan_glm(dem_win ~ PVI_N + incumbent_status + pres_year, data=ma_leg, family=binomial(link="logit"), refresh=0)
+blm2 <- stan_glm(dem_percent ~ PVI_N + incumbent_status + pres_year, data=ma_leg, family=gaussian(link="identity"), refresh=0)
+```
+
+```{r predict-races}
+rr$bayes_win_prob <- predict(bm2, newdata=(rr %>% rename(incumbent_status=inc_status) %>% mutate(pres_year = FALSE)), type="response")
+rr$bayes_dem_pct <- predict(blm2, newdata=(rr %>% rename(incumbent_status=inc_status) %>% mutate(pres_year = FALSE)), type="response")
+rep_intervals <- predictive_interval(blm2, newdata=(rr %>% rename(incumbent_status=inc_status) %>% mutate(pres_year = FALSE)))
+rr$bayes_dem_low <- rep_intervals[,1]
+rr$bayes_dem_high <- rep_intervals[,2]
+
+sr$bayes_win_prob <- predict(bm2, newdata=(sr %>% rename(incumbent_status=inc_status) %>% mutate(pres_year = FALSE)), type="response")
+sr$bayes_dem_pct <- predict(blm2, newdata=(sr %>% rename(incumbent_status=inc_status) %>% mutate(pres_year = FALSE)), type="response")
+sen_intervals <- predictive_interval(blm2, newdata=(sr %>% rename(incumbent_status=inc_status) %>% mutate(pres_year = FALSE)))
+sr$bayes_dem_low <- sen_intervals[,1]
+sr$bayes_dem_high <- sen_intervals[,2]
+```
+
+
+We will use a simple regression model trained with historical data to give
+a feel for how competitive the races are in the contested 2022 Massachusetts
+State Representative races.
+
+## The Model
+
+The Bayesian regression model has three variables: a measure of partisanship
+(the Partisan Voter Index), an incumbency factor (Democratic incumbent, no
+incumbent, or GOP incumbent), and an adjustment for presidential election years.
+The model is trained with 424 state legislative elections from 2008 through 2021
+and explains a little over 70 percent of variance in the Democratic percentage
+of the vote. The other 30 percent of the variance would be explained by
+important factors like candidate and campaign quality, which will determine the
+results in competitive races. That is also why these ratings should only be used
+to get a feel for the competitive landscape rather than as a prediction of each
+race's result.
+
+The model does not specifically take into account third-party, independent, or
+unenrolled candidates, as a simple treatment of the third candidate as an
+additional model parameter does not provide more explanatory value. An improved
+model might treat different types of third-party, independent, and unenrolled
+candidates differently, depending on their role with respect to the other
+candidate(s) (challenge from the left for Democrat, libertarian challenge to
+establishment Republican, etc.). This would require investigation and
+classification of each individual historical race, and each race being put
+through the model for inference purposes. We are considering adding additional
+features to the model that do not require this type of manual coding, including
+amount of incumbency tenure, and an adjustment for a candidate *home town
+effect*.
+
+The Bayesian regression model allows us to interpret the results in a
+probabilistic context and also provides easily interpretable confidence
+intervals.
+
+As an example, let's take the 1st Middlesex race between Margaret Scarsdale
+(D-Pepperell) and Andrew Shephard (R-Townsend) (and independent candidate
+Catherine Lundeen of Pepperell). The Partisan Voter Index (PVI) of the
+redistricted 1st Middlesex District is D+2 (or 2.27 with a bit more precision)
+meaning that over the last two presidential elections the district is 2.27
+points more Democratic than the country as a whole. The incumbency variable
+indicates no incumbent as Rep. Sheila Harrington (R-Groton) left the state house
+to become Clerk Magistrate of the Gardner District Court. The presidential
+election variable is false, as it is for all the 2022, off-year races.
+
+If we use the trained model to probabilistically simulate the election several
+thousand times (*sampling from the posterior distribution* in fancy
+Bayesian-speak) we see the Democrat winning 53% of the time, and the Republican
+47% of the time. If we look at the simulated Democratic percent of the vote,
+rather than the win/loss percentage, we see an average Democratic percent of 51%
+of the vote&mdash;making this the most competitive State Rep seat with respect
+to this model. We can also generate a 90% onfidence interval for the voting
+result with the Democratic percentage varying from 40% to 62%&mdash;a wide
+enough interval to allow for a comfortable GOP win, or a large Democratic
+victory. However, the most likely outcome will be a slim victory for Scarsdale
+or Shephard.
+
+## Race Ratings
+
+For each race we show the candidates, district Partisvan Voter Index (PVI),
+and the output of the model: a Democratic win probability, and a projected
+Democratic one-way margin (points above 50/50 tie) with a 90% confidence
+interval. It is important to remember that this fundamentals-based model
+does not take into account particulars of each race including important
+factors like candidate quality and campaign efforts and outreach, which will
+actually determine the results in competitive races.
+
+The one race that needs to be interpreted differently is the 2nd Franklin
+race between Susannah Whipps (I-Athol) and Jeffrey Raymond (R-Athol). We
+are treating Whipps as an incumbent Democrat, with respect to the model,
+given that she has a Republican opponent. We probably would have chosen
+to treat her as a Republican incumbent if she had a Democratic opponent.
+
+The highlighted races in the table have both candidates with at least a 10%
+chance of winning and non-trivial margins on both sides of the break-even line.
+
+```{r table-transforms}
+flatten_candidates <- function(district, cands) {
+    cands %>%
+        select(pty, cand_label) %>%
+        mutate(pty = case_when(
+                   pty == "D" ~ "D",
+                   pty == "R" ~ "R",
+                   ((pty == "I") & (district == "2nd Franklin")) ~ "D",
+                   TRUE ~ "other")) %>%
+        pivot_wider(names_from = "pty",
+                    values_from = "cand_label")
+}
+
+table_transforms <- function(df) {
+    df %>%
+        mutate(margin = (bayes_dem_pct - 0.5)*100,
+               margin_low = (bayes_dem_low - 0.5)*100,
+               margin_high = (bayes_dem_high - 0.5)*100,
+               Incumbent = case_when(
+                   inc_status == "Dem_Incumbent" ~ "Dem",
+                   inc_status == "GOP_Incumbent" ~ "GOP",
+                   TRUE ~ ""),
+               candidates = map2(district, candidate, flatten_candidates)) %>%
+        select(district, PVI, Incumbent, num_candidates,
+               candidates, dem_win_prob=bayes_win_prob,
+               margin, margin_low, margin_high) %>%
+        unnest(candidates)
+}
+
+sr_flat <- sr %>%
+    table_transforms()
+
+rr_flat <- rr %>%
+    table_transforms()
+```
+
+```{r state-rep-table, layout="l-screen"}
+state_rep_table <- rr_flat %>%
+    filter(num_candidates > 1) %>%
+    select(-num_candidates) %>%
+    arrange(margin) %>%
+    gt() %>%
+    gt_theme_538() %>%
+    sub_missing(missing_text = "") %>%
+    fmt_percent(columns="dem_win_prob", decimals=0) %>%
+    gt_plt_conf_int(margin,
+                    c(margin_low, margin_high),
+                    palette=c("black", "black", "white", "black"),
+                    ref_line=0.5,
+                    text_size=2.5,
+                    width=55) %>%
+    cols_hide(columns=c(margin_low, margin_high)) %>%
+    cols_align(columns=c("margin"), align="center") %>%
+    gt_highlight_rows(font_weight="normal",
+                      rows=((dem_win_prob > .1) & (dem_win_prob < .9))) %>%
+    tab_footnote(footnote="Whipps is independent, but is treated as an incumbent Democrat for modeling this race.",
+                 locations=cells_body(
+                     columns=Incumbent,
+                     rows=(district == "2nd Franklin"))) %>%
+    tab_header("Contested State Rep ratings")
+
+state_rep_table
+```
+
