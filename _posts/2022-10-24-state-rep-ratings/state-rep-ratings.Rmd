@@ -9,7 +9,7 @@ preview: https://www.massnumbers.us/images/ma_state_rep_ratings_2022.png
 output:
   distill::distill_article:
     self_contained: false
-draft: true
+draft: false
 ---
 
 ```{r setup, include=FALSE}
