@@ -205,9 +205,16 @@ race_popup_format <- list(
     tm_view(set.view=8))
 ```
 
-We will use a simple regression model trained with historical data to give
-a feel for how competitive the races are in the contested 2022 Massachusetts
-State Representative races to be decided on November 8, 2022.
+The competitive landscape for the contested State Representative races
+to be decided on November 8th range from a very likely GOP hold by incumbent
+Nicholas Boldyga (R-Southwick) in the Western Massachusetts Republican 
+stronghold of the 3rd Hampden District, to a sure hold in the D+42
+5th Suffolk District where Chris Worrell should replace Rep. Liz Miranda
+who is running for State Senator.
+
+In order to understand where the other State Rep elections fall between these
+extremes we have used a simple regression model trained with historical data to
+provide an estimated range of possible outcomes.
 
 ## The Model
 
@@ -302,7 +309,7 @@ state_rep_table <- rr_flat %>%
                  locations=cells_body(
                      columns=Incumbent,
                      rows=(district == "2nd Franklin"))) %>%
-    tab_header("Contested State Rep ratings")
+    tab_header("Contested State Rep race ratings")
 
 state_rep_table
 ```
