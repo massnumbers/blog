@@ -75,3 +75,7 @@ d-appendix {
 
 /*-- Additional custom styles --*/
 /* Add any additional CSS rules below                      */
+
+d-article a {
+    text-underline-offset: 0em;
+}
