@@ -243,7 +243,9 @@ tenure, and an adjustment for a candidate *home town effect*.
 
 The Bayesian regression model allows us to interpret the results in a
 probabilistic context and also provides easily interpretable confidence
-intervals.
+intervals. If you are interested in the technical details you can check out the
+[source code and data for this post]
+(https://github.com/massnumbers/blog/blob/main/_posts/2022-10-24-state-rep-ratings/state-rep-ratings.Rmd).
 
 As an example, let's take the 1st Middlesex race between Margaret Scarsdale
 (D-Pepperell), Andrew Shephard (R-Townsend), and independent candidate Catherine
