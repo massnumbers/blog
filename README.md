@@ -1,4 +1,4 @@
-# Mass. Numbers blog
+# Mass. Numbers Blog
 
 This is the latest incarnation of the Mass. Numbers blog that looks at
 Massachusetts politics and policy through a quantitative lens. The
