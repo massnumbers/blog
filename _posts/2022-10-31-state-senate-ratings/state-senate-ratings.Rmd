@@ -150,7 +150,7 @@ sr_flat <- sr %>%
     table_transforms()
 ```
 
-```{r state-senate-map, layout="l-body-outset", fig.height=5, fig.cap="Contested State Senate Races"}
+```{r map-setupe}
 tmap_mode(mode="view")
 
 sen_geom <- read_sf("../../_gis/SENATE2021/SENATE2021_POLY.shp") %>%
@@ -188,8 +188,11 @@ race_popup_format <- list(
     margin_low=list(fun=digits_zero),
     margin_high=list(fun=digits_zero)
 )
+```
 
-(tm_shape(sen_geom) +
+```{r state-senate-map, layout="l-body-outset", fig.height=5, fig.cap="Contested State Senate Races"}
+state_senate_map <- (
+    tm_shape(sen_geom) +
     tm_fill(col="margin",
             palette=c("#FF4949", "white", "#0F4392"),
             midpoint=0,
@@ -199,7 +202,9 @@ race_popup_format <- list(
             popup.vars=race_popup_vars) +
     tm_borders(lwd=1) +
     tm_basemap("OpenStreetMap") +
-    tm_view(set.view=8))
+    tm_view(set.view=8)
+)
+state_senate_map
 ```
 
 Just over half of the Massachusetts State Senate seats&mdash;22 out of
@@ -247,9 +252,9 @@ Johnson winning 41% of the time. If we look at the simulated
 Democratic percent of the vote, rather than the win/loss percentage,
 we see an average Democratic percent of 52% of the vote&mdash;making
 this the most competitive State Senate seat with respect to this
-model. We can also generate a 90% onfidence interval for the voting
-result with the Democratic percentage varying from 41% to 63%&mdash;a
-wide enough interval to allow for a comfortable GOP win, or a large
+model. We can also generate a 90% confidence interval for the margin
+with the Democratic percentage varying from 41% to 63%&mdash;a wide
+enough interval to allow for a comfortable GOP win, or a large
 Democratic victory. The most likely outcome will be a reasonably
 narrow victory for Oliveira or Johnson.
 
@@ -267,9 +272,9 @@ In races with a Republican, a third-party, unenrolled, or independent
 candidate, and no Democratic candidate, the Democratic win percentage
 and margin should be attributed to the non-Republican candidate.
 
-The highlighted races in the table have both candidates with at least a 10%
-chance of winning and non-trivial margins on both sides of the break-even margin
-line.
+The highlighted races in the table have both candidates with at least
+a 10% chance of winning and non-trivial margins on both sides of the
+break-even margin line.
 
 ```{r state-senate-table, layout="l-screen"}
 state_sen_table <- sr_flat %>%

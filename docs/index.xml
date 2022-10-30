@@ -12,7 +12,16 @@
       <link>https://www.massnumbers.us</link>
     </image>
     <generator>Distill</generator>
-    <lastBuildDate>Mon, 24 Oct 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 31 Oct 2022 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>MA 2022 State Senate General Election Ratings</title>
+      <dc:creator>Brent Benson</dc:creator>
+      <link>https://www.massnumbers.us/posts/2022-10-31-state-senate-ratings</link>
+      <description>A model-based evaluation of the contested Massachusetts State Senate races</description>
+      <guid>https://www.massnumbers.us/posts/2022-10-31-state-senate-ratings</guid>
+      <pubDate>Mon, 31 Oct 2022 00:00:00 +0000</pubDate>
+      <media:content url="https://www.massnumbers.us/images/ma_state_senate_ratings_2022.png" medium="image" type="image/png"/>
+    </item>
     <item>
       <title>MA 2022 State Representative General Election Ratings</title>
       <dc:creator>Brent Benson</dc:creator>
