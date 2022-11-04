@@ -1,0 +1,326 @@
+---
+title: "A closer look at the Norfolk, Worcester and Middlesex State Senate fundamentals"
+description: |
+  A multi-year shift in the region's partisanship explains Democratic strength
+author: Brent Benson
+date: 2022-11-03
+citation: false
+preview: https://www.massnumbers.us/images/state_senate_shift_12_20.png
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE)
+
+library(metathis)
+library(tidyverse)
+library(readxl)
+library(rstanarm)
+library(humaniformat)
+library(gt)
+library(gtExtras)
+library(sf)
+library(tmap)
+library(formattable)
+```
+
+```{r post-meta}
+meta() %>%
+    meta_description("A multi-year shift in the region's partisanship explains Democratic strength") %>%
+    meta_viewport() %>%
+    meta_social(
+        title = "A closer look at the Norfolk, Worcester and Middlesex State Senate fundamentals",
+        url = "https://www.massnumbers.us/posts/2022-11-03-norfolk-worcester-middlesex/",
+        image = "https://www.massnumbers.us/images/state_senate_shift_12_20.png",
+        image_alt = "A map of state senate district partisan shifts from 2012 to 2020",
+        og_type = "article",
+        og_author = "Brent Benson",
+        twitter_card_type = "summary_large_image",
+        twitter_creator = "@bwbensonjr"
+    )
+```
+
+```{r map-setup}
+sen_geom <- read_sf("../../_gis/senate2012/SENATE2012_POLY.shp") %>%
+    st_make_valid() %>%
+    st_simplify(dTolerance=100, preserveTopology=TRUE) %>%
+    select(dist_number = SENDISTNUM,
+           district = SEN_DIST)
+
+NUMS_TO_WORDS = c(
+    `&`='and',
+    `1st`='First',
+    `2nd`='Second',
+    `3rd`='Third',
+    `4th`='Fourth',
+    `5th`='Fifth',
+    `6th`='Sixth',
+    `7th`='Seventh',
+    `8th`='Eighth',
+    `9th`='Ninth',
+    `10th`='Tenth',
+    `11th`='Eleventh',
+    `12th`='Twelfth',
+    `13th`='Thirteenth',
+    `14th`='Fourteenth',
+    `15th`='Fifteenth',
+    `16th`='Sixteenth',
+    `17th`='Seventeenth',
+    `18th`='Eighteenth',
+    `19th`='Nineteenth',
+    `20th`='Twentieth',
+    `21st`='Twenty-First',
+    `22nd`='Twenty-Second',
+    `23rd`='Twenty-Third',
+    `24th`='Twenty-Fourth',
+    `25th`='Twenty-Fifth',
+    `26th`='Twenty-Sixth',
+    `27th`='Twenty-Seventh',
+    `28th`='Twenty-Eighth',
+    `29th`='Twenty-Ninth',
+    `30th`='Thirtieth',
+    `31st`='Thirty-First',
+    `32nd`='Thirty-Second',
+    `33rd`='Thirty-Third',
+    `34th`='Thirty-Fourth',
+    `35th`='Thirty-Fifth',
+    `36th`='Thirty-Sixth',
+    `37th`='Thirty-Seventh'
+)
+
+ma_sen_12_16 <- read_csv("../../_data/2020/ma_pcts_districts_pvi_2016.csv") %>%
+    rename(district = State_Sen) %>%
+    mutate(district = str_replace_all(district, NUMS_TO_WORDS)) %>%
+    group_by(district) %>%
+    summarize(Obama_12 = sum(Obama_12),
+              Romney_12 = sum(Romney_12),
+              Clinton_16 = sum(Clinton_16),
+              Trump_16 = sum(Trump_16)) %>%
+    mutate(dem_pct_12 = Obama_12/(Obama_12 + Romney_12),
+           dem_pct_16 = Clinton_16/(Clinton_16 + Trump_16))
+    
+ma_sen_20 <- read_csv("../../_data/2020/ma_precincts_districts_16_20_pres.csv") %>%
+    rename(district = `State Senate`) %>%
+    mutate(district = str_replace_all(district, NUMS_TO_WORDS)) %>%
+    group_by(district) %>%
+    summarize(Biden_20 = sum(Biden_20),
+              Trump_20 = sum(Trump_20)) %>%
+    mutate(dem_pct_20 = Biden_20/(Biden_20 + Trump_20))
+
+ma_sen_12_20 <- ma_sen_12_16 %>%
+    left_join(ma_sen_20, by="district") %>%
+    mutate(shift_12_20 = dem_pct_20 - dem_pct_12)
+
+ma_sen_12_20_geom <- sen_geom %>%
+    left_join(ma_sen_12_20, by="district") %>%
+    select(district,
+           dem_pct_12,
+           dem_pct_16,
+           dem_pct_20,
+           shift_12_20)
+
+trend_popup_vars <- c(
+    "dem_pct_12",
+    "dem_pct_16",
+    "dem_pct_20",
+    "shift_12_20"
+)    
+
+percent_format <- function(pct) {
+    percent(pct, digits=0)
+}
+
+point_format <- function(pnt) {
+    digits((pnt*100), digits=0)
+}
+
+shift_legend_format <- list(
+    shift_12_20=list(fun=point_format)
+)
+
+trend_popup_format <- list(
+    dem_pct_12=list(fun=percent_format),
+    dem_pct_16=list(fun=percent_format),
+    dem_pct_20=list(fun=percent_format),
+    shift_12_20=list(fun=point_format)
+)
+
+tmap_mode(mode="view")
+```
+
+There has been a great deal of interest in the MA State Senate race
+for the Norfolk, Worcester and Middlesex District with incumbent
+Senator Becca Rausch (D-Needham) and challenger State Representative
+Shawn Dooley (R-Norfolk). The previous version of this State Senate
+district&mdash;the Norfolk, Bristol and Middlesex&mdash;had been
+considered solidly Republican and was represented by Republican
+Richard Ross (R-Wrentham) who was ousted by Rausch in 2018, and
+represented by Scott Brown (R-Wrentham) before Brown was elected to
+the United States Senate in 2010.
+
+Our simple, fundamentals-based model gives Rausch a very high
+probability of winning with a range of likely outcomes from a single
+digit Democratic margin to a major blowout. The major reason for this
+change in circumstances is a continual multi-year shift from
+Republican to Democratic strength in the affluent and well-educated
+Boston suburbs.
+
+## Regional Partisan Shifts
+
+The rise of Donald Trump as the face of the Rebpulican party in the
+United States has led to a profound shift in levels of Democratic and
+Republican support in many areas of Massachusetts. This was evident
+after the 2016 presidential election as described in a [thoughtful
+investigation by WGBH's Adam Reilly](https://www.wgbh.org/news/politics/2018/10/30/in-blue-massachusetts-some-striking-redward-shifts)
+supported by [a Mass. Numbers analysis](https://massnumbers.blogspot.com/2018/11/which-massachusetts-cities-and-towns.html).
+
+The process has continued with the 2020 election as well-educated and
+affluent suburbs have continued their move towards the Democratic
+Party and away from a Trump-led GOP. There has also been a shift in
+the rightward direction with much higher levels of support for
+Republicans in rural areas with more non-college voters and also in
+the gateway cities with large population of Hispanic (Lawrence) and
+Portugese (Fall River, New Bedford) voter ancestry.
+
+```{r partisan-shifts-map, layout="l-body-outset", fig.height=5, fig.cap="State Senate partisan shifts 2012-2020"}
+senate_shift_map <- (
+ tm_shape(ma_sen_12_20_geom) +
+ tm_fill(col="shift_12_20",
+         title="2012 to 2020 shift",
+         palette=c("#FF4949", "white", "#0F4392"),
+         midpoint=0,
+         alpha=0.8,
+         legend.format=shift_legend_format,
+         popup.vars=trend_popup_vars,
+         popup.format=trend_popup_format) +
+ tm_borders(lwd=1, col="black") +
+ tm_basemap("OpenStreetMap") +
+ tm_view(set.view=8)
+) 
+
+tmap_leaflet(senate_shift_map)
+```
+
+This map of partisan shift from 2012 to 2020 presidential elections by
+state senate district gives a strong picture of which areas are moving
+in the Democratic direction (affluent suburbs of Boston) and in the
+Republican direction (rural areas and gateway cities). Note that many
+of the gateway cities still vote in large majorities for Democrats,
+but the margins have come down significantly.
+
+## Impact of shifts on State Senate race
+
+The pre-2021 Norfolk, Bristol and Middlesex State Senate District
+represented by Becca Rausch (D-Needham) is in second place behind the
+Third Middlesex District of Michael Barrett (D-Lexington), with
+respective shifts of 14 and 13 points in the Democratic direction
+between 2012 and 2020. However, the Third Middlesex District has
+gone from an already-very-blue 60% Democratic vote share to a
+much higher 74%, while the Rausch district was within Republican
+striking distance at 54% in 2012, but has moved to a 67% Democratic
+share in 2020.
+
+These shifts often have important ramifications on the results of
+down-ballot state legislative races, which are reflected in our
+fundamentals-based model using the Partisan Voter Index (PVI) which
+is an average of the last two presidential races, adjusted by
+the nationwide result.
+
+An examination of the model's characterization of the races in the
+Norfolk, Bristol and Middlesex District for 2016, 2018, and 2020, and
+the similar Norfolk, Worcester and Middlesex District for 2022,
+show how the playing field has changed. The model's adjustment
+for non-presidential years would have significantly reduced
+Senator Rausch's chances in 2022 compared to 2020 if it had
+not been for the continuing shift of the region towards
+Democratic candidates in the 2020 election which raised
+the PVI from D+6 to D+12, giving Rausch about the same range
+of outcomes in 2022 as in 2020.
+
+```{r leg-model}
+ma_leg <- read_csv("../../_data/2020/ma_leg_two_party_2008_2021_pvi.csv") %>%
+    mutate(dem_win = if_else(dem_percent > 0.5, 1, 0)) %>%
+    filter(!is_special)
+
+bm2 <- stan_glm(dem_win ~ PVI_N + incumbent_status + pres_year, data=ma_leg, family=binomial(link="logit"), refresh=0)
+blm2 <- stan_glm(dem_percent ~ PVI_N + incumbent_status + pres_year, data=ma_leg, family=gaussian(link="identity"), refresh=0)
+```
+
+```{r nbm-nwm-setup}
+nbm_pred_results <- tibble(
+    year = c(2016, 2018, 2020, 2022),
+    PVI_N = c(2.731936, 6.149234, 6.149234, 11.559097),
+    PVI = c("D+3", "D+6", "D+6", "D+12"),
+    incumbent_status = c("GOP_Incumbent", "GOP_Incumbent", "Dem_Incumbent", "Dem_Incumbent"),
+    pres_year = c(TRUE, FALSE, TRUE, FALSE),
+    label=c("Ross (R) over Aleksov (D)",
+            "Rausch (D) over Ross (R)",
+            "Rausch (D) over Kelly (R)",
+            NA)
+) %>%
+    mutate(dem_win_prob = predict(bm2, newdata=., type="response"),
+           pred_dem_pct = predict(blm2, newdata=., type="response"),
+           pred_dem_pct_low = predictive_interval(blm2, newdata=.)[,1],
+           pred_dem_pct_high = predictive_interval(blm2, newdata=.)[,2],
+           pred_dem_margin = pred_dem_pct - (1 - pred_dem_pct),
+           pred_dem_margin_low = pred_dem_pct_low - (1 - pred_dem_pct_low),
+           pred_dem_margin_high = pred_dem_pct_high - (1 - pred_dem_pct_high)) %>%
+   mutate(dem_margin = c(-0.201, 0.0268, 0.195, NA),
+          dem_percent = c(0.399, 0.513, 0.597, NA))
+```
+
+```{r nbm-nwm-plot, layout="l-body-outset", fig.cap="Norfolk, {Bristol, Worcester}, Middlesex model vs. outcome"}
+nbm_nwm_plot <- nbm_pred_results %>%
+    ggplot(aes(x=year,
+               y=pred_dem_margin,
+               ymin=pred_dem_margin_low,
+               ymax=pred_dem_margin_high)) +
+    geom_pointrange(size=0.2, shape="plus") +
+    geom_point(aes(y=dem_margin), color="blue", size=2) +
+    geom_text(aes(y=dem_margin, label=label), hjust="left", nudge_x=0.06, size=3) +
+    geom_hline(yintercept=0, linetype="dashed") +
+    scale_y_continuous(labels = scales::percent_format(accuracy=2)) +
+    labs(y="Democratic vote margin") +
+    theme_minimal()
+
+nbm_nwm_plot
+```
+
+```{r nbm-nwm-table, layout="l-body-outset"}
+nbm_table_vals <- nbm_pred_results %>%
+    mutate(incumbent = case_when(
+                          incumbent_status == "Dem_Incumbent" ~ "Dem",
+                          incumbent_status == "GOP_Incumbent" ~ "GOP",
+                          TRUE ~ ""),
+           candidates = if_else(is.na(label),
+                                "Rausch (D) vs. Dooley (R)",
+                                label)) %>%
+    select(year,
+           incumbent,
+           pres_year,
+           candidates,
+           result=dem_margin,
+           pred_dem_margin,
+           margin_low=pred_dem_margin_low,
+           margin_high=pred_dem_margin_high)
+
+nbm_table <- nbm_table_vals %>%
+    gt() %>%
+    gt_theme_538() %>%
+    sub_missing(missing_text = "") %>%
+    fmt_percent(columns=c("result",
+                          "pred_dem_margin",
+                          "margin_low",
+                          "margin_high"),
+                decimals=0) %>%
+    tab_header("Norfolk, {Bristol, Worcester}, Middlsex model vs. outcome")
+
+nbm_table
+```
+
+While a win by State Representative Shawn Dooley (R-Norfolk) is not an
+impossible outcome, the profound shift of the Boston suburbs away
+from the Republican Party make a win by incumbent Becca Rausch
+much more likely.

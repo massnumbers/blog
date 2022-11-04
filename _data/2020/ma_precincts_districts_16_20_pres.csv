@@ -1,4 +1,4 @@
-city_town,Ward,Pct,State Rep,State Senate,US House,Gov Council,Biden_20,Trump_20,Clinton_16,Trump_16,County
+City/Town,Ward,Pct,State Rep,State Senate,US House,Gov Council,Biden_20,Trump_20,Clinton_16,Trump_16,County
 Fairhaven,-,1,10th Bristol,2nd Bristol and Plymouth,9th Congressional,1st District,1000,601,832,606,Bristol
 Fairhaven,-,2,10th Bristol,2nd Bristol and Plymouth,9th Congressional,1st District,913,688,744,600,Bristol
 Fairhaven,-,3,10th Bristol,2nd Bristol and Plymouth,9th Congressional,1st District,640,638,581,536,Bristol
@@ -1142,25 +1142,25 @@ Yarmouth,-,4,1st Barnstable,Cape and Islands,9th Congressional,1st District,1220
 Yarmouth,-,7,1st Barnstable,Cape and Islands,9th Congressional,1st District,1596,1059,1251,1009,Barnstable
 Yarmouth,-,5,2nd Barnstable,Cape and Islands,9th Congressional,1st District,1100,848,881,797,Barnstable
 Yarmouth,-,6,2nd Barnstable,Cape and Islands,9th Congressional,1st District,1145,758,907,753,Barnstable
-Adams,-,1,1st Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,527,253,439,255,Berkshire
-Adams,-,2,1st Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,574,291,476,270,Berkshire
-Adams,-,3,1st Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,601,324,475,268,Berkshire
-Adams,-,4,1st Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,512,269,446,233,Berkshire
-Adams,-,5,1st Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,680,291,577,259,Berkshire
-Cheshire,-,1,1st Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,1124,775,978,741,Berkshire
-Clarksburg,-,1,1st Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,583,390,510,327,Berkshire
-Florida,-,1,1st Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,209,203,191,170,Berkshire
-Hancock,-,1,1st Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,257,207,189,159,Berkshire
-Lanesborough,-,1,1st Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,1237,604,998,597,Berkshire
-New Ashford,-,1,1st Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,98,48,101,39,Berkshire
-N. Adams,1,1,1st Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,932,388,793,367,Berkshire
-N. Adams,2,2,1st Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,848,288,721,270,Berkshire
-N. Adams,3,3,1st Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,678,216,669,218,Berkshire
-N. Adams,4,4,1st Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,957,390,816,414,Berkshire
-N. Adams,5,5,1st Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,801,318,731,301,Berkshire
-Williamstown,-,1,1st Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,1294,225,1162,224,Berkshire
-Williamstown,-,2,1st Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,575,49,580,51,Berkshire
-Williamstown,-,3,1st Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,1327,225,1174,203,Berkshire
+Adams,-,1,1st Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,527,253,439,255,Berkshire
+Adams,-,2,1st Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,574,291,476,270,Berkshire
+Adams,-,3,1st Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,601,324,475,268,Berkshire
+Adams,-,4,1st Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,512,269,446,233,Berkshire
+Adams,-,5,1st Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,680,291,577,259,Berkshire
+Cheshire,-,1,1st Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,1124,775,978,741,Berkshire
+Clarksburg,-,1,1st Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,583,390,510,327,Berkshire
+Florida,-,1,1st Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,209,203,191,170,Berkshire
+Hancock,-,1,1st Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,257,207,189,159,Berkshire
+Lanesborough,-,1,1st Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,1237,604,998,597,Berkshire
+New Ashford,-,1,1st Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,98,48,101,39,Berkshire
+N. Adams,1,1,1st Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,932,388,793,367,Berkshire
+N. Adams,2,2,1st Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,848,288,721,270,Berkshire
+N. Adams,3,3,1st Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,678,216,669,218,Berkshire
+N. Adams,4,4,1st Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,957,390,816,414,Berkshire
+N. Adams,5,5,1st Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,801,318,731,301,Berkshire
+Williamstown,-,1,1st Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,1294,225,1162,224,Berkshire
+Williamstown,-,2,1st Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,575,49,580,51,Berkshire
+Williamstown,-,3,1st Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,1327,225,1174,203,Berkshire
 Foxborough,-,1,1st Bristol,Bristol and Norfolk,4th Congressional,2nd District,1213,738,1002,774,Norfolk
 Foxborough,-,2,1st Bristol,Bristol and Norfolk,4th Congressional,2nd District,1415,909,1119,831,Norfolk
 Foxborough,-,3,1st Bristol,Bristol and Norfolk,4th Congressional,2nd District,1350,936,1048,877,Norfolk
@@ -1187,30 +1187,30 @@ Newburyport,1,P,1st Essex,1st Essex,6th Congressional,5th District,315,191,266,2
 Salisbury,-,1,1st Essex,1st Essex,6th Congressional,5th District,1125,841,825,740,Essex
 Salisbury,-,2,1st Essex,1st Essex,6th Congressional,5th District,961,892,726,726,Essex
 Salisbury,-,3,1st Essex,1st Essex,6th Congressional,5th District,759,864,547,783,Essex
-Ashfield,-,1,1st Franklin,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,993,180,836,184,Franklin
-Buckland,-,1,1st Franklin,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,889,268,703,230,Franklin
-Chester,-,1,1st Franklin,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,313,415,238,372,Hampden
-Chesterfield,-,1,1st Franklin,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,510,287,398,267,Hampshire
-Conway,-,1,1st Franklin,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,989,278,865,249,Franklin
-Cummington,-,1,1st Franklin,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,413,162,334,156,Hampshire
+Ashfield,-,1,1st Franklin,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,993,180,836,184,Franklin
+Buckland,-,1,1st Franklin,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,889,268,703,230,Franklin
+Chester,-,1,1st Franklin,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,313,415,238,372,Hampden
+Chesterfield,-,1,1st Franklin,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,510,287,398,267,Hampshire
+Conway,-,1,1st Franklin,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,989,278,865,249,Franklin
+Cummington,-,1,1st Franklin,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,413,162,334,156,Hampshire
 Deerfield,-,1,1st Franklin,"Hampshire, Franklin and Worcester",2nd Congressional,8th District,2425,839,1968,777,Franklin
-Goshen,-,1,1st Franklin,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,418,231,364,213,Hampshire
-Huntington,-,1,1st Franklin,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,585,593,460,611,Hampshire
+Goshen,-,1,1st Franklin,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,418,231,364,213,Hampshire
+Huntington,-,1,1st Franklin,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,585,593,460,611,Hampshire
 Leverett,-,1,1st Franklin,"Hampshire, Franklin and Worcester",2nd Congressional,8th District,1193,163,996,185,Franklin
-Middlefield,-,1,1st Franklin,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,199,124,155,115,Hampshire
+Middlefield,-,1,1st Franklin,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,199,124,155,115,Hampshire
 Montague,-,1,1st Franklin,"Hampshire, Franklin and Worcester",2nd Congressional,8th District,846,178,729,182,Franklin
 Montague,-,2,1st Franklin,"Hampshire, Franklin and Worcester",2nd Congressional,8th District,521,272,418,206,Franklin
 Montague,-,3,1st Franklin,"Hampshire, Franklin and Worcester",2nd Congressional,8th District,554,211,411,218,Franklin
 Montague,-,4,1st Franklin,"Hampshire, Franklin and Worcester",2nd Congressional,8th District,590,231,490,208,Franklin
 Montague,-,5,1st Franklin,"Hampshire, Franklin and Worcester",2nd Congressional,8th District,480,128,388,91,Franklin
 Montague,-,6,1st Franklin,"Hampshire, Franklin and Worcester",2nd Congressional,8th District,529,191,422,190,Franklin
-Plainfield,-,1,1st Franklin,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,316,116,263,107,Hampshire
-Shelburne,-,1,1st Franklin,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,927,209,821,230,Franklin
+Plainfield,-,1,1st Franklin,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,316,116,263,107,Hampshire
+Shelburne,-,1,1st Franklin,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,927,209,821,230,Franklin
 Shutesbury,-,1,1st Franklin,"Hampshire, Franklin and Worcester",2nd Congressional,8th District,1154,144,980,142,Franklin
 Sunderland,-,1,1st Franklin,"Hampshire, Franklin and Worcester",2nd Congressional,8th District,1605,394,1353,387,Franklin
 Whately,-,1,1st Franklin,"Hampshire, Franklin and Worcester",2nd Congressional,8th District,745,332,582,328,Franklin
-Williamsburg,-,1,1st Franklin,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,1446,337,1207,347,Hampshire
-Worthington,-,1,1st Franklin,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,571,271,430,229,Hampshire
+Williamsburg,-,1,1st Franklin,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,1446,337,1207,347,Hampshire
+Worthington,-,1,1st Franklin,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,571,271,430,229,Hampshire
 Brimfield,-,1,1st Hampden,"Worcester, Hampden, Hampshire and Middlesex",1st Congressional,7th District,1063,1193,793,1113,Hampden
 Holland,-,1,1st Hampden,"Worcester, Hampden, Hampshire and Middlesex",1st Congressional,7th District,698,793,475,720,Hampden
 Palmer,-,1,1st Hampden,"Worcester, Hampden, Hampshire and Middlesex",1st Congressional,7th District,768,797,572,743,Hampden
@@ -1244,7 +1244,7 @@ Northampton,6,B,1st Hampshire,"Hampshire, Franklin and Worcester",2nd Congressio
 Northampton,7,A,1st Hampshire,"Hampshire, Franklin and Worcester",2nd Congressional,8th District,1241,168,1037,189,Hampshire
 Northampton,7,B,1st Hampshire,"Hampshire, Franklin and Worcester",2nd Congressional,8th District,1175,215,1001,210,Hampshire
 Southampton,-,1,1st Hampshire,2nd Hampden and Hampshire,1st Congressional,8th District,2231,1811,1744,1692,Hampshire
-Westhampton,-,1,1st Hampshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,746,426,629,408,Hampshire
+Westhampton,-,1,1st Hampshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,746,426,629,408,Hampshire
 Ashby,-,1,1st Middlesex,"Worcester, Hampden, Hampshire and Middlesex",3rd Congressional,7th District,956,1008,722,974,Middlesex
 Ayer,-,1,1st Middlesex,Middlesex and Worcester,3rd Congressional,3rd District,1387,718,1078,729,Middlesex
 Ayer,-,2,37th Middlesex,Middlesex and Worcester,3rd Congressional,3rd District,1545,819,1084,769,Middlesex
@@ -1433,10 +1433,10 @@ Everett,5,2,28th Middlesex,Middlesex and Suffolk,7th Congressional,6th District,
 Everett,6,1,28th Middlesex,Middlesex and Suffolk,7th Congressional,6th District,969,382,809,344,Middlesex
 Everett,6,2,28th Middlesex,Middlesex and Suffolk,7th Congressional,6th District,1021,365,896,325,Middlesex
 Bernardston,-,1,2nd Berkshire,"Hampshire, Franklin and Worcester",1st Congressional,8th District,916,423,711,382,Franklin
-Charlemont,-,1,2nd Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,492,235,407,228,Franklin
+Charlemont,-,1,2nd Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,492,235,407,228,Franklin
 Colrain,-,1,2nd Berkshire,"Hampshire, Franklin and Worcester",1st Congressional,8th District,667,306,513,257,Franklin
-Dalton,-,1,2nd Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,1305,560,1091,491,Berkshire
-Dalton,-,2,2nd Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,1377,479,1099,449,Berkshire
+Dalton,-,1,2nd Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,1305,560,1091,491,Berkshire
+Dalton,-,2,2nd Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,1377,479,1099,449,Berkshire
 Greenfield,-,1,2nd Berkshire,"Hampshire, Franklin and Worcester",2nd Congressional,8th District,728,322,547,280,Franklin
 Greenfield,-,2,2nd Berkshire,"Hampshire, Franklin and Worcester",2nd Congressional,8th District,896,327,741,341,Franklin
 Greenfield,-,3,2nd Berkshire,"Hampshire, Franklin and Worcester",2nd Congressional,8th District,801,293,638,254,Franklin
@@ -1446,30 +1446,30 @@ Greenfield,-,6,2nd Berkshire,"Hampshire, Franklin and Worcester",2nd Congression
 Greenfield,-,7,2nd Berkshire,"Hampshire, Franklin and Worcester",2nd Congressional,8th District,615,236,483,246,Franklin
 Greenfield,-,8,2nd Berkshire,"Hampshire, Franklin and Worcester",2nd Congressional,8th District,701,185,515,170,Franklin
 Greenfield,-,9,2nd Berkshire,"Hampshire, Franklin and Worcester",2nd Congressional,8th District,552,225,460,221,Franklin
-Hawley,-,1,2nd Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,155,70,105,67,Franklin
-Heath,-,1,2nd Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,294,158,244,165,Franklin
-Hinsdale,-,1,2nd Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,771,402,606,403,Berkshire
+Hawley,-,1,2nd Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,155,70,105,67,Franklin
+Heath,-,1,2nd Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,294,158,244,165,Franklin
+Hinsdale,-,1,2nd Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,771,402,606,403,Berkshire
 Leyden,-,1,2nd Berkshire,"Hampshire, Franklin and Worcester",1st Congressional,8th District,330,155,306,139,Franklin
-Monroe,-,1,2nd Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,28,31,25,26,Franklin
+Monroe,-,1,2nd Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,28,31,25,26,Franklin
 Northfield,-,1,2nd Berkshire,"Hampshire, Franklin and Worcester",2nd Congressional,8th District,1211,592,1013,533,Franklin
-Peru,-,1,2nd Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,299,216,255,207,Berkshire
-Pittsfield,1,B,2nd Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,1161,397,980,366,Berkshire
-Pittsfield,1,A,3rd Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,944,312,789,309,Berkshire
-Pittsfield,2,A,3rd Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,706,184,617,143,Berkshire
-Pittsfield,2,B,3rd Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,1269,377,1048,370,Berkshire
-Pittsfield,3,A,3rd Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,1412,376,1233,326,Berkshire
-Pittsfield,3,B,3rd Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,1448,420,1248,414,Berkshire
-Pittsfield,4,A,3rd Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,1411,394,1162,402,Berkshire
-Pittsfield,4,B,3rd Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,1534,557,1342,528,Berkshire
-Pittsfield,5,A,3rd Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,1198,301,959,273,Berkshire
-Pittsfield,5,B,3rd Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,1207,454,1030,414,Berkshire
-Pittsfield,6,A,3rd Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,1261,333,1115,328,Berkshire
-Pittsfield,6,B,3rd Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,889,235,713,253,Berkshire
-Pittsfield,7,A,3rd Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,750,274,658,226,Berkshire
-Pittsfield,7,B,3rd Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,1214,403,1013,419,Berkshire
-Rowe,-,1,2nd Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,152,113,122,99,Franklin
-Savoy,-,1,2nd Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,226,161,184,163,Berkshire
-Windsor,-,1,2nd Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,370,201,313,159,Berkshire
+Peru,-,1,2nd Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,299,216,255,207,Berkshire
+Pittsfield,1,B,2nd Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,1161,397,980,366,Berkshire
+Pittsfield,1,A,3rd Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,944,312,789,309,Berkshire
+Pittsfield,2,A,3rd Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,706,184,617,143,Berkshire
+Pittsfield,2,B,3rd Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,1269,377,1048,370,Berkshire
+Pittsfield,3,A,3rd Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,1412,376,1233,326,Berkshire
+Pittsfield,3,B,3rd Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,1448,420,1248,414,Berkshire
+Pittsfield,4,A,3rd Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,1411,394,1162,402,Berkshire
+Pittsfield,4,B,3rd Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,1534,557,1342,528,Berkshire
+Pittsfield,5,A,3rd Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,1198,301,959,273,Berkshire
+Pittsfield,5,B,3rd Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,1207,454,1030,414,Berkshire
+Pittsfield,6,A,3rd Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,1261,333,1115,328,Berkshire
+Pittsfield,6,B,3rd Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,889,235,713,253,Berkshire
+Pittsfield,7,A,3rd Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,750,274,658,226,Berkshire
+Pittsfield,7,B,3rd Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,1214,403,1013,419,Berkshire
+Rowe,-,1,2nd Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,152,113,122,99,Franklin
+Savoy,-,1,2nd Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,226,161,184,163,Berkshire
+Windsor,-,1,2nd Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,370,201,313,159,Berkshire
 Georgetown,-,1,2nd Essex,1st Essex and Middlesex,6th Congressional,5th District,1100,948,863,848,Essex
 Georgetown,-,2,2nd Essex,1st Essex and Middlesex,6th Congressional,5th District,983,760,727,725,Essex
 Georgetown,-,3,2nd Essex,1st Essex and Middlesex,6th Congressional,5th District,968,680,757,655,Essex
@@ -1749,29 +1749,29 @@ Orleans,-,1,4th Barnstable,Cape and Islands,9th Congressional,1st District,3288,
 Provincetown,-,1,4th Barnstable,Cape and Islands,9th Congressional,1st District,2402,182,2082,208,Barnstable
 Truro,-,1,4th Barnstable,Cape and Islands,9th Congressional,1st District,1386,340,1095,361,Barnstable
 Wellfleet,-,1,4th Barnstable,Cape and Islands,9th Congressional,1st District,1971,496,1554,515,Barnstable
-Alford,-,1,4th Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,271,50,226,52,Berkshire
-Becket,-,1,4th Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,757,413,571,368,Berkshire
-Blandford,-,1,4th Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,307,454,256,405,Hampden
-Egremont,-,1,4th Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,783,174,621,147,Berkshire
-Great Barrington,-,A,4th Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,900,172,752,155,Berkshire
-Great Barrington,-,B,4th Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,861,203,737,187,Berkshire
-Great Barrington,-,C,4th Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,702,91,567,89,Berkshire
-Great Barrington,-,D,4th Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,905,188,824,149,Berkshire
-Lee,-,1,4th Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,2415,985,1969,852,Berkshire
-Lenox,-,1,4th Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,2701,602,2234,572,Berkshire
-Monterey,-,1,4th Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,481,102,417,88,Berkshire
-Mount Washington,-,1,4th Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,102,16,76,19,Berkshire
-New Marlborough,-,1,4th Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,678,264,564,218,Berkshire
-Otis,-,1,4th Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,550,441,431,407,Berkshire
-Richmond,-,1,4th Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,828,215,706,218,Berkshire
+Alford,-,1,4th Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,271,50,226,52,Berkshire
+Becket,-,1,4th Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,757,413,571,368,Berkshire
+Blandford,-,1,4th Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,307,454,256,405,Hampden
+Egremont,-,1,4th Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,783,174,621,147,Berkshire
+Great Barrington,-,A,4th Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,900,172,752,155,Berkshire
+Great Barrington,-,B,4th Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,861,203,737,187,Berkshire
+Great Barrington,-,C,4th Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,702,91,567,89,Berkshire
+Great Barrington,-,D,4th Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,905,188,824,149,Berkshire
+Lee,-,1,4th Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,2415,985,1969,852,Berkshire
+Lenox,-,1,4th Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,2701,602,2234,572,Berkshire
+Monterey,-,1,4th Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,481,102,417,88,Berkshire
+Mount Washington,-,1,4th Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,102,16,76,19,Berkshire
+New Marlborough,-,1,4th Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,678,264,564,218,Berkshire
+Otis,-,1,4th Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,550,441,431,407,Berkshire
+Richmond,-,1,4th Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,828,215,706,218,Berkshire
 Russell,-,1,4th Berkshire,2nd Hampden and Hampshire,1st Congressional,8th District,366,512,278,480,Hampden
-Sandisfield,-,1,4th Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,306,200,254,190,Berkshire
-Sheffield,-,1,4th Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,1542,578,1242,530,Berkshire
-Stockbridge,-,1,4th Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,1099,237,965,252,Berkshire
+Sandisfield,-,1,4th Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,306,200,254,190,Berkshire
+Sheffield,-,1,4th Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,1542,578,1242,530,Berkshire
+Stockbridge,-,1,4th Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,1099,237,965,252,Berkshire
 Tolland,-,1,4th Berkshire,2nd Hampden and Hampshire,1st Congressional,8th District,136,186,101,190,Hampden
-Tyringham,-,1,4th Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,234,72,201,70,Berkshire
-Washington,-,1,4th Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,240,107,217,89,Berkshire
-W. Stockbridge,-,1,4th Berkshire,"Berkshire, Hampshire, Franklin & Hampden",1st Congressional,8th District,784,164,659,178,Berkshire
+Tyringham,-,1,4th Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,234,72,201,70,Berkshire
+Washington,-,1,4th Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,240,107,217,89,Berkshire
+W. Stockbridge,-,1,4th Berkshire,"Berkshire, Hampshire, Franklin and Hampden",1st Congressional,8th District,784,164,659,178,Berkshire
 Rehoboth,-,1,4th Bristol,Bristol and Norfolk,4th Congressional,2nd District,1134,1345,879,1173,Bristol
 Rehoboth,-,2,4th Bristol,Bristol and Norfolk,4th Congressional,2nd District,1214,1304,918,1180,Bristol
 Rehoboth,-,3,4th Bristol,Bristol and Norfolk,4th Congressional,2nd District,1302,1427,987,1221,Bristol
