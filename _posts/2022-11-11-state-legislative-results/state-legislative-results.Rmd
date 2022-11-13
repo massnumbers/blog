@@ -1,0 +1,463 @@
+---
+title: "MA 2022 State Legislative Results"
+description: |
+  No major surprises when comparing race results to model fundamentals
+author: Brent Benson
+date: 2022-11-14
+citation: false
+preview: https://www.massnumbers.us/images/state_rep_results_2022_11_08.png
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE)
+
+library(metathis)
+library(tidyverse)
+library(readxl)
+library(rstanarm)
+library(humaniformat)
+library(gt)
+library(gtExtras)
+library(sf)
+library(tmap)
+library(formattable)
+library(plotly)
+```
+```{r post-meta}
+meta() %>%
+    meta_description("No major surprises when comparing race results to model fundamentals") %>%
+    meta_viewport() %>%
+    meta_social(
+        title = "MA 2022 State Legislative Results",
+        url = "https://www.massnumbers.us/posts/2022-11-11-state-legislative-results/",
+        image = "https://www.massnumbers.us/images/state_rep_results_2022_11_08.png",
+        image_alt = "MA 2020 State Representative general election results",
+        og_type = "article",
+        og_author = "Brent Benson",
+        twitter_card_type = "summary_large_image",
+        twitter_creator = "@bwbensonjr"
+    )
+```
+
+```{r read-data}
+party_abbrev <- tibble(
+    party = c("Democratic",
+              "Independent",
+              "Republican",
+              "Unenrolled",
+              "Workers Party",
+              "Green-Rainbow Party",
+              "We The People",
+              "Non-Party Candidate"),
+    pty = c("D",
+            "I",
+            "R",
+            "U",
+            "W",
+            "GR",
+            "WTP",
+            "NP")
+)
+
+# State Rep
+rc <- read_csv("../../_data/2020/ma_state_rep_cands_2022.csv") %>%
+    left_join(party_abbrev, by="party") %>%
+    mutate(cand_name_parsed = parse_names(candidate),
+           first_name = cand_name_parsed$first_name,
+           last_name = cand_name_parsed$last_name,
+           cand_label = str_c(last_name, " (", pty, "-", city_town, ")")) %>%
+    select(-office, -cand_name_parsed) %>%
+    nest(candidate = c(candidate, address, city_town, party, pty, first_name, last_name, cand_label)) %>%
+    mutate(num_candidates = map_dbl(candidate, nrow))
+
+rr <- read_excel("../../_data/2020/MA_State_Rep_Races_2022.xlsx") %>%
+    select(district = District,
+           dist_num = Number,
+           dist_code = Code,
+           PVI_N,
+           PVI,
+           inc_status,
+           Incumbent,
+           dem_win_prob) %>%
+    mutate(district = str_replace(district, " & ", " and ")) %>%
+    left_join(rc, by="district") %>%
+    unnest(candidate) %>%
+    group_by(district) %>%
+    mutate(is_incumbent = case_when(
+              ((inc_status == "Dem_Incumbent") & (pty == "D")) ~ TRUE,
+              ((inc_status == "GOP_Incumbent") & (pty == "R") & (district != "2nd Franklin")) ~ TRUE,
+              ((district == "2nd Franklin") & (candidate == "Susannah M. Whipps")) ~ TRUE,
+              TRUE ~ FALSE)) %>%
+    ungroup() %>%
+    nest(candidate = c(candidate,
+                       address,
+                       city_town,
+                       party,
+                       pty,
+                       cand_label,
+                       first_name,
+                       last_name,
+                       is_incumbent))
+
+#State Senate
+sc <- read_csv("../../_data/2020/ma_state_senate_cands_2022.csv") %>%
+    left_join(party_abbrev, by="party") %>%
+    mutate(cand_name_parsed = parse_names(candidate),
+           first_name = cand_name_parsed$first_name,
+           last_name = cand_name_parsed$last_name,
+           cand_label = str_c(last_name, " (", pty, "-", city_town, ")")) %>%
+    select(-office, -cand_name_parsed) %>%
+    nest(candidate = c(candidate, address, city_town, party, pty, first_name, last_name, cand_label)) %>%
+    mutate(num_candidates = map_dbl(candidate, nrow))
+
+sr <- read_excel("../../_data/2020/MA_State_Senate_Race_2022.xlsx") %>%
+    select(district = District,
+           dist_num = Number,
+           PVI_N,
+           PVI,
+           inc_status,
+           Incumbent,
+           dem_win_prob) %>%
+    left_join(sc, by="district") %>%
+    unnest(candidate) %>%
+    group_by(district) %>%
+    mutate(is_incumbent = case_when(
+              ((inc_status == "Dem_Incumbent") & (pty == "D")) ~ TRUE,
+              ((inc_status == "GOP_Incumbent") & (pty == "R")) ~ TRUE,
+              TRUE ~ FALSE)) %>%
+    ungroup() %>%
+    nest(candidate = c(candidate,
+                       address,
+                       city_town,
+                       party,
+                       pty,
+                       cand_label,
+                       first_name,
+                       last_name,
+                       is_incumbent))
+```
+
+```{r leg-model}
+ma_leg <- read_csv("../../_data/2020/ma_leg_two_party_2008_2021_pvi.csv") %>%
+    mutate(dem_win = if_else(dem_percent > 0.5, 1, 0)) %>%
+    filter(!is_special)
+
+bm2 <- stan_glm(dem_win ~ PVI_N + incumbent_status + pres_year, data=ma_leg, family=binomial(link="logit"), refresh=0)
+blm2 <- stan_glm(dem_percent ~ PVI_N + incumbent_status + pres_year, data=ma_leg, family=gaussian(link="identity"), refresh=0)
+```
+
+```{r infer-races}
+rr$bayes_win_prob <- predict(bm2, newdata=(rr %>% rename(incumbent_status=inc_status) %>% mutate(pres_year = FALSE)), type="response")
+rr$bayes_dem_pct <- predict(blm2, newdata=(rr %>% rename(incumbent_status=inc_status) %>% mutate(pres_year = FALSE)), type="response")
+rep_intervals <- predictive_interval(blm2, newdata=(rr %>% rename(incumbent_status=inc_status) %>% mutate(pres_year = FALSE)))
+rr$bayes_dem_low <- rep_intervals[,1]
+rr$bayes_dem_high <- rep_intervals[,2]
+
+sr$bayes_win_prob <- predict(bm2, newdata=(sr %>% rename(incumbent_status=inc_status) %>% mutate(pres_year = FALSE)), type="response")
+sr$bayes_dem_pct <- predict(blm2, newdata=(sr %>% rename(incumbent_status=inc_status) %>% mutate(pres_year = FALSE)), type="response")
+sen_intervals <- predictive_interval(blm2, newdata=(sr %>% rename(incumbent_status=inc_status) %>% mutate(pres_year = FALSE)))
+sr$bayes_dem_low <- sen_intervals[,1]
+sr$bayes_dem_high <- sen_intervals[,2]
+```
+
+```{r district-name-transform}
+NUMS_TO_WORDS <- c(
+    `&`='and',
+    `1st`='First',
+    `2nd`='Second',
+    `3rd`='Third',
+    `4th`='Fourth',
+    `5th`='Fifth',
+    `6th`='Sixth',
+    `7th`='Seventh',
+    `8th`='Eighth',
+    `9th`='Ninth',
+    `10th`='Tenth',
+    `11th`='Eleventh',
+    `12th`='Twelfth',
+    `13th`='Thirteenth',
+    `14th`='Fourteenth',
+    `15th`='Fifteenth',
+    `16th`='Sixteenth',
+    `17th`='Seventeenth',
+    `18th`='Eighteenth',
+    `19th`='Nineteenth',
+    `20th`='Twentieth',
+    `21st`='Twenty-First',
+    `22nd`='Twenty-Second',
+    `23rd`='Twenty-Third',
+    `24th`='Twenty-Fourth',
+    `25th`='Twenty-Fifth',
+    `26th`='Twenty-Sixth',
+    `27th`='Twenty-Seventh',
+    `28th`='Twenty-Eighth',
+    `29th`='Twenty-Ninth',
+    `30th`='Thirtieth',
+    `31st`='Thirty-First',
+    `32nd`='Thirty-Second',
+    `33rd`='Thirty-Third',
+    `34th`='Thirty-Fourth',
+    `35th`='Thirty-Fifth',
+    `36th`='Thirty-Sixth',
+    `37th`='Thirty-Seventh'
+)
+```
+
+```{r table-transforms}
+flatten_candidates <- function(district, cands) {
+    cands %>%
+        select(pty, cand_label) %>%
+        mutate(pty = case_when(
+                   pty == "D" ~ "D",
+                   pty == "R" ~ "R",
+                   ((pty == "I") & (district == "2nd Franklin")) ~ "D",
+                   TRUE ~ "other")) %>%
+        pivot_wider(names_from = "pty",
+                    values_from = "cand_label")
+}
+
+table_transforms <- function(df) {
+    df %>%
+        mutate(margin = (bayes_dem_pct - 0.5)*100,
+               margin_low = (bayes_dem_low - 0.5)*100,
+               margin_high = (bayes_dem_high - 0.5)*100,
+               Incumbent = case_when(
+                   inc_status == "Dem_Incumbent" ~ "Dem",
+                   inc_status == "GOP_Incumbent" ~ "GOP",
+                   TRUE ~ ""),
+               candidates = map2(district, candidate, flatten_candidates)) %>%
+        unnest(candidates) %>%
+        select(district, PVI, PVI_N, Incumbent, num_candidates,
+               D, R, other, dem_win_prob=bayes_win_prob,
+               margin_low, margin, margin_high)
+}
+
+rr_flat <- rr %>%
+    table_transforms()
+
+rep_results <- read_csv("../../_data/2020/state_rep_results_2022.csv") %>%
+    select(district, winning_party, pcts_reporting_pct, 
+           votes_Dem, votes_GOP, votes_Other, dem_percent, dem_margin)
+
+rr_contested <- rr_flat %>%
+    filter(num_candidates > 1) %>%
+    left_join(rep_results, by="district") %>%
+    mutate(dem_margin = dem_margin * 100,
+           winning_party = if_else(is.na(winning_party), "Unk", winning_party))
+
+sr_flat <- sr %>%
+    table_transforms()
+
+sen_results <- read_csv("../../_data/2020/state_senate_results_2022.csv") %>%
+    mutate(district = str_replace_all(district, NUMS_TO_WORDS)) %>%
+    select(district, winning_party, pcts_reporting_pct, 
+           votes_Dem, votes_GOP, votes_Other, dem_percent, dem_margin)
+
+sr_contested <- sr_flat %>%
+    filter(num_candidates > 1) %>%
+    left_join(sen_results, by="district") %>%
+    mutate(dem_margin = dem_margin * 100,
+           winning_party = if_else(is.na(winning_party), "Unk", winning_party))
+```
+
+```{r table-plot-helpers}
+partisan_palette <- function(x) {
+     f_neg <- scales::col_numeric(
+         palette = c("#FF4949", "white"),
+         domain = c(-50, 0)
+     )
+     f_pos <- scales::col_numeric(
+         palette = c("white", "#0F4392"),
+         domain = c(0, 50)
+     )
+     ifelse(x < 0, f_neg(x), f_pos(x))
+}
+
+leg_results_table <- function(results, title) {
+    results %>%
+    arrange(dem_margin) %>%
+    select(-c(PVI_N, num_candidates, dem_win_prob,
+              votes_Dem, votes_GOP, votes_Other, dem_percent)) %>%
+    gt() %>%
+    gt_theme_538() %>%
+    cols_hide(columns=c(pcts_reporting_pct)) %>%
+    cols_label(margin_low="Low",
+               margin_high="High",
+               winning_party="Winner",
+               dem_margin="Margin") %>%
+    cols_move(columns=c(winning_party,
+                        dem_margin,
+                        margin_low,
+                        margin,
+                        margin_high),
+              after=Incumbent) %>%
+    sub_missing(missing_text = "") %>%
+    tab_spanner("Model", columns=c(margin_low,
+                                   margin,
+                                   margin_high)) %>%
+    fmt_number(columns=c(margin,
+                         margin_low,
+                         margin_high,
+                         dem_margin), decimals=0) %>%
+    data_color(columns=c(margin, margin_low, margin_high, dem_margin),
+               colors=partisan_palette) %>%
+    tab_style(style=cell_text(weight="bold"),
+              locations=cells_body(columns=D,
+                                   rows=(Incumbent == "Dem"))) %>%
+    tab_style(style=cell_text(weight="bold"),
+              locations=cells_body(columns=R,
+                                   rows=(Incumbent == "GOP"))) %>%
+    tab_style(style=cell_fill(color="#0F4392", alpha=0.4),
+              locations=cells_body(columns=D,
+                                   rows=(winning_party == "Dem"))) %>%
+    tab_style(style=cell_fill(color="gray40", alpha=0.4),
+              locations=cells_body(columns=D,
+                                   rows=(winning_party == "Ind"))) %>%
+    tab_style(style=cell_fill(color="#FF4949", alpha=0.4),
+              locations=cells_body(columns=R,
+                                   rows=(winning_party == "GOP"))) %>%
+    tab_footnote(footnote="Not all results reported",
+                 locations=cells_body(columns=dem_margin,
+                                      rows=(pcts_reporting_pct != 100))) %>%
+    tab_footnote(footnote="Winner has not been called by AP",
+                 locations=cells_body(columns=winning_party,
+                                      rows=(winning_party == "Unk"))) %>%
+    tab_header(title)
+}
+
+margin_result_plot <- function(results, title) {
+    results %>%
+    mutate(district = fct_reorder(district, -margin)) %>%
+    ggplot(aes(x=margin,
+               xmin=margin_low,
+               xmax=margin_high,
+               y=district,
+               PVI=PVI,
+               Incumbent=Incumbent,
+               D=D,
+               R=R,
+               Other=other,
+               pred_margin=margin,
+               dem_margin=dem_margin)) +
+    geom_pointrange(size=0.2, shape="plus") +
+    geom_point(aes(x=dem_margin), color="blue", size=2) +
+    geom_vline(xintercept=0, linetype="dashed") +
+    labs(title=title, y="") + 
+    theme_minimal() +
+    theme(axis.text=element_text(size=9))
+}
+
+tooltip_aes = c(
+    "district",
+    "PVI",
+    "Incumbent",
+    "D",
+    "R",
+    "Other",
+    "pred_margin",
+    "margin"
+)
+```
+
+There were no major surprises in the contested Massachusetts state
+legislative elections on November 8, 2022. The State Representative
+race that looked like it would be the most competitive based on our
+fundamentals-based model (1st Middlesex) did turn out incredibly
+close&mdash;the race has still not been called. Another race that
+looked reasonably safe (2nd Essex) ended up closer than expected and
+has not been called. A State Senate race that looked close from a
+fundamentals point of view (Hampden, Hampton and Worcester) came down
+safely in Democratic territory, as did a race where pundits felt GOP
+strength might win out (Norfolk, Worcester and Middlesex).
+
+## 1st Middlesex
+
+The [model expected a
+nail-biter](https://www.massnumbers.us/posts/2022-10-24-state-rep-ratings/)
+in the 1st Middlesex State Representative race between Margaret
+Scarsdale (D-Pepperell), Andrew Shepherd (R-Townsend), and independent
+candidate Catherine Lundeen (I-Pepperell) and nail-biter is what we
+got. As of this writing, Shepherd looks to be ahead by 34 votes out of
+19,633 votes cast, a margin of 0.17 percentage points, and seems to be
+headed for a recount.
+
+## 2nd Essex
+
+The biggest surprise was the tight margin in the 2nd Essex State
+Representative race between incumbent Rep. Leonard Mirra
+(R-Georgetown) and challenger Kristin Kassner (D-Hamilton). The model
+expected a high-single digit two-party margin in favor of Mirra, but
+the current count shows a 84 vote lead out of 23,114 votes case, a
+margin of 0.36 percentage points. This race has also not officially
+been called by the Associated Press. This results was still inside the
+90% error bars of the model, but it is definitely an outlier.
+
+## Hampden, Hampton and Worcester
+
+On the State Senate side the model rated the Hampden, Hampton and
+Worcester District&mdash;the post-redistricting version of the
+district represented by Lt. Governor candidate Eric Lesser
+(D-Longmeadow)&mdash;as the most competitive race. A reader who
+understood the specifics of this race [gave the
+opinion](https://twitter.com/MSzafranski413/status/1587573604530769922?s=20&t=971hGtckUOe-pgrWKLOXbw)
+that State Rep. Oliveira (D-Ludlow) held a strong advantage over
+business person William Johsnon (R-Granby) based on the structure of
+the district. Tuesday's result seemed to bear that out with
+Oliveira getting 56% of the two-party vote, not close, but
+still well within the 90% confidence interval of the model.
+
+## Norfolk, Worcester and Middlesex
+
+I took a [fairly close
+look](https://www.massnumbers.us/posts/2022-11-03-norfolk-worcester-middlesex/)
+at the Norfolk, Worcester and Middlesex state senate race between
+incumbent Senator Becca Rausch (D-Needham) and sitting State
+Rep. Shawn Dooley (R-Norfolk). There seemed to be some conventional
+wisdom that the race would be close because of the red-to-purple
+reputation of the district in its previous incarnation as the Norfolk,
+Worcester and Bristol with former GOP State Senators Richard Ross
+(R-Wrentham) and Scott Brown (R-Wrentham).
+
+However, the district is full of towns that have [swung in the
+Democratic
+direction](https://www.wgbh.org/news/politics/2018/10/30/in-blue-massachusetts-some-striking-redward-shifts)
+since the Trump era. This swing pushed the model to have high
+expectations of a Rausch win. Rausch's victory with 55% of the
+two-party vote was fairly comfortable, but could have been higher if
+not for the strong name recognition of Rep. Dooley in the area and the
+[large amount of
+money](https://commonwealthmagazine.org/politics/in-high-stakes-race-rausch-declares-victory-over-dooley/)
+spent on boths sides.
+
+
+```{r rep-results-table, layout="l-screen"}
+rep_results_table <- leg_results_table(rr_contested,
+                                       "Contested State Rep results")
+
+rep_results_table
+```
+
+```{r rep-compare-results-model, fig.height=10}
+rep_results_plot <- margin_result_plot(rr_contested,
+                                       "State Rep actual margins vs. model")
+
+ggplotly(rep_results_plot, tooltip=tooltip_aes)
+```
+
+```{r senate-results-table, layout="l-screen"}
+sen_results_table <- leg_results_table(sr_contested,
+                                       "Contested State Senate results")
+
+sen_results_table
+```
+
+```{r sen-compare-results-model, fig.height=6}
+sen_results_plot <- margin_result_plot(sr_contested,
+                                       "State Senate actual margins vs. model")
+
+ggplotly(sen_results_plot, tooltip=tooltip_aes)
+```
+
