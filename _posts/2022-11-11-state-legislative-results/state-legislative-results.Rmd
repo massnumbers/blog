@@ -365,13 +365,13 @@ tooltip_aes = c(
 There were no major surprises in the contested Massachusetts state
 legislative elections on November 8, 2022. The State Representative
 race that looked like it would be the most competitive based on our
-fundamentals-based model (1st Middlesex) did turn out incredibly
-close&mdash;the race has still not been called. Another race that
-looked reasonably safe (2nd Essex) ended up closer than expected and
-has not been called. A State Senate race that looked close from a
-fundamentals point of view (Hampden, Hampton and Worcester) came down
-safely in Democratic territory, as did a race where pundits felt GOP
-strength might win out (Norfolk, Worcester and Middlesex).
+fundamentals-based model (1st Middlesex) did turn out incredibly close
+and has not yet been called. Another race that looked reasonably safe
+(2nd Essex) ended up closer than expected and has not been called by
+the AP. A State Senate race that looked close from a fundamentals
+point of view (Hampden, Hampton and Worcester) came down safely in
+Democratic territory, as did a race where pundits felt GOP strength
+might win out (Norfolk, Worcester and Middlesex).
 
 ## 1st Middlesex
 
@@ -381,23 +381,23 @@ in the 1st Middlesex State Representative race between Margaret
 Scarsdale (D-Pepperell), Andrew Shepherd (R-Townsend), and independent
 candidate Catherine Lundeen (I-Pepperell) and nail-biter is what we
 got. As of this writing, Shepherd looks to be ahead by 34 votes out of
-19,633 votes cast, a margin of 0.17 percentage points, and seems to be
-headed for a recount.
+19,633 votes cast, a margin of 0.17 percentage points. The race seems
+to be headed for a recount.
 
 ## 2nd Essex
 
-The biggest surprise was the tight margin in the 2nd Essex State
-Representative race between incumbent Rep. Leonard Mirra
+The biggest surprise of the night was the tight margin in the 2nd
+Essex State Representative race between incumbent Rep. Leonard Mirra
 (R-Georgetown) and challenger Kristin Kassner (D-Hamilton). The model
 expected a high-single digit two-party margin in favor of Mirra, but
-the current count shows a 84 vote lead out of 23,114 votes case, a
-margin of 0.36 percentage points. This race has also not officially
-been called by the Associated Press. This results was still inside the
-90% error bars of the model, but it is definitely an outlier.
+the current count shows a tiny 84 vote lead out of 23,114 votes case,
+a margin of 0.36 percentage points. This race has also not been
+officially called by the Associated Press. The results are still
+inside the 90% error bars of the model, but it is an outlier.
 
 ## Hampden, Hampton and Worcester
 
-On the State Senate side the model rated the Hampden, Hampton and
+On the State Senate side our model rated the Hampden, Hampton and
 Worcester District&mdash;the post-redistricting version of the
 district represented by Lt. Governor candidate Eric Lesser
 (D-Longmeadow)&mdash;as the most competitive race. A reader who
@@ -405,9 +405,10 @@ understood the specifics of this race [gave the
 opinion](https://twitter.com/MSzafranski413/status/1587573604530769922?s=20&t=971hGtckUOe-pgrWKLOXbw)
 that State Rep. Oliveira (D-Ludlow) held a strong advantage over
 business person William Johsnon (R-Granby) based on the structure of
-the district. Tuesday's result seemed to bear that out with
-Oliveira getting 56% of the two-party vote, not close, but
-still well within the 90% confidence interval of the model.
+the district and the influence of Oliveira's State Representative
+district. Tuesday's result seemed to bear that out with Oliveira
+getting 56% of the two-party vote, not close, but still well within
+the 90% confidence interval of the model.
 
 ## Norfolk, Worcester and Middlesex
 
@@ -426,12 +427,12 @@ Democratic
 direction](https://www.wgbh.org/news/politics/2018/10/30/in-blue-massachusetts-some-striking-redward-shifts)
 since the Trump era. This swing pushed the model to have high
 expectations of a Rausch win. Rausch's victory with 55% of the
-two-party vote was fairly comfortable, but could have been higher if
+two-party vote was fairly comfortable, and could have been higher if
 not for the strong name recognition of Rep. Dooley in the area and the
 [large amount of
 money](https://commonwealthmagazine.org/politics/in-high-stakes-race-rausch-declares-victory-over-dooley/)
-spent on boths sides.
-
+spent on boths sides. It is hard to see this district as purple
+anymore with its D+12 Partisan Voter Index.
 
 ```{r rep-results-table, layout="l-screen"}
 rep_results_table <- leg_results_table(rr_contested,
