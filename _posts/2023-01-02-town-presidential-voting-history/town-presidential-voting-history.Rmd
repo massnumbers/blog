@@ -5,7 +5,7 @@ description: |
 author: Brent Benson
 date: 2023-01-23
 citation: false
-preview: https://www.massnumbers.us/images/change_1972_2020_pres_margin_vs_state.png
+preview: https://www.massnumbers.us/images/ma_town_margin_1972_2020.gif
 output:
   distill::distill_article:
     self_contained: false
@@ -33,8 +33,8 @@ meta() %>%
     meta_social(
         title = "Many Massachusetts towns have changed, some have remained the same",
         url = "https://www.massnumbers.us/posts/2023-01-02-town-presidential-voting-history/",
-        image = "https://www.massnumbers.us/images/change_1972_2020_pres_margin_vs_state.png",
-        image_alt = "Change in 1972 to 2020 Margin vs. State",
+        image = "https://www.massnumbers.us/images/ma_town_margin_1972_2020.gif",
+        image_alt = "Animation of MA city/town presidential results from 1972 through 2020",
         og_type = "article",
         og_author = "Brent Benson",
         twitter_card_type = "summary_large_image",
