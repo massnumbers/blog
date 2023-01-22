@@ -1,0 +1,14 @@
+year,election_id,dem_candidate,dem_column,dem_votes,gop_candidate,gop_column,gop_votes,file_name
+1972,116994,George McGovern,McGovern/ Shriver,1332540,Richard Nixon,Nixon/ Agnew,1112078,ma_pres_results_1972.csv
+1976,123544,Jimmy Carter,Carter/ Mondale,1429475,Gerald Ford,Ford/ Dole,1030276,ma_pres_results_1976.csv
+1980,91089,Jimmy Carter,Carter/ Mondale,1053802,Ronald Reagan,Reagan/ Bush,1057631,ma_pres_results_1980.csv
+1984,106598,Walter Mondale,Mondale/ Ferraro,1239606,Ronald Reagan,Reagan/ Bush,1310936,ma_pres_results_1984.csv
+1988,106452,Michael Dukakis,Dukakis/ Bentsen,1401415,George HW Bush,Bush/ Quayle,1194635,ma_pres_results_1988.csv
+1992,106381,Bill Clinton,Clinton/ Gore,1318662,George HW Bush,Bush/ Quayle,805049,ma_pres_results_1992.csv
+1996,97298,Bill Clinton,Clinton/ Gore,1571763,Bob Dole,Dole/ Kemp,718107,ma_pres_results_1996.csv
+2000,99006,Al Gore,Gore/ Lieberman,1616487,George W Bush,Bush/ Cheney,878502,ma_pres_results_2000.csv
+2004,111693,John Kerry,Kerry/ Edwards,1803800,George W Bush,Bush/ Cheney,1071109,ma_pres_results_2004.csv
+2008,104457,Barack Obama,Obama/ Biden,1904097,John McCain,McCain/ Palin,1108854,ma_pres_results_2008.csv
+2012,112698,Barack Obama,Obama/ Biden,1921290,Mitt Romney,Romney/ Ryan,1188314,ma_pres_results_2012.csv
+2016,130243,Hillary Clinton,Clinton/ Kaine,1995196,Donald Trump,Trump/ Pence,1090893,ma_pres_results_2016.csv
+2020,140751,Joe Biden,"Joseph R. Biden, Jr.",2382202,Donald Trump,Donald J. Trump,1167202,ma_pres_results_2020.csv

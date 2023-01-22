@@ -12,7 +12,16 @@
       <link>https://www.massnumbers.us</link>
     </image>
     <generator>Distill</generator>
-    <lastBuildDate>Mon, 14 Nov 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 23 Jan 2023 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Has your city or town gotten more Republican or Democratic over the last 50 years?</title>
+      <dc:creator>Brent Benson</dc:creator>
+      <link>https://www.massnumbers.us/posts/2023-01-02-town-presidential-voting-history</link>
+      <description>A municipality-based look at Massachusetts presidential voting from 1972 through 2020.</description>
+      <guid>https://www.massnumbers.us/posts/2023-01-02-town-presidential-voting-history</guid>
+      <pubDate>Mon, 23 Jan 2023 00:00:00 +0000</pubDate>
+      <media:content url="https://www.massnumbers.us/images/change_1972_2020_pres_margin_vs_state.png" medium="image" type="image/png"/>
+    </item>
     <item>
       <title>MA 2022 State Legislative Results</title>
       <dc:creator>Brent Benson</dc:creator>
