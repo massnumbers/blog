@@ -104,17 +104,18 @@ ct_margin_table <- city_town_elecs %>%
 Massachusetts is often seen as a liberal bastion and uniformly
 supportive of the Democratic Party as in this quote by pollster Joel
 Benenson (he was contrasting Massachusetts with a Democratic-trending
-New Jersey) but its history and present behavior is much more
-complicated.
+New Jersey [in
+2002](https://content.time.com/time/subscriber/article/0,33009,1003376,00.html))
+but its history and present behavior is much more complicated.
 
 In the last 50 years Massachusetts presidential election maps have
-appeared as a sea of red cities and towns puncuated with several blue
-islands one year (1984), and then blue as far as the eye can see with
-only a handful of red towns 12 years later (1996). There have been
-several noticeable geographic trends in Massachusetts partisanship
-over the last 50 years including increased Democratic dominance in far
-Western Massachusetts, a move from Republican to Democratic support in
-the rich suburbs of Boston, and stubborn Republican consistency in the
+gone from a sea of red cities and towns puncuated with several blue
+islands in 1984, to blue as far as the eye can see with only a handful
+of red towns 12 years later in 1996. There have been several
+noticeable geographic trends in Massachusetts partisanship over the
+last 50 years including increased Democratic dominance in far Western
+Massachusetts, a move from Republican to Democratic support in the
+rich suburbs of Boston, and stubborn Republican consistency in the
 rural parts of Hampden County and much of Worcester, Bristol, and
 Plymouth counties.
 
@@ -124,8 +125,8 @@ of the Commonweath's voters. In 1996, Bill Clinton won a majority of
 votes in all but nine Massachusetts municipalities while besting Bob
 Dole by over 25 points.
 
-This post looks at the two-party (Dem/GOP) vote margin for every
-Massachusetts presidential election from 1972 through 2020 and
+This retrospective looks at the two-party (Dem/GOP) vote margin for
+every Massachusetts presidential election from 1972 through 2020 and
 identifies municipalities that have been conistently Democratic,
 consistently Republican, and towns that have seen political
 transformation over the last 50 years.
@@ -356,23 +357,6 @@ Joe Biden (D) 67% over Donald Trump (R) 33%
 
 :::
 
-## Voting History for Every City/Town
-
-Sorted by 2020 Democratic vote margin
-
-```{r margin-table, layout="l-page"}
-ct_margin_table %>%
-    arrange(`2020`) %>%
-    gt() %>%
-    tab_header(title="MA Dem-GOP Presidential margin 1972-2020") %>%
-    fmt_number(-city_town, decimals=0) %>%
-    gt_color_rows(-city_town,
-                  domain=c(-100, 100),
-                  palette=c("#FF4949", "white", "#0F4392")) %>%
-    tab_style(style=list(cell_text(weight="bold")),
-              locations=cells_column_labels(columns=`2020`))
-```
-
 ## Consistently Republican towns
 
 ```{r cluster}
@@ -404,7 +388,7 @@ neighbor, Tolland, came close to sharing this distinction, but was
 prevented by a 75 to 75 vote tie between President Bill Clinton and
 challenger Senator Bob Dole in 1996.
 
-```{r gop-towns}
+```{r gop-towns, layout="l-page"}
 gop_cluster %>%
     gt() %>%
     tab_header(title="Historically Republican towns (Dem margin 1972-2020)") %>%
@@ -434,7 +418,7 @@ university-dominated cities of Amherst and Cambridge, and two towns on
 the ocean, Provincetown on the tip of Cape Cod and Aquinnah on the
 western end of the island of Martha's Vineyard.
 
-```{r dem-towns}
+```{r dem-towns, layout="l-page"}
 dem_cluster %>%
     gt() %>%
     tab_header(title="Historically Democratic cities/towns (Dem margin 1972-2020)") %>%
@@ -462,7 +446,24 @@ for the LGBTQ+ community and progressive politics in general. The
 island town of Aquinnah is an import ancestral area for the indigenous
 Wampanoag people and continues to have a significant indigigenous
 population, which [may explain some of its Democratic
-strength](https://www.brookings.edu/blog/how-we-rise/2022/11/15/native-americans-support-democrats-over-republicans-across-house-and-senate-races/)).
+strength](https://www.brookings.edu/blog/how-we-rise/2022/11/15/native-americans-support-democrats-over-republicans-across-house-and-senate-races/).
+
+## Historic Margins by City/Town
+
+Sorted by 2020 Democratic vote margin
+
+```{r margin-table, layout="l-page"}
+ct_margin_table %>%
+    arrange(`2020`) %>%
+    gt() %>%
+    tab_header(title="MA Dem-GOP Presidential margin 1972-2020") %>%
+    fmt_number(-city_town, decimals=0) %>%
+    gt_color_rows(-city_town,
+                  domain=c(-100, 100),
+                  palette=c("#FF4949", "white", "#0F4392")) %>%
+    tab_style(style=list(cell_text(weight="bold")),
+              locations=cells_column_labels(columns=`2020`))
+```
 
 ## Which towns have changed the most?
 
