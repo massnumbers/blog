@@ -22,7 +22,7 @@ library(sf)
 library(tmap)
 library(formattable)
 library(xaringanExtra)
-set.seed(999)
+
 tmap_mode(mode="view")
 ```
 
@@ -360,25 +360,25 @@ Joe Biden (D) 67% over Donald Trump (R) 33%
 ## Consistently Republican towns
 
 ```{r cluster}
-num_clusters <- 35
 
-clustering <- kmeans((ct_margin_table %>%
-                      column_to_rownames(var="city_town")),
-                     num_clusters)
+gop_towns <- c(
+    "Blandford",
+    "Granville",
+    "Montgomery",
+    "Tolland")
 
-ct_margin_table$cluster <- clustering$cluster
-gop_cluster_num <- ct_margin_table %>%
-    filter(city_town == "Granville") %>%
-    pull(cluster)
+dem_towns <- c(
+    "Amherst",
+    "Aquinnah",
+    "Cambridge",
+    "Provincetown")
+
 gop_cluster <- ct_margin_table %>%
-    filter(cluster == gop_cluster_num) %>%
-    select(-cluster)
-dem_cluster_num <- ct_margin_table %>%
-    filter(city_town == "Cambridge") %>%
-    pull(cluster)
+    filter(city_town %in% gop_towns)
+
 dem_cluster <- ct_margin_table %>%
-    filter(cluster == dem_cluster_num) %>%
-    select(-cluster)
+    filter(city_town %in% dem_towns)
+
 ```
 
 The only Massachusetts municipality that has voted Republican in every
