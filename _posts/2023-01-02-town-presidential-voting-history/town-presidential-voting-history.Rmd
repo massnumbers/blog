@@ -129,7 +129,12 @@ This retrospective looks at the two-party (Dem/GOP) vote margin for
 every Massachusetts presidential election from 1972 through 2020 and
 identifies municipalities that have been conistently Democratic,
 consistently Republican, and towns that have seen political
-transformation over the last 50 years.
+transformation over the last 50 years. (The *Democratic Margin* is
+the number of percentage point difference between the Democratic
+candidate and the Republican candidate. For example, in Carlisle, MA
+in 1972 George McGovern (D) got 571 votes (39%) while Richard Nixon
+(R) got 896 votes (61%) giving a Democratic margin of 39% - 61% = -22
+points.)
 
 ```{r yearly-map-generation}
 city_town_geom <- read_sf("../../_gis/towns2019/TOWNSSURVEY_POLYM_GENCOAST.shp") %>%
