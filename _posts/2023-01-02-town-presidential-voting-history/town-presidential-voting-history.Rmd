@@ -411,9 +411,9 @@ gop_cluster %>%
 ```
 
 All four of these solidly Republican towns are in the western
-Massachusetts county of Hampden. The Democratic leaning Hampden cities
-like Springfield, Chicopee, and Holyoke keeps Hampden County from
-being the most Republican in the state.
+Massachusetts county of Hampden. The Democratic-leaning Pioneer Valley
+cities like Springfield, Chicopee, and Holyoke keep Hampden County
+from being the most Republican county in the state.
 
 ## The bluest of the blue
 
