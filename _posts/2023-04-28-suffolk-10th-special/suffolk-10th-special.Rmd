@@ -1,0 +1,280 @@
+---
+title: "Will Boston neighborhoods play a role in the 10th Suffolk special election?"
+description: |
+  The three candidates bring a lot to the table including their home base.
+author: Brent Benson
+date: 2023-04-28
+citation: false
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE)
+
+library(metathis)
+library(tidyverse)
+library(gt)
+library(gtExtras)
+library(sf)
+library(units)
+library(tmap)
+library(formattable)
+
+tmap_mode(mode="view")
+```
+
+```{r post-meta}
+meta() %>%
+    meta_description("The three 10th Suffolk special election candidates bring a lot to the table including their home base.") %>%
+    meta_viewport() %>%
+    meta_social(
+        title = "How important are neighborhoods in Boston state legislative elections?",
+        url = "https://www.massnumbers.us/posts/2023-04-28-suffolk-10th-special/",
+        image = "https://www.massnumbers.us/images/ma_10th_suffolk_neighborhoods.png",
+        image_alt = "The neighborhoods of the 10th Suffolk State Rep district",
+        og_type = "article",
+        og_author = "Brent Benson",
+        twitter_card_type = "summary_large_image",
+        twitter_creator = "@bwbensonjr"
+    )
+```
+
+Resignations by Massachusetts State Representatives Jon Santiago and
+Ed Coppinger have resulted in Special State Primary elections on May
+2, 2023 to elect their successors in the South End-based 9th Suffolk
+and West Roxbury-dominated 10th Suffolk districts. There are five
+Democratic candidates who submitted signatures and qualified for the
+two primary ballots.
+
+Amparo "Chary" Ortiz has withdrawn from the 9th Suffolk race leaving
+John Moran as the presumptive winner of the South Boston-based
+seat. There are three strong candidates for 10th Suffolk seat
+Democratic primary, each one bringing different different assets to
+the race, including their three distinct neighborhoods.
+
+```{r suffolk-10th-candidates}
+
+suff_10_cands <- tribble(
+    ~Candidate, ~Profession, ~Neighborhood,
+    "Bill MacGregor", "Loan Officer", "West Roxbury",
+    "Robert Orthman", "Attorney", " Roslindale",
+    "Celia Segel", "Health Policy Director", "Jamaica Plain")
+
+suff_10_cands %>%
+    gt() %>%
+    cols_label(Candidate = md("**Candidate**"),
+               Profession = "",
+               Neighborhood = md("**Neighborhood**")) %>%
+    # tab_options(column_labels.hidden=TRUE) %>%
+    # tab_header("10th Suffolk State Rep Candidates")
+    tab_caption("10th Suffolk State Rep Candidates")
+
+```
+
+## Boston Neighborhoods and their State Rep Districts
+
+```{r prepare-data}
+bos_nh <- read_sf("../../_gis/Boston_Neighborhoods.geojson",
+                  as_tibble=TRUE) %>%
+    st_make_valid() %>%
+    st_transform(6491) %>%
+    relocate(Name)
+
+summarize_neighborhoods <- function(df) {
+    df %>%
+        pull(Neighborhood) %>%
+        str_c(collapse=",")
+}
+
+wps_bos <- read_sf(file.path("../../_gis",
+                                "ma_wards_precincts_w_subs.geojson"),
+                   as_tibble=TRUE) %>%
+    filter(city_town == "Boston") %>%
+    select(-city_town_abbrev) %>%
+    st_transform(6491)
+
+wps_bos_nh <- wps_bos %>%
+    st_intersection(bos_nh) %>%
+    mutate(area = st_area(geometry)) %>%
+    filter(area > set_units(10000, m^2)) %>%
+    select(city_town, Ward, Pct, Neighborhood=Name, area) %>%
+    as_tibble() %>%
+    group_by(city_town, Ward, Pct) %>%
+    mutate(area_pct = area/sum(area)) %>%
+    ungroup() %>%
+    nest(neighborhood = c(Neighborhood, area, area_pct, geometry)) %>%
+    mutate(neighborhoods = map_chr(neighborhood, summarize_neighborhoods),
+           num_neighborhoods = map_dbl(neighborhood, nrow))
+
+wps_bos_nh_sr <- wps_bos %>%
+    st_intersection(bos_nh) %>%
+    mutate(area = st_area(geometry)) %>%
+    filter(area > set_units(10000, m^2)) %>%
+    select(Neighborhood=Name, State_Rep, city_town, Ward, Pct)
+```
+
+```{r boston-neighborhoods-precincts, fig.height=5, layout="l-body-outset"}
+(tm_shape(wps_bos_nh_sr) +
+ tm_fill(col="Neighborhood", alpha=0.6, popup.vars=TRUE) +
+ tm_borders(lwd=1) +
+ tm_basemap("OpenStreetMap"))
+```
+
+There are 160 State Representatives in the Massachusetts House of
+Representatives with 19 Suffolk County-based representatives, each who
+represents about 44,000 citizens from Boston or adjacent
+communities. Only two of the State Rep districts&mdash;East Boston's
+1st Suffolk and Dorchester's 13th Suffolk&mdash;are contained in a
+single Boston neighborhood. Every other Suffolk-based State Rep
+district crosses neighborhood boundaries.
+
+How important are the neighborhood boundaries to Boston state
+legislative races? The 10th Suffolk race is an extreme example where
+all three candidates are from different neighborhoods and one
+particular neighborhood, West Roxbury, contains over half of the
+likely voters.
+
+## 10th Suffolk Neighborhoods
+
+```{r suffolk-10-data}
+wps_suff_10 <- read_sf(file.path("../../_gis",
+                                 "ma_wards_precincts_w_subs.geojson"),
+                       as_tibble=TRUE) %>%
+    filter(State_Rep == "Tenth Suffolk") %>%
+    select(-city_town_abbrev) %>%
+    st_transform(6491)
+
+wpsn_suff_10 <- wps_suff_10 %>%
+    st_intersection((bos_nh %>% select(Neighborhood = Name))) %>%
+    mutate(area = st_area(geometry)) %>%
+    filter(area > set_units(15000, m^2)) %>%
+    group_by(city_town, Ward, Pct) %>%
+    mutate(num_parts = n(),
+           precinct_part = row_number(),
+           area_pct = area/sum(area),
+           name = if_else(num_parts > 1,
+                          str_glue("{name} (part {precinct_part})"),
+                          name)) %>%
+    ungroup() %>%
+    mutate(area_pct = map_dbl(area_pct, ~.x)) %>%
+    rbind((wps_suff_10 %>%
+           filter(city_town == "Brookline") %>%
+           mutate(area = st_area(geometry),
+                  area_pct = 1,
+                  Neighborhood = "Brookline",
+                  num_parts = 1,
+                  precinct_part = 1))) %>%
+    arrange(name)
+```
+
+```{r suffolk-10th-map, layout="l-body-outset"}
+(tm_shape(wpsn_suff_10) +
+ tm_fill(col="Neighborhood", alpha=0.6, popup.vars=TRUE) +
+ tm_borders(lwd=2, lty="dashed") +
+ tm_shape(wps_suff_10) +
+ tm_borders(lwd=2) +
+ tm_basemap("OpenStreetMap"))
+```
+
+I will use the votes from the 2022 State Democratic Primary to
+estimate the percentage of votes that we might see from each
+neighborhood in the May 2nd special primary.
+
+The 10th Suffolk State Representative district has 22 Boston precincts
+and a single precinct in Brookline. Two of the Boston precincts are
+split between Roslindale and West Roxbury, complicating the estimated
+vote breakdown, but we can use the relative size of the neighborhood
+parts and adjust the vote totals accordingly (94% to 6%). Boston Ward 20 Precinct
+1 is mostly in Roslindale with a small dip into West Roxbury, while
+Ward 20 Precinct 7 is more evenly split with 57% of the votes coming
+from Roslindale and 43% coming from West Roxbury.
+
+```{r suffolk-10-neighborhood-votes}
+compass_changes <- c(
+    "N. " = "North ",
+    "E. " = "East ",
+    "S. " = "South ",
+    "W. " = "West "
+)
+
+ma_dem_primary_nd <- read_csv("../../_data/2023/ma_2022_dem_primary_pct_results.csv") %>%
+    select(city_town = `City/Town`,
+           Ward,
+           Pct,
+           total_votes_cast = `Total Votes Cast`) %>%
+    mutate(city_town = str_replace_all(city_town, compass_changes))
+
+ma_dem_primary <- read_csv("../../_data/2023/ma_districts_precincts_2022.csv") %>%
+    left_join(ma_dem_primary_nd,
+              by=c("city_town", "Ward", "Pct"))
+
+suff_10_dem_primary <- ma_dem_primary %>%
+    filter(State_Rep == "Tenth Suffolk") %>%
+    select(city_town, Ward, Pct, total_votes_cast)
+
+wpsn_suff_10_dem_primary <- wpsn_suff_10 %>%
+    left_join(suff_10_dem_primary, by=c("city_town", "Ward", "Pct")) %>%
+    mutate(total_votes_adj = total_votes_cast * area_pct)
+
+wpsn_suff_10_dem_primary %>%
+    st_drop_geometry() %>%
+    select(name, Neighborhood, total_votes_adj) %>%
+    gt() %>%
+    tab_style(style=cell_text(weight="bold"),
+              locations=cells_column_labels()) %>%
+    fmt_number(columns=total_votes_adj, decimals=0) %>%
+    cols_label(name="Precinct",
+               total_votes_adj="2022 Dem. Primary Votes") %>%
+    tab_caption("10th Suffolk Precincts")
+
+```
+
+The final breakdown shows West Roxbury with 57% of the vote,
+Roslindale with 25%, Jamaica Plain with 13%, and the single
+Brookline precinct giving 5% of the vote.
+
+```{r suff-10-vote-table}
+suff_10_nbhd_votes <- wpsn_suff_10_dem_primary %>%
+    st_drop_geometry() %>%
+    group_by(Neighborhood) %>%
+    summarize(total_votes = sum(total_votes_adj)) %>%
+    mutate(vote_pct = total_votes/sum(total_votes))
+
+suff_10_nbhd_votes %>%
+    gt() %>%
+    tab_style(style=cell_text(weight="bold"),
+              locations=cells_column_labels()) %>%
+    fmt_percent(columns=vote_pct, decimals=0) %>%
+    fmt_number(columns=total_votes, decimals=0) %>%
+    cols_label(total_votes = "2022 Dem. Primary Votes",
+               vote_pct = "% of Votes") %>%
+    tab_caption("Likely % of votes by neighborhood")
+```
+
+## Neighborhood Advantage
+
+The obvious neighborhood advantage would seem to go to Bill MacGregor
+with his home base of Roxbury and his endorsement by departing State
+Representative and West Roxbury stalwart Ed Coppinger.
+
+The story for Robert Orthman is more complicated as he is originally
+from West Roxbury while currently making his home in
+Roslindale. Orthman has also received the mainstream endorsement of
+the Boston Globe, while also being endorsed by some progressive and
+activist groups.
+
+Celia Segel is at a relative disadvantage with only 13% of the votes
+likely to come from Jamaica Plain, but gotten high profile
+endorsements from Emily's List, the MTA, and sitting legislators like
+Cindy Creem, Becca Rausch, and Julian Cyr.
+
+It is very hard to understand the dynamics and predict an outcome in a
+three-way race without high-quality polling, which presumably the
+candidates or associated groups have done. As is often said, the poll
+that really matters is the one at the ballot box on Tuesday. In the
+meantime, we can speculate on how much the influence the home
+neighborhood of each candidate will play in the final outcome for the
+10th Suffolk legislative seat.
+
