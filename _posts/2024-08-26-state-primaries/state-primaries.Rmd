@@ -1,5 +1,5 @@
 ---
-title: "Massachusetts 2024 State Primaries"
+title: "State Primary Deep Dive"
 description: |
   Contested primaries for the state legislature, Governor's Council, Congress, and Senate
 author: Brent Benson
@@ -28,7 +28,7 @@ meta() %>%
     meta_description("Contested primaries for the state legislature, Governor's Council, Congress, and Senate") %>%
     meta_viewport() %>%
     meta_social(
-        title = "Massachusetts 2024 State Primaries",
+        title = "State Primary Deep Dive",
         url = "https://www.massnumbers.us/posts/2024-08-26-state-primaries/",
         image = "https://www.massnumbers.us/images/state_rep_primaries_2024.png",
         image_alt = "MA 2024 contested State Representative primaries map",
