@@ -187,7 +187,7 @@ primary_view <- primary_districts %>%
            ((party == "R") & gop_primary)) %>%
     arrange(party) %>%
     ungroup() %>%
-    mutate(row_group = str_glue("**{office} - {district}**<br/>*Incumbent {incumbent_display} {summary}*"))
+    mutate(row_group = str_glue("**{office} - {district}**<br/>*Incumbent {incumbent_display} - {summary}*"))
 
 office_table_display <- function(df, office_group) {
     df %>%
