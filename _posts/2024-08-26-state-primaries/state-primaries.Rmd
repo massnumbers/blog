@@ -247,7 +247,7 @@ eleven races where the current State Representative is not running and
 their is at least one party primary. These are pretty big numbers is
 both categories from a historical perspective.
 
-### Incumbent Primaries
+**Incumbent Primaries**
 
 There are thirteen Democratic incumbent challenges and two Republican
 incumbent challenges&mdash;fifteen in all.
@@ -259,7 +259,7 @@ office_table_display(
 )
 ```
 
-### Open Seat Primaries
+**Open Seat Primaries**
 
 ```{r}
 office_table_display(
@@ -287,7 +287,7 @@ challengers. State Representative Bill Driscoll (D-Milton) is running
 for the Norfolk, Plymouth and Bristol seat held by retiring Senator
 Walter Timilty (D-Milton).
 
-### Incumbent Primaries
+**Incumbent Primaries**
 
 ```{r}
 office_table_display(
@@ -296,7 +296,7 @@ office_table_display(
 )
 ```
 
-### Open Seat Primaries
+**Open Seat Primaries**
 
 ```{r}
 office_table_display(
@@ -305,7 +305,7 @@ office_table_display(
 )
 ```
 
-### Governor's Council
+## Governor's Council
 
 ```{r, layout="l-body-outset"}
 
@@ -325,7 +325,7 @@ Devaney who has held the seat for 25 years.
 office_table_display(primary_view, "Governor's Council")
 ```
 
-### U.S. Congress
+## U.S. Congress
  
 Unlike the State Representative, State Senate, and Governor's Council
 races, the primary race for the Eighth Congressional seat represented
