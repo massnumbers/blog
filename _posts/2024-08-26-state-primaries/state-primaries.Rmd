@@ -189,6 +189,13 @@ primary_view <- primary_districts %>%
     ungroup() %>%
     mutate(row_group = str_glue("**{office} - {district}**<br/>*Incumbent {incumbent_display} - {summary}*"))
 
+map_districts <- primary_view %>%
+    group_by(office, district) %>%
+    summarize(primary_type = first(primary_type),
+              incumbent = first(incumbent_display),
+              candidates = str_c(display_name, collapse="<br/>"),
+              .groups="drop")
+
 office_table_display <- function(df, office_group) {
     df %>%
         filter(office == office_group) %>%
@@ -197,18 +204,21 @@ office_table_display <- function(df, office_group) {
         tab_options(
             column_labels.hidden=TRUE,
             row_group.background.color = group_color) %>%
-        sub_missing(missing_text="  ") %>%
+        sub_missing(missing_text="") %>%
         cols_align(columns="display_name", align="right") %>%
         opt_row_striping(row_striping=FALSE)
 }
 
-office_primary_map <- function(office_group, geom, districts) {
+office_primary_map <- function(office_group, geom, map_dists) {
     (tm_shape(geom %>%
-              right_join((districts %>%
+              select(district) %>%
+              right_join((map_dists %>%
                           filter(office == office_group)),
                          by="district")) +
      tm_fill(col="primary_type",
              alpha=0.7,
+             popup.vars=TRUE,
+             popup.format=list(html.escape=FALSE),
              palette=c("Democratic"="#3E74C6",
                        "Republican"="#FF4949",
                        "Both"="purple",
@@ -227,7 +237,7 @@ office_primary_map <- function(office_group, geom, districts) {
 office_primary_map(
     "State Representative",
     read_sf("https://bwbensonjr.github.io/mapoli/gis/geojson/house2021.geojson"),
-    districts
+    map_districts
 )
 ```
 
@@ -265,7 +275,7 @@ office_table_display(
 office_primary_map(
     "State Senate",
     read_sf("https://bwbensonjr.github.io/mapoli/gis/geojson/senate2021.geojson"),
-    districts
+    map_districts
 )
 ```
 
@@ -302,7 +312,7 @@ office_table_display(
 office_primary_map(
     "Governor's Council",
     read_sf("https://bwbensonjr.github.io/mapoli/gis/geojson/govcouncil2021.geojson"),
-    districts
+    map_districts
 )
 ```
 
