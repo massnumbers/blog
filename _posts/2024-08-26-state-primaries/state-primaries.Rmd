@@ -212,8 +212,8 @@ office_table_display <- function(df, office_group) {
 office_primary_map <- function(office_group, geom, map_dists) {
     (tm_shape(geom %>%
               select(district) %>%
-              right_join((map_dists %>%
-                          filter(office == office_group)),
+              left_join((map_dists %>%
+                           filter(office == office_group)),
                          by="district")) +
      tm_fill(col="primary_type",
              alpha=0.7,
