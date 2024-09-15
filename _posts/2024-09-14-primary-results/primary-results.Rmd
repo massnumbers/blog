@@ -1,0 +1,355 @@
+---
+title: "A look at the state primary results"
+description: |
+  There were ousted incumbents, some real nail-biters, and a slate of new name winners for open seats
+author: Brent Benson
+date: 2024-09-14
+citation: false
+preview: https://www.massnumbers.us/images/state_rep_primaries_2024.png
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE)
+
+library(tidyverse)
+library(readxl)
+library(glue)
+library(gt)
+library(sf)
+library(tmap)
+library(metathis)
+```
+
+```{r post-meta}
+meta() %>%
+    meta_description("There were ousted incumbents, some real nail-biters, and a slate of new name winners for open seats") %>%
+    meta_viewport() %>%
+    meta_social(
+        title = "A look at the state primary results",
+        url = "https://www.massnumbers.us/posts/2024-09-14-primary-results/",
+        image = "https://www.massnumbers.us/images/state_rep_primaries_2024.png",
+        image_alt = "MA 2024 contested State Representative primaries map",
+        og_type = "article",
+        og_author = "Brent Benson",
+        twitter_card_type = "summary_large_image",
+        twitter_creator = "@bwbensonjr"
+    )
+```
+
+```{r}
+
+tmap_mode(mode="view")
+
+# Color of group-row
+group_color <- "lightgrey"
+
+# Leave out registrars and clerks
+offices_to_cover <- c(
+    "State Representative",
+    "State Senate",
+    "Governor's Council",
+    "Representative in Congress",
+    "Senator in Congress"
+)      
+
+candidates <- read_excel("../../_data/2024/2024_candidates_primary_results.xlsx") %>%
+    # Column transformations
+    mutate(is_incumbent = (`Incumbent Y/N` == "Y"),
+           is_winner = (winner == "Y"),
+           district = str_replace(District, " & ", " and "),
+           candidate = str_to_title(`Candidate`),
+                      street_address = str_split_i(Address, ", ", 1),
+           city_town = str_split_i(Address, ", ", 2),
+           display_name = str_glue("{candidate} ({Party}-{city_town})")) %>%
+    # Renaming and selection of columns to keep
+    select(office = Office,
+           district,
+           district_id = `District ID`,
+           candidate,
+           display_name,
+           is_incumbent,
+           votes,
+           is_winner,
+           party = Party,
+           street_address,
+           city_town,
+           statement = `Statement of Public Office/Political Designation`)
+
+calculated_incumbents <- read_csv("../../_data/2024/ma_incumbents_2024_08_03.csv") %>%
+    mutate(district = str_replace(district, " & ", " and "),
+           incumbent_party = str_sub(party_incumbent, 1, 1),
+           incumbent_display = str_glue("{name_incumbent} ({incumbent_party}-{city_town_incumbent})")) %>%
+    select(office,
+           district,
+           incumbent = name_incumbent,
+           incumbent_display,
+           incumbent_party,
+           incumbent_city_town = city_town_incumbent)
+
+running_incumbents <- candidates %>%
+    filter(is_incumbent) %>%
+    select(office,
+           district,
+           incumbent=candidate,
+           incumbent_display=display_name,
+           incumbent_party=party,
+           incumbent_city_town=city_town)
+
+# Give the set of candidates for a particular district,
+# return a dataframe with a column per party with the
+# count of the candidates in that party.
+party_counts <- function(candidates) {
+    candidates %>%
+        group_by(party) %>%
+        tally() %>%
+        pivot_wider(names_from=party, values_from=n)
+}
+
+district_summaries <- read_excel("../../_data/2024/notable_primary_results_2024.xlsx") %>%
+    filter(!is.na(summary)) %>%
+    select(district_id, summary)
+
+districts <- candidates %>%
+    # Transform into row-per seat
+    nest(candidate = c(candidate,
+                       display_name,
+                       is_incumbent,
+                       party,
+                       is_winner,
+                       votes,
+                       street_address,
+                       city_town,
+                       statement)) %>%
+    # Join to incumbency data
+    left_join(running_incumbents, by=c("office", "district")) %>%
+    # District-level data
+    mutate(num_candidates = map_int(candidate, nrow),
+           is_contested = (num_candidates > 1),
+           is_open = is.na(incumbent),
+           parties = map(candidate, party_counts)) %>%
+    unnest(parties) %>%
+    # This only handles D, R, and U for `party`
+    replace_na(list(D=0, R=0, U=0)) %>%
+    mutate(inc_party_count = case_when(
+        incumbent_party == "D" ~ D,
+        incumbent_party == "R" ~ R,
+        incumbent_party == "U" ~ U,
+        TRUE ~ NA_real_)) %>%
+    mutate(incumbent_primary = (inc_party_count > 1),
+           dem_primary = (D > 1),
+           gop_primary = (R > 1),
+           party_primary = (dem_primary | gop_primary),
+           primary_type = case_when(
+               (dem_primary & gop_primary) ~ "Both",
+               dem_primary ~ "Democratic",
+               gop_primary ~ "Republican",
+               TRUE ~ "None"
+               ),
+           contested_no_primary = (is_contested & !incumbent_primary)) %>%
+    left_join(district_summaries, by="district_id") %>%
+    rows_patch(calculated_incumbents,
+               by=c("office", "district"),
+               unmatched="ignore") %>%
+    filter(office %in% offices_to_cover)
+
+## notable_districts <- districts %>%
+##     filter(office %in% offices_to_cover,
+##           (incumbent_primary | is_open | contested_no_primary)) %>%
+##     mutate(candidate_names = map_chr(candidate,
+##                                      ~paste(.x$display_name, collapse = ", ")))
+##
+## notable_districts %>% write_csv("notable_districts_2024.csv")
+
+```
+
+While much went as expected in the September 3, 2024 state primary
+elections there were some notable losses to incumbents and some close
+incumbent victories while the open seat wins pave the way for a new set of
+leaders in the state legislature and Governor's Council.
+
+```{r}
+primary_districts <- districts %>%
+    filter((D > 1) | (R > 1))
+
+primary_view <- primary_districts %>%
+    unnest(candidate) %>%
+    mutate(incumbent = if_else(is_incumbent, "Incumbent", ""),
+           winner = if_else(is_winner, "Winner", "")) %>%
+    group_by(office, district) %>%
+    filter(((party == "D") & dem_primary) |
+           ((party == "R") & gop_primary)) %>%
+    arrange(party, desc(votes)) %>%
+    ungroup() %>%
+    group_by(office, district, party) %>%
+    arrange(desc(votes)) %>%
+    mutate(vote_margin = if_else(is_winner, votes - lead(votes), NA),
+           margin_pct = if_else(is_winner, vote_margin/sum(votes), NA)) %>%
+    ungroup() %>%
+    mutate(row_group = str_glue("**{office} - {district}**<br/>*Incumbent {incumbent_display} - {summary}*"))
+
+map_districts <- primary_view %>%
+    group_by(office, district) %>%
+    summarize(primary_type = first(primary_type),
+              incumbent = first(incumbent_display),
+              candidates = str_c(display_name, collapse="<br/>"),
+              .groups="drop")
+
+office_table_display <- function(df) {
+    df %>%
+        select(row_group, incumbent, winner, display_name, votes, vote_margin, margin_pct, statement) %>%
+        gt(groupname_col="row_group", process_md=TRUE) %>%
+        tab_options(
+            column_labels.hidden=TRUE,
+            row_group.background.color = group_color) %>%
+        fmt_number(columns="votes", decimals=0, sep_mark=",") %>%
+        fmt_number(columns="vote_margin", decimals=0, sep_mark=",", force_sign=TRUE) %>%
+        fmt_percent(columns="margin_pct", decimals=0, force_sign=TRUE) %>%
+        sub_missing(missing_text="") %>%
+        cols_align(columns="display_name", align="right") %>%
+        opt_row_striping(row_striping=FALSE)
+}
+
+office_primary_map <- function(office_group, geom, map_dists) {
+    (tm_shape(geom %>%
+              select(district) %>%
+              left_join((map_dists %>%
+                           filter(office == office_group)),
+                         by="district")) +
+     tm_fill(col="primary_type",
+             alpha=0.7,
+             popup.vars=TRUE,
+             popup.format=list(html.escape=FALSE),
+             palette=c("Democratic"="#3E74C6",
+                       "Republican"="#FF4949",
+                       "Both"="purple",
+                       "None"=NA)) +
+     tm_borders(lwd=1, col="black") +
+     tm_basemap("OpenStreetMap") +
+     tm_view(set.view=8))     
+}
+
+```
+## Incumbent losses
+
+It is very difficult to challenge and defeat a sitting state
+legislator or Governor's Council member from within the same party, but
+three incumbents lost in September 3 Democratic primaries.
+
+```{r}
+inc_loss_races <- primary_view %>%
+    filter(incumbent_primary, is_incumbent, !is_winner) %>%
+    select(office, district, party)
+
+inc_losses <- primary_view %>%
+    right_join(inc_loss_races,
+               by=c("office", "district", "party"))
+
+office_table_display(inc_losses)
+```
+
+## Close incumbent wins
+
+There were five races for State Representative where the incumbent
+victory was probably closer than they would have hoped, including a 41
+vote recount win for Representative Marjorie Decker after challenger
+Evan Mackay had declared victory on election night.
+
+```{r}
+inc_close_win_races <- primary_view %>%
+    filter(incumbent_primary,
+           is_incumbent,
+           is_winner,
+           margin_pct < 0.2) %>%
+    select(office, district, party)
+
+inc_close_wins <- primary_view %>%
+    right_join(inc_close_win_races,
+               by=c("office", "district", "party"))
+
+office_table_display(inc_close_wins %>%
+                     arrange(margin_pct))
+```
+
+## Open seat winners
+
+There will be new faces in the Governor's Council and state
+legislatures from this round of primary winners.
+
+```{r}
+office_table_display(primary_view %>%
+                     filter(is_open))
+```
+
+## Full results
+
+### U.S. Senate
+
+```{r}
+office_table_display(primary_view %>%
+                     filter(office == "Senator in Congress"))
+```
+
+### U.S. Congress
+ 
+```{r}
+office_table_display(primary_view %>%
+                     filter(office == "Representative in Congress"))
+```
+
+### Governor's Council
+
+```{r, layout="l-body-outset"}
+
+office_primary_map(
+    "Governor's Council",
+    read_sf("https://bwbensonjr.github.io/mapoli/gis/geojson/govcouncil2021.geojson"),
+    map_districts
+)
+```
+
+```{r}
+office_table_display(primary_view %>%
+                     filter(office == "Governor's Council"))
+```
+
+### State Senate
+
+```{r, layout="l-body-outset"}
+
+office_primary_map(
+    "State Senate",
+    read_sf("https://bwbensonjr.github.io/mapoli/gis/geojson/senate2021.geojson"),
+    map_districts
+)
+```
+
+```{r}
+office_table_display(
+    (primary_view %>%
+     filter(office == "State Senate"))
+)
+```
+
+### State Representative
+
+```{r, layout="l-body-outset"}
+
+office_primary_map(
+    "State Representative",
+    read_sf("https://bwbensonjr.github.io/mapoli/gis/geojson/house2021.geojson"),
+    map_districts
+)
+```
+
+```{r}
+office_table_display(
+    (primary_view %>%
+     filter(office == "State Representative"))
+)
+```
+
+
+
