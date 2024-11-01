@@ -1,0 +1,348 @@
+---
+title: "The top eight most competitive state legislative races"
+description: |
+  A mix of GOPs incumbents in swing districts and competitive open seats look
+  to be the tightest races according to our fundamentals-based model
+author: Brent Benson
+date: 2024-10-31
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(tidyverse)
+library(readxl)
+library(rstanarm)
+library(glue)
+library(gt)
+library(sf)
+library(tmap)
+library(tmaptools)
+library(metathis)
+```
+
+```{r post-meta}
+meta() %>%
+    meta_description("A mix of GOPs incumbents in swing districts and competitive open seats look to be the tightest races according to our fundamentals-based model") %>%
+    meta_viewport() %>%
+    meta_social(
+        title = "The top eight most competitive state legislative races",
+        url = "https://www.massnumbers.us/posts/2024-10-31-competitive-seats/",
+        image = "https://www.massnumbers.us/images/third_barnstable_muni_pvi.png",
+        image_alt = "A map of the Third Barnstable State Representative district PVI",
+        og_type = "article",
+        og_author = "Brent Benson",
+        twitter_card_type = "summary_large_image",
+        twitter_creator = "@bwbensonjr"
+    )
+```
+
+```{r}
+candidates <- read_excel("../../_data/2024/2024_candidates_primary_results.xlsx") %>%
+    # Column transformations
+    mutate(is_incumbent = (`Incumbent Y/N` == "Y"),
+           is_winner = (winner == "Y") | is.na(winner),
+           district = str_replace(District, " & ", " and "),
+           party = case_when(
+               Party == "D" ~ "Democratic",
+               Party == "R" ~ "Republican",
+               Party == "U" ~ `Statement of Public Office/Political Designation`
+           ),
+           candidate = str_to_title(`Candidate`),
+                      street_address = str_split_i(Address, ", ", 1),
+           city_town = str_split_i(Address, ", ", 2),
+           display_name = str_glue("{candidate} ({Party}-{city_town})")) %>%
+    select(office = Office,
+           district,
+           district_id = `District ID`,
+           candidate,
+           display_name,
+           is_incumbent,
+           votes,
+           is_winner,
+           party,
+           party_abbr = Party,
+           street_address,
+           city_town,
+           statement = `Statement of Public Office/Political Designation`) %>%
+    filter(office %in% c("State Senate", "State Representative"),
+           is_winner) %>%
+    select(-is_winner) %>%
+    group_by(office, district) %>%
+    filter(n() > 1) %>%
+    ungroup()
+
+summarize_candidates <- function(cands) {
+    incumbent <- filter(cands, is_incumbent)
+    dem <- filter(cands, party_abbr == "D")
+    gop <- filter(cands, party_abbr == "R")
+    third_party <- filter(cands, party_abbr == "U") %>%
+        slice(1)
+    rbind(incumbent, dem, gop, third_party) %>%
+        select(party_abbr, party, display_name) %>%
+        pivot_wider(names_from=party_abbr,
+                    values_from=c(display_name,
+                                  party))
+}
+
+calc_incumbent_status <- function(cands) {
+    incumbent <- filter(cands, is_incumbent)
+    if (nrow(incumbent) == 0) {
+        "No_Incumbent"
+    } else if (incumbent$party_abbr== "D") {
+        "Dem_Incumbent"
+    } else if (incumbent$party_abbr == "R") {
+        "GOP_Incumbent"
+    } else {
+        "Other_Incumbent"
+    }
+}
+
+leg_elecs <- read_csv("../../_data/2024/ma_leg_two_party_2008_2024.csv")
+
+margin_model <- stan_glm(dem_margin ~ PVI_N + incumbent_status + pres_elec,
+                         data=leg_elecs,
+                         family=gaussian(link="identity"),
+                         refresh=0)
+
+NUMS_TO_WORDS = rev(c(
+    `&`='and',
+    `1st`='First',
+    `2nd`='Second',
+    `3rd`='Third',
+    `4th`='Fourth',
+    `5th`='Fifth',
+    `6th`='Sixth',
+    `7th`='Seventh',
+    `8th`='Eighth',
+    `9th`='Ninth',
+    `10th`='Tenth',
+    `11th`='Eleventh',
+    `12th`='Twelfth',
+    `13th`='Thirteenth',
+    `14th`='Fourteenth',
+    `15th`='Fifteenth',
+    `16th`='Sixteenth',
+    `17th`='Seventeenth',
+    `18th`='Eighteenth',
+    `19th`='Nineteenth',
+    `20th`='Twentieth',
+    `21st`='Twenty-First',
+    `22nd`='Twenty-Second',
+    `23rd`='Twenty-Third',
+    `24th`='Twenty-Fourth',
+    `25th`='Twenty-Fifth',
+    `26th`='Twenty-Sixth',
+    `27th`='Twenty-Seventh',
+    `28th`='Twenty-Eighth',
+    `29th`='Twenty-Ninth',
+    `30th`='Thirtieth',
+    `31st`='Thirty-First',
+    `32nd`='Thirty-Second',
+    `33rd`='Thirty-Third',
+    `34th`='Thirty-Fourth',
+    `35th`='Thirty-Fifth',
+    `36th`='Thirty-Sixth',
+    `37th`='Thirty-Seventh'
+))
+
+district_pvi <- read_csv("../../_data/2024/ma_state_leg_pvi_2008_2022.csv") %>%
+    filter(pvi_year == 2022) %>%
+    select(-pvi_year) %>%
+    mutate(district = str_replace_all(district, NUMS_TO_WORDS))
+
+districts <- candidates %>%
+    nest(.by=c(office, district, district_id),
+         .key="candidate") %>%
+    mutate(num_candidates = map_int(candidate, nrow),
+           incumbent_status = map_chr(candidate, calc_incumbent_status),
+           incumbent_status = str_replace(incumbent_status,
+                                          "Other_Incumbent",
+                                          "Dem_Incumbent"),
+           pres_elec = TRUE) %>%
+    left_join(district_pvi, by=c("office", "district")) 
+
+dem_margin_format <- function(dem_margin) {
+    case_when(
+    (dem_margin >= -0.5) & (dem_margin <= 0.5) ~ "EVEN",
+    (dem_margin > 0.5) ~ str_glue("D+{round(dem_margin)}"),
+    (dem_margin < -0.5) ~ str_glue("R+{round(abs(dem_margin))}")
+    )
+}
+
+district_preds <- districts %>%
+    mutate(pred_dem_margin = predict(margin_model, newdata=districts, type="response"),
+           pred_margin_str = dem_margin_format(pred_dem_margin),
+           pred_interval = predictive_interval(margin_model, newdata=districts),
+           pred_dem_margin_low = pred_interval[,1],
+           pred_dem_margin_high = pred_interval[,2]) %>%
+    select(-c(pres_elec, pred_interval)) %>%
+    arrange(abs(pred_dem_margin))
+
+comp_districts <- district_preds %>%
+    filter(abs(pred_dem_margin) < 10)
+```
+
+```{r}
+
+US_Biden_20 <- 81281502
+US_Trump_20 <- 74222593
+US_Clinton_16 <- 65853514
+US_Trump_16 <- 62984828
+
+dem_percent <- function(dem_2, gop_2, dem_1, gop_1) {
+    dem_votes <- dem_2 + dem_1
+    gop_votes <- gop_2 + gop_1
+    dem_pct <- dem_votes/(dem_votes + gop_votes)
+    dem_pct
+}
+
+pvi_string <- function(pvi_n) {
+    case_when(
+        pvi_n <= -0.5 ~ str_c("R+", round(abs(pvi_n))),
+        pvi_n >= 0.5 ~ str_c("D+", round(pvi_n)),
+        TRUE ~ "EVEN",
+    )
+}
+
+US_PVI <- dem_percent(
+    US_Biden_20,
+    US_Trump_20,
+    US_Clinton_16,
+    US_Trump_16
+)
+
+add_pvi_20 <- function(df) {
+    df %>%
+        mutate(PVI_N = ((dem_percent(Biden_20,
+                                     Trump_20,
+                                     Clinton_16,
+                                     Trump_16) - US_PVI) * 100),
+               PVI = pvi_string(PVI_N))
+}
+
+district_pcts <- read_csv("https://bwbensonjr.github.io/mapoli/pvi/ma_precincts_districts_pres_2022.csv") 
+
+pct_geometry <- read_sf("https://bwbensonjr.github.io/mapoli/gis/geojson/wardsprecincts2022.geojson") %>%
+    select(city_town, ward, precinct)
+
+district_muni_pvi <- function(office, district, dist_pcts, pct_geom) {
+    if (office == "State Senate") {
+        precincts <- dist_pcts %>%
+            filter(State_Senate == district) %>%
+            select(-c(State_Rep, US_House, Gov_Council))
+    } else {
+        precincts <- dist_pcts %>%
+            filter(State_Rep == district) %>%
+            select(-c(State_Senate, US_House, Gov_Council))
+    }
+    pct_geom %>%
+        right_join(precincts,
+                   by=c("city_town", "ward", "precinct")) %>%
+        group_by(city_town) %>%
+        summarize(Biden_20 = sum(Biden_20),
+                  Trump_20 = sum(Trump_20),
+                  Clinton_16 = sum(Clinton_16),
+                  Trump_16 = sum(Trump_16)) %>%
+        st_simplify(dTolerance = 100) %>%
+        add_pvi_20() %>%
+        select(-c(Biden_20, Trump_20, Clinton_16, Trump_16)) %>%
+        mutate(label = str_glue("{city_town}\n{PVI}"))
+}
+
+district_muni_map <- function(muni_pvi, map_title) {
+    bbox <- st_bbox(muni_pvi)
+    osm_tiles <- read_osm(bbox, zoom=NULL)
+    (tm_shape(osm_tiles) +
+     tm_rgb() +
+     tm_shape(muni_pvi) +
+     tm_borders(lwd=1) +
+     tm_fill(col="PVI_N",
+             popup.vars=TRUE,
+             palette=c("#FF4949", "white", "#0F4392"),
+             midpoint=0,
+             legend.show=FALSE,
+             alpha=0.7) + 
+     tm_text("label") +
+     tm_layout(map_title))
+}
+```
+
+```{r fig.height=6}
+district_muni_map(district_muni_pvi("State Representative",
+                                    "Third Barnstable",
+                                    district_pcts,
+                                    pct_geometry),
+                  "State Representative - Third Barnstable (D+6)")
+```
+
+Several key factors that can be used to model Massachusetts state
+legislative outcomes are overall partisanship, which can be
+approximated using the Cook Political Report's Partisan Voter Index
+(PVI), whether there is a Democratic incumbent, a Republican
+incumbent, or no incumbent, and whether the election coincides with a
+presidential election.
+
+I applied this model to the State Senate and State Representative
+matchups that will be decided on November 5, 2024 and the following
+eight districts have an average simulated Democratic margin that is
++/- 10 points from evenly split, making them reasonably competitive
+from the model's point of view.
+
+```{r}
+comp_districts %>%
+    unnest(candidate) %>%
+    group_by(office, district) %>%
+    arrange(desc(is_incumbent), party_abbr) %>%
+    ungroup() %>%
+    select(office,
+           district,
+           PVI,
+           pred_margin_str,
+           display_name,
+           is_incumbent) %>%
+    mutate(row_group = str_glue("**{office} - {district}**<br/>*PVI*: {PVI}, *Model*: {pred_margin_str}"),
+           incumbent = if_else(is_incumbent, "Incumbent", "")) %>%
+    select(row_group, display_name, incumbent) %>%
+    gt(groupname_col="row_group", process_md=TRUE) %>%
+    tab_options(column_labels.hidden=TRUE,
+                row_group.background.color = "lightgrey") %>%
+    opt_row_striping(row_striping=FALSE)
+```
+
+The five elections that look the most competitive all feature
+Republican incumbents in districts that have PVIs between D+1 and D+6,
+which puts them in a more competitive position in presidential
+election years. The remaining three districts are open seats which
+lean slightly Republican with PVIs R+1 or R+2.
+
+The majority of the model training comes from head-to-head
+Democratic/Republican matchups, so we should treat the four districts
+that are not D/R head-to-heads as being even more unpredictable than
+the +/- 20 or so points that the model has for its 95% confidence
+interval.
+
+- The First Worcester and Twenty-Second Middlesex State Representative matchups both have a Republican incumbent facing an Unenrolled candidate, rather than a Democrat.
+- The Eighth Bristol State Representative race has Democrat Steven Ouellette, Republican Christopher Thrasher, and *three* Unenrolled candidates in the five candidate mix.
+- The only State Senate race on our list, the Third Bristol and Plymouth, features Democrat Joseph Pacheco (no relation to the retiring Senator Marc Pacheco), Republican Kelly Dooner, and independent James Dupont.
+
+
+```{r fig.height=7}
+district_muni_map(district_muni_pvi("State Representative",
+                                    "Ninth Norfolk",
+                                    district_pcts,
+                                    pct_geometry),
+                  "State Representative - Ninth Norfolk (D+6)")
+```
+
+```{r fig.height=7}
+district_muni_map(district_muni_pvi("State Representative",
+                                    "Eighth Bristol",
+                                    district_pcts,
+                                    pct_geometry),
+                  "State Representative - Eighth Bristol (R+2)")
+```
+

@@ -1,5 +1,24 @@
 [
   {
+    "path": "posts/2024-10-31-competitive-seats/",
+    "title": "The top eight most competitive state legislative races",
+    "description": "A mix of GOPs incumbents in swing districts and competitive open seats look\nto be the tightest races according to our fundamentals-based model",
+    "author": [
+      {
+        "name": "Brent Benson",
+        "url": {}
+      }
+    ],
+    "date": "2024-10-31",
+    "categories": [],
+    "contents": "\n\n\n\n\n\n\n\n\n\n\n\n\nSeveral key factors that can be used to model Massachusetts state\nlegislative outcomes are overall partisanship, which can be\napproximated using the Cook Political Report’s Partisan Voter Index\n(PVI), whether there is a Democratic incumbent, a Republican\nincumbent, or no incumbent, and whether the election coincides with a\npresidential election.\nI applied this model to the State Senate and State Representative\nmatchups that will be decided on November 5, 2024 and the following\neight districts have an average simulated Democratic margin that is\n+/- 10 points from evenly split, making them reasonably competitive\nfrom the model’s point of view.\n\n\nState Representative - Third BarnstablePVI: D+6, Model: R+1\n    David T. Vieira (R-Falmouth)\nIncumbentKathleen Fox Alfano (D-Bourne)\nState Representative - Ninth NorfolkPVI: D+6, Model: R+2\n    Marcus S. Vaughn (R-Wrentham)\nIncumbentKevin C. Kalkut (D-Norfolk)\nState Representative - First WorcesterPVI: D+2, Model: R+7\n    Kimberly N. Ferguson (R-Holden)\nIncumbentAnthony L. Ferrante (U-Holden)\nState Representative - Twenty-Second MiddlesexPVI: D+1, Model: R+9\n    Marc T. Lombardo (R-Billerica)\nIncumbentGeorge John Simolaris, Jr. (U-Billerica)\nState Representative - Fifth BarnstablePVI: D+1, Model: R+10\n    Steven G. Xiarhos (R-Barnstable)\nIncumbentOwen G. Fletcher (D-Barnstable)\nState Representative - Eighth BristolPVI: R+2, Model: D+5\n    Steven J. Ouellette (D-Westport)\nChristopher Thrasher (R-Westport)\nJesse W. St. Gelais (U-Acushnet)\nLaura A. Hadley (U-Westport)\nManuel Soares, Jr. (U-Westport)\nState Representative - Eighth PlymouthPVI: R+1, Model: D+5\n    Dennis C. Gallagher (D-Bridgewater)\nSandra M. Wright (R-Bridgewater)\nState Senate - Third Bristol and PlymouthPVI: R+1, Model: D+7\n    Joseph Richard Pacheco (D-Raynham)\nKelly A. Dooner (R-Taunton)\nJames B. Dupont (U-Raynham)\n\n\nThe five elections that look the most competitive all feature\nRepublican incumbents in districts that have PVIs between D+1 and D+6,\nwhich puts them in a more competitive position in presidential\nelection years. The remaining three districts are open seats which\nlean slightly Republican with PVIs R+1 or R+2.\nThe majority of the model training comes from head-to-head\nDemocratic/Republican matchups, so we should treat the four districts\nthat are not D/R head-to-heads as being even more unpredictable than\nthe +/- 20 or so points that the model has for its 95% confidence\ninterval.\nThe First Worcester and Twenty-Second Middlesex State Representative matchups both have a Republican incumbent facing an Unenrolled candidate, rather than a Democrat.\nThe Eighth Bristol State Representative race has Democrat Steven Ouellette, Republican Christopher Thrasher, and three Unenrolled candidates in the five candidate mix.\nThe only State Senate race on our list, the Third Bristol and Plymouth, features Democrat Joseph Pacheco (no relation to the retiring Senator Marc Pacheco), Republican Kelly Dooner, and independent James Dupont.\n\n\n\n\n\n\n\n\n\n",
+    "preview": "posts/2024-10-31-competitive-seats/competitive-seats_files/figure-html5/unnamed-chunk-3-1.png",
+    "last_modified": "2024-11-01T14:46:33-04:00",
+    "input_file": {},
+    "preview_width": 1248,
+    "preview_height": 1152
+  },
+  {
     "path": "posts/2024-09-14-primary-results/",
     "title": "A look at the state primary results",
     "description": "There were ousted incumbents, some real nail-biters, and a slate of new name winners for open seats",
