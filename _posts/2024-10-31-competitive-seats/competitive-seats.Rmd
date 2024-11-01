@@ -184,6 +184,27 @@ district_preds <- districts %>%
 
 comp_districts <- district_preds %>%
     filter(abs(pred_dem_margin) < 10)
+
+comp_table <- function(districts) {
+    districts %>%
+        unnest(candidate) %>%
+        group_by(office, district) %>%
+        arrange(desc(is_incumbent), party_abbr) %>%
+        ungroup() %>%
+        select(office,
+               district,
+               PVI,
+               pred_margin_str,
+               display_name,
+               is_incumbent) %>%
+        mutate(row_group = str_glue("**{office} - {district}**<br/>*PVI*: {PVI}, *Model*: {pred_margin_str}"),
+               incumbent = if_else(is_incumbent, "Incumbent", "")) %>%
+        select(row_group, display_name, incumbent) %>%
+        gt(groupname_col="row_group", process_md=TRUE) %>%
+        tab_options(column_labels.hidden=TRUE,
+                    row_group.background.color = "lightgrey") %>%
+        opt_row_striping(row_striping=FALSE)
+}
 ```
 
 ```{r}
@@ -292,32 +313,37 @@ eight districts have an average simulated Democratic margin that is
 +/- 10 points from evenly split, making them reasonably competitive
 from the model's point of view.
 
+Five of the competitive state legislative elections feature Republican
+incumbents in districts that have PVIs between D+1 and D+6, which puts
+them in a more competitive position in presidential election years.
+
 ```{r}
-comp_districts %>%
-    unnest(candidate) %>%
-    group_by(office, district) %>%
-    arrange(desc(is_incumbent), party_abbr) %>%
-    ungroup() %>%
-    select(office,
-           district,
-           PVI,
-           pred_margin_str,
-           display_name,
-           is_incumbent) %>%
-    mutate(row_group = str_glue("**{office} - {district}**<br/>*PVI*: {PVI}, *Model*: {pred_margin_str}"),
-           incumbent = if_else(is_incumbent, "Incumbent", "")) %>%
-    select(row_group, display_name, incumbent) %>%
-    gt(groupname_col="row_group", process_md=TRUE) %>%
-    tab_options(column_labels.hidden=TRUE,
-                row_group.background.color = "lightgrey") %>%
-    opt_row_striping(row_striping=FALSE)
+comp_table(comp_districts %>% filter(incumbent_status == "GOP_Incumbent"))
 ```
 
-The five elections that look the most competitive all feature
-Republican incumbents in districts that have PVIs between D+1 and D+6,
-which puts them in a more competitive position in presidential
-election years. The remaining three districts are open seats which
-lean slightly Republican with PVIs R+1 or R+2.
+The Ninth Norfolk district features a rematch between now-incumbent
+Marcus Vaughn (D-Wrentham) and Kevin Kalkut (D-Norfolk) who faced each
+other in 2022 when Shawn Dooley (R-Norfolk) ran against Becca Rausch
+(D-Needham) for the Norfolk, Middlesex and Worcester State Senate
+Seat. The model gives Vaughn extra points as an incumbent, but the
+presidential year advantage for Democrats keeps the model's average
+simulated outcome to an R+2 margin.
+
+
+```{r fig.height=6}
+district_muni_map(district_muni_pvi("State Representative",
+                                    "Ninth Norfolk",
+                                    district_pcts,
+                                    pct_geometry),
+                  "State Representative - Ninth Norfolk (D+6)")
+```
+
+The next set of competitive races are open seats which lean slightly
+Republican with PVIs R+1 or R+2.
+
+```{r}
+comp_table(comp_districts %>% filter(incumbent_status == "No_Incumbent"))
+```
 
 The majority of the model training comes from head-to-head
 Democratic/Republican matchups, so we should treat the four districts
@@ -329,16 +355,7 @@ interval.
 - The Eighth Bristol State Representative race has Democrat Steven Ouellette, Republican Christopher Thrasher, and *three* Unenrolled candidates in the five candidate mix.
 - The only State Senate race on our list, the Third Bristol and Plymouth, features Democrat Joseph Pacheco (no relation to the retiring Senator Marc Pacheco), Republican Kelly Dooner, and independent James Dupont.
 
-
-```{r fig.height=7}
-district_muni_map(district_muni_pvi("State Representative",
-                                    "Ninth Norfolk",
-                                    district_pcts,
-                                    pct_geometry),
-                  "State Representative - Ninth Norfolk (D+6)")
-```
-
-```{r fig.height=7}
+```{r fig.height=6}
 district_muni_map(district_muni_pvi("State Representative",
                                     "Eighth Bristol",
                                     district_pcts,
