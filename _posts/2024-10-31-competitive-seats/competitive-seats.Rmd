@@ -5,6 +5,8 @@ description: |
   to be the tightest races according to our fundamentals-based model
 author: Brent Benson
 date: 2024-10-31
+citation: false
+preview: https://www.massnumbers.us/images/third_barnstable_muni_pvi.png
 output:
   distill::distill_article:
     self_contained: false
