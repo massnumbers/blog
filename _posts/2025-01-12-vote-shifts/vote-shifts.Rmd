@@ -1,0 +1,283 @@
+---
+title: "Massachusetts shifts towards Trump"
+description: |
+    Demographic factors associated with the shift include rates of college attendance, socio-economic status, race, and ethnicity
+author: Brent Benson
+date: 2025-01-12
+citation: false
+preview: https://www.massnumbers.us/images/pres_vote_shifts.png
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(tidyverse)
+library(formattable)
+library(plotly)
+library(rstanarm)
+library(glue)
+library(gt)
+library(gtExtras)
+library(sf)
+library(tmap)
+library(tmaptools)
+library(metathis)
+
+tmap_mode("view")
+```
+
+```{r post-meta}
+meta() %>%
+    meta_description("Demographic factors associated with MA presidential votes shifts include rates of college attendance, socio-economic status, race, and ethnicity") |>
+    meta_viewport() |>
+    meta_social(
+        title = "Massachusetts shifts towards Trump",
+        url = "https://www.massnumbers.us/posts/2025-01-12-vote-shifts/",
+        image = "https://www.massnumbers.us/images/pres_vote_shifts.png",
+        image_alt = "Presidential vote shift by State Representative district",
+        og_type = "article",
+        og_author = "Brent Benson",
+        twitter_card_type = "summary_large_image",
+        twitter_creator = "@bwbensonjr"
+    )
+```
+
+The Commonwealth of Massachusetts remained reliably blue in the 2024
+presidential election with Kamala Harris taking 61% of the
+vote. However, Massachusetts has seen increase in Donald Trump's vote
+share going from approximately 32% of the vote in 2016 and 2020
+to 36% in 2024.
+
+The statewide shift has not been uniform with some areas moving
+towards Trump while other areas became even more Democratic. To better
+understand these shift we use statistical analysis of demographic
+factors to better understand which factors are associated with the
+shifts.
+
+We will use Massachusetts State Representative districts as the unit
+to measure the vote shift and demographic factors. The advantage of
+using State Rep. districts is that they are approximately the same
+size in terms of population (currently about 44,000 people), and they
+are created with the guidance of the Voting Rights Act (VRA) with the
+goal of not breaking up voting blocks along the lines of race and
+minority language groups, resulting in variations that provide good
+contrasts for our statistical analysis.  (There are more details on
+redistricting and district formation in the [Mass. Numbers deep-dive
+on State Senate
+redistricting](https://www.massnumbers.us/posts/2022-07-18-senate-majority-minority/).)
+
+## Districts with the largest shifts
+
+It is important to emphasize that we are examining voting behavior
+shifts rather than district partisanship. *All* of the districts with
+the largest shifts towards Trump are majority Democratic
+districts. The district with the largest shift towards Trump, the
+Tenth Hampden District in Springfield, remains remarkably Democratic
+with a Partisan Voter Index (PVI, an average of the last two
+presidential elections compared to the U.S. as a whole) of D+24, even
+after an eight point Republican shift.
+
+The districts with the largest shifts towards Trump are:
+
+```{r layout="l-body-outset"}
+
+largest_trump_shifts <- tribble(
+    ~District, ~`City/Town`, ~PVI, ~Representative, ~Shift,
+    "Tenth Hampden", "Springfield", "D+24", "Carlos Gonzalez (D-Springfield)", "R+8",
+    "Fourth Essex", "Lawrence, Methuen", "D+12", "Estela A. Reyes (D-Lawrence)", "R+7",
+    "Sixteenth Essex", "Lawrence, Methuen", "D+11", " Francisco E. Paulino (D-Methuen)", "R+7",
+    "Eleventh Bristol", "New Bedford", "D+10", " Christopher Hendricks (D-New Bedford)", "R+7",
+    "Seventh Bristol",	"Fall River", "D+1", " Alan Silvia (D-Fall River)", "R+7",
+    "Seventeenth Essex", "Andover, Lawrence", "D+17", " Frank A. Moran (D-Lawrence)", "R+6")
+
+largest_trump_shifts |>
+    gt()
+```
+
+The districts with the largest shifts away from Trump and towards Democratic candidates are:
+
+```{r layout="l-body-outset"}
+largest_dem_shifts <- tribble(
+    ~District, ~`City/Town`, ~PVI, ~Representative, ~Shift,
+    "Fourth Barnstable", "Chatham, Eastham, Harwich, Orleans, Provincetown, Truro, Wellfleet", "D+19", "Hadley Luddy (D-Orleans)", "D+3",
+    "Second Middlesex",	"Chelmsford, Littleton, Westford", "D+17", "James Arciero (D-Westford)", "D+3",
+    "Fourteenth Essex", "Amesbury, Boxford, Groveland, North Andover, West Newbury", "D+10", "Adrianne Pusateri Ramos (D-North Andover)", "D+3",
+    "First Middlesex", "Ashby, Dunstable, Groton, Lunenburg, Pepperell, Townsend", "D+5", "Margaret R. Scarsdale (D-Pepperell)", "D+3",
+    "Third Barnstable", "Bourne, Falmouth, Mashpee", "D+9", "David T. Vieira (R-Falmouth)", "D+3",
+    "Thirty-Second Middlesex", "Malden, Melrose, Wakefield", "D+20", "Kate Lipper-Garabedian (D-Melrose)", "D+3",)
+
+largest_dem_shifts |>
+    gt()
+```
+
+```{r}
+square_meters_per_square_mile = 2.59e+6
+
+state_reps <- read_csv("https://bwbensonjr.github.io/ma-election-db/data/ma_general_election_summaries_1990_2024.csv.gz") |>
+    filter(election_date == "2024-11-05", office == "State Representative") |>
+    select(district, Representative=display_winner)
+
+elec_summaries <- read_csv("https://bwbensonjr.github.io/ma-election-db/data/ma_general_election_summaries_1990_2024.csv.gz")
+
+pres_results <- read_csv("https://bwbensonjr.github.io/mapoli/pvi/ma_state_rep_pres_pvi_2024.csv") |>
+    rename(district = State_Rep)
+
+demos <- read_csv("https://bwbensonjr.github.io/mapoli/demographics/data/ma_state_rep_demographics.csv") |>
+    mutate(area_square_miles = area_m2/square_meters_per_square_mile,
+           household_density = total_households/area_square_miles)
+
+pvi_string <- function(pvi_n) {
+    case_when(
+        pvi_n <= -0.5 ~ str_c("R+", round(abs(pvi_n))),
+        pvi_n >= 0.5 ~ str_c("D+", round(pvi_n)),
+        TRUE ~ "EVEN",
+    )
+}
+
+pres_demos <- pres_results |>
+    left_join(state_reps, by="district") |>
+    left_join(demos, by="district") |>
+    mutate(`PVI Shift` = pvi_string(pvi_shift)) |>
+    rename(`PVI 2024` = PVI,
+           `PVI 2020` = PVI_20,
+           `Some College`=ed_some_college_pct,
+           White=race_white_pct,
+           Hispanic=race_hispanic_pct,
+           Portuguese=ancestry_portuguese_pct,
+           Poverty=below_poverty_pct)
+
+dist_geom <- read_sf("https://bwbensonjr.github.io/mapoli/gis/geojson/house2021.geojson") |>
+    left_join(pres_demos, by="district")
+```
+
+```{r layout="l-body-outset", fig.height=5, fig.cap="An overview of vote shifts by State Rep. district with red indicating shifts towards Trump and blue towards Democratic presidential candidates."}
+percent_zero <- function(n) {
+    percent(n, 0)
+}
+
+digits_zero <- function(n) {
+    digits(n, digits=0)
+}
+
+popup_vars <- c(
+    "Representative",
+    "PVI Shift",
+    "PVI 2024",
+    "PVI 2020",
+    "Some College",
+    "White",
+    "Hispanic",
+    "Portuguese",
+    "Poverty"
+)
+
+popup_format = list(
+    `Some College`=list(fun=percent_zero),
+    White=list(fun=percent_zero),
+    Hispanic=list(fun=percent_zero),
+    Portuguese=list(fun=percent_zero),
+    Poverty=list(fun=percent_zero)
+)
+
+tm_shape(dist_geom) +
+    tm_polygons(col="pvi_shift",
+                palette=c("#FF4949", "white", "#0F4392"),
+                midpoint=0,
+                popup.vars=popup_vars,
+                popup.format=popup_format,
+                alpha=0.7) +
+    tm_basemap("OpenStreetMap") +
+    tm_layout("Presidential vote shift by State Representative district") +
+    tm_credits("An overview of vote shifts by State Rep. district with red indicating shifts towards Trump and blue towards Democratic presidential candidates.") +
+    tm_view(set.view=8)
+```
+
+## Associated demographic factors
+
+The primary demographic factors associated with shifts toward and away from Trump are:
+
+* **College attendance** - A higher percentage of people who have attended some college is associated with a shift away from Trump.
+* **Race and ethnicity** - A larger Hispanic shares of the population and a larger percentage of the population of Portuguese ancestry is correlated with a bigger shift towards Trump while a larger white share of the population is correlated with larger shifts away from Trump.
+* **Socio-economic level** - districts with a higher percentage of people below the poverty line moved more towards Trump.
+
+```{r layout="l-body-outset", fig.height=6, fig.cap="Factors associated with vote shift. Lines sloping downward indicate shifts are towards Trump and upward sloping lines are shifts toward Democrats."}
+
+
+variables <- c(
+    "Some College",
+    "White",
+    "Hispanic",
+    "Portuguese",
+    "Poverty"
+)
+
+ggplotly((pres_demos |>
+    select(district, pvi_shift, all_of(variables)) |>
+    pivot_longer(cols=any_of(variables),
+                 names_to="variable",
+                 values_to="value") |>
+    rename(`PVI Shift`=pvi_shift) |>
+    ggplot(aes(x=value, y=`PVI Shift`, group=1, district=district)) +
+    geom_point() +
+    geom_smooth(formula="y ~ x", span=2, se=FALSE) +
+    scale_x_continuous(labels = scales::percent_format()) +
+    facet_wrap(~variable) +
+    theme(axis.title.x=element_blank())))
+```
+
+
+```{r layout="l-body-outset"}
+partisan_palette <- function(x) {
+     f_neg <- scales::col_numeric(
+         palette = c("#FF4949", "white"),
+         domain = c(-44, 0)
+     )
+     f_pos <- scales::col_numeric(
+         palette = c("white", "#0F4392"),
+         domain = c(0, 44)
+     )
+     ifelse(x < 0, f_neg(x), f_pos(x))
+}
+
+pres_demos |>
+    arrange(pvi_shift) |>
+    select(district,
+           Representative,
+           pvi_shift,
+           PVI_N,
+           PVI_N_20,
+           `PVI Shift`,
+           `PVI 2024`,
+           `PVI 2020`,
+           `Some College`,
+           Poverty,
+           Hispanic,
+           Portuguese,
+           White) |>
+    mutate(`Some College` = `Some College`*100,
+           White = White*100,
+           Hispanic = Hispanic*100,
+           Portuguese = Portuguese*100,
+           Poverty = Poverty*100) |>
+    gt() |>
+        tab_header(title="Vote shifts and demographics by State Rep. district") |>
+        cols_hide(columns=c(pvi_shift, PVI_N, PVI_N_20)) |>
+        data_color(columns=pvi_shift,
+                   colors=partisan_palette,
+                   target_columns =`PVI Shift`) |>
+        data_color(columns=PVI_N,
+                   colors=partisan_palette,
+                   target_columns =`PVI 2024`) |>
+        data_color(columns=PVI_N_20,
+                   colors=partisan_palette,
+                   target_columns =`PVI 2020`) |>
+        gt_plt_bar_pct(column=`Some College`, fill="#B07AA1FF", scaled=TRUE, labels=TRUE, decimal=0) |>
+        gt_plt_bar_pct(column=Poverty, fill="#F28E2BFF", scaled=TRUE, labels=TRUE, decimal=0) |>
+        gt_plt_bar_pct(column=Hispanic, fill="#FF9DA7FF", scaled=TRUE, labels=TRUE, decimal=0) |>
+        gt_plt_bar_pct(column=Portuguese, fill="#BAB0ACFF", scaled=TRUE, labels=TRUE, decimal=0) |>
+        gt_plt_bar_pct(column=White, fill="#76B7B2FF", scaled=TRUE, labels=TRUE, decimal=0)
+```
+
