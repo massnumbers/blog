@@ -85,7 +85,7 @@ The districts with the largest shifts towards Trump are:
 ```{r layout="l-body-outset"}
 
 largest_trump_shifts <- tribble(
-    ~District, ~`City/Town`, ~PVI, ~Representative, ~Shift,
+    ~District, ~`Cities/Towns`, ~PVI, ~Representative, ~Shift,
     "Tenth Hampden", "Springfield", "D+24", "Carlos Gonzalez (D-Springfield)", "R+8",
     "Fourth Essex", "Lawrence, Methuen", "D+12", "Estela A. Reyes (D-Lawrence)", "R+7",
     "Sixteenth Essex", "Lawrence, Methuen", "D+11", " Francisco E. Paulino (D-Methuen)", "R+7",
@@ -101,7 +101,7 @@ The districts with the largest shifts away from Trump and towards Democratic can
 
 ```{r layout="l-body-outset"}
 largest_dem_shifts <- tribble(
-    ~District, ~`City/Town`, ~PVI, ~Representative, ~Shift,
+    ~District, ~`Cities/Towns`, ~PVI, ~Representative, ~Shift,
     "Fourth Barnstable", "Chatham, Eastham, Harwich, Orleans, Provincetown, Truro, Wellfleet", "D+19", "Hadley Luddy (D-Orleans)", "D+3",
     "Second Middlesex",	"Chelmsford, Littleton, Westford", "D+17", "James Arciero (D-Westford)", "D+3",
     "Fourteenth Essex", "Amesbury, Boxford, Groveland, North Andover, West Newbury", "D+10", "Adrianne Pusateri Ramos (D-North Andover)", "D+3",
@@ -112,6 +112,11 @@ largest_dem_shifts <- tribble(
 largest_dem_shifts |>
     gt()
 ```
+
+While every one of these districts is Democratically leaning, these
+shifts points towards warning signs for down-ballot Democrats in
+swingier districts like the Third Barnstable that already has a
+Republican representative in David Viera.
 
 ```{r}
 square_meters_per_square_mile = 2.59e+6
@@ -199,9 +204,9 @@ tm_shape(dist_geom) +
 
 The primary demographic factors associated with shifts toward and away from Trump are:
 
-* **College attendance** - A higher percentage of people who have attended some college is associated with a shift away from Trump.
-* **Race and ethnicity** - A larger Hispanic shares of the population and a larger percentage of the population of Portuguese ancestry is correlated with a bigger shift towards Trump while a larger white share of the population is correlated with larger shifts away from Trump.
-* **Socio-economic level** - districts with a higher percentage of people below the poverty line moved more towards Trump.
+* _College attendance_ - A higher percentage of people who have attended some college is associated with a shift away from Trump.
+* _Race and ethnicity_ - A larger Hispanic shares of the population and a larger percentage of the population of Portuguese ancestry is correlated with a bigger shift towards Trump while a larger white share of the population is correlated with larger shifts away from Trump.
+* _Socio-economic level_ - districts with a higher percentage of people below the poverty line moved more towards Trump.
 
 ```{r layout="l-body-outset", fig.height=6, fig.cap="Factors associated with vote shift. Lines sloping downward indicate shifts are towards Trump and upward sloping lines are shifts toward Democrats."}
 
