@@ -1,5 +1,5 @@
 ---
-title: "First post-presidential special election shows Trump era Democratic strength"
+title: "First post-presidential special election shows signs of Trump-era Democratic strength"
 description: |
     Hannah Bowen won the Massachusetts 6th Essex State Rep district by a much higher margin than Kamala Harris six months ago
 author: Brent Benson
@@ -31,7 +31,7 @@ meta() %>%
     meta_description("Hannah Bowen won the Massachusetts 6th Essex State Rep district by a much higher margin than Kamala Harris six months ago") |>
     meta_viewport() |>
     meta_social(
-        title = "First post-presidential special election shows Trump era Democratic strength",
+        title = "First post-presidential special election shows signs of Trump-era Democratic strength",
         url = "https://www.massnumbers.us/posts/2025-05-15-sixth-essex-special/",
         image = "https://www.massnumbers.us/images/sixth-essex-special-diff.png",
         image_alt = "Sixth Essex Democratic vote share difference - 2025 special vs. 2024 presidential",
