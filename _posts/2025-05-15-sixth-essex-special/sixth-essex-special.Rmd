@@ -1,0 +1,208 @@
+---
+title: "First post-presidential special election shows Trump era Democratic strength"
+description: |
+    Hannah Bowen won the Massachusetts 6th Essex State Rep district by a much higher margin than Kamala Harris six months ago
+author: Brent Benson
+date: 2025-05-15
+citation: false
+preview: https://www.massnumbers.us/images/sixth-essex-special-diff.png
+output:
+  distill::distill_article:
+    self_contained: false
+    fig_caption: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(tidyverse)
+library(gt)
+library(gtExtras)
+library(sf)
+library(tmap)
+library(formattable)
+library(metathis)
+
+tmap_mode("view")
+```
+
+```{r post-meta}
+meta() %>%
+    meta_description("Hannah Bowen won the Massachusetts 6th Essex State Rep district by a much higher margin than Kamala Harris six months ago") |>
+    meta_viewport() |>
+    meta_social(
+        title = "First post-presidential special election shows Trump era Democratic strength",
+        url = "https://www.massnumbers.us/posts/2025-05-15-sixth-essex-special/",
+        image = "https://www.massnumbers.us/images/sixth-essex-special-diff.png",
+        image_alt = "Sixth Essex Democratic vote share difference - 2025 special vs. 2024 presidential",
+        og_type = "article",
+        og_author = "Brent Benson",
+        twitter_card_type = "summary_large_image",
+        twitter_creator = "@bwbensonjr"
+    )
+```
+
+```{r}
+precinct_display <- function(city_town, ward, precinct) {
+     if_else(ward == "-",
+             str_c(city_town, " ", precinct),
+             str_c(city_town, " ", ward, "-", precinct))
+}
+
+sixth_essex <-
+    read_csv("sixth_essex_2025_05_13.csv", col_types=list(precinct=col_character())) |>
+    mutate(Harris_pct_24 = Harris_24/(Harris_24 + Trump_24),
+           Trump_pct_24 = Trump_24/(Harris_24 + Trump_24),
+           point_diff_24 = (Harris_pct_24 - Trump_pct_24) * 100,
+           Bowen_pct_25 = Bowen_25/(Bowen_25 + Long_25),
+           Long_pct_25 = Long_25/(Bowen_25 + Long_25),
+           point_diff_25 = (Bowen_pct_25 - Long_pct_25) * 100,
+           point_diff = (Bowen_pct_25 - Harris_pct_24) * 100,
+           precinct_name = precinct_display(city_town, ward, precinct))
+```
+
+On Tuesday, May 13 non-profit executive Hannah Bowen (D-Beverly)
+defeated digital marketing professional Medley Long III (R-Beverly) in
+a special election for the Sixth Essex State Representative
+district. Bowen will replace Jared Parisella (D-Beverly) who was
+[appointed to a District Court
+judgeship](https://www.bostonglobe.com/2024/11/26/metro/healey-nominates-state-democratic-lawmaker-beverly-judgeship/)
+by Governor Maura Healey.
+
+Bowen's victory was not a surprise given the D+18 Partisan Voter Index
+(PVI) rating of the Beverly-based Sixth Essex district, but her margin
+of 48 points was striking because it is 12 percentage points higher than
+Kamala Harris's 35 point victory over Trump in the district.
+
+
+```{r layout="l-body-outset", fig.height=5, fig.cap="Sixth Essex Democratic vote share difference - 2025 special vs. 2024 presidential"}
+sixth_essex_geom <-
+    read_sf("http://bwbensonjr.github.io/mapoli/gis/geojson/wardsprecincts2022.geojson") |>
+    select(-precinct_name) |>
+    right_join(sixth_essex,
+               by=c("city_town", "ward", "precinct"))
+
+percent_zero <- function(n) {
+    percent(n, 0)
+}
+
+district_map <-
+   (tm_shape(sixth_essex_geom) +
+   tm_polygons(
+      col="point_diff",
+      title="Margin Difference",
+      popup.vars=c(
+          "Margin Difference" = "point_diff",
+          "Bowen (D)" = "Bowen_pct_25",
+          "Long (R)" = "Long_pct_25",
+          "Bowen Margin" = "point_diff_25",
+          "Harris (D) - 2024" = "Harris_pct_24",
+          "Trump (R) - 2024" = "Trump_pct_24",
+          "Harris Margin" = "point_diff_24"
+      ),
+      popup.format=list(
+          point_diff=list(digits=0),
+          point_diff_25=list(digits=0),
+          point_diff_24=list(digits=0),
+          Bowen_pct_25=list(fun=percent_zero),
+          Long_pct_25=list(fun=percent_zero),
+          Harris_pct_24=list(fun=percent_zero),
+          Trump_pct_24=list(fun=percent_zero)
+      ),
+      alpha=0.6,
+      palette=c("#FF4949", "white", "#0F4392"),
+      midpoint=0,
+      id="precinct_name"
+   ) +
+   tm_text("precinct_name") +
+   tm_basemap("OpenStreetMap")
+)
+
+tmap_leaflet(district_map)
+```
+
+We can see by looking at the individual precinct-level results that
+Rep-Elect Bowen outperformed the Democratic presidential candidate in
+every precinct except Beverly Ward 6, Precinct 1, which happens to be
+the home precinct of Republican candidate Medley Long III. Bowen still
+won this precinct by a 20 point margin and achieved a remarkable 85%
+of the vote in two precincts, about 10 points higher than Harris in
+each.
+
+
+```{r layout="l-body-outset", fig.cap="Sixth Essex 2025 Special Election vs. 2024 Presidential"}
+
+district_table <-
+    sixth_essex |>
+    select(
+        precinct_name,
+        Bowen_pct_25,
+        Long_pct_25,
+        point_diff_25,
+        Harris_pct_24,
+        Trump_pct_24,
+        point_diff_24,
+        point_diff
+    ) |>
+    gt() |>
+    # tab_header(
+    #     title="Sixth Essex 2025 Special Election vs. 2024 Presidential"
+    # ) |>
+    tab_spanner(label="2024", columns=ends_with("_24")) |>
+    tab_spanner(label="2025", columns=ends_with("_25")) |>
+    cols_label(
+        precinct_name="Precinct",
+        Bowen_pct_25="Bowen (D)",
+        Long_pct_25="Long (R)",
+        point_diff_25="Margin",
+        Harris_pct_24="Harris (D)",
+        Trump_pct_24="Trump (R)",
+        point_diff_24="Margin",
+        point_diff=""
+    ) |>
+    fmt_percent(
+        columns=contains("_pct"),
+        decimals=0
+    ) |>
+    fmt_number(
+        columns=starts_with("point_diff"),
+        decimals=0
+    ) |>
+    gt_plt_bar(
+        column=point_diff,
+        keep_column=TRUE,
+    ) |>
+    cols_label(DUPE_COLUMN_PLT = "") |>
+    tab_spanner(
+        label="Margin Difference",
+        columns=c(point_diff, DUPE_COLUMN_PLT)
+    ) |>
+    tab_footnote(
+        footnote="Home precinct of GOP candidate Medley Long III",
+        locations=cells_body(
+            columns=precinct_name,
+            rows=(precinct_name == "Beverly 6-1")
+        )
+    )
+
+district_table
+```
+
+We can't extrapolate too much from a single special election, but the
+results seem to show Democrats in a strong position as Donald Trump
+continues to take actions that anger a wide swath of Massachusetts
+voters, causing likely headwinds for Massachusetts GOP candidates.
+
+There will be another special election test on June 10th in the Third
+Bristol district previously help by Representative Carol Doherty
+(D-Taunton) who died in February from pancreatic cancer. Lisa Field
+(D-Taunton) of the Massachusetts Nurses Association will face funeral
+home owner Lawrence Quintal (R-Taunton). The Third Bristol district is
+a swing district with a PVI of D+5. It was represented by Republican
+Shaunna O'Connell (R-Taunton) for ten years before she was elected
+Mayor of Taunton in 2020.
+
+
+
+
+
