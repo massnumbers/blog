@@ -122,18 +122,22 @@ emphasizes how close swing district elections can be, even when the
 winning party is the same as last election.
 
 Lisa Field, the Democratic candidate from Taunton emerged with a 24
-vote margin based on the unofficial results posted by Easton and
-Taunton election officials. Lawrence Quintal, the Republican candidate
-from Taunton, has said that he will request a recount which is not
+vote margin based on the results posted by
+[Easton](https://eastontownma.documents-on-demand.com/Document/b21c8526-d546-f011-a451-000c29a59557/2025.06.10%20Special%20State%20Election%20-%20Results.pdf)
+and
+[Taunton](https://www.taunton-ma.gov/DocumentCenter/View/5606/Official-Certified-City-of-Taunton-Special-State-Election-Results-6102025)
+election officials. Lawrence Quintal, the Republican candidate from
+Taunton, has said that he will request a recount which is not
 automatic, but requires a small number of signatures. Once the
 signatures have been certified, the state takes on the funding and
-organization of the recount.
+organization of the recount. It is rare for a recount to change the
+result.
 
-The special election was the result of the passing of Representative
-Carol Doherty (D-Taunton) who died in February from pancreatic
-cancer. Lisa Field is a lobbyist for the Massachusetts Nurses
-Association and Lawrence Quintal is the co-owner of Silva Funeral Home
-and a Taunton City Councilor.
+The special election took place because of the passing of
+Representative Carol Doherty (D-Taunton) who died in February from
+pancreatic cancer. Lisa Field is a lobbyist for the Massachusetts
+Nurses Association and Lawrence Quintal is the co-owner of Silva
+Funeral Home and a Taunton City Councilor.
 
 ```{r}
 vote_table <-
@@ -167,7 +171,7 @@ Lisa Field won the Easton precincts by 72 votes, while Taunton's
 precincts created a 48 vote margin for Lawrence Quintal. Quintal had
 more votes than Field in seven precincts; Field had more votes in five
 precincts; and the candidates were tied with 50 votes each in Taunton
-Ward 4, Precinct A.
+Ward 2, Precinct A.
 
 ```{r layout="l-body-outset", fig.cap="Third Bristol 2025 Special Election vs. 2024 Presidential"}
 
@@ -243,5 +247,14 @@ district](https://www.massnumbers.us/posts/2025-05-15-sixth-essex-special/)
 where Hannah Bowen (D-Beverly) out-performed Kamala Harris'a margin in
 the district by 12 points, Lisa Field slightly underperformed compared
 to the 2024 presidential. Fields margin of 0 points is about 3 points
-less than Harris's margin in November, 2024.
+less than Harris's margin in November, 2024. 
+
+Based on the candidate fundraising reports to the [Office of Campaign
+and Political Finance](https://www.ocpf.us/filers/specialelections),
+both candidates raised over $50,000 and were able to put their case in
+front of prospective voters, resulting in a close election in a
+district that was represented by Republican Mayer Shaunna O'Connell
+(R-Taunton) for almost ten years from 2011 until 2020 before
+[Rep. Doherty's win in a 2020 special
+election](https://bwbensonjr.github.io/mapoli/districts/pages/state-rep-third-bristol.html).
 
