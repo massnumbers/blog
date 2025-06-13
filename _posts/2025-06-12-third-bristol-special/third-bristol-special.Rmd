@@ -1,7 +1,7 @@
 ---
 title: "Swing district special election results in a close Democratic win"
 description: |
-  "Democrat Lisa Field wins special election to replace Carol Doherty by 24 votes"
+  Democrat Lisa Field wins special election to replace Carol Doherty by 24 votes
 author: Brent Benson
 date: 2025-06-12
 citation: false  
@@ -118,7 +118,8 @@ tmap_leaflet(district_map)
 
 Swing districts don't swing every election, but the 24 vote margin in
 Tuesday's special election for Third Bristol State Representative
-emphasizes how close swing district elections can be.
+emphasizes how close swing district elections can be, even when the
+winning party is the same as last election.
 
 Lisa Field, the Democratic candidate from Taunton emerged with a 24
 vote margin based on the unofficial results posted by Easton and
@@ -127,6 +128,12 @@ from Taunton, has said that he will request a recount which is not
 automatic, but requires a small number of signatures. Once the
 signatures have been certified, the state takes on the funding and
 organization of the recount.
+
+The special election was the result of the passing of Representative
+Carol Doherty (D-Taunton) who died in February from pancreatic
+cancer. Lisa Field is a lobbyist for the Massachusetts Nurses
+Association and Lawrence Quintal is the co-owner of Silva Funeral Home
+and a Taunton City Councilor.
 
 ```{r}
 vote_table <-
