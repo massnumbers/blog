@@ -1,7 +1,7 @@
 ---
-title: "Swing district special election results in a close Democratic win"
+title: "Swing district special election results in a 24-vote margin for Democrat"
 description: |
-  Democrat Lisa Field wins special election to replace Carol Doherty by 24 votes
+  Democrat Lisa Field wins Third Bristol special election to replace Carol Doherty by 24 votes
 author: Brent Benson
 date: 2025-06-12
 citation: false  
@@ -37,10 +37,10 @@ tmap_mode("view")
 
 ```{r post-meta}
 meta() %>%
-    meta_description("Democrat Lisa Field wins special election to replace Carol Doherty by 24 votes") |>
+    meta_description("Democrat Lisa Field wins Third Bristol special election to replace Carol Doherty by 24 votes") |>
     meta_viewport() |>
     meta_social(
-        title = "Swing district special election results in close Democratic win",
+        title = "Swing district special election results in a 24-vote margin for Democrat",
         url = "https://www.massnumbers.us/posts/2025-06-12-third-bristol-special/",
         image = "https://www.massnumbers.us/images/third-bristol-special-results.png",
         image_alt = "Third Bristol special election precinct map",
