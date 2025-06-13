@@ -1,0 +1,240 @@
+---
+title: "Swing district special election results in a close Democratic win"
+description: |
+  "Democrat Lisa Field wins special election to replace Carol Doherty by 24 votes"
+author: Brent Benson
+date: 2025-06-12
+citation: false  
+preview: https://www.massnumbers.us/images/third-bristol-special-results.png
+output:
+  distill::distill_article:
+    self_contained: false
+    fig_caption: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(tidyverse)
+library(gt)
+library(gtExtras)
+library(sf)
+library(tmap)
+library(formattable)
+library(metathis)
+
+## third_bristol <-
+##     read_csv("http://bwbensonjr.github.io/mapoli/pvi/ma_precincts_districts_pres_2024.csv") |>
+##     filter(State_Rep == "Third Bristol") |>
+##     mutate(Field_25 = 0, Quintal_25 = 0) # To be filled in from town clerk results
+
+## third_bristol |>
+##     write_csv("third_bristol_2025_06_10.csv")
+
+tmap_mode("view")
+```
+
+```{r post-meta}
+meta() %>%
+    meta_description("Democrat Lisa Field wins special election to replace Carol Doherty by 24 votes") |>
+    meta_viewport() |>
+    meta_social(
+        title = "Swing district special election results in close Democratic win",
+        url = "https://www.massnumbers.us/posts/2025-06-12-third-bristol-special/",
+        image = "https://www.massnumbers.us/images/third-bristol-special-results.png",
+        image_alt = "Third Bristol special election precinct map",
+        og_type = "article",
+        og_author = "Brent Benson",
+        twitter_card_type = "summary_large_image",
+        twitter_creator = "@bwbensonjr"
+    )
+```
+
+```{r}
+precinct_display <- function(city_town, ward, precinct) {
+     if_else(ward == "-",
+             str_c(city_town, " ", precinct),
+             str_c(city_town, " ", ward, "-", precinct))
+}
+
+third_bristol <-
+    read_csv("third_bristol_2025_06_10.csv", col_types=list(precinct=col_character())) |>
+    mutate(Harris_pct_24 = Harris_24/(Harris_24 + Trump_24),
+           Trump_pct_24 = Trump_24/(Harris_24 + Trump_24),
+           point_diff_24 = (Harris_pct_24 - Trump_pct_24) * 100,
+           Field_pct_25 = Field_25/(Field_25 + Quintal_25),
+           Quintal_pct_25 = Quintal_25/(Field_25 + Quintal_25),
+           point_diff_25 = (Field_pct_25 - Quintal_pct_25) * 100,
+           point_diff = (Field_pct_25 - Harris_pct_24) * 100,
+           precinct_name = precinct_display(city_town, ward, precinct))
+```
+
+```{r layout="l-body", fig.height=6, fig.cap="Third Bristol special election results"}
+third_bristol_geom <-
+    read_sf("http://bwbensonjr.github.io/mapoli/gis/geojson/wards_pcts_subs_2022.geojson") |>
+    rename(ward = Ward, precinct = Pct) |>
+    right_join(third_bristol,
+               by=c("city_town", "ward", "precinct"))
+
+percent_zero <- function(n) {
+    percent(n, 0)
+}
+
+district_map <-
+   (tm_shape(third_bristol_geom) +
+   tm_polygons(
+      col="point_diff_25",
+      title="Special Election Margin",
+      popup.vars=c(
+          "Margin Difference" = "point_diff",
+          "Field (D)" = "Field_pct_25",
+          "Quintal (R)" = "Quintal_pct_25",
+          "Field Margin" = "point_diff_25",
+          "Harris (D) - 2024" = "Harris_pct_24",
+          "Trump (R) - 2024" = "Trump_pct_24",
+          "Harris Margin" = "point_diff_24"
+      ),
+      popup.format=list(
+          point_diff=list(digits=0),
+          point_diff_25=list(digits=0),
+          point_diff_24=list(digits=0),
+          Field_pct_25=list(fun=percent_zero),
+          Quintal_pct_25=list(fun=percent_zero),
+          Harris_pct_24=list(fun=percent_zero),
+          Trump_pct_24=list(fun=percent_zero)
+      ),
+      alpha=0.6,
+      palette=c("#FF4949", "white", "#0F4392"),
+      midpoint=0,
+      id="precinct_name"
+   ) +
+   tm_text("precinct_name") +
+   tm_basemap("OpenStreetMap")
+)
+
+tmap_leaflet(district_map)
+```
+
+Swing districts don't swing every election, but the 24 vote margin in
+Tuesday's special election for Third Bristol State Representative
+emphasizes how close swing district elections can be.
+
+Lisa Field, the Democratic candidate from Taunton emerged with a 24
+vote margin based on the unofficial results posted by Easton and
+Taunton election officials. Lawrence Quintal, the Republican candidate
+from Taunton, has said that he will request a recount which is not
+automatic, but requires a small number of signatures. Once the
+signatures have been certified, the state takes on the funding and
+organization of the recount.
+
+```{r}
+vote_table <-
+    third_bristol |>
+    select(city_town, precinct_name, Field_25, Quintal_25) |>
+    mutate(vote_margin = Field_25 - Quintal_25) |>
+    gt(rowname_col="precinct_name", groupname_col="city_town") |>
+    tab_header(
+        title = "Third Bristol special election votes by precinct/city/town",
+    ) |>
+    cols_label(
+        Field_25 = "Lisa Field (D)",
+        Quintal_25 = "Lawrence Quintal (R)",
+        vote_margin = "Margin"
+    ) |>
+    summary_rows(
+        columns = c(Field_25, Quintal_25, vote_margin),
+        fns = list(Total=~sum(., na.rm=TRUE)),
+        fmt = list(~fmt_integer(., use_seps=TRUE))
+    ) |>
+    grand_summary_rows(
+        columns = c(Field_25, Quintal_25, vote_margin),
+        fns = list("Grand Total"=~sum(., na.rm=TRUE)),
+        fmt = list(~fmt_integer(., use_seps=TRUE))
+    )
+
+vote_table
+```
+
+Lisa Field won the Easton precincts by 72 votes, while Taunton's
+precincts created a 48 vote margin for Lawrence Quintal. Quintal had
+more votes than Field in seven precincts; Field had more votes in five
+precincts; and the candidates were tied with 50 votes each in Taunton
+Ward 4, Precinct A.
+
+```{r layout="l-body-outset", fig.cap="Third Bristol 2025 Special Election vs. 2024 Presidential"}
+
+partisan_palette <- function(x) {
+     f_neg <- scales::col_numeric(
+         palette = c("#FF4949", "white"),
+         domain = c(-40, 0)
+     )
+     f_pos <- scales::col_numeric(
+         palette = c("white", "#0F4392"),
+         domain = c(0, 40)
+     )
+     ifelse(x < 0, f_neg(x), f_pos(x))
+}
+
+district_table <-
+    third_bristol |>
+    arrange(desc(point_diff_25)) |>
+    select(
+        precinct_name,
+        Field_pct_25,
+        Quintal_pct_25,
+        point_diff_25,
+        Harris_pct_24,
+        Trump_pct_24,
+        point_diff_24,
+        point_diff
+    ) |>
+    gt() |>
+    tab_header(
+        title = "Third Bristol special election margin vs. 2024 presidential"
+    ) |>
+    tab_spanner(label="2024", columns=ends_with("_24")) |>
+    tab_spanner(label="2025", columns=ends_with("_25")) |>
+    data_color(
+        columns = c(point_diff_25, point_diff_24),
+        domain=c(-40, 40),
+        fn = partisan_palette
+    ) |>
+    cols_label(
+        precinct_name="Precinct",
+        Field_pct_25="Field (D)",
+        Quintal_pct_25="Quintal (R)",
+        point_diff_25="Margin",
+        Harris_pct_24="Harris (D)",
+        Trump_pct_24="Trump (R)",
+        point_diff_24="Margin",
+        point_diff=""
+    ) |>
+    fmt_percent(
+        columns=contains("_pct"),
+        decimals=0
+    ) |>
+    fmt_number(
+        columns=starts_with("point_diff"),
+        decimals=0
+    ) |>
+    gt_plt_bar(
+        column=point_diff,
+        keep_column=TRUE,
+    ) |>
+    cols_label(DUPE_COLUMN_PLT = "") |>
+    tab_spanner(
+        label="Margin Difference",
+        columns=c(point_diff, DUPE_COLUMN_PLT)
+    )
+
+district_table
+```
+
+In contrast to [last month's special election for the Sixth Essex
+district](https://www.massnumbers.us/posts/2025-05-15-sixth-essex-special/)
+where Hannah Bowen (D-Beverly) out-performed Kamala Harris'a margin in
+the district by 12 points, Lisa Field slightly underperformed compared
+to the 2024 presidential. Fields margin of 0 points is about 3 points
+less than Harris's margin in November, 2024.
+
