@@ -1,7 +1,7 @@
 ---
-title: "Swing district special election results in a 24-vote margin for Democrat"
+title: "Swing district special election results in a 17-vote margin for Democrat"
 description: |
-  Democrat Lisa Field wins Third Bristol special election to replace Carol Doherty by 24 votes
+  Democrat Lisa Field wins Third Bristol special election to replace Carol Doherty by 17 votes
 author: Brent Benson
 date: 2025-06-12
 citation: false  
@@ -116,12 +116,15 @@ district_map <-
 tmap_leaflet(district_map)
 ```
 
-Swing districts don't swing every election, but the 24 vote margin in
+*[This article was revised and republished on June 16, 2025 using the
+final certified results from Easton and Taunton election officials.]*
+
+Swing districts don't swing every election, but the 17 vote margin in
 Tuesday's special election for Third Bristol State Representative
 emphasizes how close swing district elections can be, even when the
 winning party is the same as last election.
 
-Lisa Field, the Democratic candidate from Taunton emerged with a 24
+Lisa Field, the Democratic candidate from Taunton emerged with a 17
 vote margin based on the results posted by
 [Easton](https://eastontownma.documents-on-demand.com/Document/b21c8526-d546-f011-a451-000c29a59557/2025.06.10%20Special%20State%20Election%20-%20Results.pdf)
 and
@@ -168,10 +171,9 @@ vote_table
 ```
 
 Lisa Field won the Easton precincts by 72 votes, while Taunton's
-precincts created a 48 vote margin for Lawrence Quintal. Quintal had
-more votes than Field in seven precincts; Field had more votes in five
-precincts; and the candidates were tied with 50 votes each in Taunton
-Ward 2, Precinct A.
+precincts created a 55 vote margin for Lawrence Quintal. Quintal had
+more votes than Field in eight precincts and Field had more votes in five
+precincts.
 
 ```{r layout="l-body-outset", fig.cap="Third Bristol 2025 Special Election vs. 2024 Presidential"}
 
