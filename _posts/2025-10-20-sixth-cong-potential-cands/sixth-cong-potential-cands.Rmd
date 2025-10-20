@@ -304,7 +304,7 @@ gov_council_6th |>
 
 This is primarily an exercise in using available district overlap data
 to generate a list of people who might be considering a run. Many
-people not on this list are thinking about running@mdash;we have
+people not on this list are thinking about running&mdash;we have
 already seen a declaration by former 3rd District congressional
 candidate Dan Koh who has declared himself a candidate.
 
