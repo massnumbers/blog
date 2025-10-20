@@ -1,0 +1,319 @@
+---
+title: "Potential 6th Congressional candidates"
+description: |
+  A look at elected officials whose districts overlap Seth Moulton's 6th U.S. House district
+author: Brent Benson
+date: 2025-10-20
+citation: false
+preview: https://www.massnumbers.us/images/sixth-cong-district.png
+output:
+  distill::distill_article:
+    self_contained: false
+    fig_caption: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(tidyverse)
+library(gt)
+library(gtExtras)
+library(sf)
+library(tmap)
+library(formattable)
+library(metathis)
+
+tmap_mode("view")
+```
+
+```{r post-meta}
+meta() |>
+    meta_description("A look at elected officials whose districts overlap Seth Moulton's 6th U.S. House district") |>
+    meta_viewport() |>
+    meta_social(
+        title = "Potential 6th Congressional candidates",
+        url = "https://www.massnumbers.us/posts/2025-10-20-sixth-cong-potential-cands/",
+        image = "https://www.massnumbers.us/images/sixth-cong-district.png",
+        image_alt = "The MA 6th Congressional District",
+        og_type = "article",
+        og_author = "Brent Benson",
+        twitter_card_type = "summary_large_image",
+        twitter_creator = "@bwbensonjr"
+    )
+```
+
+```{r}
+ct_6th <- read_csv("sixth_cong_munis.csv")
+state_senate_6th <- read_csv("sixth_cong_state_senate.csv")
+state_rep_6th <- read_csv("sixth_cong_state_rep.csv")
+gov_council_6th <- read_csv("sixth_cong_gov_council.csv")
+```
+
+Congressman Seth Moulton (D-Salem) [has
+announced](https://www.bostonglobe.com/2025/10/15/nation/seth-moulton-senate-ed-markey/)
+that he will challenge Senator Ed Markey (D-Malden) in the 2026
+Democratic primary for the United States Senate. Several potential
+candidates have [already
+announced](https://www.bostonglobe.com/2025/10/16/metro/an-open-seat-crowded-field-seth-moultons-senate-campaign-kicks-off-busy-campaign-cycle/)
+their intention to run for the 6th Congressional seat, but many more
+are likely to get in the race given how rarely congressional seats are
+open.
+
+This post will look at the 39 municipalities, 22 State Representative,
+7 State Senate, and 3 Governor's Council districts that overlap the
+6th Congressional district to consider a range of elected officials
+who might consider a run for the seat. While the law does not require
+that a Congressional candidate live in the district they are running
+to represent, it is very rare for a candidate to break that norm. I
+will focus on elected officials who live in the 6th district.
+
+## District Overview
+
+[![](sixth-cong-district.png){width="700"}](https://mapoli.us/districts/us-house/sixth.html)
+
+The Massachusetts 6th Congressional District is "the North Shore
+district," encompassing 31 of the 34 cities and towns of Essex County
+and an additional eight Middlesex County towns. The only
+municipalities that are not fully contained in the 6th District are
+the Middlesex towns of Bedford and Billerica with 4 out of 5 Bedford
+precincts and 5 out of 12 Billerica precincts sitting inside the 6th
+Congressional District.
+
+There are three notable northern Essex County cities that are not in
+the 6th Congressional District&mdash;Haverhill, Lawrence, and
+Methuen&mdash;which are all part of Lori Trahan's 3rd Congressional
+District.
+
+## Cities and Towns
+
+There are 32 towns and 7 cities in the 6th District. Of the seven
+cities, the largest by far is Lynn with a population of just over
+100,000. The mayors of those cities&mdash;worth looking into as
+possible congressional seat contendors&mdash;are listed below.
+
+```{r}
+gt(ct_6th) |>
+    sub_missing(missing_text="") |>
+    cols_label(
+        city_town = "",
+        overlap = "",
+        type = "",
+        county = "County",
+        dist_population = "",
+        mayor = "Mayor"
+    ) |>
+    fmt_number(
+        columns=dist_population,
+        decimals=0
+        ) |>
+    gt_plt_bar(
+        column=dist_population,
+        keep_column=TRUE
+    ) |>
+    cols_label(DUPE_COLUMN_PLT = "") |>
+    tab_spanner(
+        label="District Population",
+        columns=c(dist_population, DUPE_COLUMN_PLT)
+    ) |>
+    gt_highlight_rows(
+        rows=(type == "City")
+    )
+```
+
+## State Senate
+
+```{r layout="l-body", fig.height=6, fig.cap="State Senate Districts"}
+senate_6th_geom <-
+    read_sf("https://raw.githubusercontent.com/bwbensonjr/mapoli/master/gis/geojson/senate2021.geojson") |>
+    select(district) |>
+    right_join(
+        (state_senate_6th |>
+         filter(is_eligible) |>
+         select(district, legislator, PVI)),
+         by="district"
+    )
+
+senate_map <-
+    (tm_shape(senate_6th_geom) +
+     tm_polygons(
+         col="MAP_COLORS",
+         alpha=0.6
+     ) +
+     tm_text("district") +
+     tm_basemap("OpenStreetMap"))
+
+tmap_leaflet(senate_map)
+```
+
+The 3rd Essex, 1st Essex and Middlesex, and 2nd Essex State Senate
+districts are completely contained in the 6th Congressional
+District. Of the partially contained districts, only the 2nd Essex and
+Middlesex has a senator, Barry Finegold, who resides in the
+6th. Senator Brendand Crighton (D-Lynn) has indicated that he will not
+be seeking the 6th Congressional nomination during this election
+cycle, leaving the senators in the highlighted rows as in the mix.
+
+```{r}
+state_senate_6th |>
+    select(
+        district_display,
+        legislator,
+        PVI,
+        dist_population,
+        notes,
+        is_eligible
+    ) |>
+    gt() |>
+    sub_missing(missing_text="") |>
+    cols_hide(columns = is_eligible) |>
+    cols_label(
+        district_display = "District",
+        legislator = "Legislator",
+        dist_population = "District Population",
+        notes = ""
+    ) |>
+    fmt_number(
+        columns=dist_population,
+        decimals=0
+    ) |>
+    gt_highlight_rows(
+        rows=is_eligible
+    )
+```
+
+## State Representative
+
+```{r layout="l-body", fig.height=6, fig.cap="State Representative Districts"}
+rep_6th_geom <-
+    read_sf("https://raw.githubusercontent.com/bwbensonjr/mapoli/master/gis/geojson/house2021.geojson") |>
+    select(district) |>
+    right_join(
+        (state_rep_6th |>
+         filter(is_eligible) |>
+         select(district, legislator, PVI)),
+         by="district"
+    )
+
+rep_map <-
+    (tm_shape(rep_6th_geom) +
+     tm_polygons(
+         col="MAP_COLORS",
+         alpha=0.6
+     ) +
+     tm_text("district") +
+     tm_basemap("OpenStreetMap"))
+
+tmap_leaflet(rep_map)
+```
+
+There are 15 State Representative districts fully contained in the 6th
+Congressional District, all highlighted in the table below. None of
+the representatives in the remaining 7 districts live in the 6th
+District. Representative Kenneth Gordon (D-Bedford) lives in the one
+Bedford precinct that is part of Katherine Clark's 5th Congressional
+District, and Rep. Marc Lombardo (R-Billerica) resides in a Billerica
+precinct that is part of Lori Trahan's 3rd District.
+
+```{r}
+state_rep_6th |>
+    select(
+        district_display,
+        legislator,
+        PVI,
+        dist_population,
+        notes,
+        is_eligible
+    ) |>
+    gt() |>
+    sub_missing(missing_text="") |>
+    cols_hide(columns = is_eligible) |>
+    cols_label(
+        district_display = "District",
+        legislator = "Legislator",
+        dist_population = "District Population",
+        notes = ""
+    ) |>
+    fmt_number(
+        columns=dist_population,
+        decimals=0
+    ) |>
+    gt_highlight_rows(
+        rows=is_eligible
+    )
+```
+
+## Governor's Council
+
+```{r layout="l-body", fig.height=6, fig.cap="Governor's Council Districts"}
+gov_council_6th_geom <-
+    read_sf("https://raw.githubusercontent.com/bwbensonjr/mapoli/master/gis/geojson/govcouncil2021.geojson") |>
+    select(district) |>
+    right_join(
+        (gov_council_6th |>
+         filter(is_eligible) |>
+         select(district, legislator, PVI)),
+         by="district"
+    )
+
+gov_council_map <-
+    (tm_shape(gov_council_6th_geom) +
+     tm_polygons(
+         col="MAP_COLORS",
+         alpha=0.6
+     ) +
+     tm_text("district") +
+     tm_basemap("OpenStreetMap"))
+
+tmap_leaflet(gov_council_map)
+```
+
+While the 5th Governor's Council District of Eunice Zeigler
+(D-Methuen) has the largest overlap with the 6th Congressional
+District, Terrence Kennedy (D-Lynnfield) is the only Governor's
+Councillor who actually lives in the Congressional district.
+
+```{r}
+gov_council_6th |>
+    select(
+        district_display,
+        legislator,
+        PVI,
+        dist_population,
+        notes,
+        is_eligible
+    ) |>
+    gt() |>
+    sub_missing(missing_text="") |>
+    cols_hide(columns = is_eligible) |>
+    cols_label(
+        district_display = "District",
+        legislator = "Councillor",
+        dist_population = "District Population",
+        notes = ""
+    ) |>
+    fmt_number(
+        columns=dist_population,
+        decimals=0
+    ) |>
+    gt_highlight_rows(
+        rows=is_eligible
+    )
+```
+
+## Conclusion
+
+This was primarily an exercise in using the available data about
+district overlap to generate a list of people who might be considering
+a run and is by no means the exclusive list of people who may be
+looking to run for the 6th Congressional seat. In fact, we have
+already seen a declaration by former 3rd District congressional
+candidate Dan Koh who has declared himself a candidate.
+
+According to the [Secretary of the
+Commonwealth](https://www.sec.state.ma.us/divisions/elections/getting-on-the-ballot/how-to-run-for-office-2026.htm)
+nomination papers will become available in February of 2026, and the
+deadlines for submitting papers are May 5 (party candidates to local
+officials) and June 2 (for party candidates to file certified
+signatures to the Commonwealth).
+
+
