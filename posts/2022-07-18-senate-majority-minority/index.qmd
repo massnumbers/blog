@@ -1,0 +1,596 @@
+---
+title: "A look at MA State Senate Redistricting"
+description: |
+    There are now six majority-minority state senate districts in
+    Massachusetts but only three give minority voters a robust chance of
+    electing their candidate of choice
+author: Brent Benson
+date: 2022-08-22
+---
+
+```{r setup, include=FALSE}
+options(digits=1, knitr.kable.NA="")
+library(kableExtra)
+library(formattable)
+library(tidyverse)
+library(sf)
+library(tmap)
+library(readxl)
+library(viridis)
+library(tidycensus)
+library(tigris)
+library(units)
+library(nominatimlite)
+tmap_mode("view")
+```
+
+```{r senate-districts}
+sen_dist <- read_excel("../../_data/2020/MA_State_Senate_Race_2022.xlsx", sheet="Districts")
+
+sen_cand <- read_csv("../../_data/2020/ma_state_senate_cands_2022_contested_addr.csv") %>%
+    rename(Inc = Incumbent) %>%
+    mutate(address = str_c(street_address, city_town, "MA", sep=", ")) %>%
+    select(-street_address)
+
+sen_geom <- read_sf("../../_gis/SENATE2021/SENATE2021_POLY.shp", as_tibble=TRUE) %>%
+    st_make_valid() %>%
+    select(Number=SENDISTNUM) %>%
+    st_transform(st_crs(6491)) %>%
+    left_join(sen_dist, by="Number") %>%
+    relocate(District)
+
+sen_geom_12 <- read_sf("../../_gis/senate2012/SENATE2012_POLY.shp", as_tibble=TRUE) %>%
+    st_make_valid() %>%
+    st_transform(st_crs(6491))
+
+tmap_mode(mode="view")
+one_m_sq <- set_units(1, m^2)
+two_k_m_sq <- set_units(2000, m^2)
+five_k_m_sq <- set_units(5000, m^2)
+seven_five_k_m_sq <- set_units(75000, m^2)
+```
+
+```{r precinct-setup}
+#| output: false
+ma_towns <- read_sf("../../_gis/townssurvey_shp/TOWNSSURVEY_POLYM.shp",
+                    as_tibble=TRUE) %>%
+    st_make_valid() %>%
+    mutate(city_town = str_to_title(TOWN)) %>%
+    select(city_town) %>%
+    st_transform(st_crs(6491))
+
+ward_precinct_name <- function(city_town, ward, precinct) {
+    str_c(city_town,
+          if_else(ward == "-", "", str_c("Ward ", ward)),
+          str_c("Precinct ", precinct),
+          sep=" ")
+}
+
+add_voting_percents <- function(df) {
+    df %>%
+        mutate(cvap_white_pct = cvap_2019_white/cvap_2019_total,
+               cvap_hispanic_pct = cvap_2019_hispanic/cvap_2019_total,
+               cvap_black_pct = cvap_2019_black/cvap_2019_total,
+               cvap_asian_pct = cvap_2019_asian/cvap_2019_total,
+               cvap_pred_group = case_when(((cvap_black_pct >= 0.4) &
+                                       (cvap_hispanic_pct >= 0.4)) ~ "Black_and_Hispanic",
+                                  (cvap_black_pct >= 0.4) ~ "Black",
+                                  (cvap_hispanic_pct >= 0.4) ~ "Hispanic",
+                                  (cvap_asian_pct >= 0.4) ~ "Asian",
+                                  TRUE ~ "White"),
+               vap_white_pct = vap_white_2020/vap_total_2020,
+               vap_hispanic_pct = vap_hispanic_2020/vap_total_2020,
+               vap_black_pct = vap_black_2020/vap_total_2020,
+               vap_asian_pct = vap_asian_2020/vap_total_2020,
+               vap_pred_group = case_when(((vap_black_pct >= 0.4) &
+                                       (vap_hispanic_pct >= 0.4)) ~ "Black_and_Hispanic",
+                                  (vap_black_pct >= 0.4) ~ "Black",
+                                  (vap_hispanic_pct >= 0.4) ~ "Hispanic",
+                                  (vap_asian_pct >= 0.4) ~ "Asian",
+                                  TRUE ~ "White"))
+}
+
+sen_dist_blks <- read_csv("../../_data/2020/ma_blocks_to_sen_dist_2021.csv",
+                          col_types=cols("c", "c", "i"))
+
+sen_vtd_demos <- read_csv("../../_data/2020/ma_sen_census_2020_daves.csv",
+                          col_types=cols(vtd_fips="c"))
+
+vtd_names <- read_csv("../../_data/2020/ma_vtds_city_town_fips.csv", col_types=cols(.default="c")) %>%
+    select(vtd_fips, city_town, Ward, Pct)
+
+vtd_full <- sen_vtd_demos %>%
+    select(-c(district_id, district_num, partial_pct)) %>%
+    group_by(vtd_fips) %>%
+    summarize_all(sum)
+
+vtd_demos <- vtd_names %>%
+    left_join(vtd_full, by="vtd_fips") %>%
+    add_voting_percents()
+
+vtd_geom <- voting_districts(state=25, cb=TRUE) %>%
+    select(vtd_fips = GEOID20) %>%
+    st_transform(6491) %>%
+    left_join(vtd_demos, by="vtd_fips") %>%
+    mutate(name = ward_precinct_name(city_town, Ward, Pct)) %>%
+    relocate(name)
+
+block_geom <- blocks(state=25, year=2020) %>%
+    select(block_fips = GEOID20) %>%
+    st_transform(6491)
+
+vtd_blks <- read_csv("../../_data/2020/ma_blocks_to_vtds.csv",
+                     col_types=cols(.default="c")) %>%
+    left_join(vtd_names, by="vtd_fips") %>%
+    inner_join(block_geom, by="block_fips")
+
+blks_sen_dist_vtd <- vtd_blks %>%
+    left_join(sen_dist_blks, by="block_fips")
+
+sen_vtds <- blks_sen_dist_vtd %>%
+    nest(blocks = c(block_fips, geometry)) %>%
+    group_by(vtd_fips) %>%
+    mutate(partial_pct = n() > 1) %>%
+    ungroup() %>%
+    mutate(geometry = map(blocks, ~st_union(.x$geometry))) %>%
+    unnest(geometry) %>%
+    select(-blocks)
+
+sen_dist_names <- sen_dist %>%
+    select(district_num = Number,
+           district = District)
+
+sen_vtd_comp <- sen_dist_names %>%
+    right_join(sen_vtds, by="district_num") %>%
+    left_join(sen_vtd_demos, by=c("vtd_fips", "district_id", "district_num", "partial_pct")) %>%
+    add_voting_percents() %>%
+    mutate(name = ward_precinct_name(city_town, Ward, Pct)) %>%
+    relocate(name) %>%
+    st_as_sf()
+```
+
+## Overview
+
+This deep-dive on the 2020-2021 Massachusetts State Senate
+redistricting focuses on the Voting Rights Act's requirement to create
+districts that disallow the dilution of minority voting blocks. By
+looking at the predominant voting group in each Massachusetts precinct
+we see the opportunity and limits of what can be achieved in
+for Massachusetts State Senate districts.
+
+While there are six state senate districts that are technically
+majority-minority in the newly created districts, only three
+provide a particular minority voting block with the power to
+elect its candidate of choice, and that is the best that can be
+done given Massachusetts voter demographics.
+
+## Redistricting Concepts
+
+The Massachusetts State Senate lines have been redrawn by the
+legislature after the 2020 Census as required by the constitution.
+For a guide to the redistricting principles used by the state
+legislatures, a good reference is the [Executive Summary of the
+Redistricting Red
+Book](https://www.ncsl.org/Portals/1/Documents/Redistricting/Exec_Summary_2020.pdf),
+published by the National Conference of State Legislatures.
+
+The primary responsibility given to redistricters by the constitution
+is to ensure equally-sized districts. For state legislatures, the
+courts have generally approved of redistricting plans where the
+largest and smallest districts are within 5 percent of the target
+population. The equal-size mandate results in the shifting of
+district lines as populations ebb and flow through the Commonwealth.
+
+The next mandate for the redistricters comes from the Voting Rights
+Act (VRA) and relates to race, color, and minority language groups.
+While it is illegal to use race and ethnicity as factor in
+redistricting in the general case, it is also illegal to dilute
+concentrations of a minority voting block, resulting in that voting
+block not being able to elect its candidate of choice.
+
+While the short-hand concept of a majority-minority district is often
+used when evaluating redistricting plans, it is usually an
+oversimplification which does not addequately address minority voting
+block dilution. In particular, minority groups do not usually vote as
+a monolith. A district with 25% black voters and 30% hispanic voters
+is technically majority-minority, but gives neither the black voters
+nor the hispanic voters the ability to elect their preferred
+candidate. (In practice, redistricting bodies can use techniques like
+ecological regression to analyze and account for historical voting
+patterns and tendencies to understand the voting blocks in play.)
+
+The newly drawn 2020-2021 Massachusetts State Senate districts
+increase the number of majority-minority districts from
+three to six, but only three of the districts contain
+a minority voting block with enough power to elect their candidate of
+choice. It is also clear from looking at the data that there aren't
+enough geographically concentrated minority blocks in Massachusetts
+to do any better at this time.
+
+## Concentrations of Minority Voting Blocks
+
+Let's first look at the 2,152 voting precincts in Massachusetts by
+flagging any precinct that has a citizen voting age population (CVAP)
+for a minority group that is over 40% of the total citizen voting age
+population.
+
+We use citizen voting age population because that is the actual
+number of people who are eligible to vote, a better determinant of
+voting power than total population. We will also use voting age
+population and overall population numbers when looking at specific
+districts, but CVAP makes sense as the number to consider for
+voting fairness.
+
+```{r vtd-minority-precints}
+vtd_demos %>%
+    count(cvap_pred_group) %>%
+    mutate(Percent = percent(n/sum(n), 0)) %>%
+    rename(`Predominant Group`=cvap_pred_group,
+           `Precinct Count`=n) %>%
+    arrange(desc(`Precinct Count`)) %>%
+    kbl(caption="Predominant voting group by voting precinct") %>%
+    kable_styling()
+```
+
+If we look at the municipality of the 203 voting precincts that have a
+critical mass of minority voters (102+94+5+3) it guides us towards
+which precincts might be grouped together into a single district to
+prevent dilution of that minority group's voting power.
+
+```{r vtd-group-by-city}
+cvap_towns <- vtd_demos %>%
+    filter(cvap_pred_group != "White") %>%
+    count(city_town, cvap_pred_group)
+
+cvap_towns %>%
+    rename(`City/Town`=city_town,
+           `Predominant Group`=cvap_pred_group,
+           `Precinct Count`=n) %>%
+    arrange(desc(`Precinct Count`)) %>%
+    kbl(caption="Number of plausibly minority precincts by city/town") %>%
+    kable_styling()
+```
+
+A statewide map of the precincts with concentrated minority
+representation shows the limited number and concentration of such
+districts.
+
+```{r vtd-minority-map, fig.cap="*Predominant group for all MA precincts*"}
+#| column: page
+color_list <- viridis(4)
+group_colors <- c(Black_and_Hispanic=color_list[4],
+                  Black=color_list[1],
+                  Hispanic=color_list[2],
+                  Asian=color_list[3],
+                  White=NA)
+popup_vars <- c("cvap_pred_group", "cvap_white_pct", "cvap_black_pct",
+                "cvap_hispanic_pct", "cvap_asian_pct")
+
+cvap_town_outlines <- ma_towns %>% filter(city_town %in% unique(cvap_towns$city_town))
+
+pred_group_map <- (tm_shape(vtd_geom) +
+                       tm_borders(lwd=0.05) +
+                       tm_fill(col="cvap_pred_group",
+                               alpha=1,
+                               title="",
+                               palette=group_colors) +
+                       tm_shape(cvap_town_outlines) +
+                       tm_borders(lwd=0.6) +
+                       tm_text(text="city_town", size=0.5, xmod=-1.25) +
+                       tm_shape(ma_towns) +
+                       tm_borders(lwd=0.7))
+
+tmap_mode(mode="plot")
+pred_group_map
+```
+A closer look at four of the clusters around Springfield, Lawrence, Boston, and
+Brockton show the biggest concentration of minority voting blocks. All but
+the Brockton/Randolph cluster have enough concentration to plausibly
+elect a minority candidate of choice. 
+
+```{r cvap-detail, fig.cap="*Cities with large minority voting blocks*"}
+#| column: body-outset
+cvap_detail_map <- function(city_towns, fig_title, legend_show) {
+    (tm_shape((vtd_geom %>% filter(city_town %in% city_towns))) +
+     tm_borders(lwd=0.5, col="black") +
+     tm_fill(col="cvap_pred_group",
+             alpha=1,
+             title="",
+             palette=group_colors) +
+     tm_shape((ma_towns %>% filter(city_town %in% city_towns))) +
+                       tm_borders(lwd=1) +
+                       tm_text(text="city_town", size=0.75, xmod=4) +
+     tm_layout(title=fig_title, title.size=0.7, legend.show=legend_show))
+}
+springfield_cvap_map <- cvap_detail_map(c("Springfield"), "Basis of Hampden", TRUE)
+essex_1_cvap_map <- cvap_detail_map(c("Haverhill", "Methuen", "Lawrence"),
+                                     "Basis of 1st Essex",
+                                     FALSE)
+boston_cvap_map <- cvap_detail_map(c("Boston"),
+                                   "Basis of 1st/2nd Suffolk",
+                                   FALSE)
+brockt_rand_cvap_map <- cvap_detail_map(c("Brockton", "Randolph"),
+                                        "Basis of 2nd Norfolk and Plymouth",
+                                        FALSE)
+tmap_arrange(springfield_cvap_map,
+             essex_1_cvap_map,
+             boston_cvap_map,
+             brockt_rand_cvap_map,
+             ncol=2)
+```
+
+## Districts with Minority Power
+
+The new Hampden, First Essex, and Second Suffolk Districts contain a
+large enough percentage of a particular minority group to allow for
+election of a candidate of choice by that minority group.
+
+```{r district-map-setup}
+color_list_1 <- viridis(5)
+group_colors_1 <- c(Black_and_Hispanic=color_list_1[4],
+                    Black=color_list_1[1],
+                    Hispanic=color_list_1[2],
+                    Asian=color_list_1[3],
+                    White=color_list_1[5])
+popup_vars_1 <- c("cvap_pred_group", "cvap_white_pct", "cvap_black_pct",
+                  "cvap_hispanic_pct", "cvap_asian_pct")
+
+senate_geometry <- function(dist_number) {
+    sen_geom %>% filter(Number == dist_number)
+}
+
+senate_precincts <- function(n) {
+    sen_vtd_comp %>%
+        filter(district_num == n)
+}
+
+senate_map <- function(sen_dist, sen_pcts) {
+    (tm_shape(sen_pcts) +
+     tm_borders(lwd=0.75) +
+     tm_fill(col="cvap_pred_group",
+             alpha=0.5,
+             title="",
+             palette=group_colors_1,
+             popup.vars=popup_vars_1) +
+    tm_shape(sen_dist) + tm_borders(lwd=3) +
+    tm_basemap("OpenStreetMap"))
+}
+```
+
+## The Hampden District
+
+```{r sen-hampden-map}
+sen_3 <- senate_geometry(3)
+sen_pcts_3 <- senate_precincts(3)
+sen_3_map <- senate_map(sen_3, sen_pcts_3)
+tmap_leaflet(sen_3_map)
+```
+
+```{r summarize-districts}
+summarize_dist <- function(sen_pcts) {
+    sen_pcts %>%
+        st_drop_geometry() %>%
+        group_by(district) %>%
+        summarize(total_total = sum(total_pop_2020),
+                  total_hispanic = sum(total_hispanic_2020),
+                  total_black = sum(total_black_2020),
+                  total_asian = sum(total_asian_2020),
+                  total_white = sum(total_white_2020),
+                  total_hispanic_pct = total_hispanic/total_total,
+                  total_black_pct = total_black/total_total,
+                  total_asian_pct = total_asian/total_total,
+                  total_white_pct = total_white/total_total,
+                  total_minority_pct = 1 - total_white_pct,
+                  vap_total = sum(vap_total_2020),
+                  vap_hispanic = sum(vap_hispanic_2020),
+                  vap_black = sum(vap_black_2020),
+                  vap_asian = sum(vap_asian_2020),
+                  vap_white = sum(vap_white_2020),
+                  vap_hispanic_pct = vap_hispanic/vap_total,
+                  vap_black_pct = vap_black/vap_total,
+                  vap_asian_pct = vap_asian/vap_total,
+                  vap_white_pct = vap_white/vap_total,
+                  vap_minority_pct = 1 - vap_white_pct,
+                  cvap_total = sum(cvap_2019_total),
+                  cvap_hispanic = sum(cvap_2019_hispanic),
+                  cvap_black = sum(cvap_2019_black),
+                  cvap_asian = sum(cvap_2019_asian),
+                  cvap_white = sum(cvap_2019_white),
+                  cvap_hispanic_pct = cvap_hispanic/cvap_total,
+                  cvap_black_pct = cvap_black/cvap_total,
+                  cvap_asian_pct = cvap_asian/cvap_total,
+                  cvap_white_pct = cvap_white/cvap_total,
+                  cvap_minority_pct = 1 - cvap_white_pct) %>%
+         select(-ends_with(c("_hispanic", "_black", "_asian", "_white"))) %>%
+         pivot_longer(cols=!district,
+                      names_sep="_",
+                      names_to=c("stat", "group")) %>%
+         pivot_wider(id_cols=c(district, stat),
+                     names_from=group,
+                     values_from=value)
+}
+
+summary_table <- function(sen_summary, caption) {
+    sen_summary %>%
+        select(-district) %>%
+        mutate(stat = str_replace_all(stat, c("total"="Total Population",
+                                              "cvap"="Citizen Voting Age Population",
+                                              "vap"="Voting Age Population")),
+               hispanic = percent(hispanic, 0),
+               black = percent(black, 0),
+               asian = percent(asian, 0),
+               white = percent(white, 0),
+               minority = percent(minority, 0)) %>%
+        kbl(caption=caption,
+            format.args=list(scientific=FALSE, big.mark=",")) %>%
+        kable_styling()
+}
+```
+
+```{r sen-hampden}
+summary_table(summarize_dist(sen_pcts_3), "Hampden District Demographics")
+```
+
+The Hampden State Senate District contains 90 percent of Springfield's
+precincts and 60 percent of Chicopee's precincts. The district
+has about as many hispanic voters as non-hispanic white voters,
+giving that voting block a chance at electing their preferred
+candidate.
+
+The pre-2021 version of the Hampden district had a similar
+characteristics. In 2020 Springfield City Councilor Alex Gomez
+defeated incumbent State Senator James Welch in the Democratic
+primary.
+
+A simple precinct-level ecological regression model that uses Gomez's
+margin over Welch as the response variable and the CVAP hispanic
+percent and whether the voter is in Springfield as interacting
+explanatory variables ends up explaining 90 percent of the variation
+in the margin of the 2020 Hampden District Democratic primary
+vote. Hispanic voters were much more likely to vote for Gomez,
+especially those who lived in Springfield and might be familiar
+with Gomez from the City Council.
+
+## The First Essex District
+
+```{r first-essex-redist, fig.cap="*First Essex District*"}
+sen_19 <- senate_geometry(19)
+sen_pcts_19 <- senate_precincts(19)
+sen_19_map <- senate_map(sen_19, sen_pcts_19)
+tmap_leaflet(sen_19_map)
+```
+
+```{r sen-first-essex}
+summary_table(summarize_dist(sen_pcts_19), "First Essex District Demographics")
+```
+
+The First Essex District is the first successful attempt to create a
+majority hispanic Lawrence-based State Senate district by carving out
+largely hispanic precincts in Haverhill to add to Lawrence's large
+hispanic population.
+
+The district contains all of Lawrence, all of Methuen, and
+approximately 11 precincts of Haverhill (give or take a few census
+blocks). The new lines result in a voting age population that is
+36% White, 56% Hispanic, 10% Black, and 3% Asian. There is an almost
+10 point difference when looking at hispanic citizen voting age
+population, showing the large assimilation of immigrants, and somewhat
+limiting voting power.
+
+The First Essex incumbent, Diana DiZoglio (D-Methuen), is
+running for Auditor, leaving an open race for a competitive field of
+candidates from Lawrence (Pavel Payano and Doris Rodriguez) and
+Methuen (Eunice Zeigler).
+
+## The Second Suffolk District
+
+```{r second-suffolk-redist, fig.cap="*Second Suffolk District*"}
+sen_29 <- senate_geometry(29)
+sen_pcts_29 <- senate_precincts(29)
+sen_29_map <- senate_map(sen_29, sen_pcts_29)
+tmap_leaflet(sen_29_map)
+```
+
+```{r sen-second-suffolk}
+summary_table(summarize_dist(sen_pcts_29), "Second Suffolk District Demographics")
+```
+
+The State Senate redistricting challenge in Boston is to create a
+district that gives candidate-of-choice power to black voters in
+Boston, whose numbers are large, but not large enough to give voting
+majorities in two districts. The 2020-2021 Senate redistricters
+shifted majority-black precincts from the First Suffolk District
+to the Second Suffolk, give a black citizen age voting population
+of 47%.
+
+There is a very competitive 2022 Democratic primary for the Second
+Suffolk District featuring Miniard Culpepper, Nika Elugardo, Liz
+Miranda, and Dianne Wilkerson.
+
+## The remaining majority minority districts
+
+While there are three more majority-minority State Senate
+districts, none of contain a large enough block of minority
+voters to provide candidate of choice power to any one
+minority group.
+
+## The Second Plymouth and Norfolk District
+
+```{r spn-redist, fig.cap="*Second Plymouth and Norfolk District*"}
+sen_34 <- senate_geometry(34)
+sen_pcts_34 <- senate_precincts(34)
+sen_34_map <- senate_map(sen_34, sen_pcts_34)
+tmap_leaflet(sen_34_map)
+```
+
+```{r sen-spn-summary}
+summary_table(summarize_dist(sen_pcts_34), "Second Plymouth and Norfolk District Demographics")
+```
+
+The Second Plymouth and Norfolk District was a late-comer to the
+majority minority district additions during the latest redistricting
+process. The first draft of the senate redistricting plan left the
+Brockton-based district almost unchanged and grouped with the mostly
+white surrounding suburb of Hanover, Plympton and Easton. [Pressure
+from redistricting advocacy
+groups](https://www.bostonglobe.com/2021/10/19/metro/under-pressure-state-senate-redraws-map-adding-new-majority-minority-district-brockton/)
+led to a plan which extended the district through Avon into parts of
+Randolph that moved the demographics of the district into majority
+minority, while moving the white suburbs into adjacent districts.
+
+The newly configured district has attracted an experienced Democratic
+challenger in Randolph Town Councilor Katrina Huff-Larmond who could
+increase the number of black women in the senate above one, Lydia
+Edward (D-Boston), if she were to win the primary on September 16th.
+
+## The First Suffolk District
+
+```{r sen-1st-suffolk-map}
+sen_30 <- senate_geometry(30)
+sen_pcts_30 <- senate_precincts(30) %>%
+    erase_water(area_threshold=0.6) %>%
+    st_make_valid()
+    
+sen_30_map <- senate_map(sen_30, (sen_pcts_30 %>% filter(Ward != "1")))
+tmap_leaflet(sen_30_map)
+```
+```{r sen-1st-suffolk-summary}
+summary_table(summarize_dist(sen_pcts_30), "First Suffolk District Demographics")
+```
+
+The First Suffolk District is currently represented by Nick Collins of
+South Boston. While the seat was held by Linda Dorcena Forry of
+Dorchester from 2013 through 2018, the demographics of the district
+are not particularly favorable for electing a black state senator. The
+2020-2021 senate redistricting committe chose to shore up the Second
+Suffolk District to give its black voters the ability to elect their
+candidate of choice, leaving the First Suffolk with a black citizen
+voting age population of around 23%.
+
+## The Middlesex and Suffolk District
+
+```{r middlesex-and-suffolk-redist, fig.cap="*Middlesex and Suffolk District*"}
+sen_26 <- senate_geometry(26)
+sen_pcts_26 <- senate_precincts(26)
+sen_26_map <- senate_map(sen_26, sen_pcts_26)
+tmap_leaflet(sen_26_map)
+```
+
+```{r sen-m-and-s-summary}
+summary_table(summarize_dist(sen_pcts_26), "Middlesex and Suffolk District Demographics")
+```
+
+The Middelsex and Suffolk state senate district represented by Sal
+DiDomenico (D-Everett) has been redrawn adding  sections of
+Cambridgeport and East Cambridge, while removing parts of Boston's
+West End, Allston, and Brighton neighborhoods. While the overall
+population is 58% minority, the citizen voting age population is 39%
+minority and the largest minority voting block are hispanics at 17%.
+
+## Conclusion
+
+The Massachusetts State Senate redistricting committee adhered
+to the letter and the spirit of the Voting Rights Act by
+doing its best to group together minority voting blocks and
+create districts with true minority voting power.
+

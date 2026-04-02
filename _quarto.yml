@@ -1,0 +1,39 @@
+project:
+  type: website
+  output-dir: docs
+  resources:
+    - CNAME
+    - .nojekyll
+
+website:
+  title: "Mass. Numbers"
+  description: "A qualitative look at Massachusetts politics and policy"
+  site-url: https://www.massnumbers.us
+  favicon: images/numbers_mass.png
+  google-analytics: "G-GS463FHP94"
+  open-graph:
+    locale: en_US
+  twitter-card:
+    creator: "@bwbensonjr"
+    card-style: summary_large_image
+  navbar:
+    logo: images/ma_shape.png
+    right:
+      - text: "Home"
+        href: index.qmd
+      - text: "About"
+        href: about.qmd
+      - icon: github
+        href: https://github.com/massnumbers/blog
+
+execute:
+  echo: false
+  warning: false
+  message: false
+  freeze: auto
+
+format:
+  html:
+    theme:
+      - default
+      - massnumbers.scss
