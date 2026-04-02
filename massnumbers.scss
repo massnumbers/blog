@@ -1,0 +1,118 @@
+/*-- scss:defaults --*/
+@import url('https://fonts.googleapis.com/css2?family=Amiri');
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono');
+
+$font-family-sans-serif: "Amiri", serif;
+$font-family-monospace: "DM Mono", monospace;
+$font-size-base: 1.3rem;
+$body-color: rgba(0, 0, 0, 0.8);
+$headings-color: rgba(0, 0, 0, 0.8);
+$code-font-size: 14px;
+$link-color: #1C75BC;
+
+/*-- scss:rules --*/
+.navbar {
+  background-color: #1C75BC !important;
+  font-family: sans-serif;
+  font-size: 15px;
+}
+
+.navbar .navbar-brand {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.navbar .nav-link {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.navbar .nav-link:hover {
+  color: white !important;
+}
+
+.navbar .navbar-toggler-icon {
+  filter: invert(1);
+}
+
+.nav-footer {
+  background-color: #0F2E3D;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 15px;
+}
+
+.nav-footer a {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.nav-footer a:hover {
+  color: white;
+}
+
+h1.title {
+  font-size: 50px;
+}
+
+.quarto-title-meta {
+  font-size: 1.1rem;
+}
+
+.quarto-title-meta .quarto-title-meta-heading {
+  font-size: 0.9rem;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+figure figcaption {
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+aside, .aside {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+/* Listing index page: bolder title, subtler description */
+.listing-title {
+  font-weight: 900;
+}
+
+.listing-description {
+  font-size: 0.85em;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+/* Compact table styling */
+.table, .gt_table {
+  font-family: sans-serif;
+  font-size: 0.75rem;
+  width: auto !important;
+}
+
+.table td, .table th {
+  padding: 0.1rem 0.3rem;
+  white-space: nowrap;
+}
+
+.table colgroup col, .gt_table colgroup col {
+  width: auto !important;
+}
+
+.gt_table .gt_heading.gt_title {
+  font-family: "Amiri", serif !important;
+  font-size: 1.2rem !important;
+}
+
+.gt_table .gt_col_heading {
+  font-family: sans-serif !important;
+  font-size: 0.7rem !important;
+  padding: 0.1rem 0.3rem !important;
+}
+
+.gt_table .gt_row {
+  padding: 0.1rem 0.3rem;
+}
+
+/* Fix gt_plt_bar SVG background rects defaulting to black fill */
+.gt_table svg rect {
+  fill: none;
+}
