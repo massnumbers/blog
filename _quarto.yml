@@ -4,6 +4,7 @@ project:
   resources:
     - CNAME
     - .nojekyll
+    - images/
 
 website:
   title: "Mass. Numbers"
