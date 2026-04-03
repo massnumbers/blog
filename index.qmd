@@ -1,5 +1,7 @@
 ---
 title: "Mass. Numbers"
+description: |
+  A quantitative look at Massachusetts politics and policy
 listing:
   contents: posts
   sort: "date desc"
