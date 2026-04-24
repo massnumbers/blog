@@ -1,0 +1,44 @@
+---
+title: "Who will replace Brad Jones as House minority leader?"
+description: |
+  A look at the other 24 Massachusetts House Republicans
+author: Brent Benson
+date: 2026-04-25
+---
+
+On March 23rd Massachusetts House Minority Leader Brad Jones (R-North
+Reading) [announced that he would not be
+running](https://www.wbur.org/news/2026/03/23/mass-house-republican-leader-not-running-brad-jones)
+for re-election and would be stepping down from the legislative
+chamber.
+
+
+| State Representative | District | Elected | Tenure | Leadership Role |
+|----------------------|----------|---------|--------|-----------------|
+|Bradley H. Jones, Jr. (R-North Reading)|Twentieth Middlesex|1994-03-01|32|Leader|
+|Paul K. Frost (R-Auburn)|Seventh Worcester|1996-11-05|29|Second Assistant Leader|
+|Todd M. Smola (R-Warren)|First Hampden|2004-11-02|21||
+|David T. Vieira (R-Falmouth)|Third Barnstable|2010-11-02|15|Third Assistant Leader|
+|Donald H. Wong (R-Saugus)|Ninth Essex|2010-11-02|15||
+|Kimberly N. Ferguson (R-Holden)|First Worcester|2010-11-02|15|First Assistant Leader|
+|Marc T. Lombardo (R-Billerica)|Twenty-Second Middlesex|2010-11-02|15||
+|Nicholas A. Boldyga (R-Southwick)|Third Hampden|2010-11-02|15||
+|Steven S. Howitt (R-Seekonk)|Fourth Bristol|2010-11-02|15||
+|David F. Decoste (R-Norwell)|Fifth Plymouth|2014-11-04|11||
+|David K. Muradian Jr (R-Grafton)|Ninth Worcester|2014-11-04|11|Third Assistant Leader|
+|Donald R. Berthiaume, Jr (R-Spencer)|Fifth Worcester|2014-11-04|11||
+|Joseph D. Mckenna (R-Sutton)|Eighteenth Worcester|2014-11-04|11||
+|Hannah E. Kane (R-Shrewsbury)|Eleventh Worcester|2015-03-31|10||
+|Michael J. Soter (R-Bellingham)|Eighth Worcester|2018-11-06|7||
+|Norman J. Orrall (R-Lakeville)|Twelfth Bristol|2018-11-06|7||
+|Kelly W. Pease (R-Westfield)|Fourth Hampden|2020-11-03|5||
+|Steven G. Xiarhos (R-Barnstable)|Fifth Barnstable|2020-11-03|5||
+|Marcus S. Vaughn (R-Wrentham)|Ninth Norfolk|2022-11-08|3||
+|John J. Marsi, Jr (R-Dudley)|Sixth Worcester|2024-03-05|2||
+|Alyson M. Sullivan-Almeida (R-Abington)|Seventh Plymouth|2024-11-05|1||
+|John Robert Gaskey (R-Carver)|Second Plymouth|2024-11-05|1||
+|Justin Thurber (R-Somerset)|Fifth Bristol|2024-11-05|1||
+|Kenneth Sweezey (R-Pembroke)|Sixth Plymouth|2024-11-05|1||
+|Michael Chaisson (R-Foxborough)|First Bristol|2024-11-05|1||
+
+
