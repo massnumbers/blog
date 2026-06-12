@@ -49,7 +49,7 @@ prec_demographics <- read_csv(
     select(
         city_town, ward, precinct, wwc_pct, race_white_pct, ed_college_degree_pct,
         total_population, race_white, race_black, race_hispanic, race_asian,
-        race_multiracial
+        race_multiracial, median_household_income
     )
 
 first_suffolk_data <- prec_data |>
@@ -78,6 +78,23 @@ first_suffolk_data <- prec_data |>
             c("White", "Black", "Hispanic", "Asian", "Multiracial")[plurality_idx],
             levels = c("White", "Black", "Hispanic", "Asian", "Multiracial")
         ),
+        HH_INCOME         = median_household_income,
+        HH_INCOME_clamped = pmin(HH_INCOME, 250000),
+        # Diversity-Affluence Index: income percentile (relative to the district)
+        # times the normalized Shannon diversity of the five race/ethnicity shares.
+        # It peaks where a precinct is both racially mixed AND high-income -- the
+        # gentrification signature -- and stays low for affluent-but-white South
+        # Boston or diverse-but-lower-income Dorchester.
+        AFF_PCTILE = percent_rank(HH_INCOME),
+        SHANNON = pmap_dbl(
+            list(WHITE_PCT, BLACK_PCT, HISP_PCT, ASIAN_PCT, MULTI_PCT),
+            function(w, b, h, a, m) {
+                ps <- c(w, b, h, a, m) / 100
+                ps <- ps[ps > 0]
+                -sum(ps * log(ps)) / log(5)
+            }
+        ),
+        DIV_AFF = round(AFF_PCTILE * SHANNON * 100, 1),
         precinct_label = if_else(ward == "-", precinct, str_c(ward, "-", precinct))
     )
 ```
@@ -177,4 +194,76 @@ race_map <- (
 )
 
 race_map
+```
+
+## Income
+
+```{r}
+#| column: body-outset
+#| fig-cap: |
+#|   *Median household income by precinct (top-coded at $250K)*
+
+income_palette <- c("#F7FCF5", "#E5F5E0", "#C7E9C0", "#A1D99B", "#74C476", "#41AB5D", "#238B45", "#005A32")
+
+income_map <- (
+    tm_shape(first_suffolk_geom) +
+    tm_polygons(
+        fill       = "HH_INCOME_clamped",
+        fill.scale = tm_scale_continuous(
+            values = income_palette,
+            limits = c(30000, 250000),
+            ticks  = c(50000, 100000, 150000, 200000, 250000),
+            labels = c("$50K", "$100K", "$150K", "$200K", "$250K+")
+        ),
+        fill.legend = tm_legend(title = "Median\nHH Income"),
+        fill_alpha  = 0.7,
+        popup.vars  = c(
+            "Precinct"         = "precinct_label",
+            "Median HH income" = "HH_INCOME",
+            "White %"          = "WHITE_PCT",
+            "Largest group"    = "PLURALITY",
+            "PVI"              = "PVI"
+        )
+    ) +
+    tm_basemap("OpenStreetMap")
+)
+
+income_map
+```
+
+## Diversity and Affluence
+
+```{r}
+#| column: body-outset
+#| fig-cap: |
+#|   *Diversity-Affluence Index — income percentile times racial diversity. High
+#|   values flag precincts that are both racially mixed and high-income, surfacing
+#|   the gentrifying neighborhoods that the race and income maps each tell only
+#|   half of.*
+
+divaff_palette <- c("#FCFBFD", "#EFEDF5", "#DADAEB", "#BCBDDC", "#9E9AC8", "#807DBA", "#6A51A3", "#4A1486")
+
+divaff_map <- (
+    tm_shape(first_suffolk_geom) +
+    tm_polygons(
+        fill       = "DIV_AFF",
+        fill.scale = tm_scale_continuous(
+            values = divaff_palette,
+            limits = c(0, 80),
+            ticks  = c(0, 20, 40, 60, 80)
+        ),
+        fill.legend = tm_legend(title = "Diversity-\nAffluence"),
+        fill_alpha  = 0.7,
+        popup.vars  = c(
+            "Precinct"            = "precinct_label",
+            "Div-Affluence index" = "DIV_AFF",
+            "Median HH income"    = "HH_INCOME",
+            "White %"             = "WHITE_PCT",
+            "Largest group"       = "PLURALITY"
+        )
+    ) +
+    tm_basemap("OpenStreetMap")
+)
+
+divaff_map
 ```
