@@ -410,7 +410,9 @@ ggplot(
     )
 ) +
     geom_vline(xintercept = redistrict_breaks, linetype = "dashed", color = "grey55") +
-    annotate("text", x = 2011.5, y = 48, label = "2021 plan →",
+    annotate("text", x = 2011.5, y = 48, label = "2011 plan →",
+             hjust = 1.05, size = 3, color = "grey40") +
+    annotate("text", x = 2021.5, y = 48, label = "2021 plan →",
              hjust = 1.05, size = 3, color = "grey40") +
     geom_line(linewidth = 0.9) +
     geom_point(size = 1.5) +

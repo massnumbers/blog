@@ -20,7 +20,7 @@ This is the **Mass. Numbers** blog (www.massnumbers.us) — a data-driven blog a
 
 ## Building the Site
 
-Requires [Quarto CLI](https://quarto.org/docs/get-started/) and R with relevant packages.
+Requires [Quarto CLI](https://quarto.org/docs/get-started/) (**1.9 or newer** — the committed `docs/` output is generated with Quarto 1.9; rendering with an older version reintroduces mixed-version markup and assets) and R with relevant packages (managed via `renv` — run `renv::restore()` to install them).
 
 ```bash
 # Render the entire site
