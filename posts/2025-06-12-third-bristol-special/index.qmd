@@ -90,7 +90,7 @@ district_map <-
    tm_basemap("OpenStreetMap")
 )
 
-tmap_leaflet(district_map)
+district_map
 ```
 
 *[This article was revised and republished on June 16, 2025 using the

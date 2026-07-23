@@ -292,7 +292,7 @@ new_sen_map <- (tm_shape(sen_geom) +
                     ## tm_shape(sen_geom_12) +
                     ## tm_borders(lwd=2, lty="dashed") +
                     tm_basemap("OpenStreetMap"))
-tmap_leaflet(new_sen_map)
+new_sen_map
 ```
 
 ## State Senate Primary Overview
@@ -350,7 +350,7 @@ ma_sen_cands_1 <- candidate_locations(sen_cand, 1)
 
 ```{r bhfh-map, fig.cap="*Berkshire, Hampden, Franklin and Hampshire*"}
 ma_sen_1_map <- district_map(ma_sen_1, ma_towns_1, ma_sen_cands_1, ma_house_berk_2)
-tmap_leaflet(ma_sen_1_map)
+ma_sen_1_map
 ```
 
 ```{r bhfh-cand}
@@ -398,7 +398,7 @@ ma_sen_cands_4 <- candidate_locations(sen_cand, 4)
 ```{r hhw-map, fig.cap="*Hampden, Hampshire and Worcester*m"}
 ma_sen_4_map <- district_map(ma_sen_4, ma_towns_pcts_4, ma_sen_cands_4, ma_house_hampd_7)
 
-tmap_leaflet(ma_sen_4_map)
+ma_sen_4_map
 ```
 
 ```{r hhw-cand}
@@ -446,7 +446,7 @@ ma_sen_cands_9 <- candidate_locations(sen_cand, 9)
 ```{r first-worc-map, fig.cap="*Hampden, Hampshire and Worcester*m"}
 ma_sen_9_map <- district_map(ma_sen_9, ma_towns_pcts_9, ma_sen_cands_9)
 
-tmap_leaflet(ma_sen_9_map)
+ma_sen_9_map
 ```
 
 ```{r first-worc-cand}
@@ -501,7 +501,7 @@ ma_sen_cands_19 <- candidate_locations(sen_cand, 19)
 
 ```{r first-essex-map, fig.cap="*First Essex Senate District*m"}
 ma_sen_19_map <- district_map(ma_sen_19, ma_towns_pcts_19, ma_sen_cands_19)
-tmap_leaflet(ma_sen_19_map)
+ma_sen_19_map
 ```
 
 ```{r first-essex-cands}
@@ -564,7 +564,7 @@ ma_sen_cands_22 <- candidate_locations(sen_cand, 22)
 ```{r second-essex-map, fig.cap="*Second Essex State Senate District*m"}
 ma_sen_22_map <- district_map(ma_sen_22, ma_towns_pcts_22, ma_sen_cands_22)
 
-tmap_leaflet(ma_sen_22_map)
+ma_sen_22_map
 ```
 
 ```{r second-essex-cands}
@@ -626,7 +626,7 @@ ma_sen_cands_29 <- candidate_locations(sen_cand, 29)
 ```{r second-suffolk-map, fig.cap="*Second Suffolk State Senate District*m"}
 ma_sen_29_map <- district_map(ma_sen_29, ma_towns_pcts_29, ma_sen_cands_29, ma_house_5th_suffolk, ma_house_15th_suffolk)
 
-tmap_leaflet(ma_sen_29_map)
+ma_sen_29_map
 ```
 
 ```{r second-suffolk-cands}
@@ -688,7 +688,7 @@ ma_sen_cands_31 <- candidate_locations(sen_cand, 31)
 ```{r fpn-map, fig.cap="*First Plymouth and Norfolk District*"}
 ma_sen_31_map <- district_map(ma_sen_31, ma_towns_pcts_31, ma_sen_cands_31)
 
-tmap_leaflet(ma_sen_31_map)
+ma_sen_31_map
 ```
 
 ```{r fpn-cands}
@@ -745,7 +745,7 @@ ma_sen_cands_33 <- candidate_locations(sen_cand, 33)
 ```{r npb-map, fig.cap="*Norfolk, Plymouth and Bristol District*"}
 ma_sen_33_map <- district_map(ma_sen_33, ma_towns_pcts_33, ma_sen_cands_33)
 
-tmap_leaflet(ma_sen_33_map)
+ma_sen_33_map
 ```
 
 ```{r npb-cands}
@@ -789,7 +789,7 @@ ma_sen_cands_34 <- candidate_locations(sen_cand, 34)
 ```{r spn-map, fig.cap="*Second Plymouth and Norfolk*"}
 ma_sen_34_map <- district_map(ma_sen_34, ma_towns_pcts_34, ma_sen_cands_34)
 
-tmap_leaflet(ma_sen_34_map)
+ma_sen_34_map
 ```
 
 ```{r spn-cands}
@@ -848,7 +848,7 @@ ma_sen_cands_40 <- candidate_locations(sen_cand, 40)
 ```{r cape-islands-map, fig.cap="*Second Plymouth and Norfolk*"}
 ma_sen_40_map <- district_map(ma_sen_40, ma_towns_pcts_40, ma_sen_cands_40)
 
-tmap_leaflet(ma_sen_40_map)
+ma_sen_40_map
 ```
 
 ```{r cape-islands-cands}
