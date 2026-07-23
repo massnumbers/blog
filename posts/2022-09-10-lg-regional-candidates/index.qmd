@@ -176,7 +176,7 @@ lg_winner_map <- (
     tm_basemap("OpenStreetMap") +
     tm_view(set.view=8)
 )
-tmap_leaflet(lg_winner_map)
+lg_winner_map
 ```
 
 ```{r lg-results}
@@ -272,7 +272,7 @@ lg_winner_dist_map <- (
     tm_basemap("OpenStreetMap") +
     tm_view(set.view=8)
 )
-tmap_leaflet(lg_winner_dist_map)
+lg_winner_dist_map
 ```
 
 ## Kim Driscoll Vote Share
@@ -305,7 +305,7 @@ lg_driscoll_map <- (
     tm_basemap("OpenStreetMap") +
     tm_view(set.view=8)
 )
-tmap_leaflet(lg_driscoll_map)
+lg_driscoll_map
 ```
 
 ## Eric Lesser Vote Share
@@ -331,7 +331,7 @@ lg_lesser_map <- (
     tm_basemap("OpenStreetMap") +
     tm_view(set.view=8)
 )
-tmap_leaflet(lg_lesser_map)
+lg_lesser_map
 ```
 
 ## Tami Gouveia Vote Share
@@ -357,6 +357,6 @@ lg_gouveia_map <- (
     tm_basemap("OpenStreetMap") +
     tm_view(set.view=8)
 )
-tmap_leaflet(lg_gouveia_map)
+lg_gouveia_map
 ```
 

@@ -86,7 +86,7 @@ leg_elecs <- read_csv("../../_data/2024/ma_leg_two_party_2008_2024.csv")
 margin_model <- stan_glm(dem_margin ~ PVI_N + incumbent_status + pres_elec,
                          data=leg_elecs,
                          family=gaussian(link="identity"),
-                         refresh=0)
+                         refresh=0, seed=1234)
 
 NUMS_TO_WORDS = rev(c(
     `&`='and',

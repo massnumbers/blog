@@ -95,7 +95,7 @@ district_map <-
    tm_basemap("OpenStreetMap")
 )
 
-tmap_leaflet(district_map)
+district_map
 ```
 
 We can see by looking at the individual precinct-level results that

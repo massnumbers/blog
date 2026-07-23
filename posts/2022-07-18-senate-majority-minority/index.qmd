@@ -326,6 +326,7 @@ large enough percentage of a particular minority group to allow for
 election of a candidate of choice by that minority group.
 
 ```{r district-map-setup}
+tmap_mode("view")
 color_list_1 <- viridis(5)
 group_colors_1 <- c(Black_and_Hispanic=color_list_1[4],
                     Black=color_list_1[1],
@@ -363,7 +364,7 @@ senate_map <- function(sen_dist, sen_pcts) {
 sen_3 <- senate_geometry(3)
 sen_pcts_3 <- senate_precincts(3)
 sen_3_map <- senate_map(sen_3, sen_pcts_3)
-tmap_leaflet(sen_3_map)
+sen_3_map
 ```
 
 ```{r summarize-districts}
@@ -457,7 +458,7 @@ with Gomez from the City Council.
 sen_19 <- senate_geometry(19)
 sen_pcts_19 <- senate_precincts(19)
 sen_19_map <- senate_map(sen_19, sen_pcts_19)
-tmap_leaflet(sen_19_map)
+sen_19_map
 ```
 
 ```{r sen-first-essex}
@@ -488,7 +489,7 @@ Methuen (Eunice Zeigler).
 sen_29 <- senate_geometry(29)
 sen_pcts_29 <- senate_precincts(29)
 sen_29_map <- senate_map(sen_29, sen_pcts_29)
-tmap_leaflet(sen_29_map)
+sen_29_map
 ```
 
 ```{r sen-second-suffolk}
@@ -520,7 +521,7 @@ minority group.
 sen_34 <- senate_geometry(34)
 sen_pcts_34 <- senate_precincts(34)
 sen_34_map <- senate_map(sen_34, sen_pcts_34)
-tmap_leaflet(sen_34_map)
+sen_34_map
 ```
 
 ```{r sen-spn-summary}
@@ -552,7 +553,7 @@ sen_pcts_30 <- senate_precincts(30) %>%
     st_make_valid()
     
 sen_30_map <- senate_map(sen_30, (sen_pcts_30 %>% filter(Ward != "1")))
-tmap_leaflet(sen_30_map)
+sen_30_map
 ```
 ```{r sen-1st-suffolk-summary}
 summary_table(summarize_dist(sen_pcts_30), "First Suffolk District Demographics")
@@ -573,7 +574,7 @@ voting age population of around 23%.
 sen_26 <- senate_geometry(26)
 sen_pcts_26 <- senate_precincts(26)
 sen_26_map <- senate_map(sen_26, sen_pcts_26)
-tmap_leaflet(sen_26_map)
+sen_26_map
 ```
 
 ```{r sen-m-and-s-summary}

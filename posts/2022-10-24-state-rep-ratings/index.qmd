@@ -86,8 +86,8 @@ ma_leg <- read_csv("../../_data/2020/ma_leg_two_party_2008_2021_pvi.csv") %>%
     mutate(dem_win = if_else(dem_percent > 0.5, 1, 0)) %>%
     filter(!is_special)
 
-bm2 <- stan_glm(dem_win ~ PVI_N + incumbent_status + pres_year, data=ma_leg, family=binomial(link="logit"), refresh=0)
-blm2 <- stan_glm(dem_percent ~ PVI_N + incumbent_status + pres_year, data=ma_leg, family=gaussian(link="identity"), refresh=0)
+bm2 <- stan_glm(dem_win ~ PVI_N + incumbent_status + pres_year, data=ma_leg, family=binomial(link="logit"), refresh=0, seed=1234)
+blm2 <- stan_glm(dem_percent ~ PVI_N + incumbent_status + pres_year, data=ma_leg, family=gaussian(link="identity"), refresh=0, seed=1234)
 ```
 
 ```{r infer-races}

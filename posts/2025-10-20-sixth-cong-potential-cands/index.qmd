@@ -119,7 +119,7 @@ senate_map <-
      tm_text("district") +
      tm_basemap("OpenStreetMap"))
 
-tmap_leaflet(senate_map)
+senate_map
 ```
 
 The 3rd Essex, 1st Essex and Middlesex, and 2nd Essex State Senate
@@ -180,7 +180,7 @@ rep_map <-
      tm_text("district") +
      tm_basemap("OpenStreetMap"))
 
-tmap_leaflet(rep_map)
+rep_map
 ```
 
 There are 15 State Representative districts fully contained in the 6th
@@ -241,7 +241,7 @@ gov_council_map <-
      tm_text("district") +
      tm_basemap("OpenStreetMap"))
 
-tmap_leaflet(gov_council_map)
+gov_council_map
 ```
 
 While the 5th Governor's Council District of Eunice Zeigler
