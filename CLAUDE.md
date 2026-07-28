@@ -68,6 +68,15 @@ Social metadata (Open Graph, Twitter cards) is generated automatically by Quarto
 - **formattable** — formatted numeric display
 - **rstanarm** — Bayesian regression (used in some analytical posts)
 
+## Campaign Finance Information 
+
+Campaign finance information for legislative candidates can be looked up using the OCPF CLI:
+
+```
+uvx ocpf race --help 
+uvx ocpf filer --help 
+```
+
 ## Content Domain
 
 Posts analyze Massachusetts election data: precinct-level results, PVI (Partisan Voter Index) ratings, census demographics, state legislative district maps, campaign finance (OCPF) data, and special election previews. Data files use MA-specific terminology (VTDs, precincts, state rep/senate districts, congressional districts).
