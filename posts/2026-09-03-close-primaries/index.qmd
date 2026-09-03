@@ -1,0 +1,641 @@
+---
+title: "Six primaries on the bubble"
+description: |
+    One sitting state senator has been unseated, another trails by three
+    ballots, and a third incumbent survived by 159 votes. A town-by-town
+    look at the closest contests of the September 1 primary.
+author: Brent Benson
+date: 2026-09-03
+image: /images/close-primaries-2026.png
+---
+
+```{r setup, include=FALSE}
+
+library(tidyverse)
+library(gt)
+library(sf)
+library(tmap)
+library(glue)
+
+tmap_mode("view")
+```
+
+```{r}
+# Municipality-level results for the six races inside three points, frozen from
+# the ma-election-db AP snapshot taken 2026-09-03 10:54 UTC. The upstream feed
+# mutates in place, so the numbers here are pinned to that moment.
+results_raw <- read_csv("close_primaries_2026_09_03.csv", show_col_types = FALSE)
+
+# Ballot names as they appear in the state's candidate listings, mapped to the
+# forms these candidates are commonly known by. Only the differences are listed;
+# every other name passes through unchanged.
+display_names <- tribble(
+    ~candidate_name,             ~display_name,
+    "William N. Brownsberger",   "Will Brownsberger",
+    "John Barrett",              "John Barrett III",
+    "Gabriel Boomer Amaral",     'Gabriel "Boomer" Amaral',
+    "Michael F. Rush",           "Michael Rush",
+    "Persis S. Yu",              "Persis Yu",
+    "Edward M. Pacheco",         "Edward Pacheco",
+    "Stephen J. Medeiros",       "Stephen Medeiros",
+    "Lora L. Wondolowski",       "Lora Wondolowski",
+    "Corinne Ellen Coryat",      "Corinne Coryat",
+    "Andrew J. Fitch",           "Andrew Fitch"
+)
+
+office_short <- function(office) {
+    if_else(office == "State Representative", "House", "Senate")
+}
+
+#' Surname only, for map legends where the full name will not fit.
+#' Drops a generational suffix first so "John Barrett III" gives "Barrett".
+last_name <- function(full_name) {
+    full_name |>
+        str_remove("\\s+(Jr\\.?|Sr\\.?|I{2,3}|IV)$") |>
+        word(-1)
+}
+
+results <- results_raw |>
+    left_join(display_names, by = "candidate_name") |>
+    mutate(
+        display_name = coalesce(display_name, candidate_name),
+        label        = str_glue("{display_name} ({party_abbr}-{candidate_city_town})"),
+        label_inc    = if_else(is_incumbent == 1, str_c(label, "*"), as.character(label))
+    )
+
+# One row per candidate per race, with the race total and each candidate's share.
+race_cand <- results |>
+    group_by(
+        office, district, district_display, party, party_abbr,
+        race_call_status, eevp,
+        display_name, label, label_inc, candidate_city_town, is_incumbent
+    ) |>
+    summarize(votes = sum(votes), .groups = "drop") |>
+    group_by(office, district, party) |>
+    mutate(
+        race_votes = sum(votes),
+        pct        = votes / race_votes
+    ) |>
+    ungroup()
+
+# One row per race: the top two candidates, the margin, and AP's call status.
+race_summary <- race_cand |>
+    arrange(office, district, party, desc(votes)) |>
+    group_by(office, district, district_display, party, party_abbr,
+             race_call_status, eevp) |>
+    summarize(
+        leader       = first(label_inc),
+        leader_votes = first(votes),
+        leader_pct   = first(pct),
+        runner       = nth(label_inc, 2),
+        runner_votes = nth(votes, 2),
+        runner_pct   = nth(pct, 2),
+        total_votes  = first(race_votes),
+        .groups      = "drop"
+    ) |>
+    mutate(
+        margin_votes = leader_votes - runner_votes,
+        margin_pts   = (leader_pct - runner_pct) * 100,
+        # "&" rather than "and" purely to keep the summary table narrow enough
+        # to fit without horizontal scrolling.
+        # The party is already evident from the candidate designations, so it is
+        # left off the race name here.
+        race         = str_glue(
+            "{str_replace_all(district_display, ' and ', ' & ')} ",
+            "{office_short(office)}"
+        )
+    ) |>
+    arrange(margin_pts)
+
+# The feed stamps snapshots in UTC; report the date in Eastern time, since
+# that is the day a Massachusetts reader counts it as.
+snapshot_date <- as.Date(
+    as.POSIXct(max(results_raw$snapshot_time), format = "%Y-%m-%dT%H:%M:%OS", tz = "UTC"),
+    tz = "America/New_York"
+)
+
+# "%d" zero-pads, so build the day from the integer to get "September 3".
+snapshot_time <- str_glue(
+    "{format(snapshot_date, '%B')} {as.integer(format(snapshot_date, '%d'))}"
+)
+```
+
+Massachusetts held its state primary on September 1. We will look at
+six state legislative races that have a margin of less than three
+percentage points, including the Suffolk and Middlesex State Senate
+race where incumbent Will Brownsberger (D-Belmont) is behind by three
+ballots out of more than 24,000 ballots cast.
+
+The numbers in this post come from the Associated Press
+municipality-level feed, snapshotted on **`r snapshot_time`**, with
+expected vote between 98% and 99% in each race. None of these results
+are official, no municipality has certified, and AP still lists three
+of the six as too early to call.
+
+## The six closest races
+
+```{r}
+#| column: page
+#| tbl-cap: |
+#|   *The six September 1 primaries decided by less than three points, closest
+#|   first. Vote shares are of the two-candidate total. An asterisk marks the
+#|   incumbent.*
+
+race_summary |>
+    mutate(
+        leader_disp = str_glue(
+            "{format(leader_votes, big.mark = ',')} ",
+            "({sprintf('%.1f', leader_pct * 100)}%)"
+        ),
+        runner_disp = str_glue(
+            "{format(runner_votes, big.mark = ',')} ",
+            "({sprintf('%.1f', runner_pct * 100)}%)"
+        ),
+        status = if_else(race_call_status == "Called", "Called", "Too early")
+    ) |>
+    select(race, leader, leader_disp, runner, runner_disp,
+           margin_votes, margin_pts, status) |>
+    gt() |>
+    cols_label(
+        race         = "Race",
+        leader       = "Leading",
+        leader_disp  = "Votes",
+        runner       = "Trailing",
+        runner_disp  = "Votes",
+        margin_votes = "Margin",
+        margin_pts   = "Pts",
+        status       = "AP"
+    ) |>
+    fmt_number(margin_votes, decimals = 0) |>
+    fmt_number(margin_pts, decimals = 2) |>
+    cols_align(align = "right", columns = c(leader_disp, runner_disp)) |>
+    tab_style(
+        style = cell_text(weight = "bold"),
+        locations = cells_body(columns = c(margin_votes, margin_pts))
+    ) |>
+    tab_source_note(md(glue(
+        "*\\* Incumbent. Source: Associated Press municipality-level returns, ",
+        "snapshot of {snapshot_time}.*"
+    ))) |>
+    tab_options(
+        table.font.size = px(12),
+        table.width = pct(100)
+    )
+```
+
+Three of the six close legislative primaries were challenges to an
+incumbent.  Senator Will Brownsberger (D-Belmont) is down by 3 votes
+in a race that is too close to call, Senator Michael Rush (D-Boston)'s
+challenger Persis Yu (D-Boston) has been declared the winner, and
+Representative John Barrett (D-North Adams) has been declared the
+winner by 159 votes.
+
+```{r}
+# Precinct geometry and the precinct-to-district mapping, both from mapoli.
+prec_geom <- read_sf(paste0(
+    "https://raw.githubusercontent.com/bwbensonjr/mapoli/refs/heads/master/",
+    "gis/geojson/wardsprecincts2022.geojson"
+))
+
+city_town_geom <- read_sf(paste0(
+    "https://raw.githubusercontent.com/bwbensonjr/mapoli/refs/heads/master/",
+    "gis/geojson/city_town_2024.geojson"
+)) |>
+    select(city_town, geometry) |>
+    st_make_valid()
+
+prec_dist <- read_csv(
+    paste0("https://raw.githubusercontent.com/bwbensonjr/mapoli/refs/heads/master/",
+           "pvi/ma_precincts_districts_pres_2024.csv"),
+    show_col_types = FALSE
+) |>
+    select(city_town, ward, precinct, State_Rep, State_Senate)
+
+#' Town-level geometry for a district.
+#'
+#' A municipality wholly inside the district gets its full municipal boundary;
+#' one split between districts gets only its in-district precincts, dissolved.
+#' The whole-town path matters because a handful of precincts split by the 2021
+#' redistricting (Walpole 2A and 5A, for instance) carry ward/precinct codes
+#' that the 2022 precinct shapefile does not have.
+district_towns <- function(office_name, district_name) {
+    dist_col <- if (office_name == "State Representative") "State_Rep" else "State_Senate"
+
+    in_dist <- prec_dist |>
+        filter(.data[[dist_col]] == district_name)
+
+    town_split <- in_dist |>
+        count(city_town, name = "n_in_district") |>
+        left_join(
+            prec_dist |>
+                filter(city_town %in% in_dist$city_town) |>
+                count(city_town, name = "n_total"),
+            by = "city_town"
+        ) |>
+        mutate(is_split = n_in_district < n_total)
+
+    whole_geom <- city_town_geom |>
+        filter(city_town %in% town_split$city_town[!town_split$is_split])
+
+    split_towns <- town_split$city_town[town_split$is_split]
+
+    split_geom <- in_dist |>
+        filter(city_town %in% split_towns) |>
+        inner_join(prec_geom, by = c("city_town", "ward", "precinct")) |>
+        st_as_sf() |>
+        st_make_valid() |>
+        group_by(city_town) |>
+        summarize(.groups = "drop") |>
+        st_make_valid() |>
+        st_buffer(dist = 10) |>
+        st_buffer(dist = -10)
+
+    bind_rows(whole_geom, split_geom) |>
+        st_make_valid() |>
+        st_simplify(dTolerance = 25)
+}
+
+#' Town-level two-candidate results for one race, in wide form.
+race_towns <- function(office_name, district_name, party_name) {
+    ord <- race_cand |>
+        filter(office == office_name, district == district_name, party == party_name) |>
+        arrange(desc(votes))
+
+    lead_name <- ord$display_name[1]
+    run_name  <- ord$display_name[2]
+
+    results |>
+        filter(office == office_name, district == district_name, party == party_name) |>
+        select(city_town, display_name, votes) |>
+        pivot_wider(names_from = display_name, values_from = votes, values_fill = 0) |>
+        mutate(
+            lead_votes = .data[[lead_name]],
+            run_votes  = .data[[run_name]],
+            total      = lead_votes + run_votes,
+            lead_pct   = lead_votes / total,
+            run_pct    = run_votes / total,
+            margin     = (lead_pct - run_pct) * 100,
+            margin_clamped = pmax(pmin(margin, 40), -40)
+        ) |>
+        select(city_town, lead_votes, run_votes, total, lead_pct, run_pct,
+               margin, margin_clamped) |>
+        arrange(desc(total))
+}
+
+# Purple-green diverging scale: green towns went to the race leader, purple to
+# the trailing candidate. Deliberately not red/blue -- five of these six races
+# are contests between two candidates of the same party.
+margin_palette <- c(
+    "#762A83", "#9970AB", "#C2A5CF", "#E7D4E8", "#F7F7F7",
+    "#D9F0D3", "#A6DBA0", "#5AAE61", "#1B7837"
+)
+
+#' Interactive town map for one race, filled by two-candidate margin.
+race_map <- function(office_name, district_name, party_name) {
+    ord <- race_cand |>
+        filter(office == office_name, district == district_name, party == party_name) |>
+        arrange(desc(votes))
+
+    lead_name <- ord$display_name[1]
+    run_name  <- ord$display_name[2]
+
+    town_results <- race_towns(office_name, district_name, party_name) |>
+        mutate(
+            lead_disp   = str_glue("{lead_votes} ({sprintf('%.1f', lead_pct * 100)}%)"),
+            run_disp    = str_glue("{run_votes} ({sprintf('%.1f', run_pct * 100)}%)"),
+            margin_disp = str_glue(
+                "{if_else(margin >= 0, lead_name, run_name)} ",
+                "+{sprintf('%.1f', abs(margin))}"
+            )
+        )
+
+    town_geom <- district_towns(office_name, district_name) |>
+        left_join(town_results, by = "city_town")
+
+    town_centroids <- town_geom |>
+        st_centroid() |>
+        select(city_town, geometry)
+
+    popup_vars <- c("City/Town" = "city_town")
+    popup_vars[lead_name]  <- "lead_disp"
+    popup_vars[run_name]   <- "run_disp"
+    popup_vars["Margin"]   <- "margin_disp"
+    popup_vars["Total"]    <- "total"
+
+    (tm_shape(town_geom) +
+        tm_polygons(
+            fill       = "margin_clamped",
+            fill.scale = tm_scale_continuous(
+                values   = margin_palette,
+                limits   = c(-40, 40),
+                midpoint = 0,
+                ticks    = c(-40, -20, 0, 20, 40),
+                # Negative is the trailing candidate's end of the scale, so the
+                # surnames sit at their own extremes and name the two colors.
+                labels   = c(
+                    str_glue("{last_name(run_name)} 40+"), "20", "even", "20",
+                    str_glue("{last_name(lead_name)} 40+")
+                )
+            ),
+            fill.legend = tm_legend(title = "Margin\n(points)"),
+            fill_alpha  = 0.7,
+            popup.vars  = popup_vars
+        ) +
+        tm_shape(town_centroids) +
+        tm_text("city_town", size = 0.8) +
+        tm_basemap("OpenStreetMap"))
+}
+
+#' Municipality vote table for one race, with a district total row.
+race_table <- function(office_name, district_name, party_name) {
+    ord <- race_cand |>
+        filter(office == office_name, district == district_name, party == party_name) |>
+        arrange(desc(votes))
+
+    lead_name <- ord$display_name[1]
+    run_name  <- ord$display_name[2]
+
+    town_results <- race_towns(office_name, district_name, party_name)
+
+    totals <- town_results |>
+        summarize(
+            city_town  = "District total",
+            lead_votes = sum(lead_votes),
+            run_votes  = sum(run_votes),
+            total      = sum(total)
+        ) |>
+        mutate(
+            lead_pct = lead_votes / total,
+            run_pct  = run_votes / total,
+            margin   = (lead_pct - run_pct) * 100
+        )
+
+    bind_rows(town_results |> select(-margin_clamped), totals) |>
+        # Margin in votes as well as points: in races this close, the raw vote
+        # gap in each municipality is what actually adds up to the result.
+        mutate(margin_votes = lead_votes - run_votes) |>
+        select(city_town, lead_votes, lead_pct, run_votes, run_pct,
+               margin_votes, margin, total) |>
+        gt() |>
+        cols_label(
+            city_town    = "City/Town",
+            lead_votes   = "Votes",
+            lead_pct     = "%",
+            run_votes    = "Votes",
+            run_pct      = "%",
+            margin_votes = "Votes",
+            margin       = "Pts",
+            total        = "Total"
+        ) |>
+        tab_spanner(label = lead_name, columns = c(lead_votes, lead_pct)) |>
+        tab_spanner(label = run_name, columns = c(run_votes, run_pct)) |>
+        tab_spanner(label = "Margin", columns = c(margin_votes, margin)) |>
+        fmt_number(c(lead_votes, run_votes, total), decimals = 0) |>
+        fmt_percent(c(lead_pct, run_pct), decimals = 1) |>
+        fmt_number(margin_votes, decimals = 0) |>
+        fmt_number(margin, decimals = 1) |>
+        tab_style(
+            style = list(cell_text(weight = "bold"), cell_fill(color = "#f0f0f0")),
+            locations = cells_body(rows = city_town == "District total")
+        ) |>
+        tab_options(
+            table.font.size = px(13),
+            table.width = pct(100)
+        )
+}
+```
+
+## Suffolk and Middlesex Senate: 3 votes
+
+```{r}
+#| column: body-outset
+#| fig-cap: |
+#|   *Suffolk and Middlesex Senate Democratic primary. Click a municipality
+#|   for its vote totals.*
+
+race_map("State Senate", "Suffolk and Middlesex", "Democratic")
+```
+
+Will Brownsberger has represented this district since 2012 after
+serving five years as a Representative in the House and chairs the
+Senate's Judiciary Committee. Daniel Lander is a first-time candidate
+from the Fenway neighborhood of Boston and is a former senior policy
+adviser to Boston Mayor Michelle Wu. Lander ran against the Beacon
+Hill status quo, but geographical affiliation seems to have played a
+role as well, with Brownsberger's base in suburban Belmont, while
+roughly half the district's votes are cast in Boston and Cambridge.
+
+Brownsberger carried exactly one municipality—Belmont, where he
+lives—but he carried it by 37.8 points, a 2,181-vote cushion out of
+5,767 cast. Lander won everywhere else: Boston by 21 points, Cambridge
+by 7, and Watertown, the district's second-largest vote center, by 175
+votes—very close to a tie. AP's count as of this snapshot has Lander
+ahead by three votes out of 24,261—a margin of one hundredth of a
+percentage point.
+
+The lead has moved more than once. The
+[Watertown News](https://watertownmanews.com/2026/09/02/state-senate-race-heading-to-recount-brownsberger-holds-narrow-lead/)
+and [Boston.com](https://www.boston.com/news/politics/2026/09/02/razor-thin-margin-separates-state-sen-brownsberger-and-former-wu-aide-lander-setting-up-possible-recount/)
+have both described the race as headed for a recount. No Republican filed here, so the
+recount decides the seat.
+
+```{r}
+#| column: body-outset
+#| tbl-cap: |
+#|   *Suffolk and Middlesex Senate Democratic primary, by municipality.*
+
+race_table("State Senate", "Suffolk and Middlesex", "Democratic")
+```
+
+## Ninth Bristol House: 14 votes
+
+```{r}
+#| column: body-outset
+#| fig-cap: |
+#|   *Ninth Bristol House Democratic primary.*
+
+race_map("State Representative", "Ninth Bristol", "Democratic")
+```
+
+Eight-term Democrat Christopher Markey (D-Dartmouth) stepped down as
+State Representative to run for Bristol County District Attorney and
+will face Republican Seth Aitken (R-Swansea) in November. Two
+Dartmouth Democrats—Edward Pacheco, a bartender and transit manager,
+and Stephen Medeiros, who works in South Coast real estate—competed to
+replace him. Both campaigned against three large proposed housing
+developments that would push Dartmouth past the 10% affordable-housing
+threshold in state law [New Bedford
+Light](https://newbedfordlight.org/pacheco-inches-past-medeiros-in-democratic-primary-for-9th-bristol/).
+
+The district consists of Dartmouth, which cast 4,142 of the 4,924
+votes, and a small slice of New Bedford. Both municipalities were
+nearly tied—Pacheco won Dartmouth by 22 votes, Medeiros took the New
+Bedford precincts by 8—which is how a race ends up 14 votes
+apart. This is one of only two of the six races where the winner will
+be competing against a candidate from the other party in November, in
+this case Republican Chester Tam of Dartmouth who won his party's
+nomination unopposed.
+
+```{r}
+#| column: body-outset
+#| tbl-cap: |
+#|   *Ninth Bristol House Democratic primary, by municipality.*
+
+race_table("State Representative", "Ninth Bristol", "Democratic")
+```
+
+## First Franklin House: 98 votes
+
+```{r}
+#| column: body-outset
+#| fig-cap: |
+#|   *First Franklin House Democratic primary. This is the largest of the six
+#|   districts—18 municipalities, most of them very small.*
+
+race_map("State Representative", "First Franklin", "Democratic")
+```
+
+The First Franklin has been vacant since January, when Natalie Blais
+resigned to take an administrative post at UMass Amherst. Lora
+Wondolowski, president of the Greenfield City Council and founding
+executive director of the Massachusetts League of Environmental
+Voters, faced Corinne Coryat of Deerfield, who had been Blais's
+legislative aide. Housing was the central issue of the campaign, and
+both candidates were
+[pressed on it](https://recorder.com/2026/08/26/wondolowski-coryat-housing-debate/)
+in the closing weeks.
+
+The eighteen towns of the district stretch from Montague and
+Greenfield west to hill towns like Monroe, Hawley, and Rowe that cast
+fewer than 100 votes each. Coryat carried 10 of the 18 municipalities,
+including her own Deerfield by 17 points, but Wondolowski won the two
+largest towns of Montague and Greenfield, which provided a third of
+the district's votes, leading to an overall margin of 98
+votes. Wondolowski will face independent Amy Lavallee (I-Whately) in
+November.
+
+```{r}
+#| column: body-outset
+#| tbl-cap: |
+#|   *First Franklin House Democratic primary, by municipality.*
+
+race_table("State Representative", "First Franklin", "Democratic")
+```
+
+## First Bristol and Plymouth Senate: 84 votes
+
+```{r}
+#| column: body-outset
+#| fig-cap: |
+#|   *First Bristol and Plymouth Senate Republican primary.*
+
+race_map("State Senate", "First Bristol and Plymouth", "Republican")
+```
+
+This is the one Republican primary on the list. Gabriel "Boomer"
+Amaral of Fall River—who came close to winning the Fall River
+mayoralty in 2025—beat Manny Silva of Somerset, a teacher's aide and
+retired IT specialist, for the right to challenge Senate Ways and Means
+Chair Michael Rodrigues, the Westport Democrat who has held the seat
+since 2011.
+
+The map is a clean split between Amaral's city and Silva's suburbs.
+Amaral took Fall River by 666 votes and added smaller wins in
+Westport, Freetown, and a tiny three-vote edge in Lakeville. Silva won
+everywhere else: Somerset by 322, Swansea by 224, and Rochester
+by 186.
+
+```{r}
+#| column: body-outset
+#| tbl-cap: |
+#|   *First Bristol and Plymouth Senate Republican primary, by municipality.*
+
+race_table("State Senate", "First Bristol and Plymouth", "Republican")
+```
+
+## Norfolk and Suffolk Senate: 653 votes
+
+```{r}
+#| column: body-outset
+#| fig-cap: |
+#|   *Norfolk and Suffolk Senate Democratic primary.*
+
+race_map("State Senate", "Norfolk and Suffolk", "Democratic")
+```
+
+Michael Rush has held this senate seat since 2011, after serving eight
+years in the House, and had not faced a primary or general
+election opponent since 2012. Persis Yu, a Hyde Park attorney who has
+spent her career litigating on behalf of student loan borrowers and
+consumers—first at the National Consumer Law Center, then at Protect
+Borrowers—ran against Rush and has been called as the winner by the
+AP.
+
+Yu dominated in the Boston neighborhoods of West Roxbury, Roslindale,
+Hyde Park, and Jamaica Plain which provided over half of the primary
+votes. Rush won in all of the surrounding municipalities of Dedham,
+Norwood, Walpole, and Westwood. Rush declined Yu's [invitations to debate](https://www.electpersis.com/news/state-senate-challenger-calls-for-debate),
+a decision that drew attention through a campaign in which he was
+[largely absent from candidate forums](https://www.universalhub.com/2026/state-senator-had-tough-choice-yesterday-attend-forum-whose-date-he).
+There is no Republican filer for the seat and Yu will likely be sworn
+in as senator in January, 2027.
+
+```{r}
+#| column: body-outset
+#| tbl-cap: |
+#|   *Norfolk and Suffolk Senate Democratic primary, by municipality.*
+
+race_table("State Senate", "Norfolk and Suffolk", "Democratic")
+```
+
+## First Berkshire House: 159 votes
+
+```{r}
+#| column: body-outset
+#| fig-cap: |
+#|   *First Berkshire House Democratic primary.*
+
+race_map("State Representative", "First Berkshire", "Democratic")
+```
+
+Representative John Barrett (D-North Adams) is the one challenged
+incumbent in this group who has been declared as the winner. Barrett
+was mayor of North Adams for 26 years before winning this House seat
+in a 2017 special election after the death of Rep. Gailanne Cariddi
+(D-North Adams), and his career in Berkshire politics goes back
+to 1984. Andrew Fitch (D-North Adams), vice president of the North
+Adams City Council since 2023, ran his first campaign for state office
+against him.
+
+The two [agreed on most of the district's
+problems](https://www.nepm.org/regional-news/2026-08-27/1st-berkshire-race-pits-incumbent-rep-against-north-adams-city-councilor)—the
+regional economy, housing, an aging population—and differed mainly on
+whether experience or a fresh perspective was the better answer.
+Barrett ran on his record of steering state money to the northern
+Berkshires. He won 11 of the district's 13
+municipalities. Williamstown, home to Williams College, went to Fitch
+by 20 points and 309 votes.  Barrett survived because he broke even in
+the North Adams they share, winning it by 44 votes, and getting 
+double-digit margins in Adams, Cheshire, Hinsdale, and the hill
+towns. There will be no Republican on the ballot in November.
+
+```{r}
+#| column: body-outset
+#| tbl-cap: |
+#|   *First Berkshire House Democratic primary, by municipality.*
+
+race_table("State Representative", "First Berkshire", "Democratic")
+```
+
+## Possible recounts
+
+Massachusetts allows a candidate to request a recount by petition, and
+recounts are likely to be requested in the closest of these races.
+
+*Results in this post come from the Associated Press municipality-level
+feed as collected in
+[ma-election-db](https://github.com/bwbensonjr/ma-election-db), snapshot
+of `r snapshot_time`. District geography and precinct assignments come
+from [mapoli](https://github.com/bwbensonjr/mapoli). The frozen data
+file used here is
+[`close_primaries_2026_09_03.csv`](close_primaries_2026_09_03.csv).*
