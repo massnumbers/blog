@@ -1,0 +1,33 @@
+table_id,subject,data_class,geography
+1imKtQ0D7zJNbECIauYmRy4Ze-5o1u5r0yHZ469Y,Warren 2012 Senate margin vs prior Dem performance by municipality,election-result,municipality
+1Kfs4Y1IpoPsQhC7SQdHkpItDvSMCx_Sx0hfnPuM,Municipal partisan lean from averaged 2006-2012 statewide races,derived-index,municipality
+1Tz0rWIHm5ICHujtja2FoRkDP1iru5GI70GdgbAE,Partisan ranking of MA House districts (2013 seating),derived-index,state-rep-district
+1_mq12Ew1dCwkw0TamHKnlCePGXet2ZdhBAliNag,Partisan ranking of MA Congressional districts,derived-index,congressional-district
+1X-Atx72YsyPZ5_C9SFy0rvofN0NhupPL-chxkyI,First Suffolk Senate district vs Collins/Forry House districts,district-geometry,state-rep-district
+1yOfQUuUmGW_JmBJ0xQoXg7rzvuQts_Aw-WmOdz8,First Suffolk Senate district boundary detail,district-geometry,state-senate-district
+1BI83pCOR9B072Qer33AP0Tw4yHOmRRAm6Cf23aw,First Suffolk backing table,election-result,precinct
+13z7T3CzHv8KRbT3z9Wi52-imSmuXOom3T2yr2Zc,First Suffolk 2013 Dem primary precinct results (Dorchester Reporter),election-result,precinct
+1dTQlxPkO94dd5lxE5sL6Fs6D66XF5Bkxhjn4bfQ,Markey vs Warren vote-share margin across 351 municipalities,election-result,municipality
+132ioBeYzVhxw8zANa2yH_DWPpPdiUi88Iu2HeVI,16th Worcester House seat backing table,election-result,precinct
+1xc1aAZKOXSe46ws8Wlrk45gt9c6cYyWpIngdLVQ,16th Worcester House seat backing table (second),election-result,precinct
+145mKZ1F1X2wpH6QCbfTlVz9y8b-QAehZkVaTN6c,2nd Hampden and Hampshire special election district profile,derived-index,municipality
+18TEI8WNtnyADNPzpoY2SpTc-QQDo05JSDz24o2o,2013 Boston mayoral preliminary precinct winners,election-result,boston-precinct
+1JoDSYF7vaRjk86TvUDL5aiu_h14pIBKXdhkK7JE,Boston mayoral precinct backing table,election-result,boston-precinct
+1zBfjVCB16qdkMFnlt6fufIChTYpF1-TnEsgYe_k,5th Congressional primary candidate district overlap,district-geometry,state-rep-district
+1LS40Q6GOSh_1WPiow1vnCMFpvdOGLdu2ZlKMwA4,Suffolk University poll ward-by-ward crosstabs (Walsh/Connolly),poll-crosstab,boston-ward
+1IR8sygpAf7DXpzZhseYrfyDd6UVRIOrIGxmkSUw,5th Middlesex Senate district overlap with seven House districts,district-geometry,state-rep-district
+1srQkE8-DjAGYBng46q8l1vC_Mj1K2-Zm6tkBVts,Suffolk University poll ward-by-ward endorsement effect,poll-crosstab,boston-ward
+1oY4dYL_lXUnfAXKiCwjF8sfNbMQYmCeQVziiMQLf,5th Middlesex 2014 special district overview,district-geometry,state-senate-district
+1vReKtagR3HCDjZEVBt0alFfkDxYYmHh5qkepNyhd,5th Middlesex precinct-by-precinct Democratic projection from Obama 2008/2012,derived-projection,precinct
+1Jojf7fbpaH8vWBXGNluBo2IVB2SQZFjbEv9Md6C_,5th Middlesex April 2014 special precinct margins vs projection,derived-projection,precinct
+13ktkhgEIon7fxqIC0BNzgnaktvIhQgwyKwPGK0mU,Updated partisan ranking of MA State Rep districts (2014),derived-index,state-rep-district
+1Wmf2piOPp2qAEXXPxGacn2QnvpabE8xP6c0r4Nds,2014 State Senate races contested/uncontested overview,candidate-roster,state-senate-district
+1eYCAStq8erHv6l80rj4uNW5YimCl2RYslIeuf7MU,Massachusetts tornado history by county,external-dataset,county
+1JxPgasJNST0QetCcXhobS2Wf5kwwSWyjXBlWxjZI,2nd Plymouth and Bristol precinct PVI (Brady vs Diehl),derived-index,precinct
+12fUG7DAFn6PfjpEBQfl6sQ0t7CO3Xc07egI-lAr5,1st Suffolk and Middlesex geography and fundraising,derived-index,precinct
+1rRB6uJLalsHCY7R1ZM9kfHmIkj1MaS3zMZUufFLg,Bristol and Norfolk precinct PVI,derived-index,precinct
+17y_Yh1_nIZndtIG49JHMg9U4oErs7eZszZnbmhHm,2017 Boston mayoral preliminary results by neighborhood,election-result,boston-neighborhood
+15uNiS9zskaKiIMzGde-igYLMVdBxI_cWhgtaMnZo,2017 Boston mayoral preliminary results by precinct,election-result,boston-precinct
+1XMhXwkKl9Bm6Zm8mtKFSNEUOJ52r9Zxtb2xnetmC,Worcester and Middlesex special election district PVI,derived-index,precinct
+1XszEjZQhUWsTh3eAa3JI-7CtoXQOZIrAGWLO9Z29,3rd Congressional district profile and primary candidates,derived-index,municipality
+1JX4TSP6eXnppTimtyQY5l3YFgIuVBAAOsY13EwKU,Municipal partisan shift 2008 Obama-McCain vs 2016 Clinton-Trump,election-result,municipality

@@ -1,0 +1,4 @@
+post,tier,conversion_min,image_min,map_min,review_min,total_min,notes
+2013-01-03-senate-candidate-qualifications,n/a-prose-only,2,0,0,6,8,"scripted conversion was correct first time; the only hand work was confirming the 160-row HTML table rendered as a markdown table and reading the post against the original"
+2014-08-12-governor-polling-averages,n/a-image-only,2,4,0,5,11,"10 images localized by script; hand work was choosing the listing image and verifying no remote reference survived"
+2012-11-18-house-district-partisan-ranking,3-declared-missing,2,3,34,7,46,"map time is almost entirely the reconstruction attempt: joining district PVI to 2012 geometry, then testing the result against the figures in the prose, finding the contradiction, and writing the declared-missing note"

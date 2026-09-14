@@ -1,0 +1,9 @@
+post_date,post_url,snapshots,snapshot_used,iframe_present,map_image_present,verdict
+2012-11-13,https://massnumbers.blogspot.com/2012/11/warren-realizes-largest-gains-in.html,8,20181120050851,True,False,iframe url only - no rendered map
+2012-11-15,https://massnumbers.blogspot.com/2012/11/how-democratic-or-republic-is-my-town.html,ERR,,,,cdx error: TimeoutError
+2012-11-18,https://massnumbers.blogspot.com/2012/11/a-partisan-ranking-of-massachusetts.html,7,20231123032611,True,False,iframe url only - no rendered map
+2013-01-31,https://massnumbers.blogspot.com/2013/01/from-capuanos-7th-to-tierneys-6th.html,ERR,,,,cdx error: HTTPError
+2013-04-04,https://massnumbers.blogspot.com/2013/04/a-look-at-first-suffolk-state-senate.html,3,20231123034334,True,False,iframe url only - no rendered map
+2013-05-02,https://massnumbers.blogspot.com/2013/05/an-interactive-map-of-first-suffolk.html,1,20231121212013,True,False,iframe url only - no rendered map
+2013-07-01,https://massnumbers.blogspot.com/2013/07/democrats-ed-markey-and-elizabeth.html,2,20231121195455,True,False,iframe url only - no rendered map
+2013-08-06,https://massnumbers.blogspot.com/2013/08/knapik-resignation-leaves-opening-for.html,2,20231121184020,True,False,iframe url only - no rendered map
