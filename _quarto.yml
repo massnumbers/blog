@@ -5,9 +5,12 @@ project:
     - "*.qmd"
     - "posts/**/*.qmd"
   resources:
-    - CNAME
-    - .nojekyll
-    - images/
+    # Leading slashes anchor these at the project root. Unanchored patterns
+    # match at any depth, which sweeps copies living under _sources/ and
+    # .claude/worktrees/ into docs/.
+    - /CNAME
+    - /.nojekyll
+    - /images/
 
 website:
   title: "Mass. Numbers"
