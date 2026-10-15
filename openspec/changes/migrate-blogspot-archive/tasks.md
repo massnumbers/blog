@@ -37,8 +37,8 @@
 
 ## 6. Stage two, declared-missing posts
 
-- [ ] 6.1 Port 2013-04-04 and 2013-09-26, keeping their surviving static screenshots and replacing each lost embed with a declared-missing note describing what the original map showed; verify the post passes `verify_fidelity.py` and contains no `TODO-TIER`, then commit each post separately
-- [ ] 6.2 Port 2013-07-23 and 2014-06-03 with declared-missing notes, verify as in 6.1, and commit each post separately
+- [x] 6.1 Port 2013-04-04 and 2013-09-26, keeping their surviving static screenshots and replacing each lost embed with a declared-missing note describing what the original map showed; verify the post passes `verify_fidelity.py` and contains no `TODO-TIER`, then commit each post separately
+- [x] 6.2 Port 2013-07-23 and 2014-06-03 with declared-missing notes, verify as in 6.1, and commit each post separately
 
 ## 7. Stage two, reconstruction candidates
 
