@@ -5,6 +5,8 @@ description: |
 listing:
   contents: posts
   sort: "date desc"
+  exclude:
+    categories: "blogger-archive"
   type: default
   feed:
     type: partial

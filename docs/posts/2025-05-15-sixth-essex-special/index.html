@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -15,10 +15,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -43,10 +46,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-3793a09f727e4166f67f05d827e59191.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-095245003bb80bd2beb305de39928752.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-03fc58d16c0b6fe351029511ff6b7e64.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-4301180ec57a511573728d1b1f464189.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -133,6 +136,10 @@ gtag('config', 'G-GS463FHP94', { 'anonymize_ip': true});
   <li class="nav-item">
     <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../archive.html"> 
+<span class="menu-text">Archive</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../about.html"> 
@@ -704,7 +711,7 @@ Margin Difference
 <td class="gt_row gt_right" headers="point_diff_24">28</td>
 <td class="gt_row gt_right" headers="point_diff">9</td>
 <td class="gt_row gt_left" headers="DUPE_COLUMN_PLT"><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="113.39pt" height="14.17pt" viewbox="0 0 113.39 14.17">
-<g class="svglite"><defs> </defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs> <clippath id="cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw=="> <rect x="0.00" y="0.00" width="113.39" height="14.17"></rect> </clippath></defs><g clip-path="url(#cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="113.39" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="52.85" y="0.89" width="45.16" height="12.40" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #A020F0;"></rect><line x1="52.85" y1="14.17" x2="52.85" y2="0.0000000000000016" style="stroke-width: 1.07; stroke-linecap: butt;"></line></g></g>
+<g class="svglite"><defs> <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs> <clippath id="cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw=="> <rect x="0.00" y="0.00" width="113.39" height="14.17"></rect> </clippath></defs><g clip-path="url(#cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="113.39" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="52.85" y="0.89" width="45.16" height="12.40" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #A020F0;"></rect><line x1="52.85" y1="14.17" x2="52.85" y2="0.0000000000000016" style="stroke-width: 1.07; stroke-linecap: butt;"></line></g></g>
 </svg></td>
 </tr>
 <tr class="even">
@@ -717,7 +724,7 @@ Margin Difference
 <td class="gt_row gt_right" headers="point_diff_24">31</td>
 <td class="gt_row gt_right" headers="point_diff">7</td>
 <td class="gt_row gt_left" headers="DUPE_COLUMN_PLT"><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="113.39pt" height="14.17pt" viewbox="0 0 113.39 14.17">
-<g class="svglite"><defs> </defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs> <clippath id="cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw=="> <rect x="0.00" y="0.00" width="113.39" height="14.17"></rect> </clippath></defs><g clip-path="url(#cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="113.39" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="52.85" y="0.89" width="34.80" height="12.40" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #A020F0;"></rect><line x1="52.85" y1="14.17" x2="52.85" y2="0.0000000000000016" style="stroke-width: 1.07; stroke-linecap: butt;"></line></g></g>
+<g class="svglite"><defs> <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs> <clippath id="cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw=="> <rect x="0.00" y="0.00" width="113.39" height="14.17"></rect> </clippath></defs><g clip-path="url(#cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="113.39" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="52.85" y="0.89" width="34.80" height="12.40" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #A020F0;"></rect><line x1="52.85" y1="14.17" x2="52.85" y2="0.0000000000000016" style="stroke-width: 1.07; stroke-linecap: butt;"></line></g></g>
 </svg></td>
 </tr>
 <tr class="odd">
@@ -730,7 +737,7 @@ Margin Difference
 <td class="gt_row gt_right" headers="point_diff_24">41</td>
 <td class="gt_row gt_right" headers="point_diff">11</td>
 <td class="gt_row gt_left" headers="DUPE_COLUMN_PLT"><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="113.39pt" height="14.17pt" viewbox="0 0 113.39 14.17">
-<g class="svglite"><defs> </defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs> <clippath id="cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw=="> <rect x="0.00" y="0.00" width="113.39" height="14.17"></rect> </clippath></defs><g clip-path="url(#cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="113.39" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="52.85" y="0.89" width="51.48" height="12.40" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #A020F0;"></rect><line x1="52.85" y1="14.17" x2="52.85" y2="0.0000000000000016" style="stroke-width: 1.07; stroke-linecap: butt;"></line></g></g>
+<g class="svglite"><defs> <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs> <clippath id="cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw=="> <rect x="0.00" y="0.00" width="113.39" height="14.17"></rect> </clippath></defs><g clip-path="url(#cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="113.39" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="52.85" y="0.89" width="51.48" height="12.40" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #A020F0;"></rect><line x1="52.85" y1="14.17" x2="52.85" y2="0.0000000000000016" style="stroke-width: 1.07; stroke-linecap: butt;"></line></g></g>
 </svg></td>
 </tr>
 <tr class="even">
@@ -743,7 +750,7 @@ Margin Difference
 <td class="gt_row gt_right" headers="point_diff_24">50</td>
 <td class="gt_row gt_right" headers="point_diff">10</td>
 <td class="gt_row gt_left" headers="DUPE_COLUMN_PLT"><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="113.39pt" height="14.17pt" viewbox="0 0 113.39 14.17">
-<g class="svglite"><defs> </defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs> <clippath id="cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw=="> <rect x="0.00" y="0.00" width="113.39" height="14.17"></rect> </clippath></defs><g clip-path="url(#cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="113.39" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="52.85" y="0.89" width="50.00" height="12.40" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #A020F0;"></rect><line x1="52.85" y1="14.17" x2="52.85" y2="0.0000000000000016" style="stroke-width: 1.07; stroke-linecap: butt;"></line></g></g>
+<g class="svglite"><defs> <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs> <clippath id="cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw=="> <rect x="0.00" y="0.00" width="113.39" height="14.17"></rect> </clippath></defs><g clip-path="url(#cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="113.39" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="52.85" y="0.89" width="50.00" height="12.40" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #A020F0;"></rect><line x1="52.85" y1="14.17" x2="52.85" y2="0.0000000000000016" style="stroke-width: 1.07; stroke-linecap: butt;"></line></g></g>
 </svg></td>
 </tr>
 <tr class="odd">
@@ -756,7 +763,7 @@ Margin Difference
 <td class="gt_row gt_right" headers="point_diff_24">40</td>
 <td class="gt_row gt_right" headers="point_diff">9</td>
 <td class="gt_row gt_left" headers="DUPE_COLUMN_PLT"><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="113.39pt" height="14.17pt" viewbox="0 0 113.39 14.17">
-<g class="svglite"><defs> </defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs> <clippath id="cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw=="> <rect x="0.00" y="0.00" width="113.39" height="14.17"></rect> </clippath></defs><g clip-path="url(#cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="113.39" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="52.85" y="0.89" width="44.24" height="12.40" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #A020F0;"></rect><line x1="52.85" y1="14.17" x2="52.85" y2="0.0000000000000016" style="stroke-width: 1.07; stroke-linecap: butt;"></line></g></g>
+<g class="svglite"><defs> <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs> <clippath id="cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw=="> <rect x="0.00" y="0.00" width="113.39" height="14.17"></rect> </clippath></defs><g clip-path="url(#cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="113.39" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="52.85" y="0.89" width="44.24" height="12.40" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #A020F0;"></rect><line x1="52.85" y1="14.17" x2="52.85" y2="0.0000000000000016" style="stroke-width: 1.07; stroke-linecap: butt;"></line></g></g>
 </svg></td>
 </tr>
 <tr class="even">
@@ -769,7 +776,7 @@ Margin Difference
 <td class="gt_row gt_right" headers="point_diff_24">26</td>
 <td class="gt_row gt_right" headers="point_diff">9</td>
 <td class="gt_row gt_left" headers="DUPE_COLUMN_PLT"><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="113.39pt" height="14.17pt" viewbox="0 0 113.39 14.17">
-<g class="svglite"><defs> </defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs> <clippath id="cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw=="> <rect x="0.00" y="0.00" width="113.39" height="14.17"></rect> </clippath></defs><g clip-path="url(#cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="113.39" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="52.85" y="0.89" width="45.42" height="12.40" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #A020F0;"></rect><line x1="52.85" y1="14.17" x2="52.85" y2="0.0000000000000016" style="stroke-width: 1.07; stroke-linecap: butt;"></line></g></g>
+<g class="svglite"><defs> <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs> <clippath id="cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw=="> <rect x="0.00" y="0.00" width="113.39" height="14.17"></rect> </clippath></defs><g clip-path="url(#cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="113.39" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="52.85" y="0.89" width="45.42" height="12.40" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #A020F0;"></rect><line x1="52.85" y1="14.17" x2="52.85" y2="0.0000000000000016" style="stroke-width: 1.07; stroke-linecap: butt;"></line></g></g>
 </svg></td>
 </tr>
 <tr class="odd">
@@ -782,7 +789,7 @@ Margin Difference
 <td class="gt_row gt_right" headers="point_diff_24">42</td>
 <td class="gt_row gt_right" headers="point_diff">1</td>
 <td class="gt_row gt_left" headers="DUPE_COLUMN_PLT"><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="113.39pt" height="14.17pt" viewbox="0 0 113.39 14.17">
-<g class="svglite"><defs> </defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs> <clippath id="cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw=="> <rect x="0.00" y="0.00" width="113.39" height="14.17"></rect> </clippath></defs><g clip-path="url(#cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="113.39" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="52.85" y="0.89" width="6.99" height="12.40" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #A020F0;"></rect><line x1="52.85" y1="14.17" x2="52.85" y2="0.0000000000000016" style="stroke-width: 1.07; stroke-linecap: butt;"></line></g></g>
+<g class="svglite"><defs> <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs> <clippath id="cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw=="> <rect x="0.00" y="0.00" width="113.39" height="14.17"></rect> </clippath></defs><g clip-path="url(#cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="113.39" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="52.85" y="0.89" width="6.99" height="12.40" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #A020F0;"></rect><line x1="52.85" y1="14.17" x2="52.85" y2="0.0000000000000016" style="stroke-width: 1.07; stroke-linecap: butt;"></line></g></g>
 </svg></td>
 </tr>
 <tr class="even">
@@ -795,7 +802,7 @@ Margin Difference
 <td class="gt_row gt_right" headers="point_diff_24">53</td>
 <td class="gt_row gt_right" headers="point_diff">8</td>
 <td class="gt_row gt_left" headers="DUPE_COLUMN_PLT"><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="113.39pt" height="14.17pt" viewbox="0 0 113.39 14.17">
-<g class="svglite"><defs> </defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs> <clippath id="cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw=="> <rect x="0.00" y="0.00" width="113.39" height="14.17"></rect> </clippath></defs><g clip-path="url(#cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="113.39" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="52.85" y="0.89" width="38.37" height="12.40" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #A020F0;"></rect><line x1="52.85" y1="14.17" x2="52.85" y2="0.0000000000000016" style="stroke-width: 1.07; stroke-linecap: butt;"></line></g></g>
+<g class="svglite"><defs> <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs> <clippath id="cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw=="> <rect x="0.00" y="0.00" width="113.39" height="14.17"></rect> </clippath></defs><g clip-path="url(#cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="113.39" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="52.85" y="0.89" width="38.37" height="12.40" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #A020F0;"></rect><line x1="52.85" y1="14.17" x2="52.85" y2="0.0000000000000016" style="stroke-width: 1.07; stroke-linecap: butt;"></line></g></g>
 </svg></td>
 </tr>
 <tr class="odd">
@@ -808,7 +815,7 @@ Margin Difference
 <td class="gt_row gt_right" headers="point_diff_24">24</td>
 <td class="gt_row gt_right" headers="point_diff">10</td>
 <td class="gt_row gt_left" headers="DUPE_COLUMN_PLT"><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="113.39pt" height="14.17pt" viewbox="0 0 113.39 14.17">
-<g class="svglite"><defs> </defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs> <clippath id="cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw=="> <rect x="0.00" y="0.00" width="113.39" height="14.17"></rect> </clippath></defs><g clip-path="url(#cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="113.39" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="52.85" y="0.89" width="47.25" height="12.40" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #A020F0;"></rect><line x1="52.85" y1="14.17" x2="52.85" y2="0.0000000000000016" style="stroke-width: 1.07; stroke-linecap: butt;"></line></g></g>
+<g class="svglite"><defs> <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs> <clippath id="cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw=="> <rect x="0.00" y="0.00" width="113.39" height="14.17"></rect> </clippath></defs><g clip-path="url(#cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="113.39" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="52.85" y="0.89" width="47.25" height="12.40" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #A020F0;"></rect><line x1="52.85" y1="14.17" x2="52.85" y2="0.0000000000000016" style="stroke-width: 1.07; stroke-linecap: butt;"></line></g></g>
 </svg></td>
 </tr>
 <tr class="even">
@@ -821,7 +828,7 @@ Margin Difference
 <td class="gt_row gt_right" headers="point_diff_24">28</td>
 <td class="gt_row gt_right" headers="point_diff">10</td>
 <td class="gt_row gt_left" headers="DUPE_COLUMN_PLT"><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="113.39pt" height="14.17pt" viewbox="0 0 113.39 14.17">
-<g class="svglite"><defs> </defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs> <clippath id="cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw=="> <rect x="0.00" y="0.00" width="113.39" height="14.17"></rect> </clippath></defs><g clip-path="url(#cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="113.39" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="52.85" y="0.89" width="47.32" height="12.40" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #A020F0;"></rect><line x1="52.85" y1="14.17" x2="52.85" y2="0.0000000000000016" style="stroke-width: 1.07; stroke-linecap: butt;"></line></g></g>
+<g class="svglite"><defs> <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs> <clippath id="cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw=="> <rect x="0.00" y="0.00" width="113.39" height="14.17"></rect> </clippath></defs><g clip-path="url(#cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="113.39" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="52.85" y="0.89" width="47.32" height="12.40" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #A020F0;"></rect><line x1="52.85" y1="14.17" x2="52.85" y2="0.0000000000000016" style="stroke-width: 1.07; stroke-linecap: butt;"></line></g></g>
 </svg></td>
 </tr>
 <tr class="odd">
@@ -834,7 +841,7 @@ Margin Difference
 <td class="gt_row gt_right" headers="point_diff_24">39</td>
 <td class="gt_row gt_right" headers="point_diff">−10</td>
 <td class="gt_row gt_left" headers="DUPE_COLUMN_PLT"><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="113.39pt" height="14.17pt" viewbox="0 0 113.39 14.17">
-<g class="svglite"><defs> </defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs> <clippath id="cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw=="> <rect x="0.00" y="0.00" width="113.39" height="14.17"></rect> </clippath></defs><g clip-path="url(#cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="113.39" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="5.95" y="0.89" width="46.89" height="12.40" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #A020F0;"></rect><line x1="52.85" y1="14.17" x2="52.85" y2="0.0000000000000016" style="stroke-width: 1.07; stroke-linecap: butt;"></line></g></g>
+<g class="svglite"><defs> <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs> <clippath id="cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw=="> <rect x="0.00" y="0.00" width="113.39" height="14.17"></rect> </clippath></defs><g clip-path="url(#cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="113.39" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="5.95" y="0.89" width="46.89" height="12.40" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #A020F0;"></rect><line x1="52.85" y1="14.17" x2="52.85" y2="0.0000000000000016" style="stroke-width: 1.07; stroke-linecap: butt;"></line></g></g>
 </svg></td>
 </tr>
 <tr class="even">
@@ -847,7 +854,7 @@ Margin Difference
 <td class="gt_row gt_right" headers="point_diff_24">24</td>
 <td class="gt_row gt_right" headers="point_diff">2</td>
 <td class="gt_row gt_left" headers="DUPE_COLUMN_PLT"><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="113.39pt" height="14.17pt" viewbox="0 0 113.39 14.17">
-<g class="svglite"><defs> </defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs> <clippath id="cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw=="> <rect x="0.00" y="0.00" width="113.39" height="14.17"></rect> </clippath></defs><g clip-path="url(#cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="113.39" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="52.85" y="0.89" width="8.95" height="12.40" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #A020F0;"></rect><line x1="52.85" y1="14.17" x2="52.85" y2="0.0000000000000016" style="stroke-width: 1.07; stroke-linecap: butt;"></line></g></g>
+<g class="svglite"><defs> <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs> <clippath id="cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw=="> <rect x="0.00" y="0.00" width="113.39" height="14.17"></rect> </clippath></defs><g clip-path="url(#cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="113.39" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="52.85" y="0.89" width="8.95" height="12.40" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #A020F0;"></rect><line x1="52.85" y1="14.17" x2="52.85" y2="0.0000000000000016" style="stroke-width: 1.07; stroke-linecap: butt;"></line></g></g>
 </svg></td>
 </tr>
 <tr class="odd">
@@ -860,7 +867,7 @@ Margin Difference
 <td class="gt_row gt_right" headers="point_diff_24">36</td>
 <td class="gt_row gt_right" headers="point_diff">8</td>
 <td class="gt_row gt_left" headers="DUPE_COLUMN_PLT"><svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="113.39pt" height="14.17pt" viewbox="0 0 113.39 14.17">
-<g class="svglite"><defs> </defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs> <clippath id="cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw=="> <rect x="0.00" y="0.00" width="113.39" height="14.17"></rect> </clippath></defs><g clip-path="url(#cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="113.39" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="52.85" y="0.89" width="36.27" height="12.40" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #A020F0;"></rect><line x1="52.85" y1="14.17" x2="52.85" y2="0.0000000000000016" style="stroke-width: 1.07; stroke-linecap: butt;"></line></g></g>
+<g class="svglite"><defs> <style type="text/css">    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }    .svglite g.glyphgroup path {      fill: inherit;      stroke: none;    }  </style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs> <clippath id="cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw=="> <rect x="0.00" y="0.00" width="113.39" height="14.17"></rect> </clippath></defs><g clip-path="url(#cpMC4wMHwxMTMuMzl8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="113.39" height="14.17" style="stroke-width: 0.00; stroke: none;"></rect><rect x="52.85" y="0.89" width="36.27" height="12.40" style="stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #A020F0;"></rect><line x1="52.85" y1="14.17" x2="52.85" y2="0.0000000000000016" style="stroke-width: 1.07; stroke-linecap: butt;"></line></g></g>
 </svg></td>
 </tr>
 </tbody><tfoot>

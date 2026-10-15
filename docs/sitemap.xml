@@ -2,90 +2,474 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.massnumbers.us/posts/welcome/index.html</loc>
-    <lastmod>2026-04-23T18:07:19.839Z</lastmod>
+    <lastmod>2026-04-24T22:42:59.713Z</lastmod>
   </url>
   <url>
     <loc>https://www.massnumbers.us/posts/2026-07-22-first-suffolk/index.html</loc>
-    <lastmod>2026-07-22T14:45:55.873Z</lastmod>
+    <lastmod>2026-09-08T00:50:23.740Z</lastmod>
   </url>
   <url>
     <loc>https://www.massnumbers.us/posts/2025-06-12-third-bristol-special/index.html</loc>
-    <lastmod>2026-07-23T20:21:49.235Z</lastmod>
+    <lastmod>2026-09-08T00:50:23.739Z</lastmod>
   </url>
   <url>
     <loc>https://www.massnumbers.us/posts/2025-01-12-vote-shifts/index.html</loc>
-    <lastmod>2026-04-23T18:07:19.835Z</lastmod>
+    <lastmod>2026-04-24T22:42:59.712Z</lastmod>
   </url>
   <url>
     <loc>https://www.massnumbers.us/posts/2024-09-14-primary-results/index.html</loc>
-    <lastmod>2026-04-23T18:07:19.834Z</lastmod>
+    <lastmod>2026-04-24T22:42:59.711Z</lastmod>
   </url>
   <url>
     <loc>https://www.massnumbers.us/posts/2023-04-28-suffolk-10th-special/index.html</loc>
-    <lastmod>2026-04-23T18:07:19.834Z</lastmod>
+    <lastmod>2026-04-24T22:42:59.711Z</lastmod>
   </url>
   <url>
     <loc>https://www.massnumbers.us/posts/2022-11-11-state-legislative-results/index.html</loc>
-    <lastmod>2026-07-23T20:21:49.231Z</lastmod>
+    <lastmod>2026-09-08T00:50:23.739Z</lastmod>
   </url>
   <url>
     <loc>https://www.massnumbers.us/posts/2022-10-31-state-senate-ratings/index.html</loc>
-    <lastmod>2026-07-23T20:21:49.230Z</lastmod>
+    <lastmod>2026-09-08T00:50:23.739Z</lastmod>
   </url>
   <url>
     <loc>https://www.massnumbers.us/posts/2022-09-10-lg-regional-candidates/index.html</loc>
-    <lastmod>2026-07-23T20:21:49.228Z</lastmod>
+    <lastmod>2026-09-08T00:50:23.737Z</lastmod>
   </url>
   <url>
-    <loc>https://www.massnumbers.us/posts/2022-07-18-senate-majority-minority/index.html</loc>
-    <lastmod>2026-07-23T20:21:49.227Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.massnumbers.us/index.html</loc>
-    <lastmod>2026-07-23T20:21:49.225Z</lastmod>
-  </url>
-  <url>
-    <loc>https://www.massnumbers.us/about.html</loc>
-    <lastmod>2026-04-23T18:07:19.689Z</lastmod>
+    <loc>https://www.massnumbers.us/posts/2022-08-21-announcing-new-mass-numbers/index.html</loc>
+    <lastmod>2026-10-15T14:37:21.334Z</lastmod>
   </url>
   <url>
     <loc>https://www.massnumbers.us/posts/2022-07-05-state-senate-primary-preview/index.html</loc>
-    <lastmod>2026-07-23T20:21:49.226Z</lastmod>
+    <lastmod>2026-09-08T00:50:23.735Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2020-08-29-markey-kennedy-polls/index.html</loc>
+    <lastmod>2026-10-15T14:37:21.328Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2018-11-01-towns-partisan-shift/index.html</loc>
+    <lastmod>2026-10-15T14:37:39.500Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2017-12-06-fitchburg-tran-special-election/index.html</loc>
+    <lastmod>2026-10-15T14:37:21.312Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2017-11-06-walsh-victory-boston-mayor/index.html</loc>
+    <lastmod>2026-10-15T15:01:54.695Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2016-10-17-legislative-race-simulations/index.html</loc>
+    <lastmod>2026-10-15T14:37:21.306Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2016-02-27-clinton-super-tuesday/index.html</loc>
+    <lastmod>2026-10-15T14:37:21.300Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2015-11-01-brady-diehl-senate-race/index.html</loc>
+    <lastmod>2026-10-15T15:20:23.976Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2015-01-22-senate-leadership-committees-2015/index.html</loc>
+    <lastmod>2026-10-15T14:39:40.302Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2014-11-06-governor-polls-less-biased/index.html</loc>
+    <lastmod>2026-10-15T14:29:51.678Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2014-11-03-midterm-survey-methods/index.html</loc>
+    <lastmod>2026-10-15T14:29:51.677Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2014-10-31-ivr-live-internet-polls/index.html</loc>
+    <lastmod>2026-10-15T14:29:51.676Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2014-10-16-governor-polling-methodology/index.html</loc>
+    <lastmod>2026-10-15T14:29:51.674Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2014-09-30-governor-general-election-polling/index.html</loc>
+    <lastmod>2026-10-15T14:29:51.672Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2014-09-16-rise-of-internet-polling/index.html</loc>
+    <lastmod>2026-10-15T14:29:51.671Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2014-09-09-democratic-governor-regional-strengths/index.html</loc>
+    <lastmod>2026-10-15T14:29:51.670Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2014-09-05-primary-prediction-contest-model/index.html</loc>
+    <lastmod>2026-10-15T14:29:51.667Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2014-08-12-governor-polling-averages/index.html</loc>
+    <lastmod>2026-10-15T13:43:27.065Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2014-07-24-immigrant-children-housing-support/index.html</loc>
+    <lastmod>2026-10-15T14:29:51.662Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2014-06-03-state-senate-races-2014/index.html</loc>
+    <lastmod>2026-10-15T14:51:08.343Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2014-05-23-governor-poll-name-recognition-flat/index.html</loc>
+    <lastmod>2026-10-15T14:29:51.661Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2014-04-06-april-special-election-surprise/index.html</loc>
+    <lastmod>2026-10-15T14:30:03.645Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2014-03-17-ncaa-final-four-seeds/index.html</loc>
+    <lastmod>2026-10-15T14:29:51.656Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2014-03-02-march-special-state-primaries/index.html</loc>
+    <lastmod>2026-10-15T14:29:51.650Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2014-02-12-democratization-of-data-journalism/index.html</loc>
+    <lastmod>2026-10-15T14:29:51.647Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2014-01-21-candaras-senate-seat/index.html</loc>
+    <lastmod>2026-10-15T14:29:51.646Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2013-11-07-walsh-endorsements-outcome/index.html</loc>
+    <lastmod>2026-10-15T14:05:19.373Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2013-11-01-walsh-overtakes-connolly/index.html</loc>
+    <lastmod>2026-10-15T14:08:28.999Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2013-10-16-fifth-middlesex-district-overlap/index.html</loc>
+    <lastmod>2026-10-15T14:05:19.522Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2013-09-30-ma5-democratic-primary/index.html</loc>
+    <lastmod>2026-10-15T14:05:19.523Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2013-09-19-boston-mayor-polling-connolly-leads/index.html</loc>
+    <lastmod>2026-10-15T14:05:19.359Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2013-09-02-union-membership-increasing/index.html</loc>
+    <lastmod>2026-10-15T14:05:19.356Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2013-08-12-open-state-rep-seats/index.html</loc>
+    <lastmod>2026-10-15T14:50:20.018Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2013-07-23-sixteenth-worcester-special/index.html</loc>
+    <lastmod>2026-10-15T14:50:20.015Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2013-07-01-markey-warren-statewide-paths/index.html</loc>
+    <lastmod>2026-10-15T14:05:19.523Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2013-06-24-markey-gomez-polling-overview/index.html</loc>
+    <lastmod>2026-10-15T14:05:19.339Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2013-06-11-markey-gomez-slight-tightening/index.html</loc>
+    <lastmod>2026-10-15T14:05:19.335Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2013-06-04-markey-lead-women-voters/index.html</loc>
+    <lastmod>2026-10-15T14:05:19.332Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2013-05-09-markey-gomez-poll-differences/index.html</loc>
+    <lastmod>2026-10-15T14:05:19.328Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2013-05-01-markey-lynch-polling-result/index.html</loc>
+    <lastmod>2026-10-15T14:05:19.326Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2013-04-24-first-suffolk-fundraising/index.html</loc>
+    <lastmod>2026-10-15T14:49:56.268Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2013-04-04-first-suffolk-senate-race/index.html</loc>
+    <lastmod>2026-10-15T14:49:56.289Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2013-03-07-senate-name-recognition/index.html</loc>
+    <lastmod>2026-10-15T14:05:19.309Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2013-01-28-senate-poll-name-familiarity/index.html</loc>
+    <lastmod>2026-10-15T14:05:19.307Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2013-01-09-nfl-playoff-seeding/index.html</loc>
+    <lastmod>2026-10-15T14:05:19.304Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2012-12-20-scott-brown-special-election-position/index.html</loc>
+    <lastmod>2026-10-15T14:05:19.302Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2012-11-18-house-district-partisan-ranking/index.html</loc>
+    <lastmod>2026-10-15T15:22:20.563Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2012-11-13-warren-working-class-gains/index.html</loc>
+    <lastmod>2026-10-15T15:17:15.183Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/archive.html</loc>
+    <lastmod>2026-10-15T13:43:33.994Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/about.html</loc>
+    <lastmod>2026-04-24T22:42:59.644Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/index.html</loc>
+    <lastmod>2026-10-15T13:43:33.994Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2012-11-15-town-partisan-ranking/index.html</loc>
+    <lastmod>2026-10-15T15:15:24.724Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2012-11-26-contested-governor-primaries/index.html</loc>
+    <lastmod>2026-10-15T14:05:19.299Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2013-01-03-senate-candidate-qualifications/index.html</loc>
+    <lastmod>2026-10-15T14:00:20.399Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2013-01-20-patrick-tax-proposal/index.html</loc>
+    <lastmod>2026-10-15T14:05:19.306Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2013-01-31-congressional-district-partisan-ranking/index.html</loc>
+    <lastmod>2026-10-15T15:18:14.087Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2013-03-26-senate-name-recognition-struggle/index.html</loc>
+    <lastmod>2026-10-15T14:05:19.311Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2013-04-22-markey-primary-polling-average/index.html</loc>
+    <lastmod>2026-10-15T14:05:19.313Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2013-04-29-college-educated-voter-awareness/index.html</loc>
+    <lastmod>2026-10-15T14:05:19.325Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2013-05-02-first-suffolk-results-map/index.html</loc>
+    <lastmod>2026-10-15T14:05:19.523Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2013-05-28-independent-turnout-gomez-markey/index.html</loc>
+    <lastmod>2026-10-15T14:05:19.331Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2013-06-05-markey-lead-solidifying/index.html</loc>
+    <lastmod>2026-10-15T14:05:19.334Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2013-06-15-gomez-win-unlikely/index.html</loc>
+    <lastmod>2026-10-15T14:05:19.336Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2013-06-26-markey-gomez-polling-average-result/index.html</loc>
+    <lastmod>2026-10-15T14:05:19.340Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2013-07-18-walsh-regional-support/index.html</loc>
+    <lastmod>2026-10-15T14:05:19.345Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2013-08-06-knapik-resignation-senate-pickup/index.html</loc>
+    <lastmod>2026-10-15T14:05:19.523Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2013-08-22-charlie-baker-name-recognition/index.html</loc>
+    <lastmod>2026-10-15T14:05:19.355Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2013-09-09-state-rep-specials-partisan-rankings/index.html</loc>
+    <lastmod>2026-10-15T14:05:19.358Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2013-09-26-boston-mayoral-precinct-winners/index.html</loc>
+    <lastmod>2026-10-15T14:50:39.226Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2013-10-08-walsh-connolly-regional-strengths/index.html</loc>
+    <lastmod>2026-10-15T14:50:39.206Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2013-10-31-boston-mayor-polling-tie/index.html</loc>
+    <lastmod>2026-10-15T14:05:19.369Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2013-11-04-boston-mayoral-endorsements-effect/index.html</loc>
+    <lastmod>2026-10-15T14:50:39.206Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2013-11-21-independents-baker-2014/index.html</loc>
+    <lastmod>2026-10-15T14:05:19.374Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2014-02-04-governor-polling-name-recognition/index.html</loc>
+    <lastmod>2026-10-15T14:29:51.647Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2014-02-20-governor-polling-known-candidate/index.html</loc>
+    <lastmod>2026-10-15T14:29:51.648Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2014-03-09-fifth-middlesex-likely-blue/index.html</loc>
+    <lastmod>2026-10-15T14:30:03.646Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2014-03-21-governor-polling-unknown-candidates/index.html</loc>
+    <lastmod>2026-10-15T14:29:51.657Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2014-04-17-governor-polls-name-recognition-adjusted/index.html</loc>
+    <lastmod>2026-10-15T14:29:51.659Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2014-05-27-state-rep-partisan-ranking-update/index.html</loc>
+    <lastmod>2026-10-15T15:19:00.801Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2014-06-09-governor-poll-name-recognition-uptick/index.html</loc>
+    <lastmod>2026-10-15T14:29:51.662Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2014-07-28-revere-tornado/index.html</loc>
+    <lastmod>2026-10-15T14:29:51.663Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2014-09-04-legislative-primary-money/index.html</loc>
+    <lastmod>2026-10-15T14:29:51.663Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2014-09-08-democratic-primary-polls/index.html</loc>
+    <lastmod>2026-10-15T14:29:51.669Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2014-09-10-baker-coakley-underperformance/index.html</loc>
+    <lastmod>2026-10-15T14:29:51.670Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2014-09-25-globe-poll-baker-male-support/index.html</loc>
+    <lastmod>2026-10-15T14:29:51.671Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2014-10-13-casino-repeal-coalition/index.html</loc>
+    <lastmod>2026-10-15T14:29:51.673Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2014-10-29-ballot-question-polling/index.html</loc>
+    <lastmod>2026-10-15T14:29:51.675Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2014-11-03-legislative-races-data-supplement/index.html</loc>
+    <lastmod>2026-10-15T14:29:51.677Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2014-11-05-gop-shadow-group-money/index.html</loc>
+    <lastmod>2026-10-15T15:19:00.778Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2015-01-20-boston-olympics-poll/index.html</loc>
+    <lastmod>2026-10-15T14:37:21.295Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2015-03-24-eleventh-worcester-special/index.html</loc>
+    <lastmod>2026-10-15T14:37:21.297Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2016-02-01-special-state-primaries-feb-2016/index.html</loc>
+    <lastmod>2026-10-15T14:37:21.299Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2016-04-10-first-suffolk-middlesex-special-primary/index.html</loc>
+    <lastmod>2026-10-15T14:37:39.499Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2017-10-15-bristol-norfolk-senate-special/index.html</loc>
+    <lastmod>2026-10-15T14:37:39.499Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2017-12-05-worcester-middlesex-senate-special/index.html</loc>
+    <lastmod>2026-10-15T15:01:54.695Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2018-08-31-third-congressional-district-overview/index.html</loc>
+    <lastmod>2026-10-15T14:37:39.499Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2020-03-06-presidential-primary-vote-factors/index.html</loc>
+    <lastmod>2026-10-15T14:37:21.326Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2020-11-14-biden-2020-vs-clinton-2016/index.html</loc>
+    <lastmod>2026-10-15T14:37:21.331Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.massnumbers.us/posts/2022-07-18-senate-majority-minority/index.html</loc>
+    <lastmod>2026-09-08T00:50:23.735Z</lastmod>
   </url>
   <url>
     <loc>https://www.massnumbers.us/posts/2022-08-31-state-rep-primaries/index.html</loc>
-    <lastmod>2026-07-23T20:21:49.228Z</lastmod>
+    <lastmod>2026-09-08T00:50:23.735Z</lastmod>
   </url>
   <url>
     <loc>https://www.massnumbers.us/posts/2022-10-24-state-rep-ratings/index.html</loc>
-    <lastmod>2026-07-23T20:21:49.229Z</lastmod>
+    <lastmod>2026-09-08T00:50:23.738Z</lastmod>
   </url>
   <url>
     <loc>https://www.massnumbers.us/posts/2022-11-03-norfolk-worcester-middlesex/index.html</loc>
-    <lastmod>2026-07-23T20:21:49.230Z</lastmod>
+    <lastmod>2026-09-08T00:50:23.739Z</lastmod>
   </url>
   <url>
     <loc>https://www.massnumbers.us/posts/2023-01-02-town-presidential-voting-history/index.html</loc>
-    <lastmod>2026-04-23T18:07:19.834Z</lastmod>
+    <lastmod>2026-04-24T22:42:59.711Z</lastmod>
   </url>
   <url>
     <loc>https://www.massnumbers.us/posts/2024-08-26-state-primaries/index.html</loc>
-    <lastmod>2026-04-23T18:07:19.834Z</lastmod>
+    <lastmod>2026-04-24T22:42:59.711Z</lastmod>
   </url>
   <url>
     <loc>https://www.massnumbers.us/posts/2024-10-31-competitive-seats/index.html</loc>
-    <lastmod>2026-07-23T20:21:49.233Z</lastmod>
+    <lastmod>2026-09-08T00:50:23.739Z</lastmod>
   </url>
   <url>
     <loc>https://www.massnumbers.us/posts/2025-05-15-sixth-essex-special/index.html</loc>
-    <lastmod>2026-07-23T20:21:49.234Z</lastmod>
+    <lastmod>2026-09-08T00:50:23.739Z</lastmod>
   </url>
   <url>
     <loc>https://www.massnumbers.us/posts/2025-10-20-sixth-cong-potential-cands/index.html</loc>
-    <lastmod>2026-07-23T20:21:49.235Z</lastmod>
+    <lastmod>2026-09-08T00:50:23.740Z</lastmod>
   </url>
   <url>
     <loc>https://www.massnumbers.us/posts/2026-09-03-close-primaries/index.html</loc>
-    <lastmod>2026-09-03T16:26:57.355Z</lastmod>
+    <lastmod>2026-09-08T00:50:23.741Z</lastmod>
   </url>
 </urlset>

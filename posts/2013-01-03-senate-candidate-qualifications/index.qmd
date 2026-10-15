@@ -1,0 +1,126 @@
+---
+title: "What qualifications are advantageous for MA U.S. Senate candidates?"
+description: "A history of open Senate races in Massachusetts since 1926"
+author:
+  - name: Brent Benson
+    url: https://massnumbers.us/brentbenson
+date: 2013-01-03
+categories: [blogger-archive]
+---
+
+::: {.callout-note appearance="simple"}
+Originally published on the [Mass. Numbers Blogger site](https://massnumbers.blogspot.com/2013/01/what-qualifications-are-advantageous.html) on 2013-01-03.
+:::
+
+### A history of open Senate races in Massachusetts since 1926
+
+Senator John Kerry has been nominated by President Obama to succeed Hillary Rodham Clinton as the next U.S. Secretary of State and his confirmation is all but assured. There will be an interim appointment by Governor Deval Patrick, followed by a special election to fill Kerry's Senate seat. New names for possible candidates continue to come in and out of the picture. Recently-defeated Senator Scott Brown is expected to run again for the Republican nomination. Congressman Ed Markey is an early entrant with a great deal of support on the Democratic side.
+
+People who have been mentioned as possible candidates for the seat range from Governors, Senators, and U.S. Representatives, to entrepreneurs, lawyers, and actors. What can we learn from history about the previous occupations and qualifications of successful Massachusetts candidates for the U.S. Senate? While there are examples of candidates without statewide or federal experience to be elected to the Senate, the large majority of successful candidates have statewide or federal-level qualifications, and only one candidate was elected without statewide, federal, state or local qualification since 1926, and that particular candidate had a famous family name and a brother in the White House at the time of his election.
+
+### Qualifications of successful Senate candidates since 1926
+
+Listed here are the Senators for the two Massachusetts U.S. Senate seats elected or appointed since 1926, along with the candidate's qualifications at the time of his or her election or appointment. If you have time, click on the Wikipedia links—there is some fascinating material.
+
+#### Seat 1
+
+- [David I. Walsh](http://en.wikipedia.org/wiki/David_I._Walsh) (D) - 1926 - Governor, Lt. Governor, State Representative
+
+- [Henry Cabot Lodge Jr.](http://en.wikipedia.org/wiki/Henry_Cabot_Lodge,_Jr.) (R) - 1947 - U.S. Senator, State Representative
+
+- [John F. Kennedy](http://en.wikipedia.org/wiki/John_F._Kennedy) (D) - 1953 - U.S. Representative
+
+- [Benjamin Smith](http://en.wikipedia.org/wiki/Benjamin_A._Smith_II) (D) - 1960 (appointed) - Mayor of Gloucester, Gloucester City Council, Gloucester School Committee
+
+- [Ted Kennedy](http://en.wikipedia.org/wiki/Ted_Kennedy) (D) - 1962 - Assistant District Attorney for Suffolk County
+
+- [Paul G. Kirk](http://en.wikipedia.org/wiki/Paul_G._Kirk) (D) - 2009 (appointed) - Chairman of the Democratic National Committee, Lawyer, Consultant
+
+- [Scott Brown](http://en.wikipedia.org/wiki/Scott_Brown) (R) - 2010 - State Senator, State Representative, Wrentham Selectman, Wrentham Assessor
+
+- [Elizabeth Warren](http://en.wikipedia.org/wiki/Elizabeth_Warren) (D) - 2012 - Chair of TARP Congressional Oversight Panel, Harvard Law Professor
+
+#### Seat 2
+
+- [Marcus A. Coolidge](http://en.wikipedia.org/wiki/Marcus_A._Coolidge) (D) - 1931 - Special Envoy to Poland, Mayor of Fitchburg
+
+- [Henry Cabot Lodge Jr.](http://en.wikipedia.org/wiki/Henry_Cabot_Lodge,_Jr.) (R) - 1936 - State Representative
+
+- [Sinclair Weeks](http://en.wikipedia.org/wiki/Sinclair_Weeks) (R) - 1944 (appointed) - Mayor of Newton
+
+- [Leverett Saltonstall](http://en.wikipedia.org/wiki/Leverett_Saltonstall) (R) - 1945 - Governor, Candidate for Lt. Governor
+
+- [Edward Brooke](http://en.wikipedia.org/wiki/Edward_Brooke) (R) - 1966 - Attorney General, Chairman Boston Finance Commission, Candidate for U.S. Representative
+
+- [Paul Tsongas](http://en.wikipedia.org/wiki/Paul_Tsongas) (D) - 1978 - U.S. Representative, Middlesex County Commissioner, Lowell City Councilor
+
+- [John Kerry](http://en.wikipedia.org/wiki/John_Kerry) (D) - 1984 - Lt. Governor, Assistant District Attorney of Middlesex County, Candidate for U.S. Representative
+
+I am most interested in the eventual winner of the special election (rather than the interim appointee), so I will not consider the appointed Senators. Here is a table of the successfully-elected Massachusetts Senators since 1926, showing whether the candidate held statewide, federal, state, or local office before being elected.
+
+| Candidate | Party | Year | SW | Fed | State | Local | Qualifications |
+|---|---|---|---|---|---|---|---|
+| David I. Walsh | D | 1926 | ✓ | | ✓ | | Governor, MA Lt. Governor, State Representative |
+| Marcus A. Coolidge | D | 1931 | | ✓ | | ✓ | Special Envoy to Poland, Mayor of Fitchburg |
+| Henry Cabot Lodge Jr. | R | 1936 | | | ✓ | | State Representative |
+| Leverett Saltonstall | R | 1945 | ✓ | | | | Governor, Candidate for Lt. Governor |
+| Henry Cabot Lodge Jr. | R | 1947 | ✓ | ✓ | | | U.S. Senator, State Representative |
+| John F. Kennedy | D | 1953 | | ✓ | | | U.S. Representative |
+| Ted Kennedy | D | 1962 | | | | | Assistant District Attorney for Suffolk County |
+| Edward Brooke | R | 1966 | ✓ | | | ✓ | Attorney General, Chairman Boston Finance Commission, Candidate for U.S. Representative |
+| Paul Tsongas | D | 1978 | | ✓ | | ✓ | U.S. Representative, Middlesex County Commissioner, Lowell City Councilor |
+| John Kerry | D | 1984 | ✓ | | | | Lt. Governor, Assistant District Attorney of Middlesex County, Candidate for U.S. Representative |
+| Scott Brown | R | 2010 | | | ✓ | ✓ | State Senator, State Representative, Wrentham Selectman, Wrentham Assessor |
+| Elizabeth Warren | D | 2012 | | ✓ | | | Chair of TARP Congressional Oversight Panel, Harvard Law Professor |
+
+I have counted Marcus Coolidge's service as a Special Envoy to Poland, and Elizabeth Warren's service as Chair of the TARP Congressional Oversight Panel as Federal positions, although they were not elected positions. Elizabeth Warren had strong name recognition inside and outside Massachusetts based on her work for the Obama administration.
+
+### Most successful candidates have statewide or federal experience
+
+By these criteria, 9 out of the 12 Senators or 75%, had statewide or federal qualifications before being elected to the Senate. The three candidates without statewide or federal experience were Henry Cabot Lodge Jr. (the first time he ran was elected to the senate in 1936), Ted Kennedy, who only had experience as an Assistant D.A. in Suffolk County before his election, and Scott Brown, who had held local and state office before his surprising victory in the 2010 special election after Kennedy's death.
+
+Eleven of the twelve Senators, or 92% had held a statewide, federal, state or local position at the time of his or her election to the Senate—Ted Kennedy is the only elected Massachusetts Senator since 1926 that did not hold such a position. The strong standing of the Kennedy name in Massachusetts, and an older brother in the White House as President, were enough to win Ted Kennedy 70% of the Democratic Primary vote, and 55% of the general election vote in the 1962 election. Kennedy went on to serve Massachusetts in the U.S. Senate for almost 47 years until his death in 2009.
+
+If we look at the specific job title, rather than categories like statewide and federal, there is not a lot of commonality with this small sample of 12 Senators. The most common job title is Massachusetts State Representative, with 4 of the Senators having held that position. If we look only at the most senior position held, there are two job titles that have more than one holder: Governor and U.S. Representative, with two apiece. Together, these account for one third of the top positions held by our sample of 12 Senators.
+
+#### Ted Kennedy Jr. may not have been the best candidate for Democrats
+
+Ted Kennedy's son, Connecticut lawyer Ted Kennedy Jr., was floated as a possible candidate for the open MA Senate seat, although Kennedy has already indicated that he will not run. Some have said that Kennedy bowing out is a blow to Democrat's hopes to retain the seat, mainly because of the strength of the Kennedy name. While the Kennedy name has shown strength in Massachusetts, Ted Kennedy Jr. would have been in a similar situation to his father as vulnerable to not having any of the standard qualifications of statewide, federal, or state office. The elder Ted Kennedy showed that one can be elected without these qualifications, but it might have been very difficult race against a candidate like Scott Brown who had successfully used "the people's seat" (as opposed to the "Kennedy" seat) message in the 2010 special election. A famous name can be a double-edged sword if the electorate perceives that the candidate is overly-opportunistic or undeserving.
+
+#### Ed Markey is well-qualified by historical standards
+
+[Congressman Ed Markey](http://en.wikipedia.org/wiki/Ed_Markey) holds the distinction as the current favorite as Democratic nominee for the open Senate seat, primarily because he is the only Democrat that has unequivocally said that he will run, but also because he already received the endorsement of Democratic heavyweights Vicky Kennedy and the Democratic Senatorial Campaign Committee. While outgoing Senator John Kerry has been careful not to officially endorse Markey because of his upcoming role as Secretary of State, he has done all he can to indicate his support. It looks like elements of the Democratic Party establishment are attempting to avoid a contentious primary by getting behind a single candidate early in the race. We have shown that [avoiding a primary can be useful for Massachusetts gubernatorial candidates](../2012-11-26-contested-governor-primaries/index.qmd) (especially for Republicans) and the same might hold true in a Senate race.
+
+While Markey has not held statewide office, his qualifications are strong, nevertheless. He is the dean of the Massachusetts congressional delegation having served for 36 years. Before his election to the U.S. House in 1976, Markey served in the Massachusetts House of Representatives for three years.
+
+The challenge for Markey will be to increase his name recognition and to define himself to the Massachusetts electorate in a favorable light. If he does not establish his statewide persona early on in the race, an opponent may be able to get traction with a negative portrayal of Markey, given his blank slate status in the eyes of the electorate.
+
+Markey has a strong progressive record and [indications are](http://www.bostonglobe.com/metro/2012/12/27/rep-markey-run-senate-special-election/dEJDbwYFYhYXPiPYbOmwaI/story.html) that he will use a populist message, not unlike Senator Elizabeth Warren, with a stronger emphasis on clean energy and the environment. While there is little certainty that the general election will be between Scott Brown and Ed Markey, such a race will likely come down to a face off between Scott Brown's name recognition and favorability vs. the populist message and the ground game the Democratic party honed in Elizabeth Warren's defeat of Scott Brown on November 6.
+
+### Worth noting: qualifications don't always guarantee a win
+
+While the evidence shows that strong qualifications are important for U.S. Senate candidates from Massachusetts, it is not always sufficient to guarantee success. The award for the most qualified losing candidate surely belongs to [Elliot Richardson](http://en.wikipedia.org/wiki/Elliot_Richardson) who lost a 1984 Republican Senate primary to businessman Ray Shamie in the election to replace outgoing Senator Paul Tsongas. Shamie went on to lose the general election to John Kerry. The impressive list of qualifications of the Democratic and Republican field are listed below, and the biggest standout is surely Richardson:
+
+- Democratic
+
+- John Kerry - Lt. Governor, Assistant District Attorney of Middlesex County, Candidate for U.S. Representative
+
+- James Shannon - U.S. Representative
+
+- David M. Bartley - Speaker of the MA House of Representatives, MA Secretary of Administration and Finance
+
+- Michael Connolly - MA Secretary of State, State Representative
+
+- Republican
+
+- Ray Shamie - Businessman, Candidate for U.S. Senate
+
+- *Elliot Richardson - U.S. Secretary of Commerce, U.S. Ambassador to the UK, U.S. Attorney General, U.S. Secretary of Defense, U.S. Secretary of Health, Education, and Welfare, U.S. Under Secretary of State, MA Attorney General, Lt. Governor*
+
+Elliot Richardson is one of only two individuals in the history of the United States (the other being George Shultz) who has held four U.S. Federal Cabinet positions. In addition, he was a U.S. Ambassador, Massachusetts Attorney General, and Lt. Governor.
+
+It is surprising that the highly qualified Richardson lost the Republican primary to the less qualified Shamie. Many think that the loss of moderate Republican Richardson to the very conservative Shamie was the beginning of the decline of the moderate GOP in Massachusetts, which often has trouble finding centrist candidates that appeal to Massachusetts independent voters.
+
+### Conclusion
+
+While there have been exceptions, the vast majority of successful U.S. Senate candidates in Massachusetts have held statewide or federal office. Both of the candidates at the top of current consideration—Senator Scott Brown and Congressman Ed Markey—are well-qualified according to this criteria. Despite some recent commentary, indications are that Ted Kennedy Jr.'s lack of experience would have been an issue if he had chosen to pursue the open Senate seat, and it is worth strongly considering a candidates traditional qualifications when evaluating their chances in the upcoming primary and general election.

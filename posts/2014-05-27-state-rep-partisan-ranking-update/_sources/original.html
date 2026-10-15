@@ -1,0 +1,57 @@
+<i>Including a model of Democratic margin and win probability</i><br />
+<span style="font-size: x-small;">by BRENT BENSON</span><br />
+<br />
+There are 160 State Representative Districts in Massachusetts—127 of the seats are held by Democrats, 29 are held by Republicans, and 4 are vacant. This article provides a ranking of all 160 districts from the deepest blue Democratic 6th Suffolk District of Russell Holmes in Boston, to Rep. Brad Jones's GOP stronghold in the 20th Middlesex District. I also provide a regression model that does a good job of explaining the vote margin between Republican vs. Democratic match-ups, using the Obama vote share in the district, and whether there is a Democratic or Republican incumbent in the race.<br />
+<br />
+In <a href="http://massnumbers.blogspot.com/2012/11/a-partisan-ranking-of-massachusetts.html" target="_blank">my first partisan ranking of State Representative districts</a>, I took a simple average of Democratic vs. Republican margins in the district for statewide candidates to determine the ranking. The ranking was somewhat limited by lack of precinct-by-precinct results for all districts. A finer-grained analysis of the Massachusetts towns and districts is made possible by the outstanding&nbsp;<a href="http://electionstats.state.ma.us/" target="_blank">election statistics site</a>&nbsp;published by the Massachusetts Secretary of State and built by&nbsp;<a href="http://adamfriedman.org/" target="_blank">Adam Friedman</a>, which provides precinct-by-precinct results for Massachusetts elections. I was able to look for relationships between historical State Rep. race results, statewide candidate vote margins, and other factors, and found that the best predictors of State Rep. results were President Obama's margin in the district, combined with the State Rep. incumbency status. The resulting regression model allows for rough predictions of vote margins and win probabilities in contested Democrat vs. Republican State Rep. races.<br />
+<br />
+The big takeaways from the model are that Democrats are doing better in GOP-leaning districts, than Republicans are doing in Democratic-leaning districts, and that incumbency means a great deal. An incumbent candidate of either party gets, on average, a 12 point increase in margin compared to a non-incumbent. An open race without an incumbent is the best way to flip a seat as we saw in the 4th Hampden special election on April 1, 2014, where Democrat John Velis was able to win in a district which had been held by Republican Donald Humason for 10 years.<br />
+<br />
+The results are summarized in the following table ordered from most Democratic to most Republican. The table includes the expected Democratic margin in the district for each incumbency case, and then the probability of a Democratic win for each incumbency case.<br />
+<br />
+There is a lot of blue at the top of the table and you need to get down to row 115 before find a district where the model shows a 50/50 race for an open seat—the 10th Worcester District of Democratic Rep. Dennis Rosa. Republicans Shauna O'Connell and Leah Cole have beaten the odds by getting elected in the Democratic leaning 3rd Bristol and 12th Essex Districts, which President Obama won by almost 18 points. On the other side of the coin, Democratic Representatives Colleen Garry, Josh Cutler, and Rhonda Nyman have defied the odds in districts where the President lost by around 8 points and where the model gives an incumbent Democrat a less than 40% chance of winning against a challenging Republican.<br />
+<br />
+<div>
+<a href="https://docs.google.com/spreadsheets/d/13y5sVnaJJsh87Gyo9qoIjkTuhieQ9odle0_PvY1f0OE/edit?usp=sharing" target="_blank">
+<img alt="Partisan ranking of MA State Rep. Districts" src="http://i.imgur.com/wwUBACz.png" />
+</a>
+</div>
+<br />
+Let's take a look at incumbents who have succeeded in unlikely district. In 19 of the 160 districts the incumbent's party is predicted to have a less than 50-50 chance to win the district in an open race. Four of those incumbents are Republicans and 15 are Democrats. All of these Representatives have, at some level, beaten the odds to get elected in a challenging district.<br />
+<br />
+Four of those incumbents—the already mentioned GOP Reps Shaunna O'Connell and Leah Cole, and three Democratic Reps Colleen Garry, Josh Cutler, and Rhonda Nyman—are actually in districts where the regression model predicts average incumbent of their party would lose to a challenger of the other party. It is clear that candidates can, and do, win in unfavorable partisan climates due to factors like a particularly strong campaign, a weak opponent, holding positions associated with the other party, or a particularly long service to the community, among other factors.<br />
+<br />
+<div>
+<img alt="Incumbent Reps with opposite leaning districts" src="http://i.imgur.com/bHjTnnH.png" />
+</div>
+<br />
+The following map allows for interactive exploration of the districts. The shading is based on the probability of a party's win in an open race.
+<br />
+<br />
+<iframe frameborder="no" height="400" scrolling="no" src="https://www.google.com/fusiontables/embedviz?q=select+col0%3E%3E1+from+13ktkhgEIon7fxqIC0BNzgnaktvIhQgwyKwPGK0mU&amp;viz=MAP&amp;h=false&amp;lat=42.1848759120162&amp;lng=-71.86691401171879&amp;t=1&amp;z=8&amp;l=col0%3E%3E1&amp;y=2&amp;tmplt=2&amp;hml=KML" width="640"></iframe><br />
+<b><br /></b>
+
+
+<b>Explanation and analysis</b><br />
+<b><br /></b>The identification of presidential margin and incumbency status as key predictors of State Rep. election results was done using <a href="http://en.wikipedia.org/wiki/Regression_analysis" target="_blank">regression analysis</a>. This table shows the relationship between State Rep. race margin and Presidential race margin (normalized agains the Massachusetts average) for each incumbency status, and also shows the regression line which best approximates the relationship between the variables.<br />
+<br />
+<div>
+<img alt="Contested State Rep margin vs. Presidential results" src="http://i.imgur.com/iS8bjqP.png" />
+</div>
+<br />
+Each point on the regression graph is a line in the table below of the 2010 and 2012 State Representative races which had both a Republican and a Democrat. The analysis ignores third-party and independent candidates and looks only at the two-party vote share and margin. The table is sorted first by a classification as to whether there was a Democratic incumbent, no incumbent, or a Republican incumbent, and then by President Obama's margin in the district (negative for a loss), normalized by subtracting the President's margin for all of Massachusetts. This normalization allows for some kind of comparison between the 2008 results (which are used for the 2010 races) and the 2012 results (used for the 2012 races). The <i>Predicted Margin</i>&nbsp;column shows the State Rep. margin as predicted by the regression line.<br />
+<br />
+<div>
+<a href="https://docs.google.com/spreadsheets/d/1-1Mj3U1SwZvIkXKCM_0eyLwnkz7-DqDhVOggROxwZ50/edit?usp=sharing" target="_blank">
+<img alt="Contested State Rep. Races 2010 2012" src="http://i.imgur.com/mK646g7.png" /></a><br />
+<br />
+<b>Supporting data</b></div>
+<div>
+<br /></div>
+These online documents contain searchable, sortable, and downloadable data used for this analysis:<br />
+<ul>
+<li><a href="https://docs.google.com/spreadsheets/d/13y5sVnaJJsh87Gyo9qoIjkTuhieQ9odle0_PvY1f0OE/edit#gid=1813261438" target="_blank">State Rep. district partisan ranking spreadsheet</a></li>
+<li><a href="https://docs.google.com/spreadsheets/d/1-1Mj3U1SwZvIkXKCM_0eyLwnkz7-DqDhVOggROxwZ50/edit#gid=200655386" target="_blank">Contested State Rep. races results 2010, 2012</a></li>
+<li><a href="https://www.google.com/fusiontables/embedviz?q=select+col0%3E%3E1+from+13ktkhgEIon7fxqIC0BNzgnaktvIhQgwyKwPGK0mU&amp;viz=MAP&amp;h=false&amp;lat=42.1848759120162&amp;lng=-71.86691401171879&amp;t=1&amp;z=8&amp;l=col0%3E%3E1&amp;y=2&amp;tmplt=2&amp;hml=KML" target="_blank">Interactive Map of State Rep. district partisan rankings</a></li>
+</ul>
+<br />

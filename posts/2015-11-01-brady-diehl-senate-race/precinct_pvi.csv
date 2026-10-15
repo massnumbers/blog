@@ -1,0 +1,50 @@
+# PVI by precinct as printed in this post's precinct chart (images/imgur-eDhffJj.png),
+# transcribed 2026-10-15; 46 of 47 values reproduce from electionstats 2008/2012 results within 0.2.
+city_town,ward,precinct,pvi,state_rep_district,state_rep
+Brockton,1,A,23.7,11th Plymouth,Claire D. Cronin
+Brockton,1,B,14.5,11th Plymouth,Claire D. Cronin
+Brockton,1,C,16.8,11th Plymouth,Claire D. Cronin
+Brockton,1,D,6.3,11th Plymouth,Claire D. Cronin
+Brockton,2,A,39.6,9th Plymouth,Michael D. Brady
+Brockton,2,B,35.9,9th Plymouth,Michael D. Brady
+Brockton,2,C,37.9,9th Plymouth,Michael D. Brady
+Brockton,2,D,20.8,9th Plymouth,Michael D. Brady
+Brockton,3,A,24.7,9th Plymouth,Michael D. Brady
+Brockton,3,B,31.6,9th Plymouth,Michael D. Brady
+Brockton,3,C,6.2,9th Plymouth,Michael D. Brady
+Brockton,3,D,6.5,11th Plymouth,Claire D. Cronin
+Brockton,4,A,33.4,9th Plymouth,Michael D. Brady
+Brockton,4,B,21.5,10th Plymouth,Michelle M. Dubois
+Brockton,4,C,17.2,10th Plymouth,Michelle M. Dubois
+Brockton,4,D,18.4,9th Plymouth,Michael D. Brady
+Brockton,5,A,34.3,9th Plymouth,Michael D. Brady
+Brockton,5,B,19.6,10th Plymouth,Michelle M. Dubois
+Brockton,5,C,26.0,10th Plymouth,Michelle M. Dubois
+Brockton,5,D,13.1,10th Plymouth,Michelle M. Dubois
+Brockton,6,A,22.5,10th Plymouth,Michelle M. Dubois
+Brockton,6,B,9.8,10th Plymouth,Michelle M. Dubois
+Brockton,6,C,14.8,10th Plymouth,Michelle M. Dubois
+Brockton,6,D,8.4,10th Plymouth,Michelle M. Dubois
+Brockton,7,A,33.0,9th Plymouth,Michael D. Brady
+Brockton,7,B,27.1,9th Plymouth,Michael D. Brady
+Brockton,7,C,26.2,11th Plymouth,Claire D. Cronin
+Brockton,7,D,15.7,11th Plymouth,Claire D. Cronin
+East Bridgewater,-,1,-5.8,10th Plymouth,Michelle M. Dubois
+East Bridgewater,-,2,-7.6,7th Plymouth,Geoff Diehl
+East Bridgewater,-,3,-5.5,7th Plymouth,Geoff Diehl
+Easton,-,1,-15.2,11th Plymouth,Claire D. Cronin
+Easton,-,2,-2.3,11th Plymouth,Claire D. Cronin
+Halifax,-,1,-4.7,12th Plymouth,"Thomas J. Calter, III"
+Halifax,-,2,-3.8,12th Plymouth,"Thomas J. Calter, III"
+Hanover,-,1,-11.1,5th Plymouth,David F. Decoste
+Hanover,-,2,-8.6,5th Plymouth,David F. Decoste
+Hanover,-,3,-7.5,5th Plymouth,David F. Decoste
+Hanover,-,4,-13.1,5th Plymouth,David F. Decoste
+Hanson,-,1,-7.3,6th Plymouth,Josh S. Cutler
+Hanson,-,2,-4.7,6th Plymouth,Josh S. Cutler
+Hanson,-,3,-5.9,6th Plymouth,Josh S. Cutler
+Plympton,-,1,-6.5,12th Plymouth,"Thomas J. Calter, III"
+Whitman,-,1,-1.5,7th Plymouth,Geoff Diehl
+Whitman,-,2,-5.2,7th Plymouth,Geoff Diehl
+Whitman,-,3,-2.5,7th Plymouth,Geoff Diehl
+Whitman,-,4,-2.7,7th Plymouth,Geoff Diehl

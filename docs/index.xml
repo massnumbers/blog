@@ -10,7 +10,7 @@
 <atom:link href="https://www.massnumbers.us/index.xml" rel="self" type="application/rss+xml"/>
 <description>A quantitative look at Massachusetts politics and policy
 </description>
-<generator>quarto-1.9.38</generator>
+<generator>quarto-1.10.18</generator>
 <lastBuildDate>Thu, 03 Sep 2026 04:00:00 GMT</lastBuildDate>
 <item>
   <title>Six primaries on the bubble</title>
@@ -19,7 +19,7 @@
   <description><![CDATA[ One sitting state senator has been unseated, another trails by three ballots, and a third incumbent survived by 159 votes. A town-by-town look at the closest contests of the September 1 primary. ]]></description>
   <guid>https://www.massnumbers.us/posts/2026-09-03-close-primaries/</guid>
   <pubDate>Thu, 03 Sep 2026 04:00:00 GMT</pubDate>
-  <media:content url="https://www.massnumbers.us/images/close-primaries-2026.png" medium="image" type="image/png" height="76" width="144"/>
+  <media:content url="https://www.massnumbers.us/images/close-primaries-2026.png" medium="image" type="image/png" height="99" width="144"/>
 </item>
 <item>
   <title>First Suffolk Senate: Nick Collins faces a Wu-backed primary challenge</title>

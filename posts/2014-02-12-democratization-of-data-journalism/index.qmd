@@ -1,0 +1,35 @@
+---
+title: "The democratization of data journalism"
+description: "A report on the*MassINC Big Data and the Future of Journalism* panel discussion"
+author:
+  - name: Brent Benson
+    url: https://massnumbers.us/brentbenson
+date: 2014-02-12
+categories: [blogger-archive]
+---
+
+::: {.callout-note appearance="simple"}
+Originally published on the [Mass. Numbers Blogger site](https://massnumbers.blogspot.com/2014/02/the-democratization-of-data-journalism.html) on 2014-02-12.
+:::
+
+The proliferation of interesting and easy-to-access internet-based data combined with fast computers and free or cheap analysis and visualization tools are democratizing and popularizing the field of data journalism. But what are the rules, parameters, and guidelines for this work which, like its name, bridges the worlds of data and statistics on one hand, and traditional journalism on the other?
+
+This was the subject of a fascinating panel discussion at Boston's District Hall sponsored by [MassINC](http://www.massinc.org/), [Google](http://www.google.com/), [WBUR](http://www.wbur.org/), and the [Knight Foundation](http://www.knightfoundation.org/). The introduction was given by the President of the MassINC Polling Group, [Steve Koczela](https://twitter.com/skoczela), who set the stage by giving an overview of the data journalism field and the work being done at the MassINC Polling Group. The debate was thoughtfully moderated by Northeastern professor and media commentator [Dan Kennedy](https://twitter.com/dankennedy_nu), who kept the discussion moving and asked important questions that allowed each of the panelists to provide their particular insight into this hard-to-nail-down subject area.
+
+[Laura Amico](https://twitter.com/LauraNorton) of [Homicide Watch](http://homicidewatch.org/) and [WBUR's Learning Lab](http://learninglab.wbur.org/) recommended data journalism driven by classic journalistic inquiry, combined with thoughtful collection of journalistic data, but augmented by categorization and analysis of the data with simple tools like spreadsheets in order to shed quantitative light on the driving questions. The idea is to turn regular reporting into structured data that can enable more powerful reporting.
+
+[Paul McMorrow](https://twitter.com/paul_mcmorrow) of [CommonWealth Magazine](http://www.commonwealthmagazine.org/) also comes to data journalism from a traditional journalistic angle, but Paul has augmented his journalistic chops by embracing tools like [Google Fusion Tables](https://sites.google.com/site/fusiontablestalks/home) to synthesize data from publicly available sources to [produce maps and tell stories](https://twitter.com/paul_mcmorrow/status/426383267785211904). His message was that traditional journalists and their organizations should dive head first into learning these new tools. He emphasized that data journalism does not have to be a major investment, given the availability of the tools.
+
+[John Bracken](https://twitter.com/jsb) is Director of Media Innovation for the [Knight Foundation](http://www.knightfoundation.org/) and is primarily concerned with supporting and nurturing innovative journalists that can make use of data journalism tools to improve the world. He is fostering innovation to increase the impact, scope, and efficacy of data journalism.
+
+[Charlie Kravetz](https://twitter.com/CharlieKravetz) is the General Manager of [WBUR](http://www.wbur.org/). He is trying to figure out if data journalism could be the savior of the journalism and deserves significant investment, or whether it is just a passing thing. Charlie also wondered whether journalism and writing skills are mutually exclusive with mathematical and statistical skills (answer: No, evidence: Nate Silver and many others). He was unimpressed with a [visualization of Manhattan income inequality](http://www.fastcoexist.com/3015811/visualized/re-envisioning-the-manhattan-skyline-to-reflect-the-citys-jarring-income-inequali) shown in the opening slide deck.
+
+My take on the panel discussion:
+
+- Not all data journalism is good data journalism—it can use flawed statistical methods or analysis, or be uninteresting or unimportant from a journalistic point of view. The presence of a bad article or uninteresting data visualization does not mean data journalism is a bad thing or unimportant.
+
+- While it is good for journalists to branch out and get comfortable with analytical tools, at some point journalists—at least those without strong mathematics backgrounds—will come up against a wall where an understanding of statistics is important to do analysis or decide whether a particular model or argument is valid. Once this wall is reached it is important to seek additional training, or work with a subject area expert (similar to the function Steve Koczela serves for MassINC and CommonWealth Magazine).
+
+- While the overlap between good writers/journalists with good statisticians/programmers might be small, they exist and will probably be valuable to news organizations.
+
+I hope these interesting discussions continue in Boston and throughout the journalism community.

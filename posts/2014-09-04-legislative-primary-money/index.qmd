@@ -1,0 +1,224 @@
+---
+title: "A look at the money going in and out of the MA legislative primary races"
+description: "Looking at the most and least expensive primary campaigns"
+author:
+  - name: Brent Benson
+    url: https://massnumbers.us/brentbenson
+date: 2014-09-04
+categories: [blogger-archive]
+---
+
+::: {.callout-note appearance="simple"}
+Originally published on the [Mass. Numbers Blogger site](https://massnumbers.blogspot.com/2014/09/a-look-at-money-going-in-and-out-of-ma.html) on 2014-09-04.
+:::
+
+The deadline for Massachusetts State Primary candidates to file their campaign finance reports with the Office and Campaign and Political Finance was Tuesday, September 2. Candidates were required to report money raised and spent from January 1, 2014 to August 22, 2014. I have created [a searchable and sortable spreadsheet](https://docs.google.com/spreadsheets/d/10DkVdxMW3h8Jkjx1nwefgR8K4l-Az-UL1LDHIO6yqBc/edit#gid=84407) with the data for every candidate reported to be on the ballot by the Secretary of State. This article focuses on the candidates that have opponents in the September 9 State Primary.
+
+**State Representative primary candidates with opponents**
+
+Of the [295 State Representative candidates on the ballot](https://docs.google.com/spreadsheets/d/133xGCctFnxo-2KVs5SHXpYFC_KhHNCPFyecG3ZFIbFY/edit?usp=sharing), 95 are in primaries with opponents. Here is the full list of candidates with primary opponents and the amounts with which they started the filing period (often $0 for first time candidates), the amounts they raised and spent from January 1 to August 22, and the ending balance on August 22. This list is sorted by District and Party, showing opponents next to each other.
+
+The average amount raised by the opposed primary candidates is about $17,400 and the average amount spent is about $13,000. However, there is a fair amount of variability, with medians of approximately $10,600 and $8,400 for amount raised and spent.
+
+```
+                                                    Inc  Start  Raised  Spent    End
+District       Pt Name                                                              
+1st Barnstable D  Alexander R. Morash                     3671    7935   5864   5741
+                  Elisa Beth Zawadzkas                       0   22306   6541  15765
+                  Ian P. Ryan                                0   35710  10450  25260
+2nd Bristol    R  Jeffrey R. Bailey                       8269   13676  19515   2430
+                  Bert J. Buckley                         1917    8010   6637   3290
+9th Bristol    D  Christopher Markey                INC  17321   19775  20568  16528
+                  Alan D. Garcia                             0    6420      0   6420
+1st Essex      D  Edward C. Cameron                         10   18799  14288   4521
+                  Robert W. Lavoie                           0   13815  10957   2858
+2nd Essex      R  Leonard Mirra                     INC  18001    6890   5713  19178
+                  Edward H. Watson                           0    6350   1350   5000
+5th Essex      R  Michael B. Boucher                         0   12710  12371    338
+                  Robert V. Whynott                          0   10350   7359   2991
+11th Essex     D  Brendan P. Crighton                     4487   40603  30359  14730
+                  Charlie Gallo                              0   38730  26186  12544
+                  Aikaterini Panagiotakis Koudanis           0     911    518    393
+12th Essex     D  Beverley A. Griffin Dunne                NaN     NaN    NaN    NaN
+                  James Moutsoulas                          10    6415   3741   2684
+14th Essex     D  Diana Dizoglio                    INC  19650   33355  24242  28762
+                  Oscar Camargo                              0   12605  11593   1011
+                  Phil Decologero                            0   30063  23463   6601
+2nd Franklin   R  Karen R. Anderson                          0   11159   9156   2003
+                  Susannah M. Whipps Lee                  4415   30918  29969   5364
+8th Hampden    D  Joseph F. Wagner                  INC   9074   51370  28709  31735
+                  William C. Courchesne                      0      58     58      0
+9th Hampden    D  Edward W. Collins, Jr.                 13100   32155  22283  22972
+                  Peter Murphy                               0   19340  11390   7950
+                  Jose F. Tosado                             0   16440  15493    947
+10th Hampden   D  Carlos Gonzalez                           20    3825   3642    203
+                  Ivette Hernandez                           0   13596   8266   5330
+                  Melvin A. Edwards                       2695   13998  14721   1972
+11th Hampden   D  Benjamin Swan                     INC   3158    5211   4415   3954
+                  Larry Lawson                             NaN     NaN    NaN    NaN
+13th Middlesex D  Carmine Lawrence Gentile                1750   16932  16367   2315
+                  Brian J. Lefort                         2285    6160   3343   5102
+18th Middlesex D  Brian J. Donovan                           0   12895   7856   5039
+                  James Jim Leary                            0   10151   3549   6602
+                  Rady Mom                                   0    8734  10474  -1740
+                  David M. Ouellette                         0    6183   4486   1697
+25th Middlesex D  Marjorie C. Decker                INC  19349   45096  36346  28099
+                  Lesley Rebecca Phillips                  111    2475   1346   1239
+28th Middlesex D  Wayne A. Matewsky                 INC    952   18380  18964    368
+                  Joseph W. Mcgonagle, Jr.                  63   17380  15589   1854
+31st Middlesex D  Michael Bettencourt                        0   14300   9034   5266
+                  Michael Seamus Day                      3622   68450  37767  34305
+33rd Middlesex D  Neil C. Kinnon                             0   44850  33553  11297
+                  Steven Ultrino                           682   52535  49981   3236
+34th Middlesex D  Christine P. Barber                      570   50286  42908   7948
+                  Erin A. Dibenedetto                      180   20864  12192   8852
+                  Sharon K. Guzik                         1224    9066   6590   3700
+                  Craig E. Rourke                            0    8250   8034    216
+5th Plymouth   R  David F. Decoste                         690    6959   5688   1961
+                  Louis U. Valanzola                         0    9216   8134   1082
+10th Plymouth  D  Paul L. Beckner                            0    8057   6908   1149
+                  Peggy Curtis                               0    8160   6304   1856
+                  Michelle M. Dubois                         0   14110   9454   4656
+               R  John F. Cruz                              27   13088   5620   7495
+                  Colleen R. Maloney                      3801    9550   7348   6003
+2nd Suffolk    D  Daniel Joseph Ryan                INC   1605   25326  21905   5027
+                  Roy A. Avellaneda                      -5681    3555    515  -2642
+5th Suffolk    D  Evandro C. Carvalho               INC   2737    8675   4177   7235
+                  Karen A. Charles-Peterson                NaN     NaN    NaN    NaN
+                  Althea Garrison                            0    1808   1808      0
+7th Suffolk    D  Gloria L. Fox                     INC    932    6685   1412   6205
+                  Eric M. Esteves                        10369   11032  10579  10823
+                  Rufus J. Faulk                           NaN     NaN    NaN    NaN
+12th Suffolk   D  Dan Cullinane                     INC   1243   69656  57782  13117
+                  Corey J. Allen                          1858    8278   8580   1556
+                  Ruthella J. Logan-Cruz                   100       0     80     20
+                  Carlotta M. Williams                       2    2751    523   2231
+14th Suffolk   D  Angelo M. Scaccia                 INC  27103   10705  16955  20853
+                  Anthony Joseph Solimine                    0    5687   5646     40
+5th Worcester  D  Matthew Castriotta                         0    9902   9186    716
+                  George Yiantsidis                          0    2000   1525    475
+               R  Donald R. Berthiaume, Jr.                  0   10525   7069   3456
+                  Stephen J. Comtois Ii                    324    2158   1834    648
+                  Jennifer J. Gaucher                        0    5159   5159      0
+9th Worcester  R  Shawn Craig                                0   24250  17999   6251
+                  David K. Muradian, Jr.                     0   32800  20712  12088
+10th Worcester R  Christopher T. Kivior                      0    1045    800    245
+                  Mark W. Reil, Jr.                         59    7665   2527   5197
+15th Worcester D  Mary S. Keefe                     INC  21376   25740  13418  33698
+                  Philip P. Palmieri                     51817    9819   8159  53477
+                  Ralph Perez                              NaN     NaN    NaN    NaN
+16th Worcester D  Daniel M. Donahue                 INC   7627   37873  24566  20934
+                  Joshua Perro                             688  122530  97709  25509
+17th Worcester D  Douglas A. Belanger                      455   26470  16002  10923
+                  Moses S. Dixon                             0   15550   9398   6152
+                  Michael J. Germain                      4815    6285   7984   3116
+18th Worcester D  David P. Cortese                        2383    8490   9906    967
+                  Mark G. Dowgiewicz                         0   15208   9158   6050
+                  Brenda A. Ennis                          166    2993   1747   1412
+               R  Charles G. Arakelian                       0    1702   1354    347
+                  Jesse P. Limanek                           0    6585   3547   3038
+                  Joseph D. Mckenna                       3755   10544   7603   6696
+```
+
+Grouping opponents together and sorting by money spent shows the range of money spent from the most expensive race, to the least. The 16th Worcester Democratic primary between freshman State Rep. Daniel Donahue and previous primary opponent Joshua Perro is the most expensive by far. Perro raised $122,530, largely through loans and donations to his own campaign, a very large amount for a new candidate. He also spent $97,709 four times as much as incumbent Donahue.
+
+The race to replace State Rep. Christopher Fallon is also an expensive race. Candidates Neil Kinnon and Steven Ultrino raising almost $100,00 and spending over $80,000 in the 33rd Middlesex Democratic primary race.
+
+```
+                   Start  Raised   Spent    End                                    Last
+District       Pt                                                                      
+16th Worcester D    8315  160403  122275  46443                          Donahue, Perro
+33rd Middlesex D     682   97385   83534  14533                         Kinnon, Ultrino
+34th Middlesex D    1974   88466   69724  20716      Barber, DiBenedetto, Guzik, Rourke
+12th Suffolk   D    3203   80685   66965  16924  Cullinane, Allen, Logan-Cruz, Williams
+14th Essex     D   19650   76023   59298  36374           Dizoglio, Camargo, DeCologero
+11th Essex     D    4487   80244   57063  27667  Crighton, Gallo, Panagiotakis Koudanis
+9th Hampden    D   13100   67935   49166  31869            Collins, Jr., Murphy, Tosado
+31st Middlesex D    3622   82750   46801  39571                        Bettencourt, Day
+2nd Franklin   R    4415   42077   39125   7367                           Anderson, Lee
+9th Worcester  R       0   57050   38711  18339                    Craig, Muradian, Jr.
+25th Middlesex D   19460   47571   37692  29338                        Decker, Phillips
+28th Middlesex D    1015   35760   34553   2222                     Matewsky, McGonagle
+17th Worcester D    5270   48305   33384  20191                Belanger, Dixon, Germain
+8th Hampden    D    9074   51428   28767  31735                      Wagner, Courchesne
+10th Hampden   D    2715   31419   26629   7505            Gonzalez, Hernandez, Edwards
+18th Middlesex D       0   37963   26365  11598          Donovan, Leary, Mom, Ouellette
+2nd Bristol    R   10186   21686   26152   5720                         Bailey, Buckley
+1st Essex      D      10   32614   25245   7379                         Cameron, Lavoie
+1st Barnstable D    3671   65951   22855  46766                 Morash, Zawadzkas, Ryan
+10th Plymouth  D       0   30327   22666   7661                 Beckner, Curtis, DuBois
+14th Suffolk   D   27103   16392   22601  20893                       Scaccia, Solimine
+2nd Suffolk    D   -4076   28881   22420   2385                        Ryan, Avellaneda
+15th Worcester D   73193   35559   21577  87175                  Keefe, Palmieri, Perez
+18th Worcester D    2549   26691   20811   8429              Cortese, Dowgiewicz, Ennis
+9th Bristol    D   17321   26195   20568  22948                          Markey, Garcia
+5th Essex      R       0   23060   19730   3329                        Boucher, Whynott
+13th Middlesex D    4035   23092   19710   7417                         Gentile, LeFort
+5th Worcester  R     324   17842   14062   4104    Berthiaume, Jr., Comtois II, Gaucher
+5th Plymouth   R     690   16175   13822   3043                      DeCoste, Valanzola
+10th Plymouth  R    3828   22638   12968  13498                           Cruz, Maloney
+18th Worcester R    3755   18831   12504  10081             Arakelian, Limanek, McKenna
+7th Suffolk    D   11301   17717   11991  17028                     Fox, Esteves, Faulk
+5th Worcester  D       0   11902   10711   1191                  Castriotta, Yiantsidis
+2nd Essex      R   18001   13240    7063  24178                           Mirra, Watson
+5th Suffolk    D    2737   10483    5985   7235    Carvalho, Charles-Peterson, Garrison
+11th Hampden   D    3158    5211    4415   3954                            Swan, Lawson
+12th Essex     D      10    6415    3741   2684                       Dunne, Moutsoulas
+10th Worcester R      59    8710    3327   5442                       Kivior, Reil, Jr.
+```
+
+At the other end of the spectrum, candidates Christopher Kivior and Mark Reil spent just over $3,000 in their bid to unseat Democratic State Representative John Fernandes of the 10th Worcester District.
+
+The primary candidates for the 12th Essex Democratic nomination, Beverley Griffin Dunne and James Moutsoulas have also spent less than $4,000. The winner will face Republican Leah Cole in November.
+
+**State Senate primary candidates with opponents**
+
+There are 74 candidates that have qualified for the State Senate ballot, and 23 of those candidates have opponents in 9 separate primaries, with 7 Democratic primaries and 2 Republican primaries. The average amount raised and spent by the Senate candidates is about $40,000 and $34,000, with medians of about $27,000 and $21,000, reflecting the higher visibility and large districts of State Senators.
+
+```
+                                                           Inc   Start  Raised   Spent     End
+District                     Pt Name                                                          
+Cape & Islands               R  Ronald R. Beaty, Jr.                 0     591     591       0
+                                Allen R. Waters                      0    6842    4124    2718
+1st Essex                    D  Kathleen A. O'Connor Ives  INC    8805   56645   43515   21936
+                                Jessica L. Finocchiaro               0   24150   20579    3571
+1st Hampden & Hampshire      D  Timothy C. Allen                  5652   61280   66444     489
+                                James Chip Harrington             2692   38234   37772    3154
+                                Thomas A. Lachiusa                   0    3725    3208     517
+                                Eric Philip Lesser                   0  302898  250840   52057
+                                Aaron L. Saunders                  242   32220   29389    3073
+1st Worcester                D  Harriette L. Chandler      INC  182870   31480   59352  154998
+                                William Feegbeh                    NaN     NaN     NaN     NaN
+                                Sean M. Maher                        0   11009   10305     704
+Norfolk, Bristol & Middlesex D  Dylan Hayre                       7956   29449   19861   17544
+                                Sara Lynn Reynolds               10716   40865   35052   16529
+2nd Essex & Middlesex        D  Barbara A. L'Italien               380   56919   36165   21134
+                                Pavel M. Payano                   1238   21692   17820    5110
+                                Doris V. Rodriguez                 NaN     NaN     NaN     NaN
+2nd Hampden & Hampshire      D  Christopher J. Hopewell            159   13411   13307     263
+                                Patrick T. Leahy                     0   27275   24120    3155
+2nd Suffolk                  D  Sonia Rosa Chang-Diaz      INC  109263   13890     907  122246
+                                Roy Owens                            0       0       0       0
+Worc, Hmpdn, Hmpsh & Mdlsx   R  James P. Ehrhard                 14174   25120   23654   15640
+                                Michael J. Valanzola             13782   33233   21071   25945
+```
+
+The most expensive State Senate race, by far, is the 1st Hampden & Hampshire race for the open seat being left by Gail Candaras, where the five candidates spent close to $400,000. The lions share of that money came from former White House aide Eric Lesser who raised over $300,000 and spent about $250,000. [Lesser's donor list](http://www.efs.cpf.state.ma.us/DisplayReport.aspx?reportId=203135&schedule=DisplayScheduleA) makes a great read with big name contributors like David Axlerod, Stephanie Cutter, and David Plouffe.
+
+```
+                                  Start  Raised   Spent     End                                           Last
+District                     Pt                                                                               
+1st Hampden & Hampshire      D     8586  438357  387653   59290  Allen, Harrington, Lachiusa, Lesser, Saunders
+1st Worcester                D   182870   42489   69657  155702                       Chandler, Feegbeh, Maher
+1st Essex                    D     8805   80795   64094   25507                     O'Connor Ives, Finocchiaro
+Norfolk, Bristol & Middlesex D    18672   70314   54913   34073                                Hayre, Reynolds
+2nd Essex & Middlesex        D     1618   78611   53985   26244                   L'Italien, Payano, Rodriguez
+Worc, Hmpdn, Hmpsh & Mdlsx   R    27956   58353   44725   41585                             Ehrhard, Valanzola
+2nd Hampden & Hampshire      D      159   40686   37427    3418                                Hopewell, Leahy
+Cape & Islands               R        0    7433    4715    2718                             Beaty, Jr., Waters
+2nd Suffolk                  D   109263   13890     907  122246                              Chang-Diaz, Owens
+```
+
+On the other end of the spectrum there is the Democratic primary between Senator Sonia Chang-Diaz and abortion opponent Roy Owens where only 907 dollars were spent by Chang-Diaz.
+
+Make sure to check out the [searchable/sortable spreadsheet](https://docs.google.com/spreadsheets/d/10DkVdxMW3h8Jkjx1nwefgR8K4l-Az-UL1LDHIO6yqBc/edit#gid=84407) of all ballot candidates to get a feel for the fundraising of candidates of candidates who only have a general election challenger, or no challenger at all.

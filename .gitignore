@@ -6,5 +6,4 @@
 Screenshot-*.png
 .Rprofile
 .renvignore
-_freeze/site_libs/
 docs/_freeze/
