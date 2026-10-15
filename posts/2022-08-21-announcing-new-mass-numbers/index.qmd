@@ -1,0 +1,22 @@
+---
+title: "Announcing the new Mass. Numbers"
+description: "The blog will now include code and data, along with analysis"
+author:
+  - name: Brent Benson
+    url: https://massnumbers.us/brentbenson
+image: images/blogger-f2a328df9d56.png
+date: 2022-08-21
+categories: [blogger-archive]
+---
+
+::: {.callout-note appearance="simple"}
+Originally published on the [Mass. Numbers Blogger site](https://massnumbers.blogspot.com/2022/08/announcing-new-mass-numbers.html) on 2022-08-21.
+:::
+
+Please check out the announcement post for the re-platforming of the Mass. Numbers blog:
+
+[https://www.massnumbers.us/posts/welcome/](https://www.massnumbers.us/posts/welcome/)
+
+We have the goal of eventually bringing over these blogspot-based posts, but first the plan is to publish some detailed posts on the upcoming September primaries and November general elections.
+
+![](images/blogger-f2a328df9d56.png)

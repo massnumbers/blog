@@ -30,10 +30,10 @@
 
 ## 5. Stage one, batch 2015-2022
 
-- [ ] 5.1 Convert and stage the 15 remaining 2015-2022 posts that are not stage-two posts, and verify no remote image or Fusion Tables URL is reported
-- [ ] 5.2 Resolve the batch's hand-correction flags and verify no flagged string remains
-- [ ] 5.3 Render the batch and verify render, archive listing, front-page exclusion, and `verify_fidelity.py` as in 3.3
-- [ ] 5.4 Mark the batch's manifest rows `verified`, commit the batch, and verify the manifest shows 84 verified rows and 11 pending, all 11 being stage-two posts
+- [x] 5.1 Convert and stage the 15 remaining 2015-2022 posts that are not stage-two posts, and verify no remote image or Fusion Tables URL is reported
+- [x] 5.2 Resolve the batch's hand-correction flags and verify no flagged string remains
+- [x] 5.3 Render the batch and verify render, archive listing, front-page exclusion, and `verify_fidelity.py` as in 3.3
+- [x] 5.4 Mark the batch's manifest rows `verified`, commit the batch, and verify the manifest shows 84 verified rows and 11 pending, all 11 being stage-two posts
 
 ## 6. Stage two, declared-missing posts
 

@@ -94,10 +94,17 @@ class Converter:
         text = re.sub(r"<img\b([^>]*?)/?>", self._image, text, flags=re.I)
         text = re.sub(r"<a\b([^>]*)>(.*?)</a>", self._anchor, text, flags=re.S | re.I)
 
+        def emphasis(m, k):
+            inner = m.group(1).strip()
+            # Bold or italic around nothing but breaks or empty spans is a
+            # styling artifact; keep any breaks, drop the markers.
+            if not re.sub(r"<[^>]+>|\s|&nbsp;", "", inner):
+                return re.sub(r"[^<>]*(<br\s*/?>)?[^<>]*", lambda b: b.group(1) or "", inner)
+            return f"{k}{inner}{k}"
+
         for tag, mark in (("b", "**"), ("strong", "**"), ("i", "*"), ("em", "*")):
             text = re.sub(rf"<{tag}\b[^>]*>(.*?)</{tag}>",
-                          lambda m, k=mark: f"{k}{m.group(1).strip()}{k}" if m.group(1).strip() else "",
-                          text, flags=re.S | re.I)
+                          lambda m, k=mark: emphasis(m, k), text, flags=re.S | re.I)
 
         for level in range(1, 7):
             text = re.sub(rf"<h{level}\b[^>]*>(.*?)</h{level}>",
@@ -128,7 +135,6 @@ class Converter:
         text = re.sub(r"[ \t]+", " ", text)
         text = re.sub(r" *\n *", "\n", text)
         text = re.sub(r"^\*{1,2}$", "", text, flags=re.M)     # empty <b>/<i> pairs
-        text = re.sub(r"(?<!\*)\*{2}\s*\*{2}(?!\*)", "", text)
         text = re.sub(r"[ \t]+$", "", text, flags=re.M)
         text = re.sub(r"\n{3,}", "\n\n", text)
         for n, block in enumerate(pre_blocks):

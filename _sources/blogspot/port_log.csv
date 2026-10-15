@@ -1,3 +1,4 @@
 batch,posts,working_min,render_min,notes
 2012-2013,36,75,5,"approximate session time; about half was fixing tooling found by the first verify run (description double-count, punctuation normalization, link whitespace, remote full-size image links, an href holding two URLs) and re-staging; 7 stale-caption notes; render is per-post, about 4 s each"
 2014,30,40,3,"approximate session time; converter fixes for <style> CSS leaking into body and description, and <pre> fixed-width tables now kept as fenced blocks; verifier treats inline tags as non-separating (a link starting mid-word); 3 stale-caption notes across 2 posts"
+2015-2022,15,30,1,"approximate session time; converter fix for an empty-bold cleanup that merged adjacent bold headings across a paragraph break (one post affected, confirmed by diffing every ported post against fresh output); 6 stale-caption notes across 4 posts"

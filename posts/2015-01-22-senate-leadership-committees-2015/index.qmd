@@ -1,0 +1,489 @@
+---
+title: "State Senate 2015-2016 Democratic majority leadership and committee assignments"
+description: "Massachusetts State Senate President Stan Rosenberg announced leadership and committee assignments for the Democratic members of the Senate for the 2015-2016 legislative session."
+author:
+  - name: Brent Benson
+    url: https://massnumbers.us/brentbenson
+date: 2015-01-22
+categories: [blogger-archive]
+---
+
+::: {.callout-note appearance="simple"}
+Originally published on the [Mass. Numbers Blogger site](https://massnumbers.blogspot.com/2015/01/state-senate-2015-2016-democratic.html) on 2015-01-22.
+:::
+
+Massachusetts State Senate President Stan Rosenberg announced leadership and committee assignments for the Democratic members of the Senate for the 2015-2016 legislative session.
+
+**Leadership**
+
+Majority Leader: Chandler
+
+President Pro Tempore: Pacheco
+
+Assistant Majority Leader: Creem
+
+Assistant Majority Leader: Joyce
+
+Assistant Majority Leader: Montigny
+
+Majority Whip: Petruccelli
+
+Assistant Majority Whip: Donnelly
+
+**Senate Standing Committees**
+
+**Ways and Means**
+
+Spilka - Chair
+
+DiDemenico
+
+Jehlen - Assistant Vice Chair
+
+Brownsberger
+
+Chang-Diaz
+
+Donnelly
+
+Donoghue
+
+Downing
+
+Keenan
+
+Kennedy
+
+McGee
+
+Moore
+
+Petruccelli
+
+Rush
+
+Timility
+
+**Intergovernmental Affairs**
+
+Dorcena Forry - Chair
+
+L'Italien- Vice Chair
+
+Gobi
+
+Moore
+
+Rodrigues
+
+**Redistricting**
+
+Downing - Chair
+
+Joyce - Vice Chair
+
+Chang-Diaz
+
+L'Italien
+
+Timilty
+
+**Rules**
+
+Montigny - Chair
+
+Creem - Vice Chair
+
+Chandler
+
+Spilka
+
+**Bills in Third Reading**
+
+Joyce - Chair
+
+Petruccelli - Vice Chair
+
+Donoghue
+
+Downing
+
+**Steering and Policy**
+
+Wolf - Chair
+
+Lewis - Vice Chair
+
+Chang-Diaz
+
+O'Connor Ives
+
+**Personnel and Administration**
+
+Rush - Chair
+
+O'Connor Ives - Vice Chair
+
+Donnelly
+
+Donoghue
+
+Pacheco
+
+**Children's Caucus**
+
+McGee - Chair
+
+**Ethics**
+
+Creem - Chair
+
+Brownsberger - Vice Chair
+
+Chandler
+
+DiDomenico
+
+**Post-Audit and Oversight**
+
+Barrett - Chair
+
+Downing - Vice Chair
+
+Lewis
+
+Moore
+
+Welch
+
+**Bonding, Capital Expenditures, and State Assets**
+
+Keenan - Chair
+
+Chang-Diaz - Vice Chair
+
+Donnelly
+
+Donoghue
+
+Moore
+
+**Global Warming**
+
+Pacheco - Chair
+
+Eldridge - Vice Chair
+
+Barrett
+
+Downing
+
+McGee
+
+**Joint Standing Committees**
+
+**Financial Services**
+
+Eldridge - Chair
+
+Lesser - Vice Chair
+
+Keenan
+
+O'Connor Ives
+
+Rodrigues
+
+**Economic Development and Emerging Technology**
+
+Donoghue - Chair
+
+Gobi - Vice Chair
+
+Barrett
+
+Keenan
+
+Lesser
+
+McGee
+
+**Education**
+
+Chang-Diaz - Chair
+
+Jehlen - Vice Chair
+
+Dorcena Forry
+
+Lewis
+
+L'Italien
+
+**Housing**
+
+Dorcena Forry - Chair
+
+Keenan - Vice Chair
+
+Chandler
+
+Gobi
+
+Jehlen
+
+**Public Safety and Homeland**
+
+Timilty - Chair
+
+Moore - Vice Chair
+
+Chang-Diaz
+
+Flanagan
+
+Welch
+
+**Revenue**
+
+Rodrigues - Chair
+
+Timilty - Vice Chair
+
+Downing
+
+Lesser
+
+Wolf
+
+**Higher Education**
+
+Moore - Chair
+
+Donoghue - Vice Chair
+
+Downing
+
+L'Italien
+
+O'Connor Ives
+
+**Mental Health and Substance Abuse**
+
+Flanagan - Chair
+
+Lovely - Vice
+
+Donnelly
+
+Dorcena Forry
+
+Eldridge
+
+**Telecom, Utilities, and Energy**
+
+Downing - Chair
+
+Pacheco - Vice Chair
+
+Gobi
+
+Joyce
+
+Wolf
+
+**State Administration and Regulatory Oversight**
+
+Lovely - Chair
+
+Eldridge - Vice Chair
+
+Barrett
+
+Keenan
+
+Rodrigues
+
+**Tourism, Arts, and Cultural Development**
+
+Lesser - Chair
+
+Downing - Vice Chair
+
+Eldridge
+
+Lovely
+
+Wolf
+
+**Community Development and Small Business**
+
+O'Connor Ives - Chair
+
+Rush - Vice Chair
+
+L'Italien
+
+Rodrigues
+
+Wolf
+
+**Children and Families**
+
+Flanagan - Chair
+
+Lovely - Vice Chair
+
+Chang-Diaz
+
+Keenan
+
+Lewis
+
+**Public Health**
+
+Lewis - Chair
+
+Flanagan - Vice Chair
+
+Lesser
+
+Lovely
+
+Timilty
+
+**Judiciary**
+
+Brownsberger - Chair
+
+Keenan - Vice Chair
+
+Chang-Diaz
+
+Creem
+
+Jehlen
+
+**Environment, Natural Resources, and Agriculture**
+
+Gobi - Chair
+
+Rush - Vice Chair
+
+Eldridge
+
+McGee
+
+Timilty
+
+**Public Service**
+
+Timilty - Chair
+
+Rodrigues - Vice Chair
+
+Barrett
+
+Donnelly
+
+Kennedy
+
+**Elder Affairs**
+
+Jehlen - Chair
+
+L'Italien - Vice Chair
+
+Barrett
+
+Gobi
+
+Lesser
+
+**Consumer Protection and Licensure**
+
+Kennedy - Chair
+
+Petruccelli - Vice Chair
+
+O'Connor Ives
+
+Rodrigues
+
+Timilty
+
+**Transportation**
+
+McGee - Chair
+
+Keenan - Vice Chair
+
+Donoghue
+
+Dorcena Forry
+
+Lesser
+
+Rush
+
+**Veterans and Federal Affairs**
+
+Rush - Chair
+
+Kennedy - Vice Chair
+
+Barrett
+
+Gobi
+
+Lesser
+
+**Municipalities and Regional Government**
+
+L'Italien - Chair
+
+Lovely - Vice Chair
+
+Brownsberger
+
+Donaghue
+
+Timilty
+
+**Health Care Financing**
+
+Welch - Chair
+
+Montigny - Vice Chair
+
+Barrett
+
+Dorcena Forry
+
+Joyce
+
+L'Italien
+
+**Election Laws**
+
+Kennedy - Chair
+
+Donnelly - Vice Chair
+
+Brownsberger
+
+DiDomenico
+
+Welch
+
+**Labor and Workforce Development**
+
+Wolf - Chair
+
+Barrett - Vice Chair
+
+Donoghue
+
+Lewis
+
+Moore

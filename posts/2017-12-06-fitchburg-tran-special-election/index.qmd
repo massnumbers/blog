@@ -1,0 +1,26 @@
+---
+title: "Over-performance in Fitchburg pushed Tran over the top in Worcester and Middlesex special election"
+description: "Zephir slightly over-performed compared to a modeled result in most other towns"
+author:
+  - name: Brent Benson
+    url: https://massnumbers.us/brentbenson
+image: images/imgur-LYzSXvo.png
+date: 2017-12-06
+categories: [blogger-archive]
+---
+
+::: {.callout-note appearance="simple"}
+Originally published on the [Mass. Numbers Blogger site](https://massnumbers.blogspot.com/2017/12/over-performance-in-fitchburg-pushed.html) on 2017-12-06.
+:::
+
+Republican Fitchburg City Councilor Dean Tran defeated three other opponents, including Democratic Leominster City Councilor Sue Chalifoux Zephir, to replace State Senator Jen Flanagan in the Worcester and Middlesex senate district by a margin of 607 votes (unofficial results).
+
+Tran's victory was mainly due to a staggering 19 point victory in his home city of Fitchburg, which has a strong lean towards Democrats in most elections. Fitchburg has a Partisan Voter Index (PVI) of D+9. Our [state legislative regression model](../2016-10-17-legislative-race-simulations/index.qmd) predicted a Democratic vote share of 56% for an open seat in a non-presidential year.
+
+![Worcester and Middlesex special election results vs. PVI chart](images/imgur-LYzSXvo.png)
+
+Sue Chalifoux Zephir out-performed the model in most of the other municipalities, including an 11 point over-performance in the much-smaller town of Sterling, and kept it reasonably close in the others.
+
+Zephir would have stood a better chance if she could have built a home field advantage in Leominster, similar to Tran's in Fitchburg, but fellow City Councilor Claire Freda came within range of Tran and Zephir with over a thousand votes, by far Freda's strongest showing in any municipality. It seems that Freda's success in Leominster prevented Zephir from running up the numbers in the largest vote-producing city in the district.
+
+Senator-elect Tran will serve out the rest of the current term and will be up for re-election next November, 2018. He will have the advantage of incumbency, but will face a much larger Democratically motivated electorate in a highly-charged mid-term election.
