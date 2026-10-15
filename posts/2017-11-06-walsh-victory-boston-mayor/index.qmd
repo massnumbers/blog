@@ -4,7 +4,7 @@ description: "A remarkably consistent margin has separated Walsh and Jackson in 
 author:
   - name: Brent Benson
     url: https://massnumbers.us/brentbenson
-image: images/imgur-wTzIfNL.png
+image: images/imgur-LVLd8X9.jpg
 date: 2017-11-06
 categories: [blogger-archive]
 ---

@@ -4,7 +4,7 @@ description: "Clark leads in polling averages and fundraising, Sciortino ad maki
 author:
   - name: Brent Benson
     url: https://massnumbers.us/brentbenson
-image: images/imgur-R4AL6uR.png
+image: images/imgur-cSlV9rH.png
 date: 2013-09-30
 categories: [blogger-archive]
 ---

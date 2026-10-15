@@ -4,7 +4,7 @@ description: "While all nine Massachusetts Congressional districts were won by D
 author:
   - name: Brent Benson
     url: https://massnumbers.us/brentbenson
-image: images/imgur-cYvjzds.png
+image: images/imgur-6IpVZfp.png
 date: 2013-01-31
 categories: [blogger-archive]
 ---

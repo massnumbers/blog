@@ -4,7 +4,7 @@ description: "The most recent poll from Suffolk University for the November 5 Bo
 author:
   - name: Brent Benson
     url: https://massnumbers.us/brentbenson
-image: images/imgur-1byuoBu.png
+image: images/imgur-VHEdxnv.png
 date: 2013-11-04
 categories: [blogger-archive]
 ---

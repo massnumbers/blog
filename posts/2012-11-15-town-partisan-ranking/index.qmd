@@ -4,7 +4,7 @@ description: "A partisan ranking of MA municipalities from P-Town to Lynnfield"
 author:
   - name: Brent Benson
     url: https://massnumbers.us/brentbenson
-image: images/imgur-ZiNV9.png
+image: images/map-thumbnail.png
 date: 2012-11-15
 categories: [blogger-archive]
 ---
