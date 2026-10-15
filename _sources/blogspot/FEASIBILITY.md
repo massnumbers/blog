@@ -193,3 +193,42 @@ images). A full port adds roughly 31 MB, matching the proposal's 30-40 MB estima
   expensive -- but 7 posts would carry a note where a map used to be.
 - If imgur purges these images, the tier-2 posts lose their maps entirely. The
   local copies in `images/` are the hedge, and they are already taken.
+
+## Outcome
+
+The full port was carried out by the `migrate-blogspot-archive` change and
+finished 2026-10-15. All 95 posts are on the site (`manifest.csv`:
+`port_status=verified` for every row), listed on the Archive page rather than
+the front page.
+
+**Effort.** `port_log.csv` records about 330 minutes (5.5 hours) for the 92
+posts after the pilots: 145 minutes for the 81 stage-one posts in three
+batches, 35 for the four declared-missing posts, and 150 for the seven map
+posts plus the pilot's map rebuild. That is well under the 20-46 hour estimate
+above. The estimate assumed a person reading every post against its original;
+the port instead leaned on the scripted fidelity check (`verify_fidelity.py`)
+and hand-read only what it flagged. The logged times are approximate session
+times, and most of the stage-one time went into converter and verifier fixes
+that the first batch exposed rather than into individual posts.
+
+**Tiers after the checks.** `fusion_tables.csv`, by post (a post counts at its
+most demanding tier):
+
+| tier | posts | estimate above |
+|---|---|---|
+| 1 - reconstructed | 6 | up to 7, plus the pilot as tier 3 |
+| 2 - static screenshot | 18 | 14 |
+| 3 - declared missing | 2 | 5 |
+
+Reconstruction was an upper bound in the estimate and came in higher than
+feared, not lower, because the posts' linked Google Sheets still export (see
+the update in the caution section). Two candidates thought to need rebuilds
+(2017-11-06, 2017-12-05) and three references thought lost (2013-07-23,
+2013-09-26) turned out to wrap surviving screenshots and moved to tier 2.
+
+Only one map is actually gone: the 2014-06-03 State Senate overview, a live
+embed with no screenshot. The other tier-3 rows are dead text links to Fusion
+Tables, which are kept as published with a note.
+
+**Repository cost.** 30 MB of post images (`du` over `posts/*/images`), in line
+with the 31 MB estimate.

@@ -51,10 +51,10 @@
 
 ## 8. Completion
 
-- [ ] 8.1 Run a full `quarto render` and verify it completes, `git status docs/site_libs/` shows no deleted library a page references, and every rendered ported post passes `verify_fidelity.py` with zero intra-archive links still pointing at `massnumbers.blogspot.com` post URLs
-- [ ] 8.2 Verify the manifest shows all 95 rows `verified` with existing `site_dir` directories, the archive page lists 95 posts, and the front page lists only native posts
-- [ ] 8.3 Append a short "Outcome" section to `_sources/blogspot/FEASIBILITY.md` recording actual hours spent per stage against the estimate and the final tier counts after the prose-agreement checks, and verify each figure traces to the manifest or `fusion_tables.csv`
-- [ ] 8.4 Update `CLAUDE.md` to describe the archive listing, the `blogger-archive` category, and the `_sources/blogspot/` porting scripts, and verify the documented commands run as written
+- [x] 8.1 Run a full `quarto render` and verify it completes, `git status docs/site_libs/` shows no deleted library a page references, and every rendered ported post passes `verify_fidelity.py` with zero intra-archive links still pointing at `massnumbers.blogspot.com` post URLs
+- [x] 8.2 Verify the manifest shows all 95 rows `verified` with existing `site_dir` directories, the archive page lists 95 posts, and the front page lists only native posts
+- [x] 8.3 Append a short "Outcome" section to `_sources/blogspot/FEASIBILITY.md` recording actual hours spent per stage against the estimate and the final tier counts after the prose-agreement checks, and verify each figure traces to the manifest or `fusion_tables.csv`
+- [x] 8.4 Update `CLAUDE.md` to describe the archive listing, the `blogger-archive` category, and the `_sources/blogspot/` porting scripts, and verify the documented commands run as written
 
 ## Workflow follow-up
 

@@ -64,6 +64,44 @@ Each post `index.qmd` follows this pattern:
 
 Social metadata (Open Graph, Twitter cards) is generated automatically by Quarto from the post YAML and site-level `_quarto.yml` config.
 
+## Blogger Archive
+
+The 95 posts from the original Blogger site (`massnumbers.blogspot.com`,
+2012-11-13 to 2022-08-21) are ported into `posts/` at their original dates,
+with `categories: [blogger-archive]`. The front page (`index.qmd`) and its RSS
+feed exclude that category; `archive.qmd` (navbar "Archive") lists only it.
+New posts must not use the category. Each ported post opens with a provenance
+callout linking its Blogger permalink, and any text added since the original
+(notes on vanished Fusion Tables maps, map rebuild disclosures) sits in a
+`callout-note`, never in the original prose.
+
+Porting tools and records live in `_sources/blogspot/` (not published). The
+manifest `manifest.csv` tracks each post's `site_dir` and `port_status`; run
+the scripts from the repository root:
+
+```bash
+# Convert every feed entry to Quarto markdown in a scratch directory
+python3 _sources/blogspot/convert_post.py --out /tmp/converted
+
+# Stage posts into posts/ (by manifest site_dir, or every pending stage-one post in a year)
+python3 _sources/blogspot/stage_post.py --converted /tmp/converted 2014-03-09-fifth-middlesex-likely-blue
+
+# Re-add the "interactive map no longer available" notes listed in stale_captions.tsv
+python3 _sources/blogspot/add_caption_notes.py
+
+# Check prose against the originals and rendered output for remote images,
+# Fusion Tables URLs and provenance; --strict-links also fails leftover
+# links to other Blogger posts
+python3 _sources/blogspot/verify_fidelity.py --strict-links
+```
+
+`stage_post.py` overwrites the staged `index.qmd`, so re-staging a ported post
+discards its hand edits (caption notes are restored by `add_caption_notes.py`;
+rebuilt map chunks are not). Six posts carry rebuilt maps whose data sits
+beside the post; `_sources/blogspot/fusion_tables.csv` records every Fusion
+Tables reference, its fidelity tier, and the check behind it, and
+`FEASIBILITY.md` the investigation and outcome.
+
 ## Commonly Used R Packages
 
 - **tidyverse** — data wrangling (used in every post)
