@@ -122,11 +122,26 @@ Stage-one posts contain no executable code, so this is fast. After the last stag
 post, one full `quarto render` confirms the site builds from a clean state and that
 `docs/site_libs/` loses nothing that a page references.
 
-**Reconstruction follows a fixed gate.** For each tier-1 candidate: list every figure
-the prose states about the map; compute the same figures from the candidate data;
-reconstruct only if all match within rounding and coverage is comparable. External
-data from `electionstats.state.ma.us` is fetched once into the post's `_sources/` and
-read from there, so re-rendering never touches the network.
+**Reconstruction follows a fixed gate, and the post's own data comes first.** For each
+tier-1 candidate: list every figure the prose states about the map; compute the same
+figures from the candidate data; reconstruct only if all match within rounding and
+coverage is comparable. Candidate data is tried in this order, decided 2026-10-15 when
+the checks found the posts' linked Google Sheets still export:
+
+1. The author's own published data: a Google Sheet the post (or a sibling post) links
+   to, exported as CSV. This is the table the original map was drawn from or its
+   direct twin.
+2. Values printed in the post itself, such as a per-precinct chart, transcribed and
+   cross-checked against an independent recomputation.
+3. Re-sourced data: local `_data/`, `mapoli`, or `electionstats.state.ma.us`.
+
+Certified results that disagree with the post's figures are not used even when they
+are more authoritative, because the map must agree with the prose beside it. Every
+fetched file is kept under `_sources/blogspot/recovered/` and copied beside the post
+that uses it, so re-rendering never touches the network. The disclosure on a rebuilt
+map names its source. The 2012-11-18 pilot, declared missing in the earlier change
+because re-sourced data contradicted it, is rebuilt from its own sheet under the same
+rule.
 
 ## Risks / Trade-offs
 

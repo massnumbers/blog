@@ -104,6 +104,15 @@ The general lesson: matching *data class* is not the same as matching the
 A failed check is cheap -- it costs the test -- but it means tier 1 counts are
 an upper bound on what will actually be reconstructed.
 
+**Update, 2026-10-15 (migrate-blogspot-archive).** The investigation missed a
+better source: the Google Sheets the posts link to still export as CSV, and they
+hold the author's own tables. The 2012-11-18 pilot's sheet reproduces every
+figure above (2nd Hampden from +4.22 to -4.00, 12th Bristol from +17.22 to
+-10.89, the 25th Middlesex and 9th Norfolk as the extremes, all 160 districts),
+so its map was rebuilt after all. The lesson stands in sharper form: the post's
+own data, where it survives, comes before any re-sourced equivalent. Outcome of
+the tier-1 checks is in `fusion_tables.csv` and summarized under Outcome below.
+
 ## Conversion quality
 
 `convert_post.py` run across all 95 posts, graded in `conversion_report.csv`:

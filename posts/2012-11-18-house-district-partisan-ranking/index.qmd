@@ -27,21 +27,60 @@ Here are the calculated partisan rankings of each House district, both pre- and 
 
 Here is a [searchable online spreadsheet](https://docs.google.com/spreadsheet/ccc?key=0AkWPTnj-k6-kdHU4dEo1ZzZENHlkQ1dleU9SOU1SNnc) with the same data and an interactive map:
 
-::: {.callout-note appearance="simple"}
-**The interactive map that appeared here is no longer available.** It was built
-with Google Fusion Tables, which Google shut down on 3 December 2019, and no
-copy of the underlying table survives. The map shaded each of the 160 Massachusetts
-House districts by the partisan ranking described above, from the most Democratic
-districts in Cambridge and Boston to the most Republican districts in the suburbs
-south and west of the city.
+```{r}
+#| column: body-outset
+#| fig-height: 6
 
-It has not been rebuilt from other data. The ranking in this post averages the
-Democratic-Republican margin across the 2006-2012 Governor, Senate, and
-Presidential races, weighted by each municipality's precinct count; the district
-partisan data available today is a presidential-based Partisan Voter Index, which
-is a different measure. Rebuilding the map from it would contradict the figures
-stated above -- it puts the 2nd Hampden at D+5 where this post reports a 4.00%
-Republican lean -- so the original map is described rather than replaced.
+library(tidyverse)
+library(sf)
+library(tmap)
+
+tmap_mode("view")
+
+ordinal <- function(n) {
+    suffix <- case_when(n %% 100 %in% 11:13 ~ "th",
+                        n %% 10 == 1 ~ "st",
+                        n %% 10 == 2 ~ "nd",
+                        n %% 10 == 3 ~ "rd",
+                        TRUE ~ "th")
+    str_c(n, suffix)
+}
+
+ranking <- read_csv("house_district_ranking.csv", show_col_types=FALSE) |>
+    transmute(DIST_CODE=DISTRICT,
+              District=if_else(is.na(Num), "Barnstable, Dukes and Nantucket",
+                               str_c(ordinal(as.integer(Num)), " ", Name)),
+              Representative=`Rep (2011-2012)`, Party=Pty,
+              pre=parse_number(`Score (Pre-2012)`),
+              post=parse_number(`Score (Post-2012)`),
+              change=parse_number(Change))
+
+districts <- read_sf("../../_gis/house2012/HOUSE2012_POLY.shp") |>
+    st_transform(4326) |>
+    select(DIST_CODE) |>
+    left_join(ranking, by="DIST_CODE")
+
+tm_shape(districts) +
+    tm_polygons(
+        fill="post",
+        fill.scale=tm_scale_continuous(values=c("#FF4949", "white", "#0F4392"), midpoint=0),
+        fill.legend=tm_legend(title="Partisan score, post-2012 (%)"),
+        fill_alpha=0.7,
+        col_alpha=0.3,
+        id="District",
+        popup.vars=c("Representative (2011-2012)"="Representative", "Party"="Party",
+                     "Score, pre-2012 (%)"="pre", "Score, post-2012 (%)"="post",
+                     "Change"="change")) +
+    tm_basemap("OpenStreetMap")
+```
+
+::: {.callout-note appearance="simple"}
+**This map was rebuilt in 2026.** The original interactive map was made with
+Google Fusion Tables, which Google shut down on 3 December 2019. This version is
+drawn from the searchable spreadsheet linked above, the same data the original
+map used, on the 2012-2022 House district boundaries. It reproduces the figures
+in this post, including the 2nd Hampden's shift from a 4.22% Democratic lean to
+a 4.00% Republican lean.
 :::
 
 ### Challenging Districts
