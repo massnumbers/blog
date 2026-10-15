@@ -17,7 +17,7 @@ The [most recent poll from Suffolk University](http://www.suffolk.edu/news/25738
 
 ![Preliminary supporter chart](images/imgur-1byuoBu.png)
 
-The survey shows a strong lead for Walsh among voters that voted for Arroyo and Barros in the preliminary election, and a smaller lead among Golar Richie voters. A ward-by-ward map of the Suffolk results shows Walsh starting to consolidate the [areas won by his endorsers](https://massnumbers.blogspot.com/2013/09/a-map-of-boston-mayoral-precinct.html).
+The survey shows a strong lead for Walsh among voters that voted for Arroyo and Barros in the preliminary election, and a smaller lead among Golar Richie voters. A ward-by-ward map of the Suffolk results shows Walsh starting to consolidate the [areas won by his endorsers](../2013-09-26-boston-mayoral-precinct-winners/index.qmd).
 
 **SUFFOLK WARD-BY-WARD RESULTS (click for interactive map)**
 
