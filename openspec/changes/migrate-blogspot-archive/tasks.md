@@ -42,8 +42,8 @@
 
 ## 7. Stage two, reconstruction candidates
 
-- [ ] 7.1 For each of the 4 local-data candidates (2012-11-15, 2014-05-27, 2015-11-01, 2017-12-05), list every figure the prose states about the map, compute the same figures from the local data, and record the verdict and evidence in `fusion_tables.csv` `prose_agreement`; verify no tier-1 row for these posts still reads `UNTESTED`
-- [ ] 7.2 For each of the 3 external-data candidates (2012-11-13, 2013-01-31, 2017-11-06), download the `electionstats.state.ma.us` CSV into the post's `_sources/`, run the same prose-agreement check, and record the verdict; verify no tier-1 row remains `UNTESTED`
+- [x] 7.1 For each of the 4 local-data candidates (2012-11-15, 2014-05-27, 2015-11-01, 2017-12-05), list every figure the prose states about the map, compute the same figures from the local data, and record the verdict and evidence in `fusion_tables.csv` `prose_agreement`; verify no tier-1 row for these posts still reads `UNTESTED`
+- [x] 7.2 For each of the 3 external-data candidates (2012-11-13, 2013-01-31, 2017-11-06), download the `electionstats.state.ma.us` CSV into the post's `_sources/`, run the same prose-agreement check, and record the verdict; verify no tier-1 row remains `UNTESTED`
 - [ ] 7.3 Port each candidate that passed: build the map in an R chunk reading only local files, with `tmap_mode("view")` and the `tmap` object printed directly, add the reconstruction disclosure naming the data source, and verify the rendered page shows a working map and the post passes `verify_fidelity.py`; commit each post separately
 - [ ] 7.4 Port each candidate that failed as a declared-missing post whose note states why it was not rebuilt, update its `fidelity_tier` in `fusion_tables.csv`, verify as in 6.1, and commit each post separately
 
