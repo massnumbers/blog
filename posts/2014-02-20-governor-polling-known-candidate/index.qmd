@@ -1,0 +1,24 @@
+---
+title: "Who is way ahead in MA Governor polling? The candidate whose name voters know"
+description: "Party schisms are not the reason for difference between Coakley's lead in polls and Grossman's lead in caucus delegates"
+author:
+  - name: Brent Benson
+    url: https://massnumbers.us/brentbenson
+image: images/imgur-h7JrqEF.png
+date: 2014-02-20
+categories: [blogger-archive]
+---
+
+::: {.callout-note appearance="simple"}
+Originally published on the [Mass. Numbers Blogger site](https://massnumbers.blogspot.com/2014/02/who-is-way-ahead-in-ma-governor-polling.html) on 2014-02-20.
+:::
+
+The race to replace Massachusetts Governor Deval Patrick is heating up as the Massachusetts Democratic Party conducts local caucuses to determine delegates to state convention. Candidates must win the first votes of 15 percent of the delegates to get on the primary ballot and the candidates have been working to line up pledged delegates at the caucuses.
+
+Polls of the general electorate have shown Attorney General Martha Coakley with a commanding lead, while Treasurer Steve Grossman is the leader in pledged delegates. A [National Journal article](http://www.nationaljournal.com/hotline-on-call/how-martha-coakley-could-lose-again-20140220) suggests that "discrepancy between Coakley's lead in the polls and Grossman's strength among the party faithful represents a schism between activists still wary of Coakley after her 2010 loss and a general electorate that's more forgiving."
+
+In fact, Coakley's lead in the polls is due to the fact that she is the only candidate known to the majority of the voting electorate. The [latest Suffolk/Boston Herald poll](../2014-02-04-governor-polling-name-recognition/index.qmd) shows that a full 82% of the voters have an opinion of Coakley, while only 35% have an opinion of Grossman.
+
+![Name recognition of MA Gov candidates (Suffolk)](images/imgur-h7JrqEF.png)
+
+While there are [plenty of factions and strong opinions](http://www.bostonglobe.com/metro/2014/02/20/caucuses-revealing-weaknesses-martha-coakley-campaign/xQI0pBosEZaYsq2O4DgFOJ/story.html) about the best candidate within the party activists and elected officials who attend the Democratic convention, it is clear from the polling the larger set of people who vote in Democratic primaries do not know the candidates well enough to provide much insight into the outcome of the primary on September 9, 2014.

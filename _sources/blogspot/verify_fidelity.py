@@ -38,6 +38,9 @@ BLOGGER_POST_RE = re.compile(r'href="(https?://massnumbers\.blogspot\.com/\d{4}/
 
 def words_from_html(raw):
     text = re.sub(r"<(script|style)\b.*?</\1>", " ", raw, flags=re.S | re.I)
+    # Inline tags can sit inside a word (a link starting mid-word), so they
+    # vanish without a space; every other tag separates words.
+    text = re.sub(r"</?(a|b|i|em|strong|span|font|u)\b[^>]*>", "", text, flags=re.I)
     text = re.sub(r"<[^>]+>", " ", text)
     return normalize(text)
 

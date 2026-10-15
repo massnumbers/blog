@@ -64,6 +64,23 @@ class Converter:
     def convert(self, body):
         text = body
 
+        # Inline CSS is page styling, not prose.
+        text = re.sub(r"<style\b[^>]*>.*?</style>", "", text, flags=re.S | re.I)
+
+        # <pre> blocks are fixed-width tables and formulas whose columns depend
+        # on their whitespace. Set them aside before whitespace is normalized
+        # and restore them as fenced blocks at the end.
+        pre_blocks = []
+
+        def hold_pre(m):
+            inner = re.sub(r"<br\s*/?>", "\n", m.group(1), flags=re.I)
+            inner = html.unescape(re.sub(r"<[^>]+>", "", inner)).replace("\xa0", " ")
+            pre_blocks.append(inner.strip("\n").rstrip())
+            self.flag("pre-preserved")
+            return f"\n\nPREBLOCK{len(pre_blocks) - 1}PREBLOCK\n\n"
+
+        text = re.sub(r"<pre\b[^>]*>(.*?)</pre>", hold_pre, text, flags=re.S | re.I)
+
         # Fusion Tables iframes and their wrapping anchors are dead; remove the
         # markup and leave a marker for the tier decision to replace by hand.
         text = re.sub(r"<iframe\b[^>]*>.*?</iframe>", self._iframe, text,
@@ -114,6 +131,8 @@ class Converter:
         text = re.sub(r"(?<!\*)\*{2}\s*\*{2}(?!\*)", "", text)
         text = re.sub(r"[ \t]+$", "", text, flags=re.M)
         text = re.sub(r"\n{3,}", "\n\n", text)
+        for n, block in enumerate(pre_blocks):
+            text = text.replace(f"PREBLOCK{n}PREBLOCK", f"```\n{block}\n```")
         return text.strip()
 
     def _table(self, m):

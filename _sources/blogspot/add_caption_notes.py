@@ -16,18 +16,24 @@ NOTE = '''::: {.callout-note appearance="simple"}
 The interactive version of this map was built with Google Fusion Tables, which
 Google shut down on 3 December 2019. Only the static image survives.
 :::'''
-targets = dict(line.split("\t", 1) for line in (HERE / "stale_captions.tsv").read_text().splitlines()
-               if line and not line.startswith("#"))
-for d, marker in targets.items():
+rows = [line.split("\t", 1) for line in (HERE / "stale_captions.tsv").read_text().splitlines()
+        if line and not line.startswith("#")]
+for d, marker in rows:
     p = BLOG / "posts" / d / "index.qmd"
     if not p.exists():
         continue
     t = p.read_text()
-    if "Only the static image survives" in t:
-        continue
     body_start = t.index("\n---\n", 4) + 5
-    i = t.index(marker, body_start)
-    end = t.find("\n\n", i)
-    end = len(t) if end == -1 else end
-    p.write_text(t[:end] + "\n\n" + NOTE + t[end:])
-    print("noted", d)
+    added = 0
+    i = t.find(marker, body_start)
+    while i != -1:
+        end = t.find("\n\n", i)
+        end = len(t) if end == -1 else end
+        # Every occurrence gets the note once; rerunning adds nothing.
+        if not t[end:].startswith("\n\n" + NOTE):
+            t = t[:end] + "\n\n" + NOTE + t[end:]
+            added += 1
+        i = t.find(marker, end + len(NOTE) + 2)
+    if added:
+        p.write_text(t)
+        print(f"noted {d} ({added})")

@@ -23,10 +23,10 @@
 
 ## 4. Stage one, batch 2014
 
-- [ ] 4.1 Convert and stage the 30 remaining 2014 posts that are not stage-two posts, and verify no remote image or Fusion Tables URL is reported
-- [ ] 4.2 Resolve the batch's hand-correction flags and verify no flagged string remains
-- [ ] 4.3 Render the batch and verify render, archive listing, front-page exclusion, and `verify_fidelity.py` as in 3.3, including that links into the 2012-2013 batch now resolve without Quarto warnings
-- [ ] 4.4 Mark the batch's manifest rows `verified` and commit the batch
+- [x] 4.1 Convert and stage the 30 remaining 2014 posts that are not stage-two posts, and verify no remote image or Fusion Tables URL is reported
+- [x] 4.2 Resolve the batch's hand-correction flags and verify no flagged string remains
+- [x] 4.3 Render the batch and verify render, archive listing, front-page exclusion, and `verify_fidelity.py` as in 3.3, including that links into the 2012-2013 batch now resolve without Quarto warnings
+- [x] 4.4 Mark the batch's manifest rows `verified` and commit the batch
 
 ## 5. Stage one, batch 2015-2022
 

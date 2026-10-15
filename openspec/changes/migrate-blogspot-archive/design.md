@@ -143,7 +143,9 @@ read from there, so re-rendering never touches the network.
 - [`docs/` diffs are too large to review] → Commits separate source (`posts/`) from
   rendered output where practical, and the review focus is the `.qmd` and image diff.
 - [Thumbnail choice for the archive listing] → Posts with images use their first
-  image as `image:`; image-free posts fall back to the site default. Mechanical, so no
+  image as `image:`; image-free posts get no thumbnail, as image-free native posts
+  already do. (Quarto warns about their preview image while a batch is mid-render;
+  the warning clears once every post in the batch exists.) Mechanical, so no
   per-post decision is needed.
 
 ## Migration Plan
