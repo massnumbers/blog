@@ -72,9 +72,12 @@ converter maps a `massnumbers.blogspot.com/YYYY/MM/*.html` href to its manifest 
 `blogger_path`, matching on path only so `http`/`https` and `www` variants all
 resolve, and emits `../<site_dir>/index.qmd`, which Quarto resolves to the post's
 rendered URL. Unmatched Blogger hrefs (label pages, the home page) pass through
-unchanged. Because every slug is fixed before staging, a link to a post in a later
-batch is written correctly from the start; it is a dangling link only until that batch
-lands, and the final verification catches any that remain.
+unchanged. A link whose target is not ported yet would be broken on the site, so
+`stage_post.py` runs a relink pass after every staging: relative links to unported
+targets go back to their Blogger URL, and Blogger URLs whose target now exists become
+relative links. Every commit is therefore self-consistent, and links into stage-two
+posts (and the pilots' links into later batches) upgrade on their own when the target
+lands. The pass rewrites link targets only, so it is safe on hand-corrected files.
 *Alternative considered:* absolute `https://www.massnumbers.us/posts/...` URLs.
 Rejected -- relative `.qmd` links let Quarto warn about broken targets at render time.
 
@@ -135,8 +138,8 @@ read from there, so re-rendering never touches the network.
 - [Prose-similarity scores below 1.0 are noisy] → Score is a triage signal; any post
   below 1.0000 is read against its original by hand and the cause recorded, as was
   done for the pilots.
-- [Dangling intra-archive links between batches] → Visible as Quarto render warnings
-  and accepted for the duration of the change; final verification requires zero.
+- [Dangling intra-archive links between batches] → Prevented by the relink pass;
+  final verification with `--strict-links` requires that none remain.
 - [`docs/` diffs are too large to review] → Commits separate source (`posts/`) from
   rendered output where practical, and the review focus is the `.qmd` and image diff.
 - [Thumbnail choice for the archive listing] → Posts with images use their first

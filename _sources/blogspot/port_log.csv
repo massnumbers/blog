@@ -1,0 +1,2 @@
+batch,posts,working_min,render_min,notes
+2012-2013,36,75,5,"approximate session time; about half was fixing tooling found by the first verify run (description double-count, punctuation normalization, link whitespace, remote full-size image links, an href holding two URLs) and re-staging; 7 stale-caption notes; render is per-post, about 4 s each"

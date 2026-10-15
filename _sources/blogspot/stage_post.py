@@ -22,6 +22,8 @@ BLOG = HERE.parent.parent
 MANIFEST = HERE / "manifest.csv"
 
 IMAGE_RE = re.compile(r"!\[[^\]]*\]\(images/([^)]+)\)")
+LOCAL_LINK_RE = re.compile(r"\]\(\.\./(\d{4}-\d{2}-\d{2}-[a-z0-9-]+)/index\.qmd(#[^)]*)?\)")
+BLOGGER_LINK_RE = re.compile(r"\]\(https?://massnumbers\.blogspot\.com(/\d{4}/\d{2}/[^)#?]+)(#[^)]*)?\)")
 
 
 def stage_two_permalinks():
@@ -63,6 +65,43 @@ def stage(row, converted, originals, dest_root):
     return remote == 0 and fusion == 0
 
 
+def relink(rows, posts_root):
+    """Point every intra-archive link at a ported copy only once it exists.
+
+    The converter writes ../<site_dir>/index.qmd for every link to another
+    Blogger post. A target that is not ported yet would be a broken link on
+    the site, so it goes back to its Blogger URL; a Blogger URL whose target
+    has since been ported becomes the relative link. Run after every staging
+    so each commit is self-consistent. Edits only link targets, never text.
+    """
+    by_dir = {r["site_dir"]: r for r in rows}
+    by_path = {r["blogger_path"]: r["site_dir"] for r in rows}
+    ported = {d.name for d in posts_root.iterdir() if (d / "index.qmd").exists()}
+    changed = 0
+    for site_dir in sorted(ported & set(by_dir)):
+        qmd_path = posts_root / site_dir / "index.qmd"
+        qmd = qmd_path.read_text()
+
+        def to_blogger(m):
+            target = m.group(1)
+            if target in ported or target not in by_dir:
+                return m.group(0)
+            return f"]({by_dir[target]['permalink']}{m.group(2) or ''})"
+
+        def to_local(m):
+            target = by_path.get(m.group(1))
+            if not target or target == site_dir or target not in ported:
+                return m.group(0)
+            return f"](../{target}/index.qmd{m.group(2) or ''})"
+
+        new = BLOGGER_LINK_RE.sub(to_local, LOCAL_LINK_RE.sub(to_blogger, qmd))
+        if new != qmd:
+            qmd_path.write_text(new)
+            changed += 1
+            print(f"relinked {site_dir}")
+    return changed
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--converted", required=True, type=Path,
@@ -95,6 +134,7 @@ def main():
                 originals[link["href"]] = entry["content"]["$t"]
 
     clean = all([stage(r, args.converted, originals, args.dest) for r in wanted])
+    relink(rows, args.dest)
 
     if not args.no_status:
         for r in wanted:

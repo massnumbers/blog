@@ -53,15 +53,26 @@ def words_from_qmd(raw):
     if desc:
         # Only credit the description when the subtitle actually moved out of
         # the body; when it survives as a heading too, counting both duplicates it.
-        if normalize(desc.group(1)) and normalize(desc.group(1)) not in \
-                [normalize(line) for line in body.split("\n") if line.strip()]:
+        # A description drawn from the opening sentences is a copy of body
+        # text, not a moved subtitle, so it is not credited either.
+        desc_words = normalize(desc.group(1).rstrip("."))
+        body_words = normalize(strip_markup(body))
+        if desc_words and desc_words not in \
+                [normalize(line) for line in body.split("\n") if line.strip()] \
+                and not contains_run(body_words, desc_words):
             body = desc.group(1) + "\n" + body
     # Drop the provenance callout and any tier note: both are additions the
     # spec requires, not original prose.
     body = re.sub(r"::: \{\.callout-note[^}]*\}.*?:::", " ", body, flags=re.S)
-    body = re.sub(r"!\[[^\]]*\]\([^)]*\)", " ", body)          # images
-    body = re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", body)       # link text only
-    return normalize(body)
+    return normalize(strip_markup(body))
+
+
+def strip_markup(body):
+    """Images removed, links reduced to their text. Link targets may contain
+    balanced parentheses, as some poll PDF URLs do."""
+    target = r"\((?:<[^>]*>|(?:[^()\s]|\([^()]*\))*)\)"
+    body = re.sub(r"!\[[^\]]*\]" + target, " ", body)
+    return re.sub(r"\[([^\]]*)\]" + target, r"\1", body)
 
 
 def normalize(text):
@@ -69,7 +80,16 @@ def normalize(text):
     text = re.sub(r"[*#>`]", " ", text)
     text = text.lower()
     text = re.sub(r"[^a-z0-9%.\- ]", " ", text)
-    return [w for w in text.split() if w not in {"-", ".", "%"}]
+    # Trailing periods and leading dashes attach to whichever word markup left
+    # them next to, so they are not part of the comparison.
+    words = (w.rstrip(".").lstrip("-") for w in text.split())
+    return [w for w in words if w and w != "%"]
+
+
+def contains_run(words, run):
+    """True when run appears as a contiguous sequence in words."""
+    n = len(run)
+    return any(words[i:i + n] == run for i in range(len(words) - n + 1))
 
 
 def drop_byline(words):

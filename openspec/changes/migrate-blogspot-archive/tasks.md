@@ -16,10 +16,10 @@
 
 ## 3. Stage one, batch 2012-2013
 
-- [ ] 3.1 Convert and stage the 36 remaining 2012-2013 posts that are not stage-two posts, and verify `stage_post.py` reports no remote image and no Fusion Tables URL for any of them
-- [ ] 3.2 Resolve hand-correction flags in the batch (stale interactive captions as distinct notes after the original sentence, leftover `<pre>`/`<style>` remnants) and verify `grep -L` finds no flagged string left in the staged `.qmd` files; rewrite the intra-archive links in the 2012-11-18 and 2013-01-03 pilots, whose targets land in this batch, and verify neither pilot still links to a Blogger post URL other than its own permalink
-- [ ] 3.3 Render the batch's `.qmd` files and verify each renders without error, appears on the archive page at its original date, is absent from the front page and feed, and passes `verify_fidelity.py`; read every post scoring below 1.0000 against its original and record the cause
-- [ ] 3.4 Mark the batch's manifest rows `verified` and commit the batch
+- [x] 3.1 Convert and stage the 36 remaining 2012-2013 posts that are not stage-two posts, and verify `stage_post.py` reports no remote image and no Fusion Tables URL for any of them
+- [x] 3.2 Resolve hand-correction flags in the batch (stale interactive captions as distinct notes after the original sentence, leftover `<pre>`/`<style>` remnants) and verify `grep -L` finds no flagged string left in the staged `.qmd` files; verify the relink pass pointed the 2013-01-03 pilot's link at the newly ported 2012-11-26 post (the 2012-11-18 pilot's target is a stage-two post and upgrades when that lands)
+- [x] 3.3 Render the batch's `.qmd` files and verify each renders without error, appears on the archive page at its original date, is absent from the front page and feed, and passes `verify_fidelity.py`; read every post scoring below 1.0000 against its original and record the cause
+- [x] 3.4 Mark the batch's manifest rows `verified` and commit the batch
 
 ## 4. Stage one, batch 2014
 

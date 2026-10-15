@@ -23,6 +23,11 @@ HERE = Path(__file__).parent
 
 ARCHIVE_CATEGORY = "blogger-archive"
 
+# Hosts a linked image's href points at when the link is only "view full
+# size". The image itself is localized, so the remote link is dropped.
+IMAGE_HOST_RE = re.compile(r"i\.imgur\.com|imgur\.com/|blogger\.googleusercontent\.com|"
+                           r"bp\.blogspot\.com", re.I)
+
 FUSION_RE = re.compile(r"fusiontables?\.(google|googleusercontent)\.com|"
                        r"google\.com/fusiontables", re.I)
 
@@ -157,6 +162,9 @@ class Converter:
         if FUSION_RE.search(href):
             self.flag("fusion-link-on-image")
             return f"\n\n{inner}\n\n"
+        if IMAGE_HOST_RE.search(href) or href in self.image_map:
+            self.flag("image-link-removed")
+            return f"\n\n{inner}\n\n"
         if href:
             return f"\n\n[{inner}]({href})\n\n"
         return f"\n\n{inner}\n\n"
@@ -177,10 +185,18 @@ class Converter:
         href = strip_attrs(f"<a {m.group(1)}>", {"href"}).get("href", "")
         inner = m.group(2)
         label = re.sub(r"<br\s*/?>", "\n", inner, flags=re.I)
-        label = re.sub(r"<[^>]+>", "", label).strip()
-        label = html.unescape(label).replace("\xa0", " ")
+        label = html.unescape(re.sub(r"<[^>]+>", "", label)).replace("\xa0", " ")
+        # Whitespace at the edge of the anchor text separates the link from
+        # its neighbours; keep it, outside the brackets.
+        lead = " " if label[:1].isspace() else ""
+        trail = " " if label[-1:].isspace() else ""
+        label = label.strip()
         if not href:
             return label
+
+        if "![" in label and (IMAGE_HOST_RE.search(href) or href in self.image_map):
+            self.flag("image-link-removed")
+            return f"\n\n{label}\n\n"
 
         if FUSION_RE.search(href):
             # Anchors wrapping an image are the archive's dominant map pattern:
@@ -190,10 +206,16 @@ class Converter:
                 self.flag("fusion-link-on-image")
                 return f"\n\n{label}\n\n"
             self.flag("fusion-link-removed")
-            return label
+            return lead + label + trail
 
         href = self._archive_target(href)
-        return f"[{label}]({href})" if label else ""
+        if re.search(r"\s", href):
+            # A few published hrefs contain spaces (one holds two URLs). Encode
+            # them as browsers did on Blogger, rather than letting the space
+            # break the link into literal text.
+            self.flag("href-with-space")
+            href = re.sub(r"\s", "%20", href)
+        return f"{lead}[{label}]({href}){trail}" if label else lead + trail
 
     def _archive_target(self, href):
         """Point a link to another Blogger post at that post's ported copy.
@@ -336,7 +358,16 @@ def main():
         })
 
     if args.report:
-        with Path(args.report).open("w", newline="") as fh:
+        # issues and grade are the hand review of each post's output; keep them
+        # when the mechanical columns are regenerated.
+        report_path = Path(args.report)
+        if report_path.exists():
+            kept = {(r["date"], r["title"]): r for r in csv.DictReader(report_path.open())}
+            for row in report:
+                old = kept.get((row["date"], row["title"]), {})
+                row["issues"] = old.get("issues", "")
+                row["grade"] = old.get("grade", "")
+        with report_path.open("w", newline="") as fh:
             writer = csv.DictWriter(fh, fieldnames=list(report[0]))
             writer.writeheader()
             writer.writerows(report)

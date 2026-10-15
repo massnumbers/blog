@@ -1,0 +1,26 @@
+---
+title: "Charlie Baker's problem isn't lack of personality, it's that nobody knows who he is"
+description: "Baker's name recognition numbers incredibly low for a recent gubernatorial candidate"
+author:
+  - name: Brent Benson
+    url: https://massnumbers.us/brentbenson
+image: images/imgur-B33v1.png
+date: 2013-08-22
+categories: [blogger-archive]
+---
+
+::: {.callout-note appearance="simple"}
+Originally published on the [Mass. Numbers Blogger site](https://massnumbers.blogspot.com/2013/08/charlie-bakers-problem-isnt-lack-of.html) on 2013-08-22.
+:::
+
+Former Senator Scott Brown announced last night that he is not planning to run for Massachusetts Governor, leaving the GOP field wide open for former gubernatorial candidate Charlie Baker. Brown was [quoted as saying of Baker](http://www.bostonglobe.com/metro/2013/08/21/brown-will-not-run/O0fLXXnAZwKPy7nOPuMzuL/story.html) "Is he he Mr. Personality? No. Everyone knows that he's not." Unfortunately for Baker, the problem is not that he lacks personality, but that Massachusetts voters don't know who he is, even after a high-profile run for Governor three years ago.
+
+A [poll conducted by WBUR and MassINC Polling](http://www.wbur.org/2012/12/20/wbur-special-senate-election-poll) in mid-December 2012, just two years after Deval Patrick defeated Charlie Baker and Tim Cahill in a well-covered statewide race, showed Charlie Baker tied with Marty Meehan for lowest name recognition, with 36% of voters having never heard of either—an astoundingly low number for a recent gubernatorial candidate. An additional 35% of respondents didn't know enough about Baker to have an opinion, leaving 17% who looked on Baker favorably, and 13% who had an unfavorable impression. There were fully 71% of the surveyed voters that hadn't connected at any level with Baker.
+
+![Poll name recognition chart](images/imgur-B33v1.png)
+
+A more recent [poll conducted by Public Policy Polling](http://www.publicpolicypolling.com/main/2013/05/wide-open-in-massachusetts.html) in early May of 2013 had similar findings with 21% of the respondents having a favorable opinion of Charlie Baker, 20% unfavorable, and 59% of the surveyed voters unsure.
+
+While Treasurer Steve Grossman, who has recently declared his candidacy for governor, had similarly low name-recognition numbers in the May PPP poll (20% favorable, 14% unfavorable, and 66% not sure), Grossman's campaign for Treasurer in 2010 against GOP nominee Karyn Polito did not receive nearly the media attention of the governor's race. Grossman has yet to have his opportunity to make a splash with the Massachusetts electorate.
+
+While Charlie Baker's lack of personality may be a contributor to his failure to make an impression on Massachusetts voters in 2010, it is clear that he has an incredible amount of work to do in order to win a majority in 2014.
