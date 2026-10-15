@@ -1,0 +1,15 @@
+---
+title: "Archive"
+description: |
+  Posts from the original Mass. Numbers blog on Blogger, 2012-2022
+listing:
+  contents: posts
+  sort: "date desc"
+  type: default
+  include:
+    categories: "blogger-archive"
+---
+
+Mass. Numbers ran on [Blogger](https://massnumbers.blogspot.com) from November 2012
+until August 2022. These posts are ported from that site with their original dates
+and text; each links to its Blogger original.

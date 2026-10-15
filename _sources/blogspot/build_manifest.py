@@ -44,7 +44,15 @@ def main():
         })
     rows.sort(key=lambda r: r["date"])
 
+    # site_dir and port_status are maintained by hand and by the porting
+    # scripts; carry them over so a rebuild from the feed does not lose them.
     out = HERE / "manifest.csv"
+    if out.exists():
+        kept = {r["permalink"]: r for r in csv.DictReader(out.open())}
+        for row in rows:
+            old = kept.get(row["permalink"], {})
+            row["site_dir"] = old.get("site_dir", "")
+            row["port_status"] = old.get("port_status", "pending")
     with out.open("w", newline="") as fh:
         writer = csv.DictWriter(fh, fieldnames=list(rows[0]))
         writer.writeheader()

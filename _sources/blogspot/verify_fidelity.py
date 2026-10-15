@@ -1,9 +1,21 @@
-"""Compare each ported post's prose against its Blogger original.
+"""Verify ported Blogger posts against their originals and the port rules.
 
-Task 4.6 of the port-blogspot-archive change. Both sides are reduced to a bare
-word sequence -- markup, image syntax, link targets and the added provenance
-callout removed -- so the diff shows only genuine additions or losses of prose.
+Started as task 4.6 of port-blogspot-archive; driven by the manifest since
+migrate-blogspot-archive. For every manifest row that has been staged or
+verified (or the site_dirs named on the command line), two kinds of check run:
+
+- Prose: both sides are reduced to a bare word sequence -- markup, image
+  syntax, link targets and the added editorial callouts removed -- so the diff
+  shows only genuine additions or losses of prose.
+- Rendered output in docs/posts/<site_dir>/index.html: no imgur or
+  Blogger-hosted image, no Fusion Tables URL, no unresolved TODO-TIER marker,
+  and a link to the post's own Blogger permalink. With --strict-links, no link
+  to any other Blogger post may remain either.
+
+--mark-verified moves passing staged rows to port_status=verified.
 """
+import argparse
+import csv
 import difflib
 import html
 import json
@@ -13,12 +25,15 @@ from pathlib import Path
 
 HERE = Path(__file__).parent
 BLOG = HERE.parent.parent
+MANIFEST = HERE / "manifest.csv"
 
-PILOTS = {
-    "2013-01-03-senate-candidate-qualifications": "2013-01-03",
-    "2014-08-12-governor-polling-averages": "2014-08-12",
-    "2012-11-18-house-district-partisan-ranking": "2012-11-18",
+FORBIDDEN = {
+    "imgur": re.compile(r"i\.imgur\.com", re.I),
+    "blogger-image": re.compile(r"blogger\.googleusercontent\.com|bp\.blogspot\.com", re.I),
+    "fusion": re.compile(r"fusiontables?\.(google|googleusercontent)\.com|google\.com/fusiontables", re.I),
+    "tier-marker": re.compile(r"TODO-TIER"),
 }
+BLOGGER_POST_RE = re.compile(r'href="(https?://massnumbers\.blogspot\.com/\d{4}/\d{2}/[^"#?]+)')
 
 
 def words_from_html(raw):
@@ -65,41 +80,86 @@ def drop_byline(words):
     return words
 
 
+def prose_diff(entry, qmd):
+    orig = drop_byline(words_from_html(entry["content"]["$t"]))
+    port = words_from_qmd(qmd)
+    sm = difflib.SequenceMatcher(None, orig, port, autojunk=False)
+    added, removed = [], []
+    for tag, i1, i2, j1, j2 in sm.get_opcodes():
+        if tag in ("delete", "replace"):
+            removed += orig[i1:i2]
+        if tag in ("insert", "replace"):
+            added += port[j1:j2]
+    return len(orig), len(port), sm.ratio(), added, removed
+
+
+def rendered_problems(row, strict_links):
+    page = BLOG / "docs" / "posts" / row["site_dir"] / "index.html"
+    if not page.exists():
+        return ["not rendered"]
+    out = page.read_text()
+    problems = [name for name, rx in FORBIDDEN.items() if rx.search(out)]
+    own = row["permalink"].split("://", 1)[1]
+    if own not in out:
+        problems.append("no provenance link")
+    if strict_links:
+        others = {u for u in BLOGGER_POST_RE.findall(out) if u.split("://", 1)[1] != own}
+        if others:
+            problems.append(f"blogger post links {len(others)}")
+    return problems
+
+
 def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("site_dirs", nargs="*", help="limit to these manifest site_dirs")
+    ap.add_argument("--strict-links", action="store_true",
+                    help="fail on any remaining link to another Blogger post")
+    ap.add_argument("--mark-verified", action="store_true",
+                    help="set port_status=verified on staged rows that pass")
+    args = ap.parse_args()
+
+    rows = list(csv.DictReader(MANIFEST.open()))
+    if args.site_dirs:
+        unknown = set(args.site_dirs) - {r["site_dir"] for r in rows}
+        if unknown:
+            raise SystemExit(f"not in manifest: {sorted(unknown)}")
+        targets = [r for r in rows if r["site_dir"] in args.site_dirs]
+    else:
+        targets = [r for r in rows if r["port_status"] in ("staged", "verified")]
+
     feed = json.loads((HERE / "feed.json").read_text())["feed"]
-    failures = 0
-    for slug, date in PILOTS.items():
-        qmd = (BLOG / "posts" / slug / "index.qmd").read_text()
-        title = qmd.split("\n")[1].split('"')[1]
-        entry = next(e for e in feed["entry"]
-                     if e["published"]["$t"][:10] == date and e["title"]["$t"] == title)
+    entries = {}
+    for e in feed["entry"]:
+        for link in e.get("link", []):
+            if link.get("rel") == "alternate":
+                entries[link["href"]] = e
 
-        orig = words_from_html(entry["content"]["$t"])
-        orig = drop_byline(orig)
-        port = words_from_qmd(qmd)
+    failures = []
+    for row in targets:
+        qmd = (BLOG / "posts" / row["site_dir"] / "index.qmd").read_text()
+        n_orig, n_port, ratio, added, removed = prose_diff(entries[row["permalink"]], qmd)
+        problems = rendered_problems(row, args.strict_links)
 
-        sm = difflib.SequenceMatcher(None, orig, port, autojunk=False)
-        added, removed = [], []
-        for tag, i1, i2, j1, j2 in sm.get_opcodes():
-            if tag in ("delete", "replace"):
-                removed += orig[i1:i2]
-            if tag in ("insert", "replace"):
-                added += port[j1:j2]
-
-        ratio = sm.ratio()
-        print(f"\n=== {slug}")
-        print(f"    original words {len(orig):5}   ported words {len(port):5}   similarity {ratio:.4f}")
+        status = "ok" if not (added or removed or problems) else "FAIL"
+        print(f"{status:4} {ratio:.4f} {row['site_dir']}"
+              f"  (words {n_orig} -> {n_port})" + (f"  [{', '.join(problems)}]" if problems else ""))
         if removed:
-            print(f"    REMOVED ({len(removed)}): {' '.join(removed[:25])}")
+            print(f"       REMOVED ({len(removed)}): {' '.join(removed[:25])}")
         if added:
-            print(f"    ADDED   ({len(added)}): {' '.join(added[:25])}")
-        if not removed and not added:
-            print("    prose identical after formatting normalization")
-        if removed or added:
-            failures += 1
+            print(f"       ADDED   ({len(added)}): {' '.join(added[:25])}")
+        if status == "ok" and args.mark_verified and row["port_status"] == "staged":
+            row["port_status"] = "verified"
+        if status != "ok":
+            failures.append(row["site_dir"])
 
-    print(f"\nposts with any prose difference: {failures}/{len(PILOTS)}")
-    return 0 if failures == 0 else 1
+    if args.mark_verified:
+        with MANIFEST.open("w", newline="") as fh:
+            writer = csv.DictWriter(fh, fieldnames=list(rows[0]))
+            writer.writeheader()
+            writer.writerows(rows)
+
+    print(f"\nchecked {len(targets)}, failing {len(failures)}")
+    return 0 if not failures else 1
 
 
 if __name__ == "__main__":

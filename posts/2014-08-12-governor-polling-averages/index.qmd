@@ -6,6 +6,7 @@ author:
     url: https://massnumbers.us/brentbenson
 image: images/imgur-2Lw8G4p.png
 date: 2014-08-12
+categories: [blogger-archive]
 ---
 
 ::: {.callout-note appearance="simple"}

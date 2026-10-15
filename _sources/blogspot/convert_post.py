@@ -15,10 +15,13 @@ import html
 import json
 import re
 from pathlib import Path
+from urllib.parse import urlsplit
 
 from build_manifest import permalink, slugify
 
 HERE = Path(__file__).parent
+
+ARCHIVE_CATEGORY = "blogger-archive"
 
 FUSION_RE = re.compile(r"fusiontables?\.(google|googleusercontent)\.com|"
                        r"google\.com/fusiontables", re.I)
@@ -33,14 +36,21 @@ def load_image_map():
             if r["status"] == "ok"}
 
 
+def load_site_dirs():
+    """Blogger post path -> posts/ directory name, from the manifest."""
+    return {r["blogger_path"]: r["site_dir"]
+            for r in csv.DictReader((HERE / "manifest.csv").open())}
+
+
 def strip_attrs(tag_html, keep):
     return {k.lower(): html.unescape(v) for k, v in
             re.findall(r'\b([a-zA-Z-]+)\s*=\s*"([^"]*)"', tag_html) if k.lower() in keep}
 
 
 class Converter:
-    def __init__(self, image_map):
+    def __init__(self, image_map, site_dirs):
         self.image_map = image_map
+        self.site_dirs = site_dirs
         self.flags = []
 
     def flag(self, kind, detail=""):
@@ -182,7 +192,26 @@ class Converter:
             self.flag("fusion-link-removed")
             return label
 
+        href = self._archive_target(href)
         return f"[{label}]({href})" if label else ""
+
+    def _archive_target(self, href):
+        """Point a link to another Blogger post at that post's ported copy.
+
+        Matching is on the path alone so http/https and host variants resolve.
+        Blogger pages that are not posts (static /p/ pages, label searches,
+        the home page) have no ported copy and are left as published.
+        """
+        parts = urlsplit(href)
+        if not parts.netloc.endswith("massnumbers.blogspot.com"):
+            return href
+        site_dir = self.site_dirs.get(parts.path)
+        if not site_dir:
+            self.flag("archive-link-kept", parts.path[:40])
+            return href
+        self.flag("archive-link-rewritten", site_dir)
+        anchor = f"#{parts.fragment}" if parts.fragment else ""
+        return f"../{site_dir}/index.qmd{anchor}"
 
 
 def split_lead(text):
@@ -236,8 +265,8 @@ def yaml_escape(value):
     return '"' + value.replace("\\", "\\\\").replace('"', '\\"') + '"'
 
 
-def build_qmd(entry, image_map):
-    conv = Converter(image_map)
+def build_qmd(entry, image_map, site_dirs):
+    conv = Converter(image_map, site_dirs)
     title = entry["title"]["$t"]
     date = entry["published"]["$t"][:10]
     url = permalink(entry)
@@ -254,6 +283,7 @@ def build_qmd(entry, image_map):
         "  - name: Brent Benson",
         "    url: https://massnumbers.us/brentbenson",
         f"date: {date}",
+        f"categories: [{ARCHIVE_CATEGORY}]",
         "---",
         "",
         f"::: {{.callout-note appearance=\"simple\"}}",
@@ -273,6 +303,7 @@ def main():
 
     feed = json.loads((HERE / "feed.json").read_text())["feed"]
     image_map = load_image_map()
+    site_dirs = load_site_dirs()
     out_dir = Path(args.out) if args.out else None
     if out_dir:
         out_dir.mkdir(parents=True, exist_ok=True)
@@ -282,16 +313,17 @@ def main():
         title = entry["title"]["$t"]
         date = entry["published"]["$t"][:10]
         slug = slugify(title)[:60].strip("-")
-        qmd, flags = build_qmd(entry, image_map)
+        site_dir = site_dirs.get(urlsplit(permalink(entry)).path) or f"{date}-{slug}"
+        qmd, flags = build_qmd(entry, image_map, site_dirs)
 
         if out_dir:
-            post_dir = out_dir / f"{date}-{slug}"
+            post_dir = out_dir / site_dir
             post_dir.mkdir(parents=True, exist_ok=True)
             (post_dir / "index.qmd").write_text(qmd)
 
         kinds = [f.split(":")[0] for f in flags]
         report.append({
-            "date": date, "slug": slug, "title": title,
+            "date": date, "slug": slug, "site_dir": site_dir, "title": title,
             "chars": len(qmd),
             "flags": ";".join(sorted(set(kinds))),
             "flag_detail": " | ".join(flags[:6]),
@@ -299,6 +331,8 @@ def main():
             "residual_fusion_urls": len(FUSION_RE.findall(qmd)),
             "residual_html": len(re.findall(r"<[a-zA-Z][^>]*>", qmd)),
             "remote_images": len(re.findall(r"!\[[^\]]*\]\(https?://", qmd)),
+            "archive_links": kinds.count("archive-link-rewritten"),
+            "archive_links_kept": kinds.count("archive-link-kept"),
         })
 
     if args.report:
@@ -312,6 +346,9 @@ def main():
     print(f"  posts with residual html tags   : {sum(1 for r in report if r['residual_html'])}")
     print(f"  posts with un-localized images  : {sum(1 for r in report if r['remote_images'])}")
     print(f"  posts with a tier marker        : {sum(1 for r in report if r['fusion_markers'])}")
+    print(f"  intra-archive links rewritten   : {sum(r['archive_links'] for r in report)}"
+          f" in {sum(1 for r in report if r['archive_links'])} posts")
+    print(f"  intra-archive links kept        : {sum(r['archive_links_kept'] for r in report)}")
 
 
 if __name__ == "__main__":

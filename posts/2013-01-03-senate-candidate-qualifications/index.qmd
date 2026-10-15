@@ -5,6 +5,7 @@ author:
   - name: Brent Benson
     url: https://massnumbers.us/brentbenson
 date: 2013-01-03
+categories: [blogger-archive]
 ---
 
 ::: {.callout-note appearance="simple"}

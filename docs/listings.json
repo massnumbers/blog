@@ -1,5 +1,13 @@
 [
   {
+    "listing": "/archive.html",
+    "items": [
+      "/posts/2014-08-12-governor-polling-averages/index.html",
+      "/posts/2013-01-03-senate-candidate-qualifications/index.html",
+      "/posts/2012-11-18-house-district-partisan-ranking/index.html"
+    ]
+  },
+  {
     "listing": "/index.html",
     "items": [
       "/posts/2026-09-03-close-primaries/index.html",
@@ -21,10 +29,7 @@
       "/posts/2022-08-31-state-rep-primaries/index.html",
       "/posts/2022-07-05-state-senate-primary-preview/index.html",
       "/posts/2022-07-18-senate-majority-minority/index.html",
-      "/posts/welcome/index.html",
-      "/posts/2014-08-12-governor-polling-averages/index.html",
-      "/posts/2013-01-03-senate-candidate-qualifications/index.html",
-      "/posts/2012-11-18-house-district-partisan-ranking/index.html"
+      "/posts/welcome/index.html"
     ]
   }
 ]
