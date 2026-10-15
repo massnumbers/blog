@@ -67,6 +67,9 @@ def words_from_qmd(raw):
     # Drop the provenance callout and any tier note: both are additions the
     # spec requires, not original prose.
     body = re.sub(r"::: \{\.callout-note[^}]*\}.*?:::", " ", body, flags=re.S)
+    # Executable chunks (a rebuilt map) are code, not prose; plain fenced
+    # blocks converted from <pre> are prose and stay.
+    body = re.sub(r"^```\{.*?^```[ \t]*$", " ", body, flags=re.S | re.M)
     return normalize(strip_markup(body))
 
 
