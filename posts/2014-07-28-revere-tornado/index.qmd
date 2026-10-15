@@ -4,7 +4,7 @@ description: "A look at the frequency of tornadoes in Massachusetts counties"
 author:
   - name: Brent Benson
     url: https://massnumbers.us/brentbenson
-image: images/imgur-9FN8JOS.png
+image: images/imgur-WwQamVt.png
 date: 2014-07-28
 categories: [blogger-archive]
 ---

@@ -4,7 +4,7 @@ description: "Redistricting changes removed GOP stronghold of Lynnfield and adde
 author:
   - name: Brent Benson
     url: https://massnumbers.us/brentbenson
-image: images/imgur-z6BWau9.png
+image: images/imgur-GIfV6z7.png
 date: 2014-03-09
 categories: [blogger-archive]
 ---

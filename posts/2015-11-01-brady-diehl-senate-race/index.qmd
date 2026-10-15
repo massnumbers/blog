@@ -4,7 +4,7 @@ description: "Precinct-by-precinct analysis shows 2nd Plymouth and Bristol distr
 author:
   - name: Brent Benson
     url: https://massnumbers.us/brentbenson
-image: images/imgur-eDhffJj.png
+image: images/map-thumbnail.png
 date: 2015-11-01
 categories: [blogger-archive]
 ---

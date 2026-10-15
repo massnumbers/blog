@@ -4,7 +4,7 @@ description: "Martha Coakley's loss to Scott Brown in the January 19, 2010 speci
 author:
   - name: Brent Benson
     url: https://massnumbers.us/brentbenson
-image: images/blogger-c095e056da83.png
+image: images/map-thumbnail.png
 date: 2012-11-13
 categories: [blogger-archive]
 ---

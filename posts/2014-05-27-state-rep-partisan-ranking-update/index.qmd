@@ -4,7 +4,7 @@ description: "Including a model of Democratic margin and win probability"
 author:
   - name: Brent Benson
     url: https://massnumbers.us/brentbenson
-image: images/imgur-wwUBACz.png
+image: images/map-thumbnail.png
 date: 2014-05-27
 categories: [blogger-archive]
 ---

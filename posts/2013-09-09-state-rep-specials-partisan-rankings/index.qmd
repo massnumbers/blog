@@ -4,7 +4,7 @@ description: "On Tuesday, September 10 there will be three special elections to 
 author:
   - name: Brent Benson
     url: https://massnumbers.us/brentbenson
-image: images/imgur-sR9jU8s.png
+image: images/imgur-eBdK6YF.png
 date: 2013-09-09
 categories: [blogger-archive]
 ---

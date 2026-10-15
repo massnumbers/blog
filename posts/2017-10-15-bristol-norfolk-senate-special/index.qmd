@@ -4,7 +4,7 @@ description: "Bristol and Norfolk is a prototypical swing district"
 author:
   - name: Brent Benson
     url: https://massnumbers.us/brentbenson
-image: images/imgur-Qvfj9pw.png
+image: images/imgur-8FiwlgH.jpg
 date: 2017-10-15
 categories: [blogger-archive]
 ---

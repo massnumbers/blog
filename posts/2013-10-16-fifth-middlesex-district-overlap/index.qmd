@@ -4,7 +4,7 @@ description: "On Tuesday, October 15 Katherine Clark handily won the Democratic 
 author:
   - name: Brent Benson
     url: https://massnumbers.us/brentbenson
-image: images/imgur-79T5Ra4.png
+image: images/imgur-Cu9CV9l.png
 date: 2013-10-16
 categories: [blogger-archive]
 ---
