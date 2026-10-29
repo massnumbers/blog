@@ -30,6 +30,9 @@ tmap_mode("view")
 races <- read_csv("forecast_14d_r2_races.csv", show_col_types = FALSE)
 targets <- read_csv("forecast_14d_r2_target.csv", show_col_types = FALSE)
 finance <- read_csv("forecast_14d_r2_finance.csv", show_col_types = FALSE)
+# 75% predictive intervals (12.5th and 87.5th percentiles of each race's draws),
+# derived from the same snapshot by _make_intervals.py.
+intervals <- read_csv("forecast_14d_r2_intervals.csv", show_col_types = FALSE)
 
 party_abbrev <- c(
     "Democratic" = "D",
@@ -85,9 +88,12 @@ contested <- targets |>
     left_join(races |>
                   select(target_id,
                          dem_margin = point_margin,
-                         margin_low = lower_90,
-                         margin_high = upper_90,
                          dem_win_prob = dem_win_probability),
+              by = "target_id") |>
+    left_join(intervals |>
+                  select(target_id,
+                         margin_low = lower_75,
+                         margin_high = upper_75),
               by = "target_id") |>
     left_join(receipts, by = "target_id") |>
     mutate(chamber = if_else(office == "State Senate", "Senate", "House"),
@@ -198,7 +204,7 @@ Steven Ouellette (D-Westport) in his R+4 8th Bristol district on the
 South Coast.
 
 ```{r top-four-table}
-#| column: body-outset
+#| column: page
 top_four <- contested |>
     slice_min(abs(dem_margin), n = 4)
 
@@ -215,20 +221,24 @@ top_four |>
            challenger = if_else(dem_is_incumbent, opp_label, dem_label),
            incumbent_win_prob = if_else(dem_is_incumbent,
                                         dem_win_prob,
-                                        1 - dem_win_prob)) |>
+                                        1 - dem_win_prob),
+           margin_range = str_c(margin_string(margin_low, opp_pty), " to ",
+                                margin_string(margin_high, opp_pty))) |>
     select(district_url, PVI, incumbent, challenger,
-           incumbent_win_prob, model, district_display) |>
+           incumbent_win_prob, model, margin_range, district_display) |>
     gt() |>
     gt_theme_538() |>
     fmt_url(columns = district_url, label = from_column("district_display")) |>
-    cols_hide(columns = district_display) |>
     cols_label(district_url = "District",
                incumbent = "Incumbent",
                challenger = "Challenger",
                incumbent_win_prob = "Incumbent win",
-               model = "Likely margin") |>
+               model = "Likely margin",
+               margin_range = "75% range") |>
     fmt_percent(columns = "incumbent_win_prob", decimals = 0) |>
-    cols_align(columns = c("PVI", "incumbent_win_prob", "model"),
+    cols_hide(columns = district_display) |>
+    cols_align(columns = c("PVI", "incumbent_win_prob", "model",
+                           "margin_range"),
                align = "center") |>
     tab_header("The four most competitive legislative races")
 ```
@@ -401,7 +411,7 @@ contested |>
     cols_label(chamber = "Office",
                district_url = "District",
                model = "Model",
-               dem_margin = "Dem margin") |>
+               dem_margin = "Dem margin (75% range)") |>
     gt_plt_conf_int(dem_margin,
                     c(margin_low, margin_high),
                     palette = c("black", "black", "white", "black"),
