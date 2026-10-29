@@ -11,7 +11,16 @@
 <description>A quantitative look at Massachusetts politics and policy
 </description>
 <generator>quarto-1.10.18</generator>
-<lastBuildDate>Thu, 03 Sep 2026 04:00:00 GMT</lastBuildDate>
+<lastBuildDate>Thu, 29 Oct 2026 04:00:00 GMT</lastBuildDate>
+<item>
+  <title>Swing district representatives facing tough challenges</title>
+  <dc:creator>Brent Benson</dc:creator>
+  <link>https://www.massnumbers.us/posts/2026-10-29-contested-races/</link>
+  <description><![CDATA[ We provide forecasts for the 57 contested Massachusetts State Representative and State Senate races on the November 3, 2026 ballot giving special attention to the closest four. ]]></description>
+  <guid>https://www.massnumbers.us/posts/2026-10-29-contested-races/</guid>
+  <pubDate>Thu, 29 Oct 2026 04:00:00 GMT</pubDate>
+  <media:content url="https://www.massnumbers.us/images/ninth-essex-muni-pvi-2026.png" medium="image" type="image/png" height="96" width="144"/>
+</item>
 <item>
   <title>Six primaries on the bubble</title>
   <dc:creator>Brent Benson</dc:creator>
@@ -181,14 +190,6 @@
   <description><![CDATA[ There are now six majority-minority state senate districts in Massachusetts but only three give minority voters a robust chance of electing their candidate of choice ]]></description>
   <guid>https://www.massnumbers.us/posts/2022-07-18-senate-majority-minority/</guid>
   <pubDate>Mon, 22 Aug 2022 04:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Welcome to Mass. Numbers</title>
-  <dc:creator>Brent Benson</dc:creator>
-  <link>https://www.massnumbers.us/posts/welcome/</link>
-  <description><![CDATA[ Welcome to the Mass. Numbers blog. Mass. Numbers takes a quantiative look as Massachusetts politics and policy. ]]></description>
-  <guid>https://www.massnumbers.us/posts/welcome/</guid>
-  <pubDate>Sun, 21 Aug 2022 04:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

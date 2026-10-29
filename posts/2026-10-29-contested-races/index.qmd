@@ -1,0 +1,416 @@
+---
+title: "Swing district representatives facing tough challenges"
+subtitle: "A look at the four most competitive state legislative races"
+description: |
+  We provide forecasts for the 57 contested Massachusetts State
+  Representative and State Senate races on the November 3, 2026 ballot
+  giving special attention to the closest four.
+author: Brent Benson
+date: 2026-10-29
+image: /images/ninth-essex-muni-pvi-2026.png
+draft: false
+---
+
+```{r setup, include=FALSE}
+
+library(tidyverse)
+library(gt)
+library(gtExtras)
+library(sf)
+library(tmap)
+library(glue)
+
+tmap_mode("view")
+```
+
+```{r read-data}
+# Pinned copies of the 14d-r2 forecast snapshot from the election-modeling
+# repository (data/forecast/2026): per-race posterior summaries, the target
+# race list with candidates, incumbency and PVI, and OCPF receipts frozen at the
+# 2026-10-20 cutoff.
+races <- read_csv("forecast_14d_r2_races.csv", show_col_types = FALSE)
+targets <- read_csv("forecast_14d_r2_target.csv", show_col_types = FALSE)
+finance <- read_csv("forecast_14d_r2_finance.csv", show_col_types = FALSE)
+
+party_abbrev <- c(
+    "Democratic" = "D",
+    "Republican" = "R",
+    "Unenrolled" = "U",
+    "Independent" = "I",
+    "Workers Party" = "WP",
+    "Gulf War Veteran" = "GWV"
+)
+
+pvi_string <- function(pvi_n) {
+    case_when(
+        pvi_n <= -0.5 ~ str_c("R+", round(abs(pvi_n))),
+        pvi_n >= 0.5 ~ str_c("D+", round(pvi_n)),
+        TRUE ~ "EVEN"
+    )
+}
+
+#' Margin labeled with the favored side's party, so a race against an
+#' unenrolled opponent reads "U+12" rather than "R+12".
+margin_string <- function(margin, opp_pty) {
+    case_when(
+        margin <= -0.5 ~ str_c(opp_pty, "+", round(abs(margin))),
+        margin >= 0.5 ~ str_c("D+", round(margin)),
+        TRUE ~ "EVEN"
+    )
+}
+
+cand_label <- function(name, pty, town, incumbent) {
+    str_glue("{name} ({pty}-{town}){if_else(incumbent, '*', '')}")
+}
+
+receipts <- finance |>
+    select(target_id, role, receipts) |>
+    pivot_wider(names_from = role,
+                values_from = receipts,
+                names_prefix = "receipts_")
+
+contested <- targets |>
+    select(target_id,
+           office,
+           district,
+           district_display,
+           dem_candidate_name,
+           dem_candidate_municipality,
+           dem_candidate_incumbent,
+           comparison_candidate_name,
+           comparison_candidate_party,
+           comparison_candidate_municipality,
+           comparison_candidate_incumbent,
+           incumbent_status,
+           PVI_N) |>
+    left_join(races |>
+                  select(target_id,
+                         dem_margin = point_margin,
+                         margin_low = lower_90,
+                         margin_high = upper_90,
+                         dem_win_prob = dem_win_probability),
+              by = "target_id") |>
+    left_join(receipts, by = "target_id") |>
+    mutate(chamber = if_else(office == "State Senate", "Senate", "House"),
+           # The Senate shapefile spells out "and"; one target uses "&".
+           district = str_replace(district, " & ", " and "),
+           PVI = pvi_string(PVI_N),
+           # District pages on mapoli.us, e.g. state-rep/third-barnstable.html
+           district_url = str_c(
+               "https://mapoli.us/districts/",
+               if_else(chamber == "Senate", "state-senate/", "state-rep/"),
+               str_replace_all(str_to_lower(district), "[^a-z0-9]+", "-"),
+               ".html"),
+           opp_pty = party_abbrev[comparison_candidate_party],
+           model = margin_string(dem_margin, opp_pty),
+           Incumbent = case_when(
+               incumbent_status == "Dem_Incumbent" ~ "Dem",
+               incumbent_status == "GOP_Incumbent" ~ "GOP",
+               TRUE ~ ""),
+           Democrat = cand_label(dem_candidate_name,
+                                 "D",
+                                 dem_candidate_municipality,
+                                 dem_candidate_incumbent),
+           Opponent = cand_label(comparison_candidate_name,
+                                 opp_pty,
+                                 comparison_candidate_municipality,
+                                 comparison_candidate_incumbent))
+```
+
+```{r map-setup}
+house_geom <- read_sf("../../_gis/HOUSE2021/HOUSE2021_POLY.shp") |>
+    st_make_valid() |>
+    st_simplify(dTolerance = 100, preserveTopology = TRUE) |>
+    select(district_display = REP_DIST) |>
+    inner_join(contested |> filter(chamber == "House"),
+               by = "district_display")
+
+senate_geom <- read_sf("../../_gis/SENATE2021/SENATE2021_POLY.shp") |>
+    st_make_valid() |>
+    st_simplify(dTolerance = 100, preserveTopology = TRUE) |>
+    select(district = SEN_DIST) |>
+    inner_join(contested |> filter(chamber == "Senate"),
+               by = "district")
+
+stopifnot(nrow(house_geom) == sum(contested$chamber == "House"),
+          nrow(senate_geom) == sum(contested$chamber == "Senate"))
+
+margin_palette <- c("#FF4949", "white", "#0F4392")
+
+race_popup_vars <- c(
+    "PVI" = "PVI",
+    "Democrat" = "Democrat",
+    "Opponent" = "Opponent",
+    "Dem win" = "dem_win_prob",
+    "Model margin" = "model",
+    "Dem receipts" = "receipts_dem",
+    "Opponent receipts" = "receipts_opp"
+)
+
+race_popup_format <- list(
+    dem_win_prob = tm_label_format(fun = function(x) scales::percent(x, 1)),
+    receipts_dem = tm_label_format(fun = scales::dollar),
+    receipts_opp = tm_label_format(fun = scales::dollar)
+)
+
+race_layer <- function(geom, group, show_legend = TRUE) {
+    tm_shape(geom) +
+        tm_polygons(
+            fill = "dem_margin",
+            fill.scale = tm_scale_continuous(
+                values = margin_palette,
+                limits = c(-40, 40),
+                midpoint = 0,
+                outliers.trunc = c(TRUE, TRUE),
+                ticks = c(-40, -20, 0, 20, 40),
+                labels = c("R+40", "R+20", "EVEN", "D+20", "D+40")
+            ),
+            fill.legend = if (show_legend) {
+                tm_legend(title = "Model margin")
+            } else {
+                tm_legend_hide()
+            },
+            fill_alpha = 0.7,
+            col = "black",
+            lwd = 1,
+            id = "district_display",
+            popup.vars = race_popup_vars,
+            popup.format = race_popup_format,
+            group = group
+        )
+}
+```
+
+Incumbency provides a big advantage in legislative elections. Our
+[Massachusetts legislative model](https://bwbensonjr.github.io/election-modeling/)
+shows a 9-point lift for incumbent Democrats and a 16-point lift for
+incumbent Republicans, holding the other model factors equal. But incumbents in
+swing districts that lean towards the other party often
+face challengers and sometimes a loss. The 2010 cycle was
+particularly hard on incumbent Democrats in the post-2008 Obama win GOP
+midterm wave. Two Republicans State Reps that rode that wave to victory
+in 2010 face Democratic challengers on November 3 that may be able to
+to pull off hard-fought wins.
+
+The four most competitive state legislative races in Massachusetts
+feature three GOP incumbents in Democratic-leaning districts with
+partisan voter indexes (PVIs) of D+3 to D+9, and incumbent Democrat
+Steven Ouellette (D-Westport) in his R+4 8th Bristol district on the
+South Coast.
+
+```{r top-four-table}
+#| column: body-outset
+top_four <- contested |>
+    slice_min(abs(dem_margin), n = 4)
+
+# The incumbent/challenger layout assumes every one of the four has an incumbent.
+stopifnot(all(top_four$incumbent_status != "No_Incumbent"))
+
+top_four |>
+    mutate(dem_is_incumbent = (incumbent_status == "Dem_Incumbent"),
+           dem_label = cand_label(dem_candidate_name, "D",
+                                  dem_candidate_municipality, FALSE),
+           opp_label = cand_label(comparison_candidate_name, opp_pty,
+                                  comparison_candidate_municipality, FALSE),
+           incumbent = if_else(dem_is_incumbent, dem_label, opp_label),
+           challenger = if_else(dem_is_incumbent, opp_label, dem_label),
+           incumbent_win_prob = if_else(dem_is_incumbent,
+                                        dem_win_prob,
+                                        1 - dem_win_prob)) |>
+    select(district_url, PVI, incumbent, challenger,
+           incumbent_win_prob, model, district_display) |>
+    gt() |>
+    gt_theme_538() |>
+    fmt_url(columns = district_url, label = from_column("district_display")) |>
+    cols_hide(columns = district_display) |>
+    cols_label(district_url = "District",
+               incumbent = "Incumbent",
+               challenger = "Challenger",
+               incumbent_win_prob = "Incumbent win",
+               model = "Likely margin") |>
+    fmt_percent(columns = "incumbent_win_prob", decimals = 0) |>
+    cols_align(columns = c("PVI", "incumbent_win_prob", "model"),
+               align = "center") |>
+    tab_header("The four most competitive legislative races")
+```
+
+```{r muni-map-setup}
+# Precinct presidential results for 2020 and 2024 on the 2021 district map,
+# pinned from mapoli/pvi (commit 68d65052). Split towns are summed only over
+# the precincts inside the district.
+pct_pres <- read_csv("ma_precincts_districts_pres_2024.csv",
+                     show_col_types = FALSE)
+
+pct_geometry <- read_sf("../../_gis/ma_wards_precincts_w_subs.geojson") |>
+    select(city_town, State_Rep)
+
+US_Harris_24 <- 75017626
+US_Trump_24 <- 77301997
+US_Biden_20 <- 81281502
+US_Trump_20 <- 74222593
+
+US_PVI_24 <- (US_Harris_24 + US_Biden_20) /
+    (US_Harris_24 + US_Trump_24 + US_Biden_20 + US_Trump_20)
+
+district_muni_pvi <- function(district_name) {
+    muni_votes <- pct_pres |>
+        filter(State_Rep == district_name) |>
+        group_by(city_town) |>
+        summarize(dem = sum(Harris_24 + Biden_20),
+                  gop = sum(Trump_24 + Trump_20)) |>
+        mutate(PVI_N = (dem / (dem + gop) - US_PVI_24) * 100,
+               PVI = pvi_string(PVI_N),
+               label = str_glue("{city_town}\n{PVI}"))
+    pct_geometry |>
+        filter(State_Rep == district_name) |>
+        group_by(city_town) |>
+        summarize() |>
+        st_simplify(dTolerance = 100) |>
+        inner_join(muni_votes, by = "city_town")
+}
+
+district_muni_map <- function(district_name) {
+    race <- contested |>
+        filter(chamber == "House", district == district_name)
+    muni_pvi <- district_muni_pvi(district_name)
+    tm_shape(muni_pvi) +
+        tm_polygons(
+            fill = "PVI_N",
+            fill.scale = tm_scale_continuous(
+                values = margin_palette,
+                limits = c(-20, 20),
+                midpoint = 0,
+                outliers.trunc = c(TRUE, TRUE)
+            ),
+            fill.legend = tm_legend_hide(),
+            fill_alpha = 0.7,
+            col = "black",
+            lwd = 1,
+            id = "city_town",
+            popup.vars = c("PVI" = "PVI")
+        ) +
+        tm_text("label") +
+        tm_basemap("OpenStreetMap") +
+        tm_title(str_glue("State Representative - {race$district_display} ({race$PVI})"))
+}
+```
+
+### 9th Norfolk
+
+```{r 9th-norfolk-map, fig.height=6}
+district_muni_map("Ninth Norfolk")
+```
+
+The tightest race from the model's point of view is between incumbent
+State Representative Marcus Vaughn (R-Wrentham) and Democratic
+newcomer Thomas Melville (D-Medfield). While the 9th Norfolk district
+has a PVI of D+7, it has not been represented by a Democrat since
+1993, when Jo Ann Sprague (R-Walpole) led a succession of Republicans
+including her successor Scott Brown (R-Wrentham).  Brown went on to
+the State Senate and then defeated Martha Coakley (D-Medford) in a
+January 2010 special election to replace Edward Kennedy in the
+U.S. Senate. Melville is running on a campaign of engagement and
+community service and raised almost twice the amount of campign money
+raised by incumbent Vaughn ($65,494 to $35,721 in 2026).
+
+### 8th Bristol
+
+```{r 8th-bristol-map, fig.height=6}
+district_muni_map("Eighth Bristol")
+```
+
+The 8th Bristol State Representative district is a mirror image of the
+9th Norfolk in that it has been represented by a Democratic
+representative for many years, but has a GOP-leaning PVI rating of
+R+4. Steven Ouellette (D-Westport) was elected for the first time in
+2024 in a five-way race against Christopher Thrasher (R-Westport) and
+three unenrolled candidates including the current GOP nominee Jesse
+St. Gelais (R-Acushnet). The South Coast area has seen a great deal of
+back-and-forth partisan shifting in the Trump era. Challenger
+St. Gelais has raised 20% more money over the past two years and spent
+four times more than Ouellette, a notably large spending gap.
+
+### 9th Essex
+
+```{r 9th-essex-map, fig.height=6}
+district_muni_map("Ninth Essex")
+```
+
+Representative Donald Wong (R-Saugus) has represented the North
+Shore's 9th Essex district since 2011, after his 383-vote defeat of
+Mark Falzone (D-Saugus) in the 2010 GOP wave election. The 9th Essex
+district has a PVI of D+3, giving Lynn dentist and city councilor Pete
+Meaney (D-Lynn) a fighting chance in a year when anti-GOP and
+anti-incumbent sentiment seems to be high. Meaney was able to
+significantly outraise and outspend Wong, which may help to improve
+name recognition while competing against the well-known incumbent.
+
+### 3rd Barnstable
+
+```{r 3rd-barnstable-map, fig.height=6}
+district_muni_map("Third Barnstable")
+```
+
+Incumbent Representative David Vieira (R-Falmouth) also flipped his
+House seat from blue to red in the 2010 GOP wave, defeating long-time
+incumbent Matthew Patrick (D-Falmouth) to take office in 2011. The D+9
+PVI in the 3rd Barnstable district gives Falmouth Select Board member
+Jack Richardson (D-Falmouth) a real chance, enhanced by the
+fundraising and spending advantage he had over Vieira during the
+election cycle.
+
+## Ratings for all contested seats
+
+Our newly revamped Massachusetts legislative election model uses
+precinct-level PVI, incumbency status, and fundraising data and is
+trained on data from 2010 through 2024. You can look at more details
+and do what-if calculations on the
+[model website](https://bwbensonjr.github.io/election-modeling/).
+
+Here are the forecast ratings for all of the contested State
+Representative and State Senate races.
+
+```{r contested-map, fig.height=6, fig.cap="Contested State Representative and State Senate races. Use the layer control to switch chambers."}
+#| column: body-outset
+race_layer(house_geom, "House") +
+    race_layer(senate_geom, "Senate", show_legend = FALSE) +
+    tm_group("House", control = "radio") +
+    tm_group("Senate", control = "radio") +
+    tm_basemap("OpenStreetMap", group.control = "none") +
+    tm_view(set_view = c(-71.6, 42.2, 8))
+```
+
+```{r summary-stats}
+n_races <- nrow(contested)
+n_house <- sum(contested$chamber == "House")
+n_senate <- sum(contested$chamber == "Senate")
+n_toss <- sum(contested$dem_win_prob > 0.4 & contested$dem_win_prob < 0.6)
+n_competitive <- sum(contested$dem_win_prob > 0.095 & contested$dem_win_prob < 0.905)
+```
+
+```{r ratings-table}
+#| column: screen
+contested |>
+    arrange(abs(dem_margin)) |>
+    mutate(is_top_four = target_id %in% top_four$target_id) |>
+    select(chamber, district_url, PVI, Incumbent, Democrat, Opponent,
+           model, dem_margin, margin_low, margin_high, is_top_four,
+           district_display) |>
+    gt() |>
+    gt_theme_538() |>
+    fmt_url(columns = district_url, label = from_column("district_display")) |>
+    cols_label(chamber = "Office",
+               district_url = "District",
+               model = "Model",
+               dem_margin = "Dem margin") |>
+    gt_plt_conf_int(dem_margin,
+                    c(margin_low, margin_high),
+                    palette = c("black", "black", "white", "black"),
+                    ref_line = 0,
+                    text_size = 2.5,
+                    width = 55) |>
+    cols_hide(columns = c(margin_low, margin_high, is_top_four, district_display)) |>
+    cols_align(columns = c("model", "dem_margin"), align = "center") |>
+    gt_highlight_rows(font_weight = "normal", rows = is_top_four) |>
+    tab_header("Contested 2026 legislative race ratings")
+```
