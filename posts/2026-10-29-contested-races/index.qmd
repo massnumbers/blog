@@ -1,10 +1,9 @@
 ---
-title: "Swing district representatives facing tough challenges"
+title: "Swing district incumbents facing tough challenges"
 subtitle: "A look at the four most competitive state legislative races"
 description: |
-  We provide forecasts for the 57 contested Massachusetts State
-  Representative and State Senate races on the November 3, 2026 ballot
-  giving special attention to the closest four.
+  In addition we provide forecasts for all 57 contested Massachusetts State
+  Representative and State Senate races on the November 3, 2026 ballot.
 author: Brent Benson
 date: 2026-10-29
 image: /images/ninth-essex-muni-pvi-2026.png
