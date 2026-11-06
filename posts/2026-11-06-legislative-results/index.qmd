@@ -1,0 +1,96 @@
+---
+title: "Winners, losers, and surprises"
+subtitle: "Results of the 57 contested legislative races"
+description: "A look at who won, who lost, and how the model performed"
+author: Brent Benson
+date: 2026-11-06
+draft: true
+---
+
+```{r setup}
+#| include: false
+library(tidyverse)
+library(gt)
+library(gtExtras)
+library(sf)
+library(tmap)
+
+tmap_mode("view")
+```
+
+```{r read-data}
+#| include: false
+source("_results.R")
+source("_verify.R")
+source("_tables.R")
+source("_maps.R")
+source("_statewide-map.R")
+```
+
+## Results of the four closest forecast races
+
+```{r top-four-results}
+#| column: page
+featured |>
+    with_provisional_outcomes() |>
+    results_table("Results of the four closest forecast races",
+                  show_margin_note = FALSE) |>
+    cols_label(opponent = "Republican") |>
+    cols_hide(columns = other_votes) |>
+    tab_options(table.width = px(1035))
+```
+
+### 9th Norfolk
+
+```{r 9th-norfolk-results-map, fig.height=6, fig.cap=map_caption("Ninth Norfolk")}
+municipality_result_map("Ninth Norfolk")
+```
+
+### 8th Bristol
+
+```{r 8th-bristol-results-map, fig.height=6, fig.cap=map_caption("Eighth Bristol")}
+municipality_result_map("Eighth Bristol")
+```
+
+### 9th Essex
+
+```{r 9th-essex-results-map, fig.height=6, fig.cap=map_caption("Ninth Essex")}
+municipality_result_map("Ninth Essex")
+```
+
+### 3rd Barnstable
+
+```{r 3rd-barnstable-results-map, fig.height=6, fig.cap=map_caption("Third Barnstable")}
+municipality_result_map("Third Barnstable")
+```
+
+## Other notable results
+
+### 22nd Middlesex
+
+```{r notable-results}
+#| column: page
+results_table(notable, "22nd Middlesex result", show_margin_note = FALSE) |>
+    cols_hide(columns = other_votes) |>
+    tab_options(table.width = px(1035))
+```
+
+```{r 22nd-middlesex-results-map, fig.height=6, fig.cap=map_caption("Twenty-Second Middlesex")}
+municipality_result_map("Twenty-Second Middlesex") +
+    tm_view(set_view = 12)
+```
+
+## Results for all contested seats
+
+```{r statewide-results-map, fig.cap=paste("Contested legislative seats. Use the selector to switch between House and Senate districts. Stripes indicate a party flip; dashed outlines indicate a provisional result in an uncalled race.", source_note)}
+#| column: body-outset
+statewide_outcome_map()
+```
+
+```{r all-results}
+#| column: screen
+results |>
+    with_provisional_outcomes() |>
+    arrange(desc(abs(signed_error)), chamber, district_display) |>
+    results_table("Results of all 57 contested legislative races", full = TRUE)
+```

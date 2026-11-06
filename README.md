@@ -1,5 +1,17 @@
 # Mass. Numbers Blog
 
+## Preview the legislative-results draft
+
+From the repository root, run:
+
+```bash
+quarto preview posts/2026-11-06-legislative-results/index.qmd --profile legislative-preview
+```
+
+This profile shows draft content and writes the local preview to the ignored
+`_preview/` directory. The post retains `draft: true`, and normal site builds
+continue to use `docs/`. Press `Ctrl+C` to stop the preview.
+
 This is the latest incarnation of the Mass. Numbers blog that looks at
 Massachusetts politics and policy through a quantitative lens. The
 original version of the blog is at (http://massnumbers.blogspot.com).

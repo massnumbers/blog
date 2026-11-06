@@ -1,0 +1,43 @@
+{
+  "repository": "bwbensonjr/ma-election-db",
+  "source_revision": "25651d41584ebb54feadc954f85b489b12955d21",
+  "snapshot_time": "2026-11-06T12:53:50.306Z",
+  "status": "Unofficial AP results",
+  "forecast": "14d-r2",
+  "finance_cutoff": "2026-10-20",
+  "forecast_reference": "posts/2026-10-29-contested-races",
+  "notes": [
+    "Named candidate votes only; blanks and write-ins excluded.",
+    "AP municipality results cover only the portion of each municipality in that district.",
+    "Margin uses only the Democratic and forecast comparison candidates' votes.",
+    "The upstream forecast comparison was stale. Rebuilt locally with the upstream forecast_compare.py using these AP files and the unchanged October 29 pinned forecast files."
+  ],
+  "files": [
+    {
+      "file": "ma_general_2026_races.csv.gz",
+      "source_path": "data/ap_results/general_2026/ma_general_2026_races.csv.gz",
+      "generated_locally": false,
+      "sha256": "3cc212a533b18d60550b20af688e51a8ea665c6dc300072f83b90697cc01f52f",
+      "rows": 200
+    },
+    {
+      "file": "ma_general_2026_results.csv.gz",
+      "source_path": "data/ap_results/general_2026/ma_general_2026_results.csv.gz",
+      "generated_locally": false,
+      "sha256": "84fe6886ff04760c8b934bf569ed41a4ea415603b80a75e660280298e2b35b26",
+      "rows": 544
+    },
+    {
+      "file": "ma_general_2026_forecast_comparison.csv.gz",
+      "source_path": null,
+      "generated_locally": true,
+      "sha256": "ee2a0734b5d3393718880db29194f19d97d18e08a77f4a3623e16ec2d75844b3",
+      "rows": 57
+    }
+  ],
+  "comparison_builder": {
+    "source_path": "ap_results/general_2026/forecast_compare.py",
+    "source_revision": "25651d41584ebb54feadc954f85b489b12955d21",
+    "entry_point": "main() with RACES_FILE, RESULTS_FILE and OUT_FILE redirected to the post's local files, and FORECAST_DIR set to the October 29 post"
+  }
+}
