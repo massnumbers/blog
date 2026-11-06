@@ -25,6 +25,7 @@ source("_verify.R")
 source("_tables.R")
 source("_maps.R")
 source("_statewide-map.R")
+source("_forecast-error-chart.R")
 ```
 
 ## Results of the four closest forecast races
@@ -87,10 +88,22 @@ municipality_result_map("Twenty-Second Middlesex") +
 statewide_outcome_map()
 ```
 
+```{r outcome-summary}
+outcome_summary_table(results)
+```
+
 ```{r all-results}
 #| column: screen
 results |>
     with_provisional_outcomes() |>
     arrange(desc(abs(signed_error)), chamber, district_display) |>
     results_table("Results of all 57 contested legislative races", full = TRUE)
+```
+
+## Results compared to model forecast
+
+```{r forecast-performance}
+#| column: body-outset
+#| results: asis
+cat("```{=html}\n", forecast_error_chart(results), "\n```\n", sep = "")
 ```

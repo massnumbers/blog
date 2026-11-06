@@ -53,3 +53,47 @@ results_table <- function(data, title, full = FALSE, show_margin_note = TRUE) {
         cols_width(chamber ~ px(65), model_range ~ px(160), error_label ~ px(90))
     table
 }
+
+outcome_summary_table <- function(data) {
+    outcomes <- with_provisional_outcomes(data) |>
+        mutate(party_result = str_remove(party_result, fixed(" (provisional)")),
+               incumbency = str_remove(candidate_result, fixed(" (provisional)")))
+    party_counts <- outcomes |>
+        count(party_result, name = "count") |>
+        arrange(match(party_result, c("D hold", "R to D flip",
+                                     "D to R flip", "R hold")))
+    incumbency_counts <- outcomes |>
+        count(incumbency, name = "count") |>
+        arrange(match(incumbency, c("Incumbent re-elected", "Incumbent defeated",
+                                   "Open-seat win")))
+    stopifnot(sum(party_counts$count) == nrow(data),
+              sum(incumbency_counts$count) == nrow(data), nrow(data) == 57)
+    rows <- seq_len(max(nrow(party_counts), nrow(incumbency_counts)))
+    summary <- tibble(party = party_counts$party_result[rows],
+                      party_count = party_counts$count[rows],
+                      incumbency = incumbency_counts$incumbency[rows],
+                      incumbency_count = incumbency_counts$count[rows]) |>
+        bind_rows(tibble(party = "Total", party_count = nrow(data),
+                         incumbency = "Total", incumbency_count = nrow(data)))
+    summary |>
+        gt() |>
+        gt_theme_538() |>
+        cols_label(party = "Party", party_count = "Count",
+                   incumbency = "Incumbency", incumbency_count = "Count") |>
+        fmt_number(columns = c(party_count, incumbency_count), decimals = 0) |>
+        sub_missing(columns = everything(), missing_text = "") |>
+        cols_align(align = "center", columns = c(party_count, incumbency_count)) |>
+        cols_width(party ~ pct(32), party_count ~ pct(12),
+                   incumbency ~ pct(44), incumbency_count ~ pct(12)) |>
+        tab_style(style = cell_borders(sides = "left", color = "#dddddd"),
+                  locations = list(cells_body(columns = incumbency),
+                                   cells_column_labels(columns = incumbency))) |>
+        tab_style(style = list(cell_text(weight = "bold"),
+                               cell_borders(sides = "top", color = "#333333")),
+                  locations = cells_body(rows = party == "Total")) |>
+        tab_header(title = "Outcomes across 57 contested races") |>
+        tab_source_note(source_note) |>
+        tab_source_note("Some results are provisional.") |>
+        tab_options(quarto.disable_processing = TRUE, table.width = pct(100),
+                    data_row.padding = px(8), container.overflow.x = "auto")
+}
