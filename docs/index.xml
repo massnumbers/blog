@@ -11,7 +11,16 @@
 <description>A quantitative look at Massachusetts politics and policy
 </description>
 <generator>quarto-1.10.18</generator>
-<lastBuildDate>Thu, 29 Oct 2026 04:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 06 Nov 2026 05:00:00 GMT</lastBuildDate>
+<item>
+  <title>Winners, losers, and surprises</title>
+  <dc:creator>Brent Benson</dc:creator>
+  <link>https://www.massnumbers.us/posts/2026-11-06-legislative-results/</link>
+  <description><![CDATA[ Incumbent defeats, party flips, and a teenage challenger’s upset in the 2026 Massachusetts legislative elections. ]]></description>
+  <guid>https://www.massnumbers.us/posts/2026-11-06-legislative-results/</guid>
+  <pubDate>Fri, 06 Nov 2026 05:00:00 GMT</pubDate>
+  <media:content url="https://www.massnumbers.us/images/legislative-results-2026.jpg" medium="image" type="image/jpeg"/>
+</item>
 <item>
   <title>Swing district incumbents facing tough challenges</title>
   <dc:creator>Brent Benson</dc:creator>
@@ -182,14 +191,6 @@
   <guid>https://www.massnumbers.us/posts/2022-07-05-state-senate-primary-preview/</guid>
   <pubDate>Thu, 25 Aug 2022 04:00:00 GMT</pubDate>
   <media:content url="https://www.massnumbers.us/images/berk_hamp_frank_hamp.png" medium="image" type="image/png"/>
-</item>
-<item>
-  <title>A look at MA State Senate Redistricting</title>
-  <dc:creator>Brent Benson</dc:creator>
-  <link>https://www.massnumbers.us/posts/2022-07-18-senate-majority-minority/</link>
-  <description><![CDATA[ There are now six majority-minority state senate districts in Massachusetts but only three give minority voters a robust chance of electing their candidate of choice ]]></description>
-  <guid>https://www.massnumbers.us/posts/2022-07-18-senate-majority-minority/</guid>
-  <pubDate>Mon, 22 Aug 2022 04:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>

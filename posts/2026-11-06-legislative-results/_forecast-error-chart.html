@@ -1,0 +1,207 @@
+<section id="legislative-forecast-error">
+  <h3>Forecast error and performance versus the model</h3>
+  <svg class="error-swarm" role="img" aria-labelledby="error-preview-title error-preview-description" style="display:block;width:100%;height:410px"></svg>
+  <div class="viz-row text-small" style="justify-content:space-between">
+    <span>Democratic under-performance</span>
+    <span>Democratic over-performance</span>
+  </div>
+  <div class="text-small" style="margin-top:calc(var(--font-size-base)*0.5)">One dot per race. Hollow dot: provisional. The 75% window is approximate. Vote shares exclude blanks/write-ins. AP snapshot: __SNAPSHOT__.</div>
+  <div data-error-detail class="error-detail" role="tooltip" hidden>
+    <div class="card"><div class="card-body">
+      <div style="display:grid;gap:calc(var(--font-size-base)*0.5)">
+        <div>
+          <div data-detail-race style="font-weight:500"></div>
+          <div data-detail-performance class="text-small"></div>
+        </div>
+        <hr>
+        <div class="candidate-line">
+          <span data-detail-democrat></span>
+          <span data-detail-dem-share class="tabular-nums"></span>
+        </div>
+        <div class="candidate-line">
+          <span data-detail-opponent></span>
+          <span data-detail-opp-share class="tabular-nums"></span>
+        </div>
+        <div data-detail-provisional class="text-small" hidden>Provisional result</div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <script type="application/json" data-errors>__DATA__</script>
+</section>
+<style>
+#legislative-forecast-error {
+  --font-size-base:14px;
+  --foreground:var(--bs-body-color, #333333);
+  --muted-foreground:var(--bs-secondary-color, #606060);
+  --muted:var(--bs-tertiary-bg, #e9ecef);
+  --border:var(--bs-border-color, #d6d6d6);
+  --background:var(--bs-body-bg, #ffffff);
+  --blue:#24589A;
+  --red:#CB454A;
+  position:relative;
+  font-family:system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size:var(--font-size-base);
+  line-height:1.5;
+}
+#legislative-forecast-error h3 {margin:0 0 0.5rem;font-size:1.15rem}
+#legislative-forecast-error .viz-row {display:flex;flex-wrap:wrap;align-items:center;gap:0.5rem 1.25rem}
+#legislative-forecast-error .text-small {font-size:12px}
+#legislative-forecast-error .tabular-nums {font-variant-numeric:tabular-nums}
+#legislative-forecast-error .cursor-interaction {cursor:pointer}
+#legislative-forecast-error .error-detail .card {box-shadow:0 3px 16px rgba(0,0,0,0.15)}
+#legislative-forecast-error .error-detail .card-body {padding:12px}
+#legislative-forecast-error .error-detail hr {margin:0;border:0;border-top:1px solid var(--border);opacity:1}
+#legislative-forecast-error .error-detail {position:absolute;z-index:10}
+#legislative-forecast-error .candidate-line {display:grid;grid-template-columns:minmax(0,1fr) auto;gap:calc(var(--font-size-base)*0.75);align-items:baseline}
+#legislative-forecast-error .error-swarm text {font-family:inherit;font-size:var(--font-size-base);fill:var(--foreground)}
+#legislative-forecast-error .error-swarm .secondary-label {font-size:calc(var(--font-size-base)*0.86);fill:var(--muted-foreground)}
+#legislative-forecast-error .error-swarm .forecast-window {fill:var(--muted);opacity:0.7;pointer-events:none}
+#legislative-forecast-error .error-swarm .guide {stroke:var(--border);stroke-width:1;fill:none;pointer-events:none}
+#legislative-forecast-error .error-swarm .reference {stroke:var(--foreground);stroke-width:1;fill:none;pointer-events:none}
+#legislative-forecast-error .error-swarm .positive {fill:var(--blue)}
+#legislative-forecast-error .error-swarm .negative {fill:var(--red)}
+#legislative-forecast-error .error-swarm .provisional {fill:var(--background);stroke:var(--blue);stroke-width:2}
+#legislative-forecast-error .error-swarm .annotation {pointer-events:none}
+</style>
+<script>
+(() => {
+  const root = document.getElementById("legislative-forecast-error");
+  const data = JSON.parse(root.querySelector("[data-errors]").textContent);
+  const svg = root.querySelector("svg");
+  const ns = "http://www.w3.org/2000/svg";
+  const mean = data.reduce((sum, race) => sum + race.error, 0) / data.length;
+  const sorted = data.map(race => race.error).sort((a, b) => a - b);
+  const median = sorted[Math.floor(sorted.length / 2)];
+  const signed = number => (number > 0 ? "+" : "") + number.toFixed(1);
+
+  const detail = root.querySelector("[data-error-detail]");
+  const raceLabel = root.querySelector("[data-detail-race]");
+  const demName = root.querySelector("[data-detail-democrat]");
+  const performanceLabel = root.querySelector("[data-detail-performance]");
+  const demShare = root.querySelector("[data-detail-dem-share]");
+  const oppName = root.querySelector("[data-detail-opponent]");
+  const oppShare = root.querySelector("[data-detail-opp-share]");
+  const provisionalLabel = root.querySelector("[data-detail-provisional]");
+  const partyAbbreviations = {Republican:"R",Unenrolled:"U",Independent:"I","Workers Party":"WP","Gulf War Veteran":"GWV"};
+  let pinned = false;
+  let currentRace = null;
+  let closeTimer;
+  function hideDetail() {
+    detail.hidden = true;
+    currentRace = null;
+  }
+  function performance(value) {
+    return Math.abs(value) < 0.05 ? "Margin on forecast" : "Margin " + Math.abs(value).toFixed(1) + " pp " + (value > 0 ? "above" : "below") + " forecast";
+  }
+  function showDetail(race, point) {
+    clearTimeout(closeTimer);
+    currentRace = race.id;
+    raceLabel.textContent = (race.chamber === "Senate" ? "State Senate" : "State Representative") + ": " + race.district;
+    performanceLabel.textContent = Math.abs(race.error) < 0.05 ? "Democrats performed as forecast" : "Democratic " + (race.error > 0 ? "over-performance: " : "under-performance: ") + Math.abs(race.error).toFixed(1) + " pp";
+    demName.textContent = race.democrat + " (D-" + race.demTown + ")";
+    demShare.textContent = (100 * race.demShare).toFixed(1) + "%";
+    oppName.textContent = race.opponent + " (" + (partyAbbreviations[race.opponentParty] || race.opponentParty) + "-" + race.oppTown + ")";
+    oppShare.textContent = (100 * race.oppShare).toFixed(1) + "%";
+    provisionalLabel.hidden = race.called;
+    detail.style.width = Math.min(460, root.clientWidth - 24) + "px";
+    detail.hidden = false;
+    const host = root.getBoundingClientRect();
+    const anchor = point.getBoundingClientRect();
+    const popup = detail.getBoundingClientRect();
+    const left = Math.max(12, Math.min(anchor.left - host.left + anchor.width / 2 - popup.width / 2, root.clientWidth - popup.width - 12));
+    let top = anchor.top - host.top - popup.height - 12;
+    if (top < 0) top = anchor.bottom - host.top + 12;
+    detail.style.left = left + "px";
+    detail.style.top = top + "px";
+  }
+  detail.addEventListener("pointerenter", () => clearTimeout(closeTimer));
+  detail.addEventListener("pointerleave", () => { if (!pinned) hideDetail(); });
+  root.addEventListener("pointerdown", event => {
+    if (!event.target.closest("circle[data-race-id]") && !detail.contains(event.target)) {
+      pinned = false;
+      hideDetail();
+    }
+  });
+
+  function add(tag, attributes, text) {
+    const element = document.createElementNS(ns, tag);
+    for (const [key, value] of Object.entries(attributes)) element.setAttribute(key, value);
+    if (text !== undefined) element.textContent = text;
+    svg.appendChild(element);
+    return element;
+  }
+
+  function draw() {
+    pinned = false;
+    hideDetail();
+    svg.replaceChildren();
+    const width = root.clientWidth;
+    const left = 24;
+    const right = width - 20;
+    const x = error => left + (error + 15) / 40 * (right - left);
+    const center = 235;
+    const radius = 5.5;
+    const separation = 13;
+    const placed = [];
+    const ordered = [...data].sort((a, b) => a.error - b.error || a.id.localeCompare(b.id));
+    ordered.forEach(race => {
+      const px = x(race.error);
+      let py = center;
+      for (let attempt = 0; attempt < 100; attempt++) {
+        const offset = attempt === 0 ? 0 : Math.ceil(attempt / 2) * separation * (attempt % 2 ? -1 : 1);
+        py = center + offset;
+        if (placed.every(point => (px - point.x) ** 2 + (py - point.y) ** 2 >= separation ** 2)) break;
+      }
+      placed.push({ ...race, x: px, y: py });
+    });
+    add("title", {id:"error-preview-title"}, "Model error and Democratic over- or under-performance in 57 Massachusetts legislative races");
+    add("desc", {id:"error-preview-description"},
+      data.filter(race => race.error > 0).length + " Democratic over-performances and " +
+      data.filter(race => race.error < 0).length + " under-performances. Mean: " + signed(mean) +
+      " percentage points; median: " + signed(median) + ". The shaded -15 to +15 range is an approximate 75% forecast window. Dots show observed Democratic margin minus forecast margin. Popups show both candidates with parties, hometowns and vote shares. Vertical stacking has no numerical meaning.");
+    add("rect", {x:x(-15),y:155,width:x(15)-x(-15),height:185,class:"forecast-window"});
+    add("text", {x:x(0),y:120,"text-anchor":"middle",class:"secondary-label"}, width < 480 ? "Approx. 75% window" : "Approx. 75% forecast window");
+    for (const bound of [-15, 15]) add("line", {x1:x(bound),x2:x(bound),y1:155,y2:340,class:"guide"});
+    const ticks = width < 480 ? [-15, 0, 15, 25] : [-15, -10, -5, 0, 5, 10, 15, 20, 25];
+    ticks.forEach(tick => {
+      add("line", {x1:x(tick),x2:x(tick),y1:155,y2:340,class:"guide"});
+      add("text", {x:x(tick),y:362,"text-anchor":"middle",class:"secondary-label"}, (tick > 0 ? "+" : "") + tick);
+    });
+    add("line", {x1:x(0),x2:x(0),y1:155,y2:340,class:"reference"});
+    add("line", {x1:x(mean),x2:x(mean),y1:155,y2:340,class:"reference","stroke-dasharray":"5 4"});
+    add("text", {x:x(0)-7,y:142,"text-anchor":"end",class:"secondary-label"}, "On forecast");
+    add("text", {x:x(mean)+7,y:142,"text-anchor":"start",class:"secondary-label"}, "Mean " + signed(mean) + " pp");
+    add("text", {x:width/2,y:396,"text-anchor":"middle",class:"secondary-label"}, "Model error (pp)");
+    const republicanCallout = placed.find(race => race.chamber === "House" && race.district === "9th Essex");
+    const democraticCallouts = ["22nd Middlesex", "2nd Plymouth"].map(district =>
+      placed.find(race => race.chamber === "House" && race.district === district));
+    democraticCallouts.forEach((race,index) => {
+      const labelY = 27 + index * 32;
+      add("line", {x1:race.x,y1:race.y-8,x2:right-6,y2:labelY+6,class:"guide annotation"});
+      add("text", {x:right-2,y:labelY,"text-anchor":"end",class:"annotation"}, race.district + " " + signed(race.error));
+    });
+    add("line", {x1:republicanCallout.x,y1:republicanCallout.y-8,x2:left+6,y2:103,class:"guide annotation"});
+    add("text", {x:left+2,y:96,"text-anchor":"start",class:"annotation"}, republicanCallout.district + " " + signed(republicanCallout.error));
+    placed.forEach(race => {
+      const point = add("circle", {cx:race.x,cy:race.y,r:radius,class:(race.called ? (race.error >= 0 ? "positive" : "negative") : "provisional") + " cursor-interaction","aria-label":race.chamber + ": " + race.district + ". " + race.democrat + " (D), " + performance(race.error) + "; " + race.opponent + ", " + performance(-race.error),"data-race-id":race.id});
+      point.addEventListener("pointerenter", () => { if (!pinned) showDetail(race, point); });
+      point.addEventListener("pointerleave", () => {
+        if (!pinned) closeTimer = setTimeout(hideDetail, 120);
+      });
+      point.addEventListener("click", event => {
+        event.stopPropagation();
+        if (pinned && currentRace === race.id) {
+          pinned = false;
+          hideDetail();
+        } else {
+          pinned = true;
+          showDetail(race, point);
+        }
+      });
+    });
+  }
+  new ResizeObserver(draw).observe(root);
+  draw();
+})();
+</script>
