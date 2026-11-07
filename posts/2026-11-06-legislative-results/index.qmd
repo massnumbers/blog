@@ -1,10 +1,12 @@
 ---
 title: "Winners, losers, and surprises"
-subtitle: "Results of the 57 contested legislative races"
-description: "A look at who won, who lost, and how the model performed"
+subtitle: "Results of the 57 contested legislative races compared to our forecast"
+description: |
+  Incumbent defeats, party flips, and a teenage challenger’s upset in the 2026 Massachusetts legislative elections.
 author: Brent Benson
+image: /images/legislative-results-2026.jpg
+image-alt: "Massachusetts contested House district outcomes, with blue Democratic holds, red Republican holds, and striped party flips."
 date: 2026-11-06
-draft: true
 ---
 
 ```{r setup}
@@ -28,79 +30,186 @@ source("_statewide-map.R")
 source("_forecast-error-chart.R")
 ```
 
+There were 57 contested State Representative and State Senate seats in
+the November 3, 2026, Massachusetts general election. We published a
+[forecast for these races](/posts/2026-10-29-contested-races/), which
+was based on our
+[legislative model](https://bwbensonjr.github.io/election-modeling/)
+that is trained on legislative elections from 2010 through 2024. We
+will look at the races we expected to be the most competitive,
+consider a notable upset, present the complete results, and look at
+how the results compared to the model in aggregate.
+
 ## Results of the four closest forecast races
+
+The races that looked to be the most competitive according to the
+model featured three Republican incumbents and one Democratic
+incumbent, all in swing districts. Two of the incumbents, Marcus
+Vaughn (R-Wrentham) and Donald Wong (R-Saugus), survived their
+challenges, while Steven Ouellette (D-Westport) and David Vieira
+(R-Falmouth) were defeated.
 
 ```{r top-four-results}
 #| column: page
 featured |>
     with_provisional_outcomes() |>
-    results_table("Results of the four closest forecast races",
-                  show_margin_note = FALSE) |>
+    results_table("", show_margin_note = FALSE) |>
     cols_label(opponent = "Republican") |>
     cols_hide(columns = other_votes) |>
-    tab_options(table.width = px(1035))
+    tab_options(table.width = px(885))
 ```
 
 ### 9th Norfolk
 
-```{r 9th-norfolk-results-map, fig.height=6, fig.cap=map_caption("Ninth Norfolk")}
+```{r 9th-norfolk-results-map, fig.height=6}
 municipality_result_map("Ninth Norfolk")
 ```
+<br/>
+State Representative Marcus Vaughn (R-Wrentham) slightly outperformed
+the model's central forecast of a 1.8-point GOP win
+by finishing 4.7 points ahead of challenger Thomas Melville
+(D-Medfield), keeping this longtime Republican seat. The seat was
+previously held by Shawn Dooley (R-Norfolk), Richard Ross
+(R-Wrentham), and Scott Brown (R-Wrentham), who went on to serve in
+both the Massachusetts Senate and the U.S. Senate.
 
 ### 8th Bristol
 
-```{r 8th-bristol-results-map, fig.height=6, fig.cap=map_caption("Eighth Bristol")}
+```{r 8th-bristol-results-map, fig.height=6}
 municipality_result_map("Eighth Bristol")
 ```
+<br/>
+The 8th Bristol State Representative district, with towns straddling
+Fall River and New Bedford, will have a Republican representative in
+Jesse St. Gelais (R-Acushnet) after being in Democratic hands for more
+than half a century. St. Gelais outperformed the forecast's D+2.2
+Democratic margin by almost five points for an R+2.6 win over first-term
+incumbent State Representative Steven Ouellette
+(D-Westport). Ouellette won his hometown of Westport and the
+district's three precincts of Fall River, while St. Gelais won the
+district's precincts of Freetown, Acushnet, and New Bedford.
 
 ### 9th Essex
 
-```{r 9th-essex-results-map, fig.height=6, fig.cap=map_caption("Ninth Essex")}
+```{r 9th-essex-results-map, fig.height=6}
 municipality_result_map("Ninth Essex")
 ```
+<br/>
+The model saw State Representative Donald Wong (R-Saugus) as a
+2.6-point favorite over challenger Peter Meaney (D-Lynn) in the North
+Shore's 9th Essex district. Wong won by a ten-point margin to earn a
+ninth term by running up a 22-point margin in Saugus and winning by 2
+points in Wakefield. Meaney won the two precincts of Lynn by about 7
+points. Wong was first elected State Representative in the red wave of 2010.
 
 ### 3rd Barnstable
 
-```{r 3rd-barnstable-results-map, fig.height=6, fig.cap=map_caption("Third Barnstable")}
+```{r 3rd-barnstable-results-map, fig.height=6}
 municipality_result_map("Third Barnstable")
 ```
+<br/>
+The other incumbent from our focus group to lose his seat on Tuesday
+was David Vieira (R-Falmouth), another Republican who was also first
+elected as State Representative 16 years ago in 2010. Jack Richardson
+(D-Falmouth) pushed things just over the model's projection of a
+2.8-point Democratic margin to a 3.5-point victory. Richardson was
+able to outraise and outspend Vieira, often a difficult accomplishment
+for a challenger.
 
-## Other notable results
+## Tuesday's biggest surprise: The 22nd Middlesex
 
-### 22nd Middlesex
+State Representative Marc Lombardo (R-Billerica), like Vieira and Wong,
+was elected in the 2010 red wave and has earned a reputation as one of
+Massachusetts's most conservative legislators. The model predicted an
+almost 15-point victory for Lombardo against his Democratic challenger
+based on his incumbency, the presidential voting history of the
+district, and his fundraising advantage.
+
+The biggest surprise from the legislative elections on Tuesday ended up
+being 19-year-old Daniel Darris-O'Connor (D-Billerica) and his 2.5-point
+victory over incumbent Lombardo. Darris-O'Connor is a sitting
+member of the Billerica select board and
+[will assume office the day after his 20th birthday in January](https://www.bostonglobe.com/2026/11/04/metro/darris-oconnor-lombardo-billerica-legislature/).
 
 ```{r notable-results}
 #| column: page
-results_table(notable, "22nd Middlesex result", show_margin_note = FALSE) |>
+results_table(notable, "", show_margin_note = FALSE) |>
     cols_hide(columns = other_votes) |>
-    tab_options(table.width = px(1035))
+    tab_options(table.width = px(885))
 ```
 
-```{r 22nd-middlesex-results-map, fig.height=6, fig.cap=map_caption("Twenty-Second Middlesex")}
+```{r 22nd-middlesex-results-map, fig.height=6}
 municipality_result_map("Twenty-Second Middlesex") +
     tm_view(set_view = 12)
 ```
+<br/>
+
+The 22nd Middlesex district is one of four Massachusetts State
+Representative districts that consist of a single, wholly contained
+municipality. The other three are the 4th Worcester (Leominster), 2nd
+Berkshire (Pittsfield), and 7th Essex (Salem).
 
 ## Results for all contested seats
 
-```{r statewide-results-map, fig.cap=paste("Contested legislative seats. Use the selector to switch between House and Senate districts. Stripes indicate a party flip; dashed outlines indicate a provisional result in an uncalled race.", source_note)}
-#| column: body-outset
-statewide_outcome_map()
-```
+Of the 57 contested State Representative and State Senate seats, eight
+were open seats with no incumbent running and 49 were incumbent
+challenges. Three of the 49 incumbents were defeated, and a fourth
+trails in the uncalled 2nd Plymouth race.
 
 ```{r outcome-summary}
 outcome_summary_table(results)
 ```
+
+In terms of party, 39 of the 57 contested seats were
+Democratic-held seats that stayed Democratic. Democrats won four
+Republican-held seats and lead in a fifth, the uncalled 2nd Plymouth
+race. One Democratic-held seat was won by a Republican (St. Gelais
+over Ouellette in the 8th Bristol), and 12 Republican-held seats were
+held by the GOP.
+
+```{r statewide-results-map}
+#| column: body-outset
+statewide_outcome_map()
+```
+
+### Results of all 57 contested legislative races
+
+The table of districts and outcomes is sorted by the size of
+Democratic or Republican over- or under-performance compared to the
+model, which can also be thought of as model error.
+
+It is notable that the biggest differences from the model's
+predictions were instances of Democratic over-performance against a
+non-Republican candidate. We have seen that races between Democrats
+and non-Republican opponents are harder for the model to predict, with
+testing on Dem/non-GOP races showing an absolute error of about 15
+points, compared with 8 points for Dem/GOP matchups. In addition, the
+model tends to underestimate Democratic margins in Dem/non-GOP
+races. The 2026 results follow that same pattern.
 
 ```{r all-results}
 #| column: screen
 results |>
     with_provisional_outcomes() |>
     arrange(desc(abs(signed_error)), chamber, district_display) |>
-    results_table("Results of all 57 contested legislative races", full = TRUE)
+    results_table("", full = TRUE)
 ```
 
 ## Results compared to model forecast
+
+All but six of the race outcomes fall within the model's 75%
+predictive intervals. Each interval represents the range in which the
+model placed a 75% probability of that race's result falling.
+
+Four of the six outliers are instances of a Democrat facing a
+non-Republican. One of the other two outliers is the uncalled 2nd
+Plymouth race where challenger Sarah Hewins (D-Carver) seems to be
+significantly outperforming the R+15.8 model forecast against
+incumbent John Gaskey (R-Carver) with an 89-vote lead.
+
+The remaining outlier is the 22nd Middlesex win by 19-year-old Daniel
+Darris-O'Connor (D-Billerica) over incumbent Marc Lombardo
+(R-Billerica).
 
 ```{r forecast-performance}
 #| column: body-outset

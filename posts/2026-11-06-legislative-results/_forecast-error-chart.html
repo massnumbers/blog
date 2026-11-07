@@ -1,9 +1,5 @@
 <section id="legislative-forecast-error">
   <h3>Forecast error and performance versus the model</h3>
-  <div class="viz-row text-small" style="margin-top:calc(var(--font-size-base)*0.5)">
-    <span data-counts></span>
-    <span data-median></span>
-  </div>
   <svg class="error-swarm" role="img" aria-labelledby="error-preview-title error-preview-description" style="display:block;width:100%;height:410px"></svg>
   <div class="viz-row text-small" style="justify-content:space-between">
     <span>Democratic under-performance</span>
@@ -78,8 +74,6 @@
   const sorted = data.map(race => race.error).sort((a, b) => a - b);
   const median = sorted[Math.floor(sorted.length / 2)];
   const signed = number => (number > 0 ? "+" : "") + number.toFixed(1);
-  root.querySelector("[data-counts]").textContent = data.filter(race => race.error > 0).length + " Democratic over-performances / " + data.filter(race => race.error < 0).length + " under-performances";
-  root.querySelector("[data-median]").textContent = "Median D performance: " + signed(median) + " pp";
 
   const detail = root.querySelector("[data-error-detail]");
   const raceLabel = root.querySelector("[data-detail-race]");
@@ -178,17 +172,17 @@
     add("line", {x1:x(mean),x2:x(mean),y1:155,y2:340,class:"reference","stroke-dasharray":"5 4"});
     add("text", {x:x(0)-7,y:142,"text-anchor":"end",class:"secondary-label"}, "On forecast");
     add("text", {x:x(mean)+7,y:142,"text-anchor":"start",class:"secondary-label"}, "Mean " + signed(mean) + " pp");
-    add("text", {x:width/2,y:396,"text-anchor":"middle",class:"secondary-label"}, "Model error / Democratic performance (pp)");
-    const negativeExtreme = placed.reduce((a,b) => a.error < b.error ? a : b);
-    const positiveExtremes = [...placed].sort((a,b) => b.error - a.error).slice(0,width < 560 ? 1 : 3);
-    positiveExtremes.forEach((race,index) => {
+    add("text", {x:width/2,y:396,"text-anchor":"middle",class:"secondary-label"}, "Model error (pp)");
+    const republicanCallout = placed.find(race => race.chamber === "House" && race.district === "9th Essex");
+    const democraticCallouts = ["22nd Middlesex", "2nd Plymouth"].map(district =>
+      placed.find(race => race.chamber === "House" && race.district === district));
+    democraticCallouts.forEach((race,index) => {
       const labelY = 27 + index * 32;
       add("line", {x1:race.x,y1:race.y-8,x2:right-6,y2:labelY+6,class:"guide annotation"});
-      const district = race.district.replace("Worcester and Middlesex", "Worcester & Middlesex").replace("Norfolk and Plymouth", "Norfolk & Plymouth");
-      add("text", {x:right-2,y:labelY,"text-anchor":"end",class:"annotation"}, district + " " + signed(race.error));
+      add("text", {x:right-2,y:labelY,"text-anchor":"end",class:"annotation"}, race.district + " " + signed(race.error));
     });
-    add("line", {x1:negativeExtreme.x,y1:negativeExtreme.y-8,x2:left+6,y2:103,class:"guide annotation"});
-    add("text", {x:left+2,y:96,"text-anchor":"start",class:"annotation"}, negativeExtreme.district + " " + signed(negativeExtreme.error));
+    add("line", {x1:republicanCallout.x,y1:republicanCallout.y-8,x2:left+6,y2:103,class:"guide annotation"});
+    add("text", {x:left+2,y:96,"text-anchor":"start",class:"annotation"}, republicanCallout.district + " " + signed(republicanCallout.error));
     placed.forEach(race => {
       const point = add("circle", {cx:race.x,cy:race.y,r:radius,class:(race.called ? (race.error >= 0 ? "positive" : "negative") : "provisional") + " cursor-interaction","aria-label":race.chamber + ": " + race.district + ". " + race.democrat + " (D), " + performance(race.error) + "; " + race.opponent + ", " + performance(-race.error),"data-race-id":race.id});
       point.addEventListener("pointerenter", () => { if (!pinned) showDetail(race, point); });
